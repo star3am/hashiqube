@@ -7,8 +7,8 @@ Once the Qube is up an internet connection is no longer needed meaning sales pit
 ![HashiQube](images/thestack.png?raw=true "HashiQube")
 
 ## Purpose
-HashiQube has been created to enable anyone interested in secure automation pipelines the ability to run a suite of 'best in class' tools their local machines at the cost of a small number of system resources. 
-The Qube gives all interested parties the empowerment to deploy these tools in a way covers multiple use cases effectively providing a 'concept to completion' testbed using open-source HashiCorp products. 
+HashiQube has been created to enable anyone interested in secure automation pipelines the ability to run a suite of 'best in class' tools their local machines at the cost of a small number of system resources.
+The Qube gives all interested parties the empowerment to deploy these tools in a way covers multiple use cases effectively providing a 'concept to completion' testbed using open-source HashiCorp products.
 
 The original use case was born the desire to demystify DevSecOps utilising Terraform, Vault, Consul, Sentinel and Nomad as well as some other well known open source CI/CD tools by providing a 'hands-on' environment that demonstrates the value of secret and credential management in a standard software development pipeline.
 
@@ -92,7 +92,7 @@ For Documentation please open http://localhost:3333 in your browser
 ## Support & Feedback
 For suggestions, feedback and queries please branch or and submit a Pull Request or directly contact the architects of the HashiQube via email:
 
-Lead Automation Architect [riaan.nolan@servian.com](mailto:riaan.nolan@servian.com)
+Lead Automation Architect [riaan.nolan@gmail.com](mailto:riaan.nolan@gmail.com)
 
 ## Contributors and Special mentions
 A Very special mention to HashiQube's contributors, Thank You All for your help, suggestions and contributions no matter how small <3
