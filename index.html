@@ -1,15 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="google-site-verification" content="4ohgfi8tswCbXVn4uYJz7U0F6sYQIB6QQdEBcWgtdgo" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta charset="UTF-8">
-  <link rel="icon" type="image/png" href="images/logo.png">
-  <link rel="stylesheet" href="docsify/lib/vue.css">
-  <link rel="stylesheet" href="docsify/lib/buble.css" disabled>
-  <link rel="stylesheet" href="docsify/lib/dark.css" disabled>
-  <link rel="stylesheet" href="docsify/lib/pure.css" disabled>
+  <link rel="icon" type="image/png" href="images/hashiqube-logo.png">
+  <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css" title="vue">
   <link rel="stylesheet" href="docsify/lib/mermaid.min.css">
   <script src="docsify/lib/mermaid.min.js"></script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158077964-1"></script>
@@ -21,14 +17,118 @@
     gtag('config', 'UA-158077964-1');
   </script>
   <style>
+    body {
+      background-color: #2a2c37;
+      font-family: Source Sans Pro;
+      font-weight: 300;
+      font-size: 20px;
+      color: #f2f2f2;
+    }
+    .sidebar > h1 a {
+      color: #ff80bf;
+      transform: rotate(-10deg) !important;
+      margin: 0 0 40px;
+      font-size: 48px;
+      text-align: center;
+      font-family: Abril Text;
+      font-weight: 700;
+    }
+    h1 .anchor span {
+      color: #8be9fd;
+    }
+    h2 .anchor span {
+      color: #50fa7b;
+      font-size: 1.75rem;
+    }
+    h3 .anchor span {
+      color: #ff79c6;
+      font-size: 1.75rem;
+    }
+    h4 .anchor span {
+      color: #ffb86c;
+      font-size: 1.75rem;
+    }
+    h5 .anchor span {
+      color: #bd93f9;
+      font-size: 1.75rem;
+    }
+    h6 .anchor span {
+      color: #f1fa8c;
+      font-size: 1.75rem;
+    }
+    .markdown-section p {
+      color: #f2f2f2;
+    }
+    .sidebar {
+      background-color: #262937;
+      border-right: 3px dashed #bd93f9;
+    }
+    .sidebar ul li a {
+      color: #ffb86c;
+      font-size: 20px;
+    }
+    .search {
+      margin-bottom: 20px;
+      padding: 6px;
+      border-bottom: 3px dashed #bd93f9 !important;
+    }
+    .search input {
+      transition: all .3s ease-in-out;
+      display: inline-block;
+      margin: 0 auto;
+      background: #262937;
+      border-radius: 4px;
+      text-align: center;
+      color: #8be9fd;
+      font-weight: 400;
+      padding: 10px 18px;
+      font-size: 18px;
+      border: 0;
+    }
+    .search p {
+      color: #8be9fd;
+      font-size: 14px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+    .sidebar-toggle {
+      background-color: transparent;
+      /* background-color: rgba(255,255,255,0.8); */
+      border: 0;
+      outline: none;
+      padding: 10px;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      text-align: center;
+      transition: opacity 0.3s;
+      width: 284px;
+      z-index: 30;
+      font-size: 28px;
+    }
+    .sidebar-toggle span {
+      background-color: var(--theme-color, #42b983);
+      display: block;
+      margin-bottom: 4px;
+      width: 36px;
+      height: 7px;
+    }
+    .sidebar .sidebar-nav {
+      line-height: 2em;
+      padding-bottom: 40px;
+      padding-left: 30px;
+    }
+    .markdown-section em {
+      color: #f1fa8c;
+    }
     .markdown-section a {
       color: var(--theme-color, #00a99c);
     }
-    .markdown-section pre > code {
-      color: rgb(231, 90, 122);
-    }
     .sidebar ul li.active > a {
-      color: var(--theme-color, #e75a7a);
+      color: var(--theme-color, #f2f2f2);
     }
     .content {
       padding-top: 10px;
@@ -38,7 +138,18 @@
       max-width: 1050px;
     }
     .markdown-section code {
-      color: #e96e3c;
+      border-radius: 2px;
+      color: rgb(231, 90, 122);
+      font-size: .8rem;
+      margin: 0 2px;
+      padding: 3px 5px;
+      white-space: pre-wrap;
+      background-color: #262937;
+    }
+    .markdown-section iframe {
+      border: 1px solid #ff80bf;
+      width: 1px;
+      min-width: 100%;
     }
     .header {
       position: relative;
@@ -47,19 +158,59 @@
     }
     .footer {
       position: relative;
-      display: none;
+      bottom: 0px;
       text-align: center;
-      bottom: 10px;
     }
     .app-name-link img {
       width: 180px;
     }
     .anchor span {
-      color: #a7298b;
+      color: #8be9fd;
     }
     .markdown-section h1, .markdown-section h2, .markdown-section h3, .markdown-section h4, .markdown-section strong {
-      color: #a7298b;
+      color: #8be9fd;
       font-weight: 600;
+    }
+    .markdown-section pre>code {
+      -moz-osx-font-smoothing: initial;
+      -webkit-font-smoothing: initial;
+      background-color: #262937;
+      border-radius: 2px;
+      color: rgb(231, 90, 122);
+      display: block;
+      font-family: Roboto Mono,Monaco,courier,monospace;
+      font-size: .8rem;
+      line-height: inherit;
+      margin: 0 2px;
+      max-width: inherit;
+      overflow: inherit;
+      padding: 2.2em 5px;
+      white-space: inherit;
+    }
+    .medium-zoom-image {
+      cursor: pointer;
+      cursor: zoom-in;
+      transition: transform .3s cubic-bezier(.2,0,.2,1);
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+    :root {
+      /* Tab blocks */
+      --docsifytabs-border-color          : #50fa7b;
+      --docsifytabs-border-px             : 3px;
+      --docsifytabs-border-radius-px      : ;
+      --docsifytabs-margin                : 1.5em 0;
+      /* Tabs */
+      --docsifytabs-tab-background        : #50fa7b;
+      --docsifytabs-tab-background--active: #50fa7b;
+      --docsifytabs-tab-color             : #50fa7b;
+      --docsifytabs-tab-color--active     : inherit;
+      --docsifytabs-tab-highlight-px      : 3px;
+      --docsifytabs-tab-highlight-color   : #ff79c6;
+      --docsifytabs-tab-padding           : 0.6em 1em;
+      /* Tab content */
+      --docsifytabs-content-background    : #262937;
+      --docsifytabs-content-padding       : 0.5rem 1.75rem;
     }
   </style>
 </head>
@@ -72,9 +223,9 @@
         '/.*/SUMMARY.md': '/SUMMARY.md',
         '/en/(.*)': 'https://raw.githubusercontent.com/docsifyjs/docs-en/master/$1'
       },
-      repo: 'https://github.com/servian/hashiqube/',
-      logo: 'images/logo.png',
-      name: 'HashiQube',
+      logo: 'images/rubiksqube-logo.png',
+      name: 'RubiksQube',
+      repo: 'https://github.com/star3am/rubiksqube/',
       search: 'auto',
       auto2top: true,
       relativePath: false,
@@ -82,11 +233,22 @@
       loadSidebar: 'SUMMARY.md',
       subMaxLevel: 3,
       formatUpdated: '{MM}/{DD} {HH}:{mm}',
+      tabs: {
+        theme: 'material' // default
+      },
       plugins: [
         function (hook, vm) {
-          hook.beforeEach(function (html) {
+          hook.beforeEach(function(html) {
             return html.replace(/{% *.* %}/mg, '')
-          })
+          });
+          var footer = [
+            '<footer class="footer">',
+            '<span>Created using <a href="https://github.com/docsifyjs/docsify" target="_blank">Docsify</a> & <a href="https://draculatheme.com" target="_blank">Dracula theme</a>.</span>',
+            '</footer>'
+          ].join('');
+          hook.afterEach(function(html) {
+            return html + footer;
+          });
         }
       ],
       markdown: {
@@ -107,8 +269,10 @@
     mermaid.initialize({ logLevel:0, startOnLoad: false, themeCSS:'.label { font-family: Source Sans Pro,Helvetica Neue,Arial,sans-serif; }' });
 
   </script>
-  <script src="docsify/lib/docsify.min.js"></script>
-  <script src="docsify/lib/search.js"></script>
-  <div class="footer">footer</div>
+  <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
+  <script src="//unpkg.com/docsify/lib/plugins/search.min.js"></script>
+  <script src="//unpkg.com/docsify/lib/plugins/zoom-image.min.js"></script>
+  <script src="//unpkg.com/docsify/lib/plugins/emoji.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-tabs"></script>
 </body>
 </html>
