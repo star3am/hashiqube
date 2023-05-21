@@ -3,7 +3,8 @@ HashiQube is a VM or Docker Container with a Docker daemon inside. It runs all H
 It also runs a host of other popular Open Source DevOps / DevSecOps applications showcasing how simple integration with HashiCorp products can result in tangible learnings and benefits for all its users
 Once the Qube is up an internet connection is no longer needed meaning sales pitches and demos for potential and existing customers is greatly aided.
 
-Hashiqube was created by me, Riaan Nolan to help me learn Hashicorp's suite of fantastic software, and I hop it can help you too! 
+Hashiqube was created by me, Riaan Nolan, to help me learn about Hashicorp's suite of fantastic software, and I hope it can help 
+you too! Good luck to you!! 
 
 You are welcome to connect with me on Linkedin https://www.linkedin.com/in/riaannolan/ <br />
 Credly profile: https://www.credly.com/users/riaan-nolan.e657145c
