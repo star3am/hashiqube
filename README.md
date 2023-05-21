@@ -1,6 +1,3 @@
-# Latest Updates
-Project archived, latest updates can be found here: https://github.com/star3am/hashiqube
-
 # HashiQube Overview
 HashiQube is a VM or Docker Container with a Docker daemon inside. It runs all HashiCorp products. __Vault, Terraform, Nomad, Consul, Waypoint, Boundary, Vagrant, Packer and Sentinel.__
 It also runs a host of other popular Open Source DevOps / DevSecOps applications showcasing how simple integration with HashiCorp products can result in tangible learnings and benefits for all its users
@@ -275,6 +272,7 @@ A Very special mention to HashiQube's contributors, Thank You All for your help,
  - Lane Birmingham
  - Devang Dhameliya
  - Rajesh Cholleti
+ - Nel-Marie Nolan
 
 ## Videos
 Videos were made with asciinema https://asciinema.org/
