@@ -74,6 +74,8 @@ Vagrant::configure("2") do |config|
       if machines.size == 1 # only expose these ports if 1 machine, else conflicts
         config.vm.network "forwarded_port", guest: 8200, host: 8200 # vault
         config.vm.network "forwarded_port", guest: 4646, host: 4646 # nomad
+        config.vm.network "forwarded_port", guest: 4647, host: 4647 # nomad
+        config.vm.network "forwarded_port", guest: 4648, host: 4648 # nomad
         config.vm.network "forwarded_port", guest: 8080, host: 8080 # nomad-traefik
         config.vm.network "forwarded_port", guest: 8181, host: 8181 # nomad-traefik-admin
         config.vm.network "forwarded_port", guest: 19702, host: 19702 # waypoint-kubernetes-minikube
@@ -82,6 +84,9 @@ Vagrant::configure("2") do |config|
         config.vm.network "forwarded_port", guest: 9701, host: 9701 # waypoint-api-nomad
         config.vm.network "forwarded_port", guest: 19200, host: 19200 # boundary
         config.vm.network "forwarded_port", guest: 8500, host: 8500 # consul
+        config.vm.network "forwarded_port", guest: 8300, host: 8300 # consul
+        config.vm.network "forwarded_port", guest: 8301, host: 8301 # consul
+        config.vm.network "forwarded_port", guest: 8302, host: 8302 # consul
         config.vm.network "forwarded_port", guest: 8600, host: 8600, protocol: 'udp' # consul dns
         config.vm.network "forwarded_port", guest: 8888, host: 8888 # ansible/roles/www
         config.vm.network "forwarded_port", guest: 8889, host: 8889 # docker/apache2
@@ -205,9 +210,6 @@ Vagrant::configure("2") do |config|
       # vagrant up --provision-with docsify to only run this on vagrant up
       config.vm.provision "docsify", type: "shell", preserve_order: true, privileged: false, path: "docsify/docsify.sh"
 
-
-      # blast-radius
-
       # install vault
       # vagrant up --provision-with vault to only run this on vagrant up
       config.vm.provision "vault", type: "shell", preserve_order: true, privileged: true, path: "hashicorp/vault.sh"
@@ -260,7 +262,6 @@ Vagrant::configure("2") do |config|
       # run ldap docker container for testing with vault (for example) ldap login
       config.vm.provision "ldap", run: "never", type: "shell", preserve_order: true, privileged: true, path: "ldap/ldap.sh"
 
-
       # vagrant up --provision-with mysql to only run this on vagrant up
       # run mysql docker container for testing with vault
       config.vm.provision "mysql", run: "never", type: "shell", preserve_order: true, privileged: false, path: "database/mysql.sh"
@@ -296,10 +297,6 @@ Vagrant::configure("2") do |config|
       # vagrant up --provision-with jenkins to only run this on vagrant up
       config.vm.provision "jenkins", run: "never", type: "shell", preserve_order: true, privileged: false, path: "jenkins/jenkins.sh"
 
-
-
-
-
       # minikube
       # vagrant up --provision-with minikube to only run this on vagrant up
       config.vm.provision "minikube", run: "never", type: "shell", preserve_order: true, privileged: false, path: "minikube/minikube.sh"
@@ -308,17 +305,10 @@ Vagrant::configure("2") do |config|
       # vagrant up --provision-with apache-airflow to only run this on vagrant up
       config.vm.provision "apache-airflow", run: "never", type: "shell", preserve_order: true, privileged: false, path: "apache-airflow/apache-airflow.sh"
 
-      
-
       # ansible-tower
       # vagrant up --provision-with ansible-tower to only run this on vagrant up
       config.vm.provision "ansible-tower", run: "never", type: "shell", preserve_order: true, privileged: false, path: "ansible-tower/ansible-tower.sh"
 
-
-
-
-      
-      
       # dbt 
       # vagrant up --provision-with dbt to only run this on vagrant up
       config.vm.provision "dbt", run: "never", type: "shell", preserve_order: true, privileged: false, path: "dbt/dbt-global.sh"
