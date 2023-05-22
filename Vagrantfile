@@ -67,7 +67,6 @@ Vagrant::configure("2") do |config|
       # config.disksize.size = machine[:disksize] # deprecated
       config.ssh.forward_agent = true
       config.ssh.insert_key = true
-      config.ssh.connect_timeout = 60
       config.ssh.host = "127.0.0.1" # docker on windows tries to ssh to 0.0.0.0
       config.vm.network "private_network", ip: "#{machine[:ip]}"
       config.vm.network "forwarded_port", guest: 22, host: machine[:ssh_port], id: 'ssh', auto_correct: true
