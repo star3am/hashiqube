@@ -37,9 +37,161 @@ Give it a try and most of all have fun with this module, your feedback is always
 Everything you need is done via the Dockerfile, and once you open this project folder with VSCode Dev Containers, you will be dropped into a container built of the Dockerfile with Terraform already installed. 
 
 You simple need to configure your Cloud authentication, and this is done: 
-- AWS ~/.aws/config
-- GCP ~/.gcp/credentials.json
+- AWS `~/.aws/config`
+- GCP `~/.gcp/credentials.json`
 - Azure with `az login` (The credentials are then passed into the container via the ENV variables in the docker-compose.yml file) 
+- Run `terraform plan` and `terraform apply`
+- The Terraform Output will look something like: 
+
+```
+Outputs:
+
+aaa_welcome = <<EOT
+Your HashiQube instance is busy launching, usually this takes ~5 minutes.
+Below are some links to open in your browser, and commands you can copy and paste in a terminal to login via SSH into your HashiQube instance.
+Thank you for using this module, you are most welcome to fork this repository to make it your own.
+** DO NOT USE THIS IN PRODUCTION **
+
+EOT
+aab_instructions = <<EOT
+Use the Hashiqube SSH output below to login to your instance
+To get Vault Shamir keys and Root token do "sudo cat /etc/vault/init.file"
+
+EOT
+aws_hashiqube-boundary = "http://13.55.129.xxx:19200 username: admin password: password"
+aws_hashiqube-consul = "http://13.55.129.xxx:8500"
+aws_hashiqube-fabio-lb = "http://13.55.129.xxx:9999"
+aws_hashiqube-fabio-ui = "http://13.55.129.xxx:9998"
+aws_hashiqube-nomad = "http://13.55.129.xxx:4646"
+aws_hashiqube-ssh = "ssh ubuntu@13.55.129.xxx"
+aws_hashiqube-traefik-lb = "http://13.55.129.xxx:8080"
+aws_hashiqube-traefik-ui = "http://13.55.129.xxx:8181"
+aws_hashiqube-vault = "http://13.55.129.xxx:8200"
+aws_hashiqube-waypoint = "https://13.55.129.xxx:9702"
+aws_hashiqube_ip = "13.55.129.xxx"
+azure_hashiqube-boundary = "http://4.196.162.xxx:19200 username: admin password: password"
+azure_hashiqube-consul = "http://4.196.162.xxx:8500"
+azure_hashiqube-fabio-lb = "http://4.196.162.xxx:9999"
+azure_hashiqube-fabio-ui = "http://4.196.162.xxx:9998"
+azure_hashiqube-nomad = "http://4.196.162.xxx:4646"
+azure_hashiqube-ssh = "ssh ubuntu@4.196.162.xxx"
+azure_hashiqube-traefik-lb = "http://4.196.162.xxx:8080"
+azure_hashiqube-traefik-ui = "http://4.196.162.xxx:8181"
+azure_hashiqube-vault = "http://4.196.162.xxx:8200"
+azure_hashiqube-waypoint = "https://4.196.162.xxx:9702"
+azure_hashiqube_ip = "4.196.162.xxx"
+gcp_hashiqube-boundary = "http://35.244.86.xxx:19200 username: admin password: password"
+gcp_hashiqube-consul = "http://35.244.86.xxx:8500"
+gcp_hashiqube-fabio-lb = "http://35.244.86.xxx:9999"
+gcp_hashiqube-fabio-ui = "http://35.244.86.xxx:9998"
+gcp_hashiqube-nomad = "http://35.244.86.xxx:4646"
+gcp_hashiqube-ssh = "ssh ubuntu@35.244.86.xxx"
+gcp_hashiqube-traefik-lb = "http://35.244.86.xxx:8080"
+gcp_hashiqube-traefik-ui = "http://35.244.86.xxx:8181"
+gcp_hashiqube-vault = "http://35.244.86.xxx:8200"
+gcp_hashiqube-waypoint = "https://35.244.86.xxx:9702"
+gcp_hashiqube_ip = "35.244.86.xxx"
+your_ipaddress = "101.189.211.xxx"
+```
+
+## Access Hashiqube Instances, First Login
+After your Hashiqube instances has been launched you can access them by using the SSH commands in the Terraform Apply Output, and you will see something like this
+
+![Hashiqube Access](images/hashiqube-first-login.png?raw=true "Hashiqube Access")
+
+You can then interact with Hashicorp's Services running in Hashiqube, for example:
+
+Get Vault status
+*root@hashiqube-aws:/hashiqube#* `vagrant ssh -c 'vault status'`
+```
+Key             Value
+---             -----
+Seal Type       shamir
+Initialized     true
+Sealed          false
+Total Shares    5
+Threshold       3
+Version         1.13.2
+Build Date      2023-04-25T13:02:50Z
+Storage Type    file
+Cluster Name    vault
+Cluster ID      4731c701-5575-be22-6678-8ba210f7f045
+HA Enabled      false
+Connection to 127.0.0.1 closed.
+```
+
+Get Nomad Job Status
+*root@hashiqube-aws:/hashiqube#* `vagrant ssh -c 'nomad job status'`
+```
+ID                                            Type     Priority  Status   Submit Date
+fabio                                         system   50        running  2023-05-23T22:59:55Z
+nomad-trex-nodejs-01h15dkdgxxp6pw1fa7409q59z  service  10        running  2023-05-23T23:02:42Z
+nomad-trex-nodejs-01h15dkhnh3zzwa03jdjvsh6e5  service  10        running  2023-05-23T23:02:46Z
+traefik                                       service  50        running  2023-05-23T22:59:56Z
+traefik-whoami                                service  50        running  2023-05-23T23:00:15Z
+waypoint-server                               service  50        running  2023-05-23T23:00:47Z
+Connection to 127.0.0.1 closed.
+```
+
+Get Nomad Server Members
+*root@hashiqube-aws:/hashiqube#* `vagrant ssh -c 'nomad server members'`
+```
+Name                                   Address     Port  Status  Leader  Raft Version  Build  Datacenter  Region
+hashiqube-aws.service.consul.global    10.9.99.11  5648  alive   true    3             1.5.6  aws         global
+hashiqube-azure.service.consul.global  10.9.99.13  5648  failed  false   3             1.5.6  azure       global
+hashiqube-gcp.service.consul.global    10.9.99.12  5648  failed  false   3             1.5.6  gcp         global
+Connection to 127.0.0.1 closed.
+```
+
+Get Consul Members
+*root@hashiqube-aws:/hashiqube#* `vagrant ssh -c 'consul members -wan'`
+```
+Node                                  Address          Status  Type    Build   Protocol  DC     Partition  Segment
+hashiqube-aws.service.consul.aws      10.9.99.11:8302  alive   server  1.15.2  3         aws    default    <all>
+hashiqube-azure.service.consul.azure  10.9.99.13:8302  failed  server  1.15.2  3         azure  default    <all>
+hashiqube-gcp.service.consul.gcp      10.9.99.12:8302  failed  server  1.15.2  3         gcp    default    <all>
+Connection to 127.0.0.1 closed.
+```
+
+Or simply access the Hashiqube container to interact freely with the Hashicorp Services, edit config files and so on
+
+*root@hashiqube-aws:/hashiqube#* `vagrant ssh`
+```
+ _               _     _             _                                                         _                                     _ 
+| |__   __ _ ___| |__ (_) __ _ _   _| |__   ___        __ ___      _____   ___  ___ _ ____   _(_) ___ ___   ___ ___  _ __  ___ _   _| |
+| '_ \ / _` / __| '_ \| |/ _` | | | | '_ \ / _ \_____ / _` \ \ /\ / / __| / __|/ _ \ '__\ \ / / |/ __/ _ \ / __/ _ \| '_ \/ __| | | | |
+| | | | (_| \__ \ | | | | (_| | |_| | |_) |  __/_____| (_| |\ V  V /\__ \_\__ \  __/ |   \ V /| | (_|  __/| (_| (_) | | | \__ \ |_| | |
+|_| |_|\__,_|___/_| |_|_|\__, |\__,_|_.__/ \___|      \__,_| \_/\_/ |___(_)___/\___|_|    \_/ |_|\___\___(_)___\___/|_| |_|___/\__,_|_|
+                            |_|                                                                                                        
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+Last login: Tue May 23 23:28:49 2023 from 172.17.0.1
+vagrant@hashiqube-aws:~$
+```
+
+Get Waypoint Token
+*root@hashiqube-aws:/hashiqube#* `vagrant ssh -c "cat /home/vagrant/.waypoint-nomad-token"`
+```
+HZCwuUtmrrpW5ycZ63TToJgrFN3CsxSYJT5pEo2kWp1npxEksykGHtZ9uAUkj5YhqL6Q4ZHAPCGToVLCpanmAoASuABmbFQvnjgRzEtt5zDbkosYD4KXFimWhKx1NC5EnQn8c71qivsms7pLXYMknmfSsmRaLjDhkJmW
+```
+
+And acces Waypoint on the address in the Output of Terraform Apply in your browser
+```
+aws_hashiqube-waypoint = "https://13.55.129.xxx:9702"
+```
+
+![Hashicorp Waypoint on Hashiqube](images/hashiqube-waypoint.png?raw=true "Hashicorp Waypoint on Hashiqube")
+
+Access Hashicorp Boundary on Hashiqube on the address in the Output of Terraform Apply in your browser
+```
+aws_hashiqube-boundary = "http://13.55.129.152:19200 username: admin password: password"
+```
+
+![Hashicorp Boundary on Hashiqube](images/hashiqube-boundary.png?raw=true "Hashicorp Boundary on Hashiqube")
+
+## Development Environment using VSCode Dev Containers
 
 ![VSCode Dev Containers](images/vscode-dev-containers.png?raw=true "VSCode Dev Containers")
 

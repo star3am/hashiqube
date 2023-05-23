@@ -49,8 +49,23 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get --assume-yes install swapspace curl 
 sudo mkdir -p /etc/update-motd.d
 cat <<EOF | sudo tee /etc/update-motd.d/00-header
 #!/bin/bash
-/usr/bin/toilet --gay -f standard $(hostname) -w 170
+/usr/bin/toilet --gay -f standard hashiqube-aws -w 170
 printf "%s"
+
+printf "\n"
+printf " * Hashiqube Documentation:  https://hashiqube.com\n"
+printf " * See User Data Log:        tail -f /var/log/user-data.log\n"
+printf " * First sudo to root:       sudo -i\n"
+printf " * Change directory:         cd /hashiqube\n"
+printf " * Get Vault Root token:     vagrant ssh -c 'cat /etc/vault/init.file'\n"
+printf " * Get Vault Status:         vagrant ssh -c 'vault status'\n"
+printf " * Get Nomad Job Status:     vagrant ssh -c 'nomad job status'\n"
+printf " * Get Nomad Server Members: vagrant ssh -c 'nomad server members'\n"
+printf " * Get Consul Info:          vagrant ssh -c 'consul info'\n"
+printf " * Get Consul Members:       vagrant ssh -c 'consul members -wan'\n"
+printf " * Get Waypoint Token:       vagrant ssh -c 'cat /home/vagrant/.waypoint-nomad-token'\n"
+printf " * SSH into Hashiqube:       vagrant ssh\n"
+printf "\n"
 EOF
 # install docker
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
