@@ -40,7 +40,7 @@ resource "azurerm_subnet" "hashiqube" {
   name                 = "hashiqube"
   resource_group_name  = azurerm_resource_group.hashiqube.name
   virtual_network_name = azurerm_virtual_network.hashiqube.name
-  address_prefixes      = ["10.0.1.0/24"]
+  address_prefixes     = ["10.0.1.0/24"]
 }
 
 # Create public IPs
@@ -60,13 +60,13 @@ resource "azurerm_network_security_group" "my_ipaddress" {
   location            = var.azure_region
   resource_group_name = azurerm_resource_group.hashiqube.name
   security_rule {
-    name                        = "myipaddress"
-    priority                    = 1001
-    direction                   = "Inbound"
-    access                      = "Allow"
-    protocol                    = "Tcp"
-    source_port_range           = "*"
-    destination_port_range      = "*"
+    name                         = "myipaddress"
+    priority                     = 1001
+    direction                    = "Inbound"
+    access                       = "Allow"
+    protocol                     = "Tcp"
+    source_port_range            = "*"
+    destination_port_range       = "*"
     source_address_prefixes      = ["${var.my_ipaddress}/32"]
     destination_address_prefixes = [azurerm_network_interface.hashiqube.private_ip_address]
   }
@@ -81,13 +81,13 @@ resource "azurerm_network_security_group" "azure_hashiqube_ip" {
   location            = var.azure_region
   resource_group_name = azurerm_resource_group.hashiqube.name
   security_rule {
-    name                        = "azure_hashiqube_ip"
-    priority                    = 1002
-    direction                   = "Inbound"
-    access                      = "Allow"
-    protocol                    = "Tcp"
-    source_port_range           = "*"
-    destination_port_range      = "*"
+    name                         = "azure_hashiqube_ip"
+    priority                     = 1002
+    direction                    = "Inbound"
+    access                       = "Allow"
+    protocol                     = "Tcp"
+    source_port_range            = "*"
+    destination_port_range       = "*"
     source_address_prefixes      = ["${azurerm_public_ip.hashiqube.ip_address}/32"]
     destination_address_prefixes = [azurerm_network_interface.hashiqube.private_ip_address]
   }
@@ -102,13 +102,13 @@ resource "azurerm_network_security_group" "aws_hashiqube_ip" {
   location            = var.azure_region
   resource_group_name = azurerm_resource_group.hashiqube.name
   security_rule {
-    name                        = "aws_hashiqube_ip"
-    priority                    = 1003
-    direction                   = "Inbound"
-    access                      = "Allow"
-    protocol                    = "Tcp"
-    source_port_range           = "*"
-    destination_port_range      = "*"
+    name                         = "aws_hashiqube_ip"
+    priority                     = 1003
+    direction                    = "Inbound"
+    access                       = "Allow"
+    protocol                     = "Tcp"
+    source_port_range            = "*"
+    destination_port_range       = "*"
     source_address_prefixes      = ["${var.aws_hashiqube_ip}/32"]
     destination_address_prefixes = [azurerm_network_interface.hashiqube.private_ip_address]
   }
@@ -123,13 +123,13 @@ resource "azurerm_network_security_group" "gcp_hashiqube_ip" {
   location            = var.azure_region
   resource_group_name = azurerm_resource_group.hashiqube.name
   security_rule {
-    name                        = "gcp_hashiqube_ip"
-    priority                    = 1004
-    direction                   = "Inbound"
-    access                      = "Allow"
-    protocol                    = "Tcp"
-    source_port_range           = "*"
-    destination_port_range      = "*"
+    name                         = "gcp_hashiqube_ip"
+    priority                     = 1004
+    direction                    = "Inbound"
+    access                       = "Allow"
+    protocol                     = "Tcp"
+    source_port_range            = "*"
+    destination_port_range       = "*"
     source_address_prefixes      = ["${var.gcp_hashiqube_ip}/32"]
     destination_address_prefixes = [azurerm_network_interface.hashiqube.private_ip_address]
   }
@@ -144,13 +144,13 @@ resource "azurerm_network_security_group" "whitelist_cidr" {
   location            = var.azure_region
   resource_group_name = azurerm_resource_group.hashiqube.name
   security_rule {
-    name                        = "whitelist_cidr"
-    priority                    = 1005
-    direction                   = "Inbound"
-    access                      = "Allow"
-    protocol                    = "Tcp"
-    source_port_range           = "*"
-    destination_port_range      = "*"
+    name                         = "whitelist_cidr"
+    priority                     = 1005
+    direction                    = "Inbound"
+    access                       = "Allow"
+    protocol                     = "Tcp"
+    source_port_range            = "*"
+    destination_port_range       = "*"
     source_address_prefixes      = [var.whitelist_cidr]
     destination_address_prefixes = [azurerm_network_interface.hashiqube.private_ip_address]
   }
@@ -161,9 +161,9 @@ resource "azurerm_network_security_group" "whitelist_cidr" {
 
 # Create network interface
 resource "azurerm_network_interface" "hashiqube" {
-  name                      = "hashiqube"
-  location                  = var.azure_region
-  resource_group_name       = azurerm_resource_group.hashiqube.name
+  name                = "hashiqube"
+  location            = var.azure_region
+  resource_group_name = azurerm_resource_group.hashiqube.name
   ip_configuration {
     name                          = "hashiqube"
     subnet_id                     = azurerm_subnet.hashiqube.id
@@ -172,16 +172,6 @@ resource "azurerm_network_interface" "hashiqube" {
   }
   tags = {
     environment = "hashiqube"
-  }
-}
-
-data "template_file" "hashiqube_user_data" {
-  template = file("${path.module}/../../modules/shared/startup_script")
-  vars = {
-    HASHIQUBE_AZURE_IP = azurerm_public_ip.hashiqube.ip_address
-    HASHIQUBE_GCP_IP   = var.gcp_hashiqube_ip == null ? "" : var.gcp_hashiqube_ip
-    HASHIQUBE_AWS_IP   = var.aws_hashiqube_ip == null ? "" : var.aws_hashiqube_ip
-    VAULT_ENABLED      = lookup(var.vault, "enabled")
   }
 }
 
@@ -199,15 +189,20 @@ resource "azurerm_linux_virtual_machine" "hashiqube" {
   }
   source_image_reference {
     publisher = "Canonical"
-    offer     = "UbuntuServer"
-    sku       = "18.04-LTS"
+    offer     = "0001-com-ubuntu-server-focal"
+    sku       = "20_04-lts-gen2"
     version   = "latest"
   }
   admin_ssh_key {
     username   = "ubuntu"
     public_key = file(var.ssh_public_key)
   }
-  custom_data = base64gzip(data.template_file.hashiqube_user_data.rendered)
+  custom_data = base64gzip(templatefile("${path.module}/../../modules/shared/startup_script",{
+    HASHIQUBE_AZURE_IP = azurerm_public_ip.hashiqube.ip_address
+    HASHIQUBE_GCP_IP   = var.gcp_hashiqube_ip == null ? "" : var.gcp_hashiqube_ip
+    HASHIQUBE_AWS_IP   = var.aws_hashiqube_ip == null ? "" : var.aws_hashiqube_ip
+    VAULT_ENABLED      = lookup(var.vault, "enabled")
+  }))
   tags = {
     environment = "hashiqube"
   }

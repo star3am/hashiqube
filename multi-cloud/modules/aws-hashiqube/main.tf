@@ -19,7 +19,7 @@ data "aws_ami" "ubuntu" {
   most_recent = true
   filter {
     name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*"]
+    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
   }
   filter {
     name   = "virtualization-type"
@@ -71,22 +71,17 @@ resource "aws_iam_role_policy" "hashiqube" {
 EOF
 }
 
-data "template_file" "hashiqube" {
-  template = file("${path.module}/../../modules/shared/startup_script")
-  vars = {
+resource "aws_instance" "hashiqube" {
+  ami                  = data.aws_ami.ubuntu.id
+  instance_type        = var.aws_instance_type
+  security_groups      = [aws_security_group.hashiqube.name]
+  key_name             = aws_key_pair.hashiqube.key_name
+  user_data_base64     = base64gzip(templatefile("${path.module}/../../modules/shared/startup_script",{
     HASHIQUBE_AWS_IP   = aws_eip.hashiqube.public_ip
     HASHIQUBE_AZURE_IP = var.azure_hashiqube_ip == null ? "" : var.azure_hashiqube_ip
     HASHIQUBE_GCP_IP   = var.gcp_hashiqube_ip == null ? "" : var.gcp_hashiqube_ip
     VAULT_ENABLED      = lookup(var.vault, "enabled")
-  }
-}
-
-resource "aws_instance" "hashiqube" {
-  ami                 = data.aws_ami.ubuntu.id
-  instance_type       = var.aws_instance_type
-  security_groups     = [aws_security_group.hashiqube.name]
-  key_name            = aws_key_pair.hashiqube.key_name
-  user_data_base64    = base64gzip(data.template_file.hashiqube.rendered)
+  }))
   iam_instance_profile = aws_iam_instance_profile.hashiqube.name
   tags = {
     Name = "hashiqube"

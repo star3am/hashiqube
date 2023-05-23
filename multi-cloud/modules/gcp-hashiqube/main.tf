@@ -35,7 +35,6 @@ resource "google_compute_region_instance_group_manager" "hashiqube" {
     minimal_action       = "REPLACE"
     max_surge_fixed       = 3
     max_unavailable_fixed = 0
-    min_ready_sec        = 60
   }
 }
 
@@ -44,23 +43,13 @@ data "google_compute_subnetwork" "hashiqube" {
   name     = "default"
 }
 
-data "template_file" "hashiqube" {
-  template = file("${path.module}/../../modules/shared/startup_script")
-  vars = {
-    HASHIQUBE_GCP_IP   = google_compute_address.hashiqube.address
-    HASHIQUBE_AWS_IP   = var.aws_hashiqube_ip == null ? "" : var.aws_hashiqube_ip
-    HASHIQUBE_AZURE_IP = var.azure_hashiqube_ip == null ? "" : var.azure_hashiqube_ip
-    VAULT_ENABLED      = lookup(var.vault, "enabled")
-  }
-}
-
 resource "google_compute_instance_template" "hashiqube" {
   provider             = google
   name_prefix          = var.gcp_cluster_name
   description          = var.gcp_cluster_description
   instance_description = var.gcp_cluster_description
   machine_type         = var.gcp_machine_type
-  tags                 = list(var.gcp_cluster_tag_name)
+  tags                 = tolist(var.gcp_cluster_tag_name)
   scheduling {
     automatic_restart   = true
     on_host_maintenance = "MIGRATE"
@@ -69,11 +58,16 @@ resource "google_compute_instance_template" "hashiqube" {
   disk {
     boot         = true
     auto_delete  = true
-    source_image = "ubuntu-os-cloud/ubuntu-1804-lts"
+    source_image = "ubuntu-os-cloud/ubuntu-2004-lts"
     disk_size_gb = var.gcp_root_volume_disk_size_gb
     disk_type    = var.gcp_root_volume_disk_type
   }
-  metadata_startup_script = data.template_file.hashiqube.rendered
+  metadata_startup_script = templatefile("${path.module}/../../modules/shared/startup_script",{
+    HASHIQUBE_GCP_IP   = google_compute_address.hashiqube.address
+    HASHIQUBE_AWS_IP   = var.aws_hashiqube_ip == null ? "" : var.aws_hashiqube_ip
+    HASHIQUBE_AZURE_IP = var.azure_hashiqube_ip == null ? "" : var.azure_hashiqube_ip
+    VAULT_ENABLED      = lookup(var.vault, "enabled")
+  })
   metadata = {
     ssh-keys = "ubuntu:${file(var.ssh_public_key)}"
   }
@@ -140,7 +134,7 @@ resource "google_compute_firewall" "azure_hashiqube_ip" {
     protocol = "udp"
     ports    = ["0-65535"]
   }
-  source_ranges = ["${var.aws_hashiqube_ip}/32"]
+  source_ranges = ["${var.azure_hashiqube_ip}/32"]
 }
 
 resource "google_compute_firewall" "gcp_hashiqube_ip" {

@@ -235,9 +235,6 @@ __Solution__ Ensure the following contents are present in `/etc/vbox/networks.co
 ## Support & Feedback
 For suggestions, feedback and queries please branch or and submit a Pull Request or directly contact the architects of the HashiQube via email:
 
-Lead Automation Architect [riaan.nolan@servian.com](mailto:riaan.nolan@servian.com)
-https://www.linkedin.com/in/riaannolan/
-
 ## About
 Hashiqube has been created to help Engineers, Developers and anyone who wants to practise, learn or demo Hashicorp products to get started quickly with a local lab. 
 

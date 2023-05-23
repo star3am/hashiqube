@@ -12,7 +12,7 @@ variable "deploy_to_gcp" {
 
 variable "deploy_to_azure" {
   type        = bool
-  default     = true
+  default     = false
   description = "Deploy Hashiqube on Azure"
 }
 
@@ -36,13 +36,13 @@ variable "azure_region" {
 
 variable "azure_instance_type" {
   type        = string
-  default     = "Standard_F2"
+  default     = "Standard_DS1_v2"
   description = "Azure instance type"
 }
 
 variable "aws_credentials" {
   type        = string
-  default     = "~/.aws/credentials"
+  default     = "~/.aws/config"
   description = "AWS credentials file location"
 }
 
@@ -71,7 +71,7 @@ variable "gcp_credentials" {
 
 variable "gcp_project" {
   type        = string
-  default     = "thermal-formula-256223"
+  default     = "default"
   description = "GCP project ID"
 }
 
@@ -100,8 +100,8 @@ variable "gcp_cluster_description" {
 }
 
 variable "gcp_cluster_tag_name" {
-  type        = string
-  default     = "hashiqube"
+  type        = list(string)
+  default     = ["hashiqube"]
   description = "Cluster tag to apply"
 }
 

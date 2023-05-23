@@ -1,24 +1,45 @@
+# A Terraform module to bring up Hashiqube in the Cloud.
+# https://hashiqube.com
+# DO NOT USE THIS IN PRODUCTION
+
+terraform {
+  required_providers {
+    # https://registry.terraform.io/providers/hashicorp/aws/latest
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 4.67"
+    }
+    # https://registry.terraform.io/providers/hashicorp/azurerm/latest
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "3.57.0"
+    }
+    # https://registry.terraform.io/providers/hashicorp/google/latest
+    google = {
+      source  = "hashicorp/google"
+      version = "~> 4.65"
+    }
+  }
+}
+
+provider "aws" {
+  region                   = var.aws_region
+  shared_credentials_files = [file(var.aws_credentials)]
+  profile                  = var.aws_profile
+}
+
+provider "azurerm" {
+  features {}
+}
+
 provider "google" {
-  version     = "~> 3.40.0"
   credentials = file(var.gcp_credentials)
   project     = var.gcp_project
   region      = var.gcp_region
 }
 
-provider "azurerm" {
-  version = "~> 2.29.0"
-  features {}
-}
-
-provider "aws" {
-  version                = "~> 3.8.0"
-  region                 = var.aws_region
-  shared_credentials_file = file(var.aws_credentials)
-  profile                 = var.aws_profile
-}
-
 data "external" "myipaddress" {
-  program = ["bash", "-c", "curl -s 'https://api.ipify.org?format=json'"]
+  program = ["bash", "-c", "curl -k 'https://api.ipify.org?format=json'"]
 }
 
 resource "null_resource" "hashiqube" {
@@ -75,7 +96,7 @@ module "aws-hashiqube" {
   ssh_public_key     = var.ssh_public_key
   aws_credentials    = var.aws_credentials
   aws_instance_type  = var.aws_instance_type
-  aws_profile         = var.aws_profile
+  aws_profile        = var.aws_profile
   aws_region         = var.aws_region
   whitelist_cidr     = var.whitelist_cidr
   azure_hashiqube_ip = var.deploy_to_azure ? try(module.azure-hashiqube[0].hashiqube_ip, null) : null
