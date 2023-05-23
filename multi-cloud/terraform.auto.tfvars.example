@@ -1,0 +1,5 @@
+deploy_to_aws = true
+deploy_to_gcp = true
+deploy_to_azure = true
+aws_profile = "default"
+gcp_project = "default"

@@ -1,0 +1,99 @@
+---
+image:
+  name: docker/compose:1.29.2
+
+variables:
+  STATE_LOCK_PLAN: "false"
+
+stages:
+  - pre-commit
+
+pre-commit:
+  stage: pre-commit
+  script:
+    # https://www.docker.com/blog/how-to-rapidly-build-multi-architecture-images-with-buildx/
+    # - pwd
+    # - docker build -t tools:latest .
+    # - docker images | grep tools
+    # - docker buildx create --name tools --use
+    # - docker buildx inspect
+    # # https://vikaspogu.dev/posts/docker-buildx-setup/
+    # - docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+    # - docker buildx build --platform=linux/amd64,linux/arm64 -t tools:latest .
+    # - docker buildx imagetools inspect star3am/repository:tools
+    # - docker buildx build --push --platform linux/amd64,linux/arm64 --tag star3am/repository:tools .
+    - |
+      arch=$(uname -m)
+      if [[ $arch == x86_64* ]]; then
+        ARCH="amd64"
+      elif  [[ $arch == arm64 ]]; then
+        ARCH="arm64"
+      fi
+      echo "CPU is ${ARCH}"
+      pwd
+      docker images | grep tools || true
+      docker rmi -f tools || true
+      docker rmi -f pre-commit_tools || true
+      docker rmi -f devops-bootstrap_tools || true
+      ls -la 
+      # Docker volumes in Gitlab dont work, we use COPY to copy the code into the container
+      sed -i 's/^# COPY/COPY/' Dockerfile
+      sed -i 's/^\.git/#\.git/' .dockerignore
+      sed -i 's/volumes/#volumes/' docker-compose.yml
+      sed -i "s%- \"\.\:/app\"%#- \"\.\:\/app\"%" docker-compose.yml
+      echo "*** cat Dockerfile"
+      cat Dockerfile
+      echo "*** cat .dockerignore"
+      cat .dockerignore
+      echo "*** cat docker-compose.yml"
+      cat docker-compose.yml
+      ARCH=${ARCH} docker-compose run --rm tools bash -c '
+        cd /app
+        env | grep PATH
+        cat /etc/lsb-release
+        uname -a
+        pwd
+        tree -a -L 1
+        echo "*** python -V"
+        python -V
+        echo "*** pip -V"
+        pip -V
+        echo "*** az --version"
+        az --version
+        echo "*** cookiecutter --version"
+        cookiecutter --version
+        echo "*** aws --version"
+        aws --version
+        echo "*** gcloud --version"
+        gcloud --version
+        echo "*** dbt --version"
+        dbt --version
+        echo "*** kubectl version"
+        kubectl version
+        echo "*** helm version"
+        helm version
+        echo "*** terraform -version"
+        terraform -version
+        echo "*** terragrunt -version"
+        terragrunt -version
+        echo "*** pre-commit --version"
+        pre-commit --version
+        echo "*** packer version"
+        packer version
+        echo "*** docker version"
+        docker version
+        echo "*** docker-compose version"
+        docker-compose version
+        terraform-docs markdown document --hide requirements --escape=false --sort-by required . > docs/README.md
+        terraform init -upgrade
+        terraform plan
+        DIR=~/.git-template
+        git config --global init.templateDir ${DIR}
+        pre-commit init-templatedir -t pre-commit ${DIR}
+        pre-commit validate-config
+        pre-commit run -a
+        # echo "*** pip list"
+        # pip list'
+        pwd'
+  only:
+    - main

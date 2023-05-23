@@ -1,0 +1,15 @@
+{
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "tools",
+  "workspaceFolder": "/app",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "hashicorp.terraform",
+        "nhoizey.gremlins",
+        "hashicorp.hcl"
+      ]
+    }
+  }
+}
