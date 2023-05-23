@@ -246,6 +246,7 @@ function waypoint-nomad() {
   sudo --preserve-env=PATH -u vagrant waypoint context verify
   echo -e '\e[38;5;198m'"++++ Waypoint Init and Up T-Rex Nodejs Example"
   echo -e '\e[38;5;198m'"++++ Found here /vagrant/hashicorp/waypoint/custom-examples/nomad-trex-nodejs"
+  sudo chmod -R 777 /vagrant/hashicorp/waypoint/custom-examples
   cd /vagrant/hashicorp/waypoint/custom-examples/nomad-trex-nodejs
   echo -e '\e[38;5;198m'"++++ Waypoint config /vagrant/hashicorp/waypoint/custom-examples/nomad-trex-nodejs/waypoint.hcl"
   echo -e '\e[38;5;198m'"++++ Waypoint Init"
