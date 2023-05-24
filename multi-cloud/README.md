@@ -29,6 +29,28 @@ Give it a try and most of all have fun with this module, your feedback is always
 
 ![Hashiqube Integrations](images/logo-qube.png?raw=true "Hashiqube Integrations")
 
+## Basic concept
+The basic concept is, we spin up a cloud instance, we install `docker` and `vagrant` and we clone https://github.com/star3am/hashiqube into /home/ubuntu/hashiqube
+
+We then use vagrant to spin up Hashiqube as a docker container with all the Hashicorp tools inside of this docker container. So Vault, Nomad, Consul, Boundary and Waypoint actually runs inside a docker container on the cloud instance. 
+
+*ubuntu@hashiqube-aws:~$* `vagrant status`
+```
+Current machine states:
+
+hashiqube0.service.consul running (docker)
+
+The container is created and running. You can stop it using
+`vagrant halt`, see logs with `vagrant docker-logs`, and
+kill/destroy it with `vagrant destroy`.
+```
+
+*ubuntu@hashiqube-aws:~$* `docker ps`
+``` 
+CONTAINER ID   IMAGE          COMMAND            CREATED          STATUS          PORTS   NAMES
+f6bc621e730e   7b224f871e2a   "/usr/sbin/init"   58 minutes ago   Up 58 minutes   0.0.0.0:1433->1433/tcp, :::1433->1433/tcp, 0.0.0.0:3306->3306/tcp, :::3306->3306/tcp, 0.0.0.0:3333->3333/tcp, :::3333->3333/tcp, 0.0.0.0:4566->4566/tcp, :::4566->4566/tcp, 0.0.0.0:4646-4648->4646-4648/tcp, :::4646-4648->4646-4648/tcp, 0.0.0.0:5001-5002->5001-5002/tcp, :::5001-5002->5001-5002/tcp, 0.0.0.0:5432->5432/tcp, :::5432->5432/tcp, 0.0.0.0:7777->7777/tcp, :::7777->7777/tcp, 0.0.0.0:8000->8000/tcp, :::8000->8000/tcp, 0.0.0.0:8043->8043/tcp, :::8043->8043/tcp, 0.0.0.0:8080->8080/tcp, :::8080->8080/tcp, 0.0.0.0:8088->8088/tcp, :::8088->8088/tcp, 0.0.0.0:8181->8181/tcp, :::8181->8181/tcp, 0.0.0.0:8200->8200/tcp, :::8200->8200/tcp, 0.0.0.0:8300-8302->8300-8302/tcp, :::8300-8302->8300-8302/tcp, 0.0.0.0:8500->8500/tcp, :::8500->8500/tcp, 0.0.0.0:8888-8889->8888-8889/tcp, :::8888-8889->8888-8889/tcp, 0.0.0.0:9001-9002->9001-9002/tcp, :::9001-9002->9001-9002/tcp, 0.0.0.0:9011->9011/tcp, :::9011->9011/tcp, 0.0.0.0:9022->9022/tcp, :::9022->9022/tcp, 0.0.0.0:9701-9702->9701-9702/tcp, :::9701-9702->9701-9702/tcp, 0.0.0.0:9998-9999->9998-9999/tcp, :::9998-9999->9998-9999/tcp, 0.0.0.0:10888->10888/tcp, :::10888->10888/tcp, 0.0.0.0:18080->18080/tcp, :::18080->18080/tcp, 0.0.0.0:18181->18181/tcp, :::18181->18181/tcp, 0.0.0.0:18888-18889->18888-18889/tcp, :::18888-18889->18888-18889/tcp, 0.0.0.0:19200->19200/tcp, :::19200->19200/tcp, 0.0.0.0:19701-19702->19701-19702/tcp, :::19701-19702->19701-19702/tcp, 0.0.0.0:28080->28080/tcp, :::28080->28080/tcp, 0.0.0.0:31506->31506/tcp, :::31506->31506/tcp, 0.0.0.0:8600->8600/udp, :::8600->8600/udp, 0.0.0.0:2255->22/tcp, :::2255->22/tcp, 0.0.0.0:33389->389/tcp, :::33389->389/tcp   hashiqube_hashiqube0serviceconsul_1684968900
+```
+
 ## Quickstart
 - Download and Install VSCode https://code.visualstudio.com/
 - Install the VSCode Remote Containers extension https://code.visualstudio.com/docs/devcontainers/containers
@@ -99,10 +121,23 @@ After your Hashiqube instances has been launched you can access them by using th
 
 ![Hashiqube Access](images/hashiqube-first-login.png?raw=true "Hashiqube Access")
 
+## Voodoo you should be aware of
+I use `~/.bash_aliases` file to make it easier to interact with Hashicorp tools running in the hashiqube docker container. 
+
+```
+ubuntu@hashiqube-aws:~$ cat ~/.bash_aliases 
+alias vagrant='cd /home/ubuntu/hashiqube; vagrant'
+nomad() { cd /home/ubuntu/hashiqube; vagrant ssh -c "nomad $1 $2 $3 $4 $5" ;}
+consul() { cd /home/ubuntu/hashiqube; vagrant ssh -c "consul $1 $2 $3 $4 $5" ;}
+vault() { cd /home/ubuntu/hashiqube; vagrant ssh -c "vault $1 $2 $3 $4 $5" ;}
+```
+
+:bulb: Meaning that when you issue the command `vault` or `nomad` or `consul` it is ACTUALLY executed via `vagrant ssh -c $command` this is just to make things a bit easier for you, of course, you can still use the `vagrant ssh -c "vault status` like you'd normally do.
+
 You can then interact with Hashicorp's Services running in Hashiqube, for example:
 
 Get Vault status
-*root@hashiqube-aws:/hashiqube#* `vagrant ssh -c 'vault status'`
+*ubuntu@hashiqube-aws:~/hashiqube#* `vault status`
 ```
 Key             Value
 ---             -----
@@ -119,9 +154,28 @@ Cluster ID      4731c701-5575-be22-6678-8ba210f7f045
 HA Enabled      false
 Connection to 127.0.0.1 closed.
 ```
+Or normally via `vagrant ssh -c` like below
+
+*ubuntu@hashiqube-aws:~/hashiqube$* `vagrant ssh -c "vault status"`
+```
+Key             Value
+---             -----
+Seal Type       shamir
+Initialized     true
+Sealed          false
+Total Shares    5
+Threshold       3
+Version         1.13.2
+Build Date      2023-04-25T13:02:50Z
+Storage Type    file
+Cluster Name    vault
+Cluster ID      114f0631-9c5b-df15-71ec-9740776d8693
+HA Enabled      false
+Connection to 127.0.0.1 closed.
+```
 
 Get Nomad Job Status
-*root@hashiqube-aws:/hashiqube#* `vagrant ssh -c 'nomad job status'`
+*ubuntu@hashiqube-aws:~/hashiqube#* `nomad job status`
 ```
 ID                                            Type     Priority  Status   Submit Date
 fabio                                         system   50        running  2023-05-23T22:59:55Z
@@ -134,7 +188,7 @@ Connection to 127.0.0.1 closed.
 ```
 
 Get Nomad Server Members
-*root@hashiqube-aws:/hashiqube#* `vagrant ssh -c 'nomad server members'`
+*ubuntu@hashiqube-aws:~/hashiqube#* `nomad server members`
 ```
 Name                                   Address     Port  Status  Leader  Raft Version  Build  Datacenter  Region
 hashiqube-aws.service.consul.global    10.9.99.11  5648  alive   true    3             1.5.6  aws         global
@@ -144,7 +198,7 @@ Connection to 127.0.0.1 closed.
 ```
 
 Get Consul Members
-*root@hashiqube-aws:/hashiqube#* `vagrant ssh -c 'consul members -wan'`
+*ubuntu@hashiqube-aws:~/hashiqube#* `consul members -wan`
 ```
 Node                                  Address          Status  Type    Build   Protocol  DC     Partition  Segment
 hashiqube-aws.service.consul.aws      10.9.99.11:8302  alive   server  1.15.2  3         aws    default    <all>
@@ -155,7 +209,7 @@ Connection to 127.0.0.1 closed.
 
 Or simply access the Hashiqube container to interact freely with the Hashicorp Services, edit config files and so on
 
-*root@hashiqube-aws:/hashiqube#* `vagrant ssh`
+*ubuntu@hashiqube-aws:~/hashiqube#* `vagrant ssh`
 ```
  _               _     _             _                                                         _                                     _ 
 | |__   __ _ ___| |__ (_) __ _ _   _| |__   ___        __ ___      _____   ___  ___ _ ____   _(_) ___ ___   ___ ___  _ __  ___ _   _| |
@@ -172,7 +226,7 @@ vagrant@hashiqube-aws:~$
 ```
 
 Get Waypoint Token
-*root@hashiqube-aws:/hashiqube#* `vagrant ssh -c "cat /home/vagrant/.waypoint-nomad-token"`
+*ubuntu@hashiqube-aws:~/hashiqube#* `vagrant ssh -c "cat /home/vagrant/.waypoint-nomad-token"`
 ```
 HZCwuUtmrrpW5ycZ63TToJgrFN3CsxSYJT5pEo2kWp1npxEksykGHtZ9uAUkj5YhqL6Q4ZHAPCGToVLCpanmAoASuABmbFQvnjgRzEtt5zDbkosYD4KXFimWhKx1NC5EnQn8c71qivsms7pLXYMknmfSsmRaLjDhkJmW
 ```

@@ -2,7 +2,7 @@
 exec > >(tee /var/log/user-data.log|logger -t user-data -s 2>/dev/console) 2>&1
 echo BEGIN $(date '+%Y-%m-%d %H:%M:%S')
 # determine which cloud we are in and set some variables
-if [[ $(sudo dmidecode -s bios-version) =~ .*\.amazon ]]
+if [[ $(dmidecode -s bios-version) =~ .*\.amazon ]]
 then
   echo "This is AWS"
   DC=aws
@@ -14,7 +14,7 @@ then
   HASHIQUBE_GCP_IP=${HASHIQUBE_GCP_IP}
   HOSTNAME=hashiqube-aws
   FQDN=hashiqube-aws.service.consul
-elif [[ $(sudo dmidecode -s bios-version) =~ Google ]]
+elif [[ $(dmidecode -s bios-version) =~ Google ]]
 then
   echo "This is GCP"
   DC=gcp
@@ -40,14 +40,14 @@ else
 fi
 # set hostname
 echo "$HOSTNAME" > /etc/hostname
-sudo hostname "$HOSTNAME"
-sudo sed -i "s/.*127.0.0.1.*/127.0.0.1 $FQDN $HOSTNAME localhost/g" /etc/hosts
+hostname "$HOSTNAME"
+sed -i "s/.*127.0.0.1.*/127.0.0.1 $FQDN $HOSTNAME localhost/g" /etc/hosts
 # install basetools
-sudo DEBIAN_FRONTEND=noninteractive apt-get update
-sudo DEBIAN_FRONTEND=noninteractive apt-get --assume-yes install swapspace curl unzip jq git update-motd toilet figlet apt-transport-https ca-certificates gnupg-agent software-properties-common
+DEBIAN_FRONTEND=noninteractive apt-get update
+DEBIAN_FRONTEND=noninteractive apt-get --assume-yes install swapspace curl unzip jq git update-motd toilet figlet apt-transport-https ca-certificates gnupg-agent software-properties-common mc
 # set motd
-sudo mkdir -p /etc/update-motd.d
-cat <<EOF | sudo tee /etc/update-motd.d/00-header
+mkdir -p /etc/update-motd.d
+cat <<EOF | tee /etc/update-motd.d/00-header
 #!/bin/bash
 /usr/bin/toilet --gay -f standard hashiqube-aws -w 170
 printf "%s"
@@ -55,54 +55,61 @@ printf "%s"
 printf "\n"
 printf " * Hashiqube Documentation:  https://hashiqube.com\n"
 printf " * See User Data Log:        tail -f /var/log/user-data.log\n"
-printf " * First sudo to root:       sudo -i\n"
-printf " * Change directory:         cd /hashiqube\n"
 printf " * Get Vault Root token:     vagrant ssh -c 'cat /etc/vault/init.file'\n"
-printf " * Get Vault Status:         vagrant ssh -c 'vault status'\n"
-printf " * Get Nomad Job Status:     vagrant ssh -c 'nomad job status'\n"
-printf " * Get Nomad Server Members: vagrant ssh -c 'nomad server members'\n"
-printf " * Get Consul Info:          vagrant ssh -c 'consul info'\n"
-printf " * Get Consul Members:       vagrant ssh -c 'consul members -wan'\n"
+printf " * Get Vault Status:         vault status\n"
+printf " * Get Nomad Job Status:     nomad job status\n"
+printf " * Get Nomad Server Members: nomad server members\n"
+printf " * Get Consul Info:          consul info\n"
+printf " * Get Consul Members:       consul members -wan\n"
 printf " * Get Waypoint Token:       vagrant ssh -c 'cat /home/vagrant/.waypoint-nomad-token'\n"
 printf " * SSH into Hashiqube:       vagrant ssh\n"
 printf "\n"
 EOF
+# remove unneeded motd files
+for i in $(ls /etc/update-motd.d/ | grep -v landscape | grep -v header); do rm /etc/update-motd.d/$i; done
 # install docker
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-sudo DEBIAN_FRONTEND=noninteractive apt-get update
-sudo DEBIAN_FRONTEND=noninteractive apt-get install --allow-downgrades --assume-yes docker.io
-sudo usermod -aG docker ubuntu
-sudo service docker restart
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+DEBIAN_FRONTEND=noninteractive apt-get update
+DEBIAN_FRONTEND=noninteractive apt-get install --allow-downgrades --assume-yes docker.io
+usermod -aG docker ubuntu
+service docker restart
 # install vagrant
-sudo apt-get install -y vagrant
+apt-get install -y vagrant
 # clone and run hashiqube
-sudo git clone https://github.com/star3am/hashiqube.git
-cd hashiqube
+sudo -u ubuntu git clone https://github.com/star3am/hashiqube.git /home/ubuntu/hashiqube
+cd /home/ubuntu/hashiqube
 # set different IPs for the nodes
-for i in $(grep -Rlz '10.9.99.10' /hashiqube/); do sudo sed -i "s/10.9.99.10/$HASHIQUBE_IP/g" $i; done
+for i in $(grep -Rlz '10.9.99.10' /home/ubuntu/hashiqube/); do sudo -u ubuntu sed -i "s/10.9.99.10/$HASHIQUBE_IP/g" $i; done
 # set different Hostnames for the nodes
-for i in $(grep -Rlz 'hashiqube0' /hashiqube/); do sudo sed -i "s/hashiqube0/hashiqube-$DC/g" $i; done
+for i in $(grep -Rlz 'hashiqube0' /home/ubuntu/hashiqube/); do sudo -u ubuntu sed -i "s/hashiqube0/hashiqube-$DC/g" $i; done
 # set different DCs for the nodes
-for i in $(grep -Rlz 'dc1' /hashiqube/); do sudo sed -i "s/dc1/$DC/g" $i; done
-sudo vagrant up --provision-with basetools,docker,vault,consul,nomad,boundary,waypoint
+for i in $(grep -Rlz 'dc1' /home/ubuntu/hashiqube/); do sudo -u ubuntu sed -i "s/dc1/$DC/g" $i; done
+sudo -u ubuntu vagrant up --provision-with basetools,docker,vault,consul,nomad,boundary,waypoint
 # cluster join
 if [[ $HASHIQUBE_AZURE_IP ]]; then
-  sudo vagrant ssh -c "consul join -wan ${HASHIQUBE_AZURE_IP}"
-  sudo vagrant ssh -c "consul members -wan"
-  sudo vagrant ssh -c "nomad server join ${HASHIQUBE_AZURE_IP}"
-  sudo vagrant ssh -c "nomad server members"
+  sudo -u ubuntu vagrant ssh -c "consul join -wan ${HASHIQUBE_AZURE_IP}"
+  sudo -u ubuntu vagrant ssh -c "consul members -wan"
+  sudo -u ubuntu vagrant ssh -c "nomad server join ${HASHIQUBE_AZURE_IP}"
+  sudo -u ubuntu vagrant ssh -c "nomad server members"
 fi
 if [[ $HASHIQUBE_AWS_IP ]]; then
-  sudo vagrant ssh -c "consul join -wan ${HASHIQUBE_AWS_IP}"
-  sudo vagrant ssh -c "consul members -wan"
-  sudo vagrant ssh -c "nomad server join ${HASHIQUBE_AWS_IP}"
-  sudo vagrant ssh -c "nomad server members"
+  sudo -u ubuntu vagrant ssh -c "consul join -wan ${HASHIQUBE_AWS_IP}"
+  sudo -u ubuntu vagrant ssh -c "consul members -wan"
+  sudo -u ubuntu vagrant ssh -c "nomad server join ${HASHIQUBE_AWS_IP}"
+  sudo -u ubuntu vagrant ssh -c "nomad server members"
 fi
 if [[ $HASHIQUBE_GCP_IP ]]; then
-  sudo vagrant ssh -c "consul join -wan ${HASHIQUBE_GCP_IP}"
-  sudo vagrant ssh -c "consul members -wan"
-  sudo vagrant ssh -c "nomad server join ${HASHIQUBE_GCP_IP}"
-  sudo vagrant ssh -c "nomad server members"
+  sudo -u ubuntu vagrant ssh -c "consul join -wan ${HASHIQUBE_GCP_IP}"
+  sudo -u ubuntu vagrant ssh -c "consul members -wan"
+  sudo -u ubuntu vagrant ssh -c "nomad server join ${HASHIQUBE_GCP_IP}"
+  sudo -u ubuntu vagrant ssh -c "nomad server members"
 fi
+# set bash aliases
+cat <<EOF | sudo -u ubuntu tee /home/ubuntu/.bash_aliases
+alias vagrant='cd /home/ubuntu/hashiqube; vagrant'
+nomad() { cd /home/ubuntu/hashiqube; vagrant ssh -c "nomad $1 $2 $3 $4 $5" ;}
+consul() { cd /home/ubuntu/hashiqube; vagrant ssh -c "consul $1 $2 $3 $4 $5" ;}
+vault() { cd /home/ubuntu/hashiqube; vagrant ssh -c "vault $1 $2 $3 $4 $5" ;}
+EOF
 echo END $(date '+%Y-%m-%d %H:%M:%S')
