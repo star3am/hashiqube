@@ -1,8 +1,8 @@
 FROM ubuntu:20.04
 
 # Install dependencies
-RUN export DEBIAN_FRONTEND=noninteractive && apt-get update -qq && \
- apt-get -y install -qq apache2
+RUN export DEBIAN_FRONTEND=noninteractive && apt-get update -qq < /dev/null > /dev/null && \
+ apt-get -y install -qq apache2 < /dev/null > /dev/null
 
 # Install apache and write hello world message
 RUN echo 'You have just build (and run) a docker container from a Dockerfile. Congratulations!' > /var/www/html/index.html

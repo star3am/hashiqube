@@ -11,7 +11,7 @@ elif  [[ $arch == aarch64 ]]; then
 fi
 echo -e '\e[38;5;198m'"CPU is $ARCH"
 
-sudo DEBIAN_FRONTEND=noninteractive apt-get --assume-yes install curl unzip jq
+sudo DEBIAN_FRONTEND=noninteractive apt-get --assume-yes install curl unzip jq < /dev/null > /dev/null
 mkdir -p /etc/consul
 mkdir -p /etc/consul.d
 cat <<EOF | sudo tee /etc/consul/server.hcl
@@ -127,7 +127,7 @@ EOF
   sudo systemctl disable systemd-resolved
   sudo systemctl stop systemd-resolved
   sleep 10;
-  sudo apt-get install -y -qq dnsmasq
+  sudo apt-get install -y -qq dnsmasq < /dev/null > /dev/null
   echo -e '\e[38;5;198m'"++++ Adding DNSMasq config for Consul for DNS lookups"
   # https://learn.hashicorp.com/tutorials/consul/dns-forwarding#dnsmasq-setup
   cat <<EOF | sudo tee /etc/dnsmasq.d/10-consul

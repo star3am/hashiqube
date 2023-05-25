@@ -3,7 +3,7 @@
 # https://learn.hashicorp.com/tutorials/boundary/getting-started-dev
 
 function boundary-install() {
-  sudo DEBIAN_FRONTEND=noninteractive apt-get --assume-yes install -qq curl unzip jq
+  sudo DEBIAN_FRONTEND=noninteractive apt-get --assume-yes install -qq curl unzip jq < /dev/null > /dev/null
   yes | sudo docker system prune -a
   yes | sudo docker system prune --volumes
 
