@@ -127,7 +127,7 @@ EOF
   sudo systemctl disable systemd-resolved
   sudo systemctl stop systemd-resolved
   sleep 10;
-  sudo apt-get install -y dnsmasq
+  sudo apt-get install -y -qq dnsmasq
   echo -e '\e[38;5;198m'"++++ Adding DNSMasq config for Consul for DNS lookups"
   # https://learn.hashicorp.com/tutorials/consul/dns-forwarding#dnsmasq-setup
   cat <<EOF | sudo tee /etc/dnsmasq.d/10-consul

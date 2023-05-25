@@ -18,7 +18,7 @@ function nomad-install() {
   fi
   echo -e '\e[38;5;198m'"CPU is $ARCH"
 
-  sudo DEBIAN_FRONTEND=noninteractive apt-get --assume-yes install curl unzip jq
+  sudo DEBIAN_FRONTEND=noninteractive apt-get --assume-yes install -qq curl unzip jq
   yes | sudo docker system prune -a
   yes | sudo docker system prune --volumes
   mkdir -p /etc/nomad

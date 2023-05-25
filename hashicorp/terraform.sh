@@ -10,7 +10,7 @@ function terraform-install() {
   fi
   echo -e '\e[38;5;198m'"CPU is $ARCH"
   
-  sudo DEBIAN_FRONTEND=noninteractive apt-get --assume-yes install curl unzip jq
+  sudo DEBIAN_FRONTEND=noninteractive apt-get --assume-yes install -qq curl unzip jq
   if [ -f /usr/local/bin/terraform ]; then
     echo -e '\e[38;5;198m'"++++ `/usr/local/bin/terraform version` already installed at /usr/local/bin/terraform"
   else

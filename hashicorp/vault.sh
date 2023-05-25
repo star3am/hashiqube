@@ -27,7 +27,7 @@ echo -e '\e[38;5;198m'"CPU is $ARCH"
 # apt-get remove -y replicated replicated-ui replicated-operator
 # apt-get purge -y replicated replicated-ui replicated-operator
 # rm -rf /var/lib/replicated* /etc/replicated* /etc/init/replicated* /etc/init.d/replicated* /etc/default/replicated* /var/log/upstart/replicated* /etc/systemd/system/replicated*
-sudo DEBIAN_FRONTEND=noninteractive apt-get --assume-yes install curl unzip jq
+sudo DEBIAN_FRONTEND=noninteractive apt-get --assume-yes install -qq curl unzip jq
 # only do if vault is not found
 if [ ! -f /usr/local/bin/vault ]; then
   

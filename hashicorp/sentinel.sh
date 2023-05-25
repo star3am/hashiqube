@@ -9,7 +9,7 @@ function sentinel-install() {
   fi
   echo -e '\e[38;5;198m'"CPU is $ARCH"
 
-  sudo DEBIAN_FRONTEND=noninteractive apt-get --assume-yes install curl unzip jq
+  sudo DEBIAN_FRONTEND=noninteractive apt-get --assume-yes install -qq curl unzip jq
   if [ -f /usr/local/bin/sentinel ]; then
     echo -e '\e[38;5;198m'"++++ `/usr/local/bin/sentinel version` already installed at /usr/local/bin/sentinel"
   else

@@ -32,7 +32,7 @@ function packer-install() {
   fi
   sudo touch /var/log/packer.log
   sudo chmod 777 /var/log/packer.log
-  sudo DEBIAN_FRONTEND=noninteractive apt-get --assume-yes install curl unzip jq python3-hvac
+  sudo DEBIAN_FRONTEND=noninteractive apt-get --assume-yes install -qq curl unzip jq python3-hvac
   if [ -f /usr/local/bin/packer ]; then
     echo -e '\e[38;5;198m'"++++ `/usr/local/bin/packer version` already installed at /usr/local/bin/packer"
   else

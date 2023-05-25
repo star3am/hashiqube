@@ -1,7 +1,7 @@
 #/bin/bash
 # https://docs.docker.com/install/linux/docker-ce/ubuntu/
-sudo DEBIAN_FRONTEND=noninteractive apt-get update
-sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes apt-transport-https ca-certificates curl gnupg-agent software-properties-common
+sudo DEBIAN_FRONTEND=noninteractive apt-get update -qq
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq --assume-yes apt-transport-https ca-certificates curl gnupg-agent software-properties-common
 sudo -i
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 #PROCESSOR_ARCHITECTURE=$(lscpu | grep "Architecture" | awk '{print $NF}') >> /etc/environment
@@ -14,11 +14,11 @@ elif  [[ $arch == aarch64 ]]; then
 fi
 echo -e '\e[38;5;198m'"CPU is $ARCH"
 sudo add-apt-repository "deb [arch=$ARCH] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-sudo apt-get update
+sudo apt-get update -qq
 # BUG: error reopening /dev/null https://bugs.launchpad.net/ubuntu/+source/docker.io/+bug/1950071 so we pin docker-ce=5:20.10.16~3-0~ubuntu-focal and containerd.io=1.5.11-1
 # BUG: https://github.com/containerd/containerd/issues/6203
 # INFO: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: error during container init: error reopening /dev/null inside container: open /dev/null: operation not permitted: unknown
-sudo DEBIAN_FRONTEND=noninteractive apt-get install --allow-downgrades --assume-yes docker-ce=5:20.10.9~3-0~ubuntu-focal docker-ce-cli containerd.io=1.5.11-1 docker-compose-plugin
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq --allow-downgrades --assume-yes docker-ce=5:20.10.9~3-0~ubuntu-focal docker-ce-cli containerd.io=1.5.11-1 docker-compose-plugin
 sudo usermod -aG docker vagrant
 sudo mkdir -p /etc/docker
 sudo echo '{
