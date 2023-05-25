@@ -4,6 +4,8 @@ variable "deploy_to_azure" {}
 
 variable "deploy_to_gcp" {}
 
+variable "debug_user_data" {}
+
 variable "aws_hashiqube_ip" {}
 
 variable "azure_hashiqube_ip" {}
@@ -11,6 +13,8 @@ variable "azure_hashiqube_ip" {}
 variable "whitelist_cidr" {}
 
 variable "ssh_public_key" {}
+
+variable "ssh_private_key" {}
 
 variable "my_ipaddress" {}
 

@@ -15,6 +15,10 @@ resource "null_resource" "hashiqube" {
   }
 }
 
+locals {
+  timestamp = timestamp()
+}
+
 data "aws_ami" "ubuntu" {
   most_recent = true
   filter {
@@ -162,4 +166,36 @@ resource "aws_eip_association" "eip_assoc" {
 
 resource "aws_eip" "hashiqube" {
   vpc = true
+}
+
+resource "null_resource" "debug" {
+  count = var.debug_user_data == true ? 1 : 0
+
+  triggers = {
+    timestamp = local.timestamp
+  }
+
+  connection {
+    type     = "ssh"
+    user     = "ubuntu"
+    host     = aws_eip.hashiqube.public_ip
+    private_key = file(var.ssh_private_key)
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      # https://developer.hashicorp.com/terraform/language/resources/provisioners/remote-exec#scripts
+      # See Note in the link above about: set -o errexit
+      "set -o errexit",
+      "while [ ! -f /var/log/user-data.log ]; do sleep 1; done;",
+      "tail -f /var/log/user-data.log | { sed '/ USER-DATA END / q' && kill $$ || true; }",
+      "exit 0"
+    ]
+    on_failure = continue
+  }
+
+  depends_on = [
+    aws_instance.hashiqube,
+    aws_eip_association.eip_assoc
+  ]
 }

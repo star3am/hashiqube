@@ -16,6 +16,12 @@ variable "deploy_to_azure" {
   description = "Deploy Hashiqube on Azure"
 }
 
+variable "debug_user_data" {
+  type        = bool
+  default     = true
+  description = "Debug Output the User Data of the Cloud instance during Terraform Apply"
+}
+
 variable "whitelist_cidr" {
   description = "Additional CIDR to whitelist"
   type        = string
@@ -26,6 +32,12 @@ variable "ssh_public_key" {
   type        = string
   default     = "~/.ssh/id_rsa.pub"
   description = "SSH public key"
+}
+
+variable "ssh_private_key" {
+  type        = string
+  default     = "~/.ssh/id_rsa"
+  description = "SSH private key"
 }
 
 variable "azure_region" {

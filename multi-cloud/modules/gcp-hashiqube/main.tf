@@ -18,6 +18,10 @@ resource "null_resource" "hashiqube" {
   }
 }
 
+locals {
+  timestamp = timestamp()
+}
+
 resource "google_compute_region_instance_group_manager" "hashiqube" {
   name     = "hashiqube"
   provider = google
@@ -179,4 +183,36 @@ resource "google_project_iam_member" "hashiqube" {
   project = var.gcp_project
   role    = "roles/compute.networkViewer"
   member  = "serviceAccount:${google_service_account.hashiqube.email}"
+}
+
+resource "null_resource" "debug" {
+  count = var.debug_user_data == true ? 1 : 0
+
+  triggers = {
+    timestamp = local.timestamp
+  }
+
+  connection {
+    type     = "ssh"
+    user     = "ubuntu"
+    host     = google_compute_address.hashiqube.address
+    private_key = file(var.ssh_private_key)
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      # https://developer.hashicorp.com/terraform/language/resources/provisioners/remote-exec#scripts
+      # See Note in the link above about: set -o errexit
+      "set -o errexit",
+      "while [ ! -f /var/log/user-data.log ]; do sleep 1; done;",
+      "tail -f /var/log/user-data.log | { sed '/ USER-DATA END / q' && kill $$ || true; }",
+      "exit 0"
+    ]
+    on_failure = continue
+  }
+
+  depends_on = [
+    google_compute_instance_template.hashiqube,
+    google_compute_address.hashiqube
+  ]
 }

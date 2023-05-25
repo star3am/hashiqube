@@ -17,7 +17,7 @@ terraform {
     # https://registry.terraform.io/providers/hashicorp/google/latest
     google = {
       source  = "hashicorp/google"
-      version = "~> 4.65"
+      version = "~> 4.66"
     }
   }
 }
@@ -47,6 +47,7 @@ resource "null_resource" "hashiqube" {
     deploy_to_azure = var.deploy_to_azure
     deploy_to_gcp   = var.deploy_to_gcp
     deploy_to_aws   = var.deploy_to_aws
+    debug_user_data = var.debug_user_data
     my_ipaddress    = data.external.myipaddress.result.ip
   }
 }
@@ -75,6 +76,8 @@ module "gcp-hashiqube" {
   gcp_cluster_tag_name         = var.gcp_cluster_tag_name
   gcp_custom_metadata          = var.gcp_custom_metadata
   ssh_public_key               = var.ssh_public_key
+  ssh_private_key              = var.ssh_private_key
+  debug_user_data              = var.debug_user_data
   aws_hashiqube_ip             = var.deploy_to_aws ? try(module.aws-hashiqube[0].hashiqube_ip, null) : null
   azure_hashiqube_ip           = var.deploy_to_azure ? try(module.azure-hashiqube[0].hashiqube_ip, null) : null
   my_ipaddress                 = data.external.myipaddress.result.ip
@@ -94,6 +97,8 @@ module "aws-hashiqube" {
   deploy_to_azure    = var.deploy_to_azure
   deploy_to_gcp      = var.deploy_to_gcp
   ssh_public_key     = var.ssh_public_key
+  ssh_private_key    = var.ssh_private_key
+  debug_user_data    = var.debug_user_data
   aws_credentials    = var.aws_credentials
   aws_instance_type  = var.aws_instance_type
   aws_profile        = var.aws_profile
@@ -119,6 +124,8 @@ module "azure-hashiqube" {
   deploy_to_gcp       = var.deploy_to_gcp
   whitelist_cidr      = var.whitelist_cidr
   ssh_public_key      = var.ssh_public_key
+  ssh_private_key     = var.ssh_private_key
+  debug_user_data     = var.debug_user_data
   aws_hashiqube_ip    = var.deploy_to_aws ? try(module.aws-hashiqube[0].hashiqube_ip, null) : null
   gcp_hashiqube_ip    = var.deploy_to_gcp ? try(module.gcp-hashiqube[0].hashiqube_ip, null) : null
   my_ipaddress        = data.external.myipaddress.result.ip

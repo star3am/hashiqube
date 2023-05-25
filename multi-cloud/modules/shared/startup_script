@@ -1,6 +1,6 @@
 #!/bin/bash -x
 exec > >(tee /var/log/user-data.log|logger -t user-data -s 2>/dev/console) 2>&1
-echo BEGIN $(date '+%Y-%m-%d %H:%M:%S')
+echo USER-DATA BEGIN $(date '+%Y-%m-%d %H:%M:%S')
 # determine which cloud we are in and set some variables
 if [[ $(dmidecode -s bios-version) =~ .*\.amazon ]]
 then
@@ -67,6 +67,13 @@ printf "\n"
 EOF
 # remove unneeded motd files
 for i in $(ls /etc/update-motd.d/ | grep -v landscape | grep -v header); do rm /etc/update-motd.d/$i; done
+# set bash aliases
+cat <<EOF | sudo -u ubuntu tee /home/ubuntu/.bash_aliases
+alias vagrant='cd /home/ubuntu/hashiqube; vagrant'
+nomad() { cd /home/ubuntu/hashiqube; vagrant ssh -c "nomad $1 $2 $3 $4 $5" ;}
+consul() { cd /home/ubuntu/hashiqube; vagrant ssh -c "consul $1 $2 $3 $4 $5" ;}
+vault() { cd /home/ubuntu/hashiqube; vagrant ssh -c "vault $1 $2 $3 $4 $5" ;}
+EOF
 # install docker
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
 add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
@@ -105,11 +112,5 @@ if [[ $HASHIQUBE_GCP_IP ]]; then
   sudo -u ubuntu vagrant ssh -c "nomad server join ${HASHIQUBE_GCP_IP}"
   sudo -u ubuntu vagrant ssh -c "nomad server members"
 fi
-# set bash aliases
-cat <<EOF | sudo -u ubuntu tee /home/ubuntu/.bash_aliases
-alias vagrant='cd /home/ubuntu/hashiqube; vagrant'
-nomad() { cd /home/ubuntu/hashiqube; vagrant ssh -c "nomad $1 $2 $3 $4 $5" ;}
-consul() { cd /home/ubuntu/hashiqube; vagrant ssh -c "consul $1 $2 $3 $4 $5" ;}
-vault() { cd /home/ubuntu/hashiqube; vagrant ssh -c "vault $1 $2 $3 $4 $5" ;}
-EOF
-echo END $(date '+%Y-%m-%d %H:%M:%S')
+echo "Hashiqube Setup Complete"
+echo USER-DATA END $(date '+%Y-%m-%d %H:%M:%S')
