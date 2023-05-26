@@ -6,18 +6,17 @@ FROM ubuntu:focal
 ENV DEBIAN_FRONTEND noninteractive
 
 # Install packages needed for SSH and interactive OS
-RUN apt-get update && \
-    yes | unminimize && \
-    apt-get -y install \
+RUN apt-get update -qq < /dev/null > /dev/null
+RUN apt-get -y install -qq \
         openssh-server \
         passwd \
         sudo \
         man-db \
         curl \
         wget \
-        vim-tiny && \
-    apt-get -qq clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+        vim-tiny < /dev/null > /dev/null
+RUN apt-get -qq clean < /dev/null > /dev/null
+RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Enable systemd (from Matthew Warman's mcwarman/vagrant-provider)
 # Ref: https://github.com/servian/hashiqube/issues/12
