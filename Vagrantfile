@@ -26,7 +26,7 @@ vbox_config = [
 # machine(s) hash
 machines = [
   {
-    :name => "hashiqube",
+    :name => "hashiqube0",
     :ip => '10.9.99.10',
     :ssh_port => '2255',
     :disksize => '10GB',
