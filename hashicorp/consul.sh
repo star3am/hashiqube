@@ -85,6 +85,41 @@ EOF
 # }
 # }
 # EOF
+  # create a Consul service file at /etc/systemd/system/consul.service
+  cat <<EOF | sudo tee /etc/systemd/system/consul.service
+[Unit]
+Description=Consul
+Documentation=https://www.consul.io/docs/
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+#EnvironmentFile=/etc/consul.d/consul.env
+ExecReload=/bin/kill -HUP $MAINPID
+ExecStart=/usr/local/bin/consul agent -dev -client="0.0.0.0" -bind="0.0.0.0" -enable-script-checks -config-file=/etc/consul/server.hcl -config-dir=/etc/consul.d
+KillMode=process
+KillSignal=SIGINT
+LimitNOFILE=65536
+LimitNPROC=infinity
+Restart=on-failure
+RestartSec=2
+StandardOutput=append:/var/log/consul.log
+StandardError=append:/var/log/consul.log
+StartLimitBurst=3
+
+## Configure unit start rate limiting. Units which are started more than
+## *burst* times within an *interval* time span are not permitted to start any
+## more. Use `StartLimitIntervalSec` or `StartLimitInterval` (depending on
+## systemd version) to configure the checking interval and `StartLimitBurst`
+## to configure how many starts per interval are allowed. The values in the
+## commented lines are defaults.
+
+TasksMax=infinity
+OOMScoreAdjust=-1000
+
+[Install]
+WantedBy=multi-user.target
+EOF
   # check if consul is installed, start and exit
   if [ -f /usr/local/bin/consul ]; then
     echo -e '\e[38;5;198m'"++++ Consul already installed at /usr/local/bin/consul"
@@ -96,7 +131,7 @@ EOF
     sudo pkill consul
     sudo pkill consul
     touch /var/log/consul.log
-    sudo nohup consul agent -dev -client="0.0.0.0" -bind="0.0.0.0" -enable-script-checks -config-file=/etc/consul/server.hcl -config-dir=/etc/consul.d > /var/log/consul.log 2>&1 &
+    sudo service consul start
     sh -c 'sudo tail -f /var/log/consul.log | { sed "/agent: Synced/ q" && kill $$ ;}'
     consul members
     consul info
@@ -109,7 +144,7 @@ EOF
     (cd /usr/local/bin && unzip /tmp/consul.zip)
     echo -e '\e[38;5;198m'"++++ Installed `/usr/local/bin/consul version`"
     touch /var/log/consul.log
-    sudo nohup consul agent -dev -client="0.0.0.0" -bind="0.0.0.0" -enable-script-checks -config-file=/etc/consul/server.hcl -config-dir=/etc/consul.d > /var/log/consul.log 2>&1 &
+    sudo service consul start
     sh -c 'sudo tail -f /var/log/consul.log | { sed "/agent: Synced/ q" && kill $$ ;}'
     consul members
     consul info
