@@ -3,20 +3,20 @@ HashiQube is a VM or Docker Container with a Docker daemon inside. It runs all H
 It also runs a host of other popular Open Source DevOps / DevSecOps applications showcasing how simple integration with HashiCorp products can result in tangible learnings and benefits for all its users
 Once the Qube is up an internet connection is no longer needed meaning sales pitches and demos for potential and existing customers is greatly aided.
 
-Hashiqube was created by me, Riaan Nolan, to help me learn about Hashicorp's suite of fantastic software, and I hope it can help 
-you too! Good luck to you!! 
+Hashiqube was created by Riaan Nolan, to help him learn about Hashicorp's suite of fantastic software, and Hashiqube can help you too! Good luck to you!! 
 
-You are welcome to connect with me on Linkedin https://www.linkedin.com/in/riaannolan/ <br />
-Credly profile: https://www.credly.com/users/riaan-nolan.e657145c
+You are welcome to connect with Riaan Nolan on Linkedin https://www.linkedin.com/in/riaannolan/ <br />
+Riaan Nolan's Credly profile: https://www.credly.com/users/riaan-nolan.e657145c
 
 ![My Hashicorp Badges](images/hashicorp-badges.png?raw=true "My Hashicorp Badges")
 
 ## Links
 HashiCorp blog post: https://www.hashicorp.com/resources/hashiqube-a-development-lab-using-all-the-hashicorp-products <br />
-HashiQube website: https://hashiqube.com <br />
-HashiQube github: https://github.com/star3am/hashiqube <br />
-HashiQube youtube: https://www.youtube.com/watch?v=6jGDAGWaFiw <br />
-HashiQube medium: https://medium.com/search?q=hashiqube
+HashiQube Website: https://hashiqube.com <br />
+HashiQube Github: https://github.com/star3am/hashiqube <br />
+HashiQube Youtube: https://www.youtube.com/watch?v=6jGDAGWaFiw <br />
+HashiQube Medium: https://medium.com/search?q=hashiqube <br />
+HashiQube Terraform Registry module: https://registry.terraform.io/modules/star3am/hashiqube/hashicorp/latest <br />
 
 ## HashiQube runs all HashiCorp's products and more
 ![HashiQube](images/thestack.png?raw=true "HashiQube")
