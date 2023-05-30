@@ -163,7 +163,7 @@ echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Check that AWX Ansible Tower web interface is available"
 echo -e '\e[38;5;198m'"++++ "
 attempts=0
-max_attempts=20
+max_attempts=30
 while ! ( kubectl exec $(kubectl get po -n awx | grep -v operator | grep -v postgres | grep awx | tr -s " " | cut -d " " -f1) --container="redis" -n awx -- /bin/bash -c "apt-get -qqq update && apt-get -qqq install -y procps curl net-tools && netstat -nlp | grep 8052" ) && (( $attempts < $max_attempts )); do
   attempts=$((attempts+1))
   sleep 60;
