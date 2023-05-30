@@ -9,8 +9,20 @@
 
 <url>
   <loc>https://hashiqube.com/</loc>
-  <lastmod>2023-05-11T07:59:12+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>1.0</priority>
 </url>
 
+<url>
+  <loc>https://hashiqube.com/#/ansible/README</loc>
+</url>
+
+<url>
+  <loc>https://hashiqube.com/#/ansible-tower/README</loc>
+</url>
+
+<url>
+  <loc>https://hashiqube.com/#/apache-airflow/README</loc>
+</url>
 
 </urlset>
