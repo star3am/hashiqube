@@ -108,7 +108,7 @@ NAME       STATUS   ROLES    AGE   VERSION
 minikube   Ready    master   63m   v1.17.0
 ```
 
-## K9s for Minikube (CLI alternative to kubectl)
+## K9s CLI for Minikube
 k9s is a CLI tool for interacting with k8s clusters. It wraps kubectl functionality to provide a terminal interface for interaction with clusters in an intuitive way. 
 
 With the minikube installation k9s is also installed on the Vagrant machine. To run, after provisioning minikube run the following commands:

@@ -4,8 +4,6 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
-
 
 <url>
   <loc>https://hashiqube.com/</loc>
@@ -23,6 +21,70 @@
 
 <url>
   <loc>https://hashiqube.com/#/apache-airflow/README</loc>
+</url>
+
+<url>
+  <loc>https://hashiqube.com/#/code-server/README</loc>
+</url>
+
+<url>
+  <loc>https://hashiqube.com/#/database/README</loc>
+</url>
+
+<url>
+  <loc>https://hashiqube.com/#/dbt/README</loc>
+</url>
+
+<url>
+  <loc>https://hashiqube.com/#/docker/README</loc>
+</url>
+
+<url>
+  <loc>https://hashiqube.com/#/docsify/README</loc>
+</url>
+
+<url>
+  <loc>https://hashiqube.com/#/git/README</loc>
+</url>
+
+<url>
+  <loc>https://hashiqube.com/#/hashicorp/README</loc>
+</url>
+
+<url>
+  <loc>https://hashiqube.com/#/jenkins/README</loc>
+</url>
+
+<url>
+  <loc>https://hashiqube.com/#/ldap/README</loc>
+</url>
+
+<url>
+  <loc>https://hashiqube.com/#/localstack/README</loc>
+</url>
+
+<url>
+  <loc>https://hashiqube.com/#/markdown-quiz-generator/README</loc>
+</url>
+
+<url>
+  <loc>https://hashiqube.com/#/minikube/README</loc>
+</url>
+
+<url>
+  <loc>https://hashiqube.com/#/multi-cloud/README</loc>
+</url>
+
+<url>
+  <loc>https://hashiqube.com/#/newrelic-kubernetes-monitoring/README</loc>
+</url>
+
+<url>
+  <loc>https://hashiqube.com/#/typography/README</loc>
+</url>
+
+<url>
+  <loc>https://hashiqube.com/#/visual-studio-code/README</loc>
 </url>
 
 </urlset>

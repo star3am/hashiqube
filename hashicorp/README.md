@@ -15,7 +15,7 @@ HashiCorp was founded by Mitchell Hashimoto and Armon Dadgar in 2012 with the go
 * [Vagrant](/hashicorp/?id=vagrant)
 * [Packer](/hashicorp/?id=packer)
 
-## So how do we use the HashiStack
+## The HashiStack
 
 Kelsey Hightower presenting 12-Factor Apps and the HashiStack
 https://github.com/kelseyhightower/hashiapp
@@ -142,7 +142,7 @@ The Terraform lifecycle consists of the following four phases
 terraform init -> terraform plan -> terraform apply -> terraform destroy
 ```
 
-### Terraform Workflow at Scale, Best Practices
+### Terraform Best Practices
 [![Armon Dadgar: Terraform Workflow at Scale, Best Practices](https://img.youtube.com/vi/9c0s93GcXVw/maxresdefault.jpg)](https://www.youtube.com/watch?v=9c0s93GcXVw)
 
 ### Terraform Language

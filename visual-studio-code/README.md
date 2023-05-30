@@ -18,7 +18,7 @@ It has many extensions and plugins and can help you write betetr code faster.
 To use VSCode, please down load it from here: 
 https://code.visualstudio.com/Download
 
-## Download and Install Popular VSCode Extensions 
+## Popular VSCode Extensions 
 
 Also install these popular Extensions to help you get started: 
 
@@ -52,7 +52,7 @@ https://marketplace.visualstudio.com/items?itemName=dracula-theme.theme-dracula
 - Live Share Extension 
 https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare-pack
 
-## Using Dev Containers also called Remote Containers with VSCode 
+## VSCode Remote Containers
 
 https://code.visualstudio.com/docs/devcontainers/containers
 
@@ -60,7 +60,7 @@ The Visual Studio Code Dev Containers extension lets you use a container as a fu
 
 Workspace files are mounted from the local file system or copied or cloned into the container. Extensions are installed and run inside the container, where they have full access to the tools, platform, and file system. This means that you can seamlessly switch your entire development environment just by connecting to a different container.
 
-## Using Hashiqube as a Dev Container (Development Environment)
+## Hashiqube VSCode Dev Container
 
 - Start Hashiqube with `vagrant up --provision`
 
@@ -82,7 +82,7 @@ https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-cont
 
 ![VSCode](images/vscode-hashiqube-devcontainer.png?raw=true "VSCode")
 
-# VScode Server VSCode in a Browser! 
+# VSCode in a Browser
 
 https://code.visualstudio.com/
 
