@@ -16,3 +16,4 @@ hashicorp/packer/windows/output**
 hashicorp/packer/windows/ansible/connection_plugins/__pycache__**
 **.box
 **.iso
+**__pycache__
