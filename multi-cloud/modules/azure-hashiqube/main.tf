@@ -8,10 +8,9 @@ resource "null_resource" "hashiqube" {
     ssh_public_key      = var.ssh_public_key
     aws_hashiqube_ip    = var.aws_hashiqube_ip
     gcp_hashiqube_ip    = var.gcp_hashiqube_ip
-    vault_enabled       = lookup(var.vault, "enabled")
-    vault_version       = lookup(var.vault, "version")
     azure_region        = var.azure_region
     azure_instance_type = var.azure_instance_type
+    vagrant_provisioners = var.vagrant_provisioners
   }
 }
 
@@ -205,7 +204,7 @@ resource "azurerm_linux_virtual_machine" "hashiqube" {
     HASHIQUBE_AZURE_IP = azurerm_public_ip.hashiqube.ip_address
     HASHIQUBE_GCP_IP   = var.gcp_hashiqube_ip == null ? "" : var.gcp_hashiqube_ip
     HASHIQUBE_AWS_IP   = var.aws_hashiqube_ip == null ? "" : var.aws_hashiqube_ip
-    VAULT_ENABLED      = lookup(var.vault, "enabled")
+    VAGRANT_PROVISIONERS = var.vagrant_provisioners
   }))
   tags = {
     environment = "hashiqube"
@@ -231,7 +230,7 @@ resource "null_resource" "debug" {
       # https://developer.hashicorp.com/terraform/language/resources/provisioners/remote-exec#scripts
       # See Note in the link above about: set -o errexit
       "set -o errexit",
-      "while [ ! -f /var/log/user-data.log ]; do sleep 1; done;",
+      "while [ ! -f /var/log/user-data.log ]; do sleep 5; done;",
       "tail -f /var/log/user-data.log | { sed '/ USER-DATA END / q' && kill $$ || true; }",
       "exit 0"
     ]

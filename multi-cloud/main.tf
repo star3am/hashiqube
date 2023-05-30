@@ -49,6 +49,7 @@ resource "null_resource" "hashiqube" {
     deploy_to_aws   = var.deploy_to_aws
     debug_user_data = var.debug_user_data
     my_ipaddress    = data.external.myipaddress.result.ip
+    vagrant_provisioners = var.vagrant_provisioners
   }
 }
 
@@ -81,10 +82,7 @@ module "gcp-hashiqube" {
   aws_hashiqube_ip             = var.deploy_to_aws ? try(module.aws-hashiqube[0].hashiqube_ip, null) : null
   azure_hashiqube_ip           = var.deploy_to_azure ? try(module.azure-hashiqube[0].hashiqube_ip, null) : null
   my_ipaddress                 = data.external.myipaddress.result.ip
-  vault = {
-    enabled = true
-    version = "1.4.1"
-  }
+  vagrant_provisioners         = var.vagrant_provisioners
 }
 
 module "aws-hashiqube" {
@@ -107,10 +105,7 @@ module "aws-hashiqube" {
   azure_hashiqube_ip = var.deploy_to_azure ? try(module.azure-hashiqube[0].hashiqube_ip, null) : null
   gcp_hashiqube_ip   = var.deploy_to_gcp ? try(module.gcp-hashiqube[0].hashiqube_ip, null) : null
   my_ipaddress       = data.external.myipaddress.result.ip
-  vault              = {
-    enabled = true
-    version = "1.4.1"
-  }
+  vagrant_provisioners = var.vagrant_provisioners
 }
 
 module "azure-hashiqube" {
@@ -131,8 +126,5 @@ module "azure-hashiqube" {
   my_ipaddress        = data.external.myipaddress.result.ip
   azure_region        = var.azure_region
   azure_instance_type = var.azure_instance_type
-  vault               = {
-    enabled = true
-    version = "1.4.1"
-  }
+  vagrant_provisioners = var.vagrant_provisioners
 }

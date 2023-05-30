@@ -116,20 +116,22 @@ gcp_hashiqube_ip = "35.244.86.xxx"
 your_ipaddress = "101.189.211.xxx"
 ```
 
-## Access Hashiqube Instances, First Login
+## Access Hashiqube, First Login
 After your Hashiqube instances has been launched you can access them by using the SSH commands in the Terraform Apply Output, and you will see something like this
 
 ![Hashiqube Access](images/hashiqube-first-login.png?raw=true "Hashiqube Access")
 
-## Voodoo you should be aware of
+## Voodoo Bash Aliases
 I use `~/.bash_aliases` file to make it easier to interact with Hashicorp tools running in the hashiqube docker container. 
 
+*ubuntu@hashiqube-aws:~$* `cat ~/.bash_aliases`
 ```
-ubuntu@hashiqube-aws:~$ cat ~/.bash_aliases 
 alias vagrant='cd /home/ubuntu/hashiqube; vagrant'
 nomad() { cd /home/ubuntu/hashiqube; vagrant ssh -c "nomad $1 $2 $3 $4 $5" ;}
 consul() { cd /home/ubuntu/hashiqube; vagrant ssh -c "consul $1 $2 $3 $4 $5" ;}
 vault() { cd /home/ubuntu/hashiqube; vagrant ssh -c "vault $1 $2 $3 $4 $5" ;}
+waypoint() { cd /home/ubuntu/hashiqube; vagrant ssh -c "waypoint $1 $2 $3 $4 $5" ;}
+boundary() { cd /home/ubuntu/hashiqube; vagrant ssh -c "boundary $1 $2 $3 $4 $5" ;}
 ```
 
 :bulb: Meaning that when you issue the command `vault` or `nomad` or `consul` it is ACTUALLY executed via `vagrant ssh -c $command` this is just to make things a bit easier for you, of course, you can still use the `vagrant ssh -c "vault status` like you'd normally do.
@@ -245,11 +247,11 @@ aws_hashiqube-boundary = "http://13.55.129.152:19200 username: admin password: p
 
 ![Hashicorp Boundary on Hashiqube](images/hashiqube-boundary.png?raw=true "Hashicorp Boundary on Hashiqube")
 
-## Development Environment using VSCode Dev Containers
+## Dev Env, VSCode Dev Containers
 
 ![VSCode Dev Containers](images/vscode-dev-containers.png?raw=true "VSCode Dev Containers")
 
-## Using Dev Containers also called Remote Containers with VSCode 
+## Using VSCode Dev Containers
 
 https://code.visualstudio.com/docs/devcontainers/containers
 
@@ -257,7 +259,7 @@ The Visual Studio Code Dev Containers extension lets you use a container as a fu
 
 Workspace files are mounted from the local file system or copied or cloned into the container. Extensions are installed and run inside the container, where they have full access to the tools, platform, and file system. This means that you can seamlessly switch your entire development environment just by connecting to a different container.
 
-## Download and Install Popular VSCode Extensions 
+## Popular VSCode Extensions 
 
 Also install these popular Extensions to help you get started: 
 
@@ -301,7 +303,7 @@ HashiQube medium: https://medium.com/search?q=hashiqube
 ## Purpose
 HashiQube has been created to help developers and engineers to get up to speed with HashiCorp products. It can be used for development, testing or training. HashiQube gives all interested parties the empowerment to deploy these tools in a way covers multiple use cases effectively providing a 'concept to completion' testbed using open-source HashiCorp products.
 
-## HashiQube runs all HashiCorp's products and more
+## HashiQube - Dev Lab
 ![HashiQube](images/thestack.png?raw=true "HashiQube")
 
 - [What is a Terraform module](#what-is-a-terraform-module)
@@ -1608,7 +1610,7 @@ gcp_hashiqube_ip = "34.87.247.xxx"
 your_ipaddress = "101.189.211.xxx"
 ```
 
-## Access the Cloud Instance
+## SSH into the Cloud Instances
 Your IP will be whitelisted and you will be able to access the cloud instance with the commands in the Terraform Output, for example: 
 
 ```

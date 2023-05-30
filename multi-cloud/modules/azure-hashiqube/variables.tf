@@ -18,7 +18,7 @@ variable "ssh_public_key" {}
 
 variable "ssh_private_key" {}
 
-variable "vault" {}
+variable "vagrant_provisioners" {}
 
 variable "azure_region" {}
 

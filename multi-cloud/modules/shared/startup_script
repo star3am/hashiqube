@@ -2,7 +2,7 @@
 exec > >(tee /var/log/user-data.log|logger -t user-data -s 2>/dev/console) 2>&1
 echo USER-DATA BEGIN $(date '+%Y-%m-%d %H:%M:%S')
 # determine which cloud we are in and set some variables
-if [[ $(dmidecode -s bios-version) =~ .*\.amazon ]]
+if [[ $(dmidecode -s bios-version) =~ .*\.amazon ]] || [[ $(dmidecode -s bios-vendor) =~ Amazon ]]
 then
   echo "This is AWS"
   DC=aws
@@ -14,6 +14,7 @@ then
   HASHIQUBE_GCP_IP=${HASHIQUBE_GCP_IP}
   HOSTNAME=hashiqube-aws
   FQDN=hashiqube-aws.service.consul
+  VAGRANT_PROVISIONERS=${VAGRANT_PROVISIONERS}
 elif [[ $(dmidecode -s bios-version) =~ Google ]]
 then
   echo "This is GCP"
@@ -26,6 +27,7 @@ then
   HASHIQUBE_AWS_IP=${HASHIQUBE_AWS_IP}
   HOSTNAME=hashiqube-gcp
   FQDN=hashiqube-gcp.service.consul
+  VAGRANT_PROVISIONERS=${VAGRANT_PROVISIONERS}
 else
   echo "This is Azure"
   DC=azure
@@ -37,14 +39,15 @@ else
   HASHIQUBE_GCP_IP=${HASHIQUBE_GCP_IP}
   HOSTNAME=hashiqube-azure
   FQDN=hashiqube-azure.service.consul
+  VAGRANT_PROVISIONERS=${VAGRANT_PROVISIONERS}
 fi
 # set hostname
 echo "$HOSTNAME" > /etc/hostname
 hostname "$HOSTNAME"
 sed -i "s/.*127.0.0.1.*/127.0.0.1 $FQDN $HOSTNAME localhost/g" /etc/hosts
 # install basetools
-DEBIAN_FRONTEND=noninteractive apt-get update
-DEBIAN_FRONTEND=noninteractive apt-get --assume-yes install swapspace curl unzip jq git update-motd toilet figlet apt-transport-https ca-certificates gnupg-agent software-properties-common mc
+DEBIAN_FRONTEND=noninteractive apt-get update -qq < /dev/null > /dev/null
+DEBIAN_FRONTEND=noninteractive apt-get --assume-yes install -qq swapspace curl unzip jq git update-motd toilet figlet apt-transport-https ca-certificates gnupg-agent software-properties-common mc < /dev/null > /dev/null
 # set motd
 mkdir -p /etc/update-motd.d
 cat <<EOF | tee /etc/update-motd.d/00-header
@@ -70,29 +73,31 @@ for i in $(ls /etc/update-motd.d/ | grep -v landscape | grep -v header); do rm /
 # set bash aliases
 cat <<EOF | sudo -u ubuntu tee /home/ubuntu/.bash_aliases
 alias vagrant='cd /home/ubuntu/hashiqube; vagrant'
-nomad() { cd /home/ubuntu/hashiqube; vagrant ssh -c "nomad $1 $2 $3 $4 $5" ;}
-consul() { cd /home/ubuntu/hashiqube; vagrant ssh -c "consul $1 $2 $3 $4 $5" ;}
-vault() { cd /home/ubuntu/hashiqube; vagrant ssh -c "vault $1 $2 $3 $4 $5" ;}
+nomad() { cd /home/ubuntu/hashiqube; vagrant ssh -c "nomad \$1 \$2 \$3 \$4 \$5" ;}
+consul() { cd /home/ubuntu/hashiqube; vagrant ssh -c "consul \$1 \$2 \$3 \$4 \$5" ;}
+vault() { cd /home/ubuntu/hashiqube; vagrant ssh -c "vault \$1 \$2 \$3 \$4 \$5" ;}
+waypoint() { cd /home/ubuntu/hashiqube; vagrant ssh -c "waypoint \$1 \$2 \$3 \$4 \$5" ;}
+boundary() { cd /home/ubuntu/hashiqube; vagrant ssh -c "boundary \$1 \$2 \$3 \$4 \$5" ;}
 EOF
 # install docker
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
-add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-DEBIAN_FRONTEND=noninteractive apt-get update
-DEBIAN_FRONTEND=noninteractive apt-get install --allow-downgrades --assume-yes docker.io
+add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" < /dev/null > /dev/null
+DEBIAN_FRONTEND=noninteractive apt-get update -qq < /dev/null > /dev/null
+DEBIAN_FRONTEND=noninteractive apt-get install -qq --allow-downgrades --assume-yes docker.io < /dev/null > /dev/null
 usermod -aG docker ubuntu
 service docker restart
 # install vagrant
-apt-get install -y vagrant
+apt-get install -y -qq vagrant < /dev/null > /dev/null
 # clone and run hashiqube
 sudo -u ubuntu git clone https://github.com/star3am/hashiqube.git /home/ubuntu/hashiqube
 cd /home/ubuntu/hashiqube
 # set different IPs for the nodes
-for i in $(grep -Rlz '10.9.99.10' /home/ubuntu/hashiqube/); do sudo -u ubuntu sed -i "s/10.9.99.10/$HASHIQUBE_IP/g" $i; done
+for i in $(grep -Rlz '10.9.99.10' /home/ubuntu/hashiqube/); do sudo -u ubuntu sed -i "s/10.9.99.10/$HASHIQUBE_IP/g" $i; done < /dev/null > /dev/null
 # set different Hostnames for the nodes
-for i in $(grep -Rlz 'hashiqube0' /home/ubuntu/hashiqube/); do sudo -u ubuntu sed -i "s/hashiqube0/hashiqube-$DC/g" $i; done
+for i in $(grep -Rlz 'hashiqube0' /home/ubuntu/hashiqube/); do sudo -u ubuntu sed -i "s/hashiqube0/hashiqube-$DC/g" $i; done < /dev/null > /dev/null
 # set different DCs for the nodes
-for i in $(grep -Rlz 'dc1' /home/ubuntu/hashiqube/); do sudo -u ubuntu sed -i "s/dc1/$DC/g" $i; done
-sudo -u ubuntu vagrant up --provision-with basetools,docker,vault,consul,nomad,boundary,waypoint
+for i in $(grep -Rlz 'dc1' /home/ubuntu/hashiqube/); do sudo -u ubuntu sed -i "s/dc1/$DC/g" $i; done < /dev/null > /dev/null
+sudo -u ubuntu vagrant up --provision-with ${VAGRANT_PROVISIONERS}
 # cluster join
 if [[ $HASHIQUBE_AZURE_IP ]]; then
   sudo -u ubuntu vagrant ssh -c "consul join -wan ${HASHIQUBE_AZURE_IP}"

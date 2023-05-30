@@ -18,7 +18,7 @@ variable "ssh_private_key" {}
 
 variable "my_ipaddress" {}
 
-variable "vault" {}
+variable "vagrant_provisioners" {}
 
 variable "gcp_project" {}
 
