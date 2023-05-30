@@ -122,6 +122,11 @@ function minikube-install() {
   echo -e '\e[38;5;198m'"++++ "
   sudo --preserve-env=PATH -u vagrant minikube addons enable default-storageclass
 
+  echo -e '\e[38;5;198m'"++++ "
+  echo -e '\e[38;5;198m'"++++ Enable Minikube Metrics-Server Addon"
+  echo -e '\e[38;5;198m'"++++ "
+  sudo --preserve-env=PATH -u vagrant minikube addons enable metrics-server
+
   # https://minikube.sigs.k8s.io/docs/commands/dashboard/
   echo -e '\e[38;5;198m'"++++ "
   echo -e '\e[38;5;198m'"++++ Starting Minikube dashboard"
