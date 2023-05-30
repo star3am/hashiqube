@@ -25,13 +25,16 @@ disable_host_node_id = true
 disable_update_check = true
 leave_on_terminate = true
 log_level = "INFO"
-# ports = {
-#   grpc  = 8502
-#   dns   = 8600
-#   https = -1
-# }
+server = true
+ports = {
+  grpc  = 8502
+  dns   = 8600
+  http  = 8500
+  https = 8501
+}
 connect {
   enabled = true
+  enable_mesh_gateway_wan_federation = true
 }
 enable_central_service_config = true
 protocol = 3
@@ -40,8 +43,10 @@ recursors = [
   "8.8.8.8",
   "8.8.4.4",
 ]
-server_name = "consul.service.consul"
-ui = true
+server_name = "hashiqube0.service.consul"
+ui_config {
+  enabled = true
+}
 EOF
 cat <<EOF | sudo tee /etc/consul.d/vault.json
   {"service":

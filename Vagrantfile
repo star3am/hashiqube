@@ -84,6 +84,8 @@ Vagrant::configure("2") do |config|
         config.vm.network "forwarded_port", guest: 9701, host: 9701 # waypoint-api-nomad
         config.vm.network "forwarded_port", guest: 19200, host: 19200 # boundary
         config.vm.network "forwarded_port", guest: 8500, host: 8500 # consul
+        config.vm.network "forwarded_port", guest: 8501, host: 8501 # consul
+        config.vm.network "forwarded_port", guest: 8502, host: 8502 # consul
         config.vm.network "forwarded_port", guest: 8300, host: 8300 # consul
         config.vm.network "forwarded_port", guest: 8301, host: 8301 # consul
         config.vm.network "forwarded_port", guest: 8302, host: 8302 # consul

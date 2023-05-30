@@ -45,6 +45,7 @@ EOF
   sleep 10;
   sudo netstat -nlp | grep 19200
   sleep 10;
+  sudo touch /var/log/boundary.log
   nohup boundary dev -api-listen-address 0.0.0.0:19200 > /var/log/boundary.log 2>&1 &
   sh -c 'sudo tail -f /var/log/boundary.log | { sed "/Boundary server started/ q" && kill $$ ;}'
   echo -e '\e[38;5;198m'"++++ Boundary Server started at http://localhost:19200"
