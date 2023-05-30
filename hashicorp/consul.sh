@@ -16,8 +16,8 @@ mkdir -p /etc/consul
 mkdir -p /etc/consul.d
 cat <<EOF | sudo tee /etc/consul/server.hcl
 primary_datacenter = "dc1"
-client_addr = "10.9.99.10 10.0.2.15"
-bind_addr = "10.9.99.10"
+client_addr = "0.0.0.0"
+bind_addr = "0.0.0.0"
 advertise_addr = "10.9.99.10"
 data_dir = "/var/lib/consul"
 datacenter = "dc1"
@@ -34,7 +34,7 @@ ports = {
 }
 connect {
   enabled = true
-  enable_mesh_gateway_wan_federation = true
+  # enable_mesh_gateway_wan_federation = true
 }
 enable_central_service_config = true
 protocol = 3
