@@ -118,11 +118,12 @@
   <div id="app"></div>
   <script>
     window.$docsify = {
-      routerMode: 'hash', //history not working, gives 404 on direct access
+      routerMode: 'history', //history see: https://github.com/docsifyjs/docsify/issues/238#issuecomment-1065320116
       notFoundPage: '/',
       nameLink: '/',
       basePath: '/',
       alias: {
+        '/(.*)': '/index.html',
         '/.*/SUMMARY.md': '/SUMMARY.md'
       },
       logo: 'images/logo.png',
