@@ -16,7 +16,7 @@ HashiQube Youtube: https://www.youtube.com/watch?v=6jGDAGWaFiw <br />
 HashiQube Medium: https://medium.com/search?q=hashiqube <br />
 HashiQube Terraform Registry module: https://registry.terraform.io/modules/star3am/hashiqube/hashicorp/latest <br />
 
-## HashiQube runs all HashiCorp's products and more
+## HashiQube Integrations
 ![HashiQube](images/thestack.png?raw=true "HashiQube")
 
 ## Purpose
@@ -26,7 +26,7 @@ The original use case was born the desire to demystify DevSecOps utilising Terra
 
 Thanks to the flexibility of the HashiCorp products there is no need to wonder how to achieve the goals of bringing software to market in a more secure and timely fashion, just Vagrant up!
 
-## Operating Systems and Chipsets Supported
+## Supported Architectures
 | Name | Docker | Virtualbox | Hyper-V
 |------|--------|------------|---------|
 | amd64 | ✓ | ✓ | ✘ |

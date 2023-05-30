@@ -1,13 +1,13 @@
 # Servian Quiz
 
 ---
-1. Servian is a consultancy company.
-    - (x) True
-    - ( ) False
+1. Hashicorp is a consultancy company.
+    - ( ) True
+    - (x) False
 
-2. Hashiqube was created at Servian.
-    - (x) True
-    - ( ) False 
+2. Hashiqube was created by Hashicorp.
+    - ( ) True
+    - (x) False 
 
 3. Which Hashicorp products can you test or demo with Hashiqube?
     - [ ] Terraform
