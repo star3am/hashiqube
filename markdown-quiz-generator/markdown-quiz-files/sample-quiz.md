@@ -1,4 +1,4 @@
-# Servian Quiz
+# Sample Quiz
 
 ---
 1. Hashicorp is a consultancy company.
@@ -7,7 +7,7 @@
 
 2. Hashiqube was created by Hashicorp.
     - ( ) True
-    - (x) False 
+    - (x) False
 
 3. Which Hashicorp products can you test or demo with Hashiqube?
     - [ ] Terraform
