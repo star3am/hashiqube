@@ -44,6 +44,9 @@ if [ ! -f /usr/local/bin/vault ]; then
   echo -e '\e[38;5;198m'"++++ Installed `/usr/local/bin/vault --version`"
   echo -e '\e[38;5;198m'"++++ "
 
+  # create /var/log/nomad.log
+  sudo touch /var/log/nomad.log
+
   # enable command autocompletion
   vault -autocomplete-install
   complete -C /usr/local/bin/vault vault
@@ -81,6 +84,8 @@ KillMode=process
 KillSignal=SIGINT
 Restart=on-failure
 RestartSec=5
+StandardOutput=append:/var/log/vault.log
+StandardError=append:/var/log/vault.log
 TimeoutStopSec=30
 StartLimitBurst=3
 LimitNOFILE=65536
@@ -93,27 +98,44 @@ EOF
   touch /etc/vault/config.hcl
 
   # add basic configuration settings for Vault to /etc/vault/config.hcl file
+  # https://developer.hashicorp.com/vault/tutorials/raft/raft-storage#create-an-ha-cluster
   cat <<EOF | sudo tee /etc/vault/config.hcl
 disable_cache = true
 disable_mlock = true
 ui = true
 listener "tcp" {
-   address          = "0.0.0.0:8200"
-   tls_disable      = 1
+   address         = "0.0.0.0:8200"
+   cluster_address = "0.0.0.0:8201"
+   tls_disable     = true
 }
-storage "file" {
-   path  = "/var/lib/vault/data"
- }
+# https://developer.hashicorp.com/vault/tutorials/raft/raft-storage#create-an-ha-cluster
+#seal "transit" {
+#   address            = "http://0.0.0.0:8200"
+#   # token is read from VAULT_TOKEN env
+#   # token            = ""
+#   disable_renewal    = "false"
+#   key_name           = "unseal_key"
+#   mount_path         = "transit/"
+#}
+storage "raft" {
+   path    = "/var/lib/vault/data"
+   node_id = "hashiqube0"
+}
+# use a file path as storage backend
+#storage "file" {
+#  path  = "/var/lib/vault/data"
+#}
 # use consul as storage backend
 #storage "consul" {
 #  address = "127.0.0.1:8500"
 #  path    = "vault"
 #}
-api_addr         = "http://0.0.0.0:8200"
-max_lease_ttl         = "10h"
+api_addr             = "http://0.0.0.0:8200"
+max_lease_ttl        = "10h"
 default_lease_ttl    = "10h"
-cluster_name         = "vault"
-raw_storage_endpoint     = true
+cluster_name         = "hashiqube"
+cluster_addr         = "http://10.9.99.10:8201"
+raw_storage_endpoint = true
 disable_sealwrap     = true
 disable_printable_check = true
 EOF

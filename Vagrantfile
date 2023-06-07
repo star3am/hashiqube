@@ -73,6 +73,7 @@ Vagrant::configure("2") do |config|
 
       if machines.size == 1 # only expose these ports if 1 machine, else conflicts
         config.vm.network "forwarded_port", guest: 8200, host: 8200 # vault
+        config.vm.network "forwarded_port", guest: 8201, host: 8201 # vault
         config.vm.network "forwarded_port", guest: 4646, host: 4646 # nomad
         config.vm.network "forwarded_port", guest: 4647, host: 4647 # nomad
         config.vm.network "forwarded_port", guest: 4648, host: 4648 # nomad
