@@ -54,7 +54,6 @@ if [ ! -f /usr/local/bin/vault ]; then
   # create Vault data directories
   sudo mkdir /etc/vault
   sudo mkdir -p /var/lib/vault/data
-  sudo mkdir -p /var/lib/vault/raft
 
   # create user named vault
   sudo useradd --system --home /etc/vault --shell /bin/false vault
@@ -117,7 +116,7 @@ listener "tcp" {
 #   mount_path         = "transit/"
 # }
 storage "raft" {
-   path    = "/var/lib/vault/raft"
+   path    = "/var/lib/vault/data"
    node_id = "hashiqube0"
 }
 # use a file path as storage backend
