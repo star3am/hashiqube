@@ -54,6 +54,7 @@ if [ ! -f /usr/local/bin/vault ]; then
   # create Vault data directories
   sudo mkdir /etc/vault
   sudo mkdir -p /var/lib/vault/data
+  sudo mkdir -p /var/lib/vault/raft
 
   # create user named vault
   sudo useradd --system --home /etc/vault --shell /bin/false vault
@@ -100,8 +101,6 @@ EOF
   # add basic configuration settings for Vault to /etc/vault/config.hcl file
   # https://developer.hashicorp.com/vault/tutorials/raft/raft-storage#create-an-ha-cluster
   cat <<EOF | sudo tee /etc/vault/config.hcl
-disable_cache = true
-disable_mlock = true
 ui = true
 listener "tcp" {
    address         = "0.0.0.0:8200"
@@ -117,25 +116,27 @@ listener "tcp" {
 #   key_name           = "unseal_key"
 #   mount_path         = "transit/"
 #}
-storage "raft" {
-   path    = "/var/lib/vault/data"
+ha_storage "raft" {
+   path    = "/var/lib/vault/raft"
    node_id = "hashiqube0"
 }
 # use a file path as storage backend
-#storage "file" {
-#  path  = "/var/lib/vault/data"
-#}
+storage "file" {
+  path  = "/var/lib/vault/data"
+}
 # use consul as storage backend
 #storage "consul" {
 #  address = "127.0.0.1:8500"
 #  path    = "vault"
 #}
-api_addr             = "http://0.0.0.0:8200"
+api_addr             = "http://10.9.99.10:8200"
 max_lease_ttl        = "10h"
 default_lease_ttl    = "10h"
 cluster_name         = "hashiqube"
 cluster_addr         = "http://10.9.99.10:8201"
 raw_storage_endpoint = true
+disable_cache        = true
+disable_mlock        = true
 disable_sealwrap     = true
 disable_printable_check = true
 EOF
