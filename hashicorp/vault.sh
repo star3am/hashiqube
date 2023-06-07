@@ -108,27 +108,27 @@ listener "tcp" {
    tls_disable     = true
 }
 # https://developer.hashicorp.com/vault/tutorials/raft/raft-storage#create-an-ha-cluster
-#seal "transit" {
+# seal "transit" {
 #   address            = "http://0.0.0.0:8200"
 #   # token is read from VAULT_TOKEN env
 #   # token            = ""
 #   disable_renewal    = "false"
 #   key_name           = "unseal_key"
 #   mount_path         = "transit/"
-#}
-ha_storage "raft" {
+# }
+storage "raft" {
    path    = "/var/lib/vault/raft"
    node_id = "hashiqube0"
 }
 # use a file path as storage backend
-storage "file" {
-  path  = "/var/lib/vault/data"
-}
+# storage "file" {
+#   path  = "/var/lib/vault/data"
+# }
 # use consul as storage backend
-#storage "consul" {
+# storage "consul" {
 #  address = "127.0.0.1:8500"
 #  path    = "vault"
-#}
+# }
 api_addr             = "http://10.9.99.10:8200"
 max_lease_ttl        = "10h"
 default_lease_ttl    = "10h"
