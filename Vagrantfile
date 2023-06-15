@@ -60,7 +60,6 @@ Vagrant::configure("2") do |config|
 
   machines.each_with_index do |machine, index|
 
-    #config.vm.box = "ubuntu/focal64"
     config.vm.box = "generic/ubuntu2004"
     config.vm.define machine[:name] do |config|
 
@@ -118,7 +117,6 @@ Vagrant::configure("2") do |config|
         config.vm.network "forwarded_port", guest: 7777, host: 7777 # vscode-server
         config.vm.network "forwarded_port", guest: 28080, host: 28080 # dbt docs serve
         config.vm.network "forwarded_port", guest: 8000, host: 8000 # markdown-quiz-generator
-
       end
 
       config.vm.hostname = "#{machine[:name]}"

@@ -14,8 +14,21 @@ HashiCorp was founded by Mitchell Hashimoto and Armon Dadgar in 2012 with the go
 * [Waypoint](/hashicorp/?id=waypoint)
 * [Vagrant](/hashicorp/?id=vagrant)
 * [Packer](/hashicorp/?id=packer)
+* [Brand Logo's](https://www.hashicorp.com/brand)
+* [Cloud Operating Model](https://www.hashicorp.com/resources/deriving-business-value-from-the-cloud-operating-model-in-the-public-sector)
 
-## The HashiStack
+| Dimension | Products | | | 
+|------|--------|------------|------------|
+| __Applications__ | ![Nomad](https://www.datocms-assets.com/2885/1620155098-brandhcnomadprimaryattributedcolor.svg) <br /> __Nomad__ <br /> Schedular and workload orchestrator to deploy and manage applications | ![Waypoint](https://www.datocms-assets.com/2885/1620155130-brandhcwaypointprimaryattributedcolor.svg) <br /> __Waypoint__ <br /> One workflow to build, deploy and release applications across platforms| | 
+| __Networking__ | ![Consul](https://www.datocms-assets.com/2885/1620155090-brandhcconsulprimaryattributedcolor.svg) <br /> __Consul__ <br /> Service Mesh across any cloud and runtime platform | | |
+| __Security__ | ![Boundary](https://www.datocms-assets.com/2885/1620155080-brandhcboundaryprimaryattributedcolor.svg) <br /> __Boundary__ <br /> Secure remote access to applications and critical systems | ![Vault](https://www.datocms-assets.com/2885/1620159869-brandvaultprimaryattributedcolor.svg) <br /> __Vault__ <br /> Secure management of secrets and sensitive data| |
+| __Infrastructure__ | ![Packer](https://www.datocms-assets.com/2885/1620155103-brandhcpackerprimaryattributedcolor.svg) <br /> __Packer__ <br /> Automated machine images from a single source configuration| ![Vagrant](https://www.datocms-assets.com/2885/1620155118-brandhcvagrantprimaryattributedcolor.svg) <br /> __Vagrant__ <br /> Single workflow to build and manage developer environments| ![Terraform](https://www.datocms-assets.com/2885/1620155113-brandhcterraformprimaryattributedcolor.svg) <br /> __Terraform__ <br /> Infrastructure automation to provision and manage any cloud service |
+
+## Links 
+
+* https://www.hashicorp.com/resources/deriving-business-value-from-the-cloud-operating-model-in-the-public-sector
+* https://ir.hashicorp.com/node/6701/html
+## 12-Factor Apps
 
 Kelsey Hightower presenting 12-Factor Apps and the HashiStack
 https://github.com/kelseyhightower/hashiapp

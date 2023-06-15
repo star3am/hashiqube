@@ -100,6 +100,14 @@ Now you can use DNS like nomad.service.consul:9999 vault.service.consul:9999 via
 * Vagrant
 * `vagrant up --provision`
 
+## The HashiStack
+| Dimension | Products | | | 
+|------|--------|------------|------------|
+| __Applications__ | ![Nomad](https://www.datocms-assets.com/2885/1620155098-brandhcnomadprimaryattributedcolor.svg) <br /> __Nomad__ <br /> Schedular and workload orchestrator to deploy and manage applications | ![Waypoint](https://www.datocms-assets.com/2885/1620155130-brandhcwaypointprimaryattributedcolor.svg) <br /> __Waypoint__ <br /> One workflow to build, deploy and release applications across platforms| | 
+| __Networking__ | ![Consul](https://www.datocms-assets.com/2885/1620155090-brandhcconsulprimaryattributedcolor.svg) <br /> __Consul__ <br /> Service Mesh across any cloud and runtime platform | | |
+| __Security__ | ![Boundary](https://www.datocms-assets.com/2885/1620155080-brandhcboundaryprimaryattributedcolor.svg) <br /> __Boundary__ <br /> Secure remote access to applications and critical systems | ![Vault](https://www.datocms-assets.com/2885/1620159869-brandvaultprimaryattributedcolor.svg) <br /> __Vault__ <br /> Secure management of secrets and sensitive data| |
+| __Infrastructure__ | ![Packer](https://www.datocms-assets.com/2885/1620155103-brandhcpackerprimaryattributedcolor.svg) <br /> __Packer__ <br /> Automated machine images from a single source configuration| ![Vagrant](https://www.datocms-assets.com/2885/1620155118-brandhcvagrantprimaryattributedcolor.svg) <br /> __Vagrant__ <br /> Single workflow to build and manage developer environments| ![Terraform](https://www.datocms-assets.com/2885/1620155113-brandhcterraformprimaryattributedcolor.svg) <br /> __Terraform__ <br /> Infrastructure automation to provision and manage any cloud service |
+
 ## Hashiqube Integrations
 * [__Multi Cloud__](multi-cloud/#terraform-hashicorp-hashiqube) - Hashiqube on AWS, GCP and Azure (Clustered) https://registry.terraform.io/modules/star3am/hashiqube/hashicorp/latest
 * [__Vagrant__](hashicorp/#vagrant) - Vagrant is an open-source software product for building and maintaining portable virtual software development environments; e.g., for VirtualBox, KVM, Hyper-V, Docker containers, VMware, and AWS. It tries to simplify the software configuration management of virtualization in order to increase development productivity
@@ -231,7 +239,7 @@ __Solution__ Ensure the following contents are present in `/etc/vbox/networks.co
     Gloo: https://docs.solo.io/gloo/latest/introduction/
 
 ## Support & Feedback
-For suggestions, feedback and queries please branch or and submit a Pull Request or directly contact the architects of the HashiQube via email:
+For suggestions, feedback and queries please branch or and submit a Pull Request or directly contact Riaan Nolan, creator of the HashiQube via Github: https://github.com/star3am/hashiqube
 
 ## About
 Hashiqube has been created to help Engineers, Developers and anyone who wants to practise, learn or demo Hashicorp products to get started quickly with a local lab. 
