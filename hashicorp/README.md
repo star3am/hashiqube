@@ -132,6 +132,10 @@ You must be in the directory hashiqube/hashicorp/packer
 
 Now you can run `./run.sh`
 
+## The Code
+
+[filename](packer.sh ':include :type=code')
+
 ## Terraform
 https://www.terraform.io/
 
@@ -232,6 +236,10 @@ can't guarantee that exactly these actions will be performed if
 "terraform apply" is subsequently run.
 ```
 
+## The Code
+
+[filename](terraform.sh ':include :type=code')
+
 ## Vault
 https://www.vaultproject.io/
 
@@ -307,6 +315,10 @@ Bringing machine 'user.local.dev' up with 'virtualbox' provider...
     user.local.dev: existing unseal keys shares. See "vault operator rekey" for more information.
 ```
 ![Vault](images/vault.png?raw=true "Vault")
+
+## The Code
+
+[filename](vault.sh ':include :type=code')
 
 ## Nomad
 https://www.nomadproject.io/
@@ -438,6 +450,10 @@ When you register a service in Consul all you need to add is a tag that announce
 
 Fabio runs as a Nomad job, see `hashicorp/nomad/jobs/fabio.nomad`
 Some routes are added via Consul, see `hashicorp/consul.sh`
+
+## The Code
+
+[filename](nomad.sh ':include :type=code')
 
 ## Consul
 https://www.consul.io/
@@ -606,6 +622,10 @@ Bringing machine 'user.local.dev' up with 'virtualbox' provider...
     user.local.dev: ++++ Consul http://localhost:8500
 ```    
 ![Consul](images/consul.png?raw=true "Consul")
+
+## The Code
+
+[filename](consul.sh ':include :type=code')
 
 ## Sentinel
 https://docs.hashicorp.com/sentinel/
@@ -1038,6 +1058,10 @@ c97d646ce0ef: Already exists :
     hashiqube0.service.consul: bM152PWkXxfoy4vA51JFhR7LmV9FA9RLbSpHoKrysFnwnRCAGzV2RExsyAmBrHu784d1WZRW6Cx4MkhvWzkDHvEn49c4wkSZYScfJ
 ```
 
+## The Code
+
+[filename](waypoint.sh ':include :type=code')
+
 ## Boundary
 
 Boundary is designed to grant access to critical systems using the principle of least privilege, solving challenges organizations encounter when users need to securely access applications and machines. Traditional products that grant access to systems are cumbersome, painful to maintain, or are black boxes lacking extensible APIs. Boundary allows authenticated and authorized users to access secure systems in private networks without granting access to the larger network where those systems reside.
@@ -1111,3 +1135,7 @@ Bringing machine 'hashiqube0.service.consul' up with 'virtualbox' provider...
     hashiqube0.service.consul: ++++ Login with admin:password
     hashiqube0.service.consul: /tmp/vagrant-shell: line 5:  5093 Terminated              sh -c 'sudo tail -f /var/log/boundary.log | { sed "/worker successfully authed/ q" && kill $$ ;}'
 ```
+
+## The Code
+
+[filename](boundary.sh ':include :type=code')

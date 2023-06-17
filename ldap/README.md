@@ -103,3 +103,7 @@ identity_policies      []
 policies               ["default"]
 token_meta_username    hermes
 ```
+
+## The Code
+
+[filename](ldap.sh ':include :type=code')

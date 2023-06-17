@@ -57,3 +57,9 @@ The `test-ssh.py` just ssh into hashiqube to test the connection
 - https://airflow.apache.org/docs/helm-chart/stable/adding-connections-and-variables.html
 - https://airflow.readthedocs.io/_/downloads/en/1.10.2/pdf/
 - https://airflow.apache.org/docs/helm-chart/stable/parameters-ref.html
+
+## The Code
+
+[filename](apache-airflow.sh ':include :type=code')
+
+[filename](dags/run-dbt.py ':include :type=code')

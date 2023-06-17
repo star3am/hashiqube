@@ -122,3 +122,9 @@ Use DBT RUN and DBT TEST with deferring parameters: $ dbt run --select [...] --d
 In this way, if we have already run the model, the next RUN and TEST will execute exclusively what is new on the code and reuse what has been run previously.
 
 This would open space as well to implement cool stuff, such as running the model over a pull request. 
+
+## The Code
+
+[filename](common.sh ':include :type=code')
+
+[filename](dbt-global.sh ':include :type=code')

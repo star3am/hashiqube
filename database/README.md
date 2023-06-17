@@ -210,6 +210,9 @@ mysql: [Warning] Using a password on the command line interface can be insecure.
 | root             | localhost |
 +------------------+-----------+
 ```
+## The Code
+
+[filename](mysql.sh ':include :type=code')
 
 ## Microsoft SQL (Mssql Express)
 
@@ -354,6 +357,11 @@ NT AUTHORITY\SYSTEM                                                             
 
 (21 rows affected)
 ```
+
+## The Code
+
+[filename](mssql.sh ':include :type=code')
+
 ## PostgreSQL 
 
 https://www.postgresql.org/
@@ -440,4 +448,8 @@ Bringing machine 'hashiqube0.service.consul' up with 'virtualbox' provider...
     hashiqube0.service.consul: --------------------------------------------------+------------------------------------------------------------+-----------
     hashiqube0.service.consul:  root                                             | Superuser, Create role, Create DB, Replication, Bypass RLS | {}
     hashiqube0.service.consul:  v-token-postgres-3AhBH3pbmVNnkbxXV8K3-1598841098 | Password valid until 2020-08-31 03:31:43+00                | {}
-    ```
+```
+
+## The Code
+
+[filename](postgresql.sh ':include :type=code')

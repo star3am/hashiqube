@@ -197,3 +197,7 @@ Now let's build the job, click on `Build Now` (Right menu) You should see bottom
 
 You can click on that job and view the console, for more output, you should see your secrets are totally hidden and provided by Vault.
 ![Jenkins](images/jenkins_job_vault-jenkins_build_console.png?raw=true "Jenkins")
+
+## The Code
+
+[filename](jenkins.sh ':include :type=code')

@@ -133,3 +133,7 @@ https://doc.traefik.io/traefik/v1.7/user-guide/kubernetes/
 This guide explains how to use Traefik as an Ingress controller for a Kubernetes cluster.
 
 ![Traefik on Minikube](images/minikube-traefik-dashboard.png?raw=true "Traefik on Minikube")
+
+## The Code
+
+[filename](minikube.sh ':include :type=code')

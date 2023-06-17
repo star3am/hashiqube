@@ -874,3 +874,9 @@ null_resource.awx_cli: Creation complete after 36s [id=936123805330159798]
 
 Apply complete! Resources: 1 added, 0 changed, 1 destroyed.
 ```
+
+## The Code
+
+[filename](ansible-tower.sh ':include :type=code')
+
+[filename](main.tf ':include :type=code')
