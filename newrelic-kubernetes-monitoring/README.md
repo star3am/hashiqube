@@ -54,21 +54,23 @@ At the end will be a Helm command like this that we run in the container.
 - now run this command:
 ```shell
 helm repo add newrelic https://helm-charts.newrelic.com && helm repo update && \
-> kubectl create namespace newrelic ; helm upgrade --install newrelic-bundle newrelic/nri-bundle \
->  --set global.licenseKey=YOUR_NEWRELIC_LICENSE_KEY \
->  --set global.cluster=minikube \
->  --namespace=newrelic \
->  --set newrelic-infrastructure.privileged=true \
->  --set global.lowDataMode=true \
->  --set ksm.enabled=true \
->  --set kubeEvents.enabled=true \
->  --set prometheus.enabled=true \
->  --set logging.enabled=true \
->  --set newrelic-pixie.enabled=true \
->  --set newrelic-pixie.apiKey=YOUR_PIXIE_API_KEY \
->  --set pixie-chart.enabled=true \
->  --set pixie-chart.deployKey=YOUR_PIXIE_DEPLOY_KEY \
->  --set pixie-chart.clusterName=minikube
+kubectl create namespace newrelic; 
+
+helm upgrade --install newrelic-bundle newrelicnri-bundle \
+--set global.licenseKey=YOUR_NEWRELIC_LICENSE_KEY \
+--set global.cluster=minikube \
+--namespace=newrelic \
+--set newrelic-infrastructure.privileged=true \
+--set global.lowDataMode=true \
+--set ksm.enabled=true \
+--set kubeEvents.enabled=true \
+--set prometheus.enabled=true \
+--set logging.enabled=true \
+--set newrelic-pixie.enabled=true \
+--set newrelic-pixie.apiKey=YOUR_PIXIE_API_KEY \
+--set pixie-chart.enabled=true \
+--set pixie-chart.deployKey=YOUR_PIXIE_DEPLOY_KEY \
+--set pixie-chart.clusterName=minikube
 ```
 
 ## Info
