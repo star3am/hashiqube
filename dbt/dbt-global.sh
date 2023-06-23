@@ -39,8 +39,8 @@ install-dbt-mssql () {
 
 }
 
-#####################################3
-#####################################3
+#####################################
+#####################################
 # Install DBT with some non MSSQL adapters
 function install-dbt () {
 
@@ -48,31 +48,31 @@ function install-dbt () {
   python -m pip install --no-cache "git+https://github.com/dbt-labs/${dbt_postgres_ref}#egg=dbt-postgres&subdirectory=plugins/postgres"
 }
 
-#####################################3
+#####################################
 function install-dbt-redshift () {
   echo -e '\e[38;5;198m'"++++ installing redshift adapater"
   python -m pip install --no-cache "git+https://github.com/dbt-labs/${dbt_redshift_ref}#egg=dbt-redshift"
 }
 
-#####################################3
+#####################################
 function install-dbt-bigquery () {
   echo -e '\e[38;5;198m'"++++ installing bigquery adapater"
   python -m pip install --no-cache "git+https://github.com/dbt-labs/${dbt_bigquery_ref}#egg=dbt-bigquery"
 }
 
-#####################################3
+#####################################
 function install-dbt-snowflake () {
   echo -e '\e[38;5;198m'"++++ installing snowflake adapater"
   python -m pip install --no-cache "git+https://github.com/dbt-labs/${dbt_snowflake_ref}#egg=dbt-snowflake"
 }
 
-#####################################3
+#####################################
 function install-dbt-spark () {
   echo -e '\e[38;5;198m'"++++ installing spark adapter"
   python -m pip install --no-cache "git+https://github.com/dbt-labs/${dbt_spark_ref}#egg=dbt-spark[${dbt_spark_version}]"
 }
 
-#####################################3
+#####################################
 function install-dbt-databricks () {
   echo -e '\e[38;5;198m'"++++ installing databricks adapter"
   python -m pip install --no-cache "dbt_databricks==${dbt_databricks}"

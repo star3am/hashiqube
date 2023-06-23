@@ -10,6 +10,7 @@
   * [Docsify](docsify/README.md)
   * [Git](git/README.md)
   * [Hashicorp](hashicorp/README.md)
+  * [Hashiqube](hashiqube/README.md)
   * [Jenkins](jenkins/README.md)
   * [Ldap](ldap/README.md)
   * [Localstack](localstack/README.md)
