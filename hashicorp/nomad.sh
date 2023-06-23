@@ -51,6 +51,7 @@ client {
   # https://github.com/hashicorp/nomad/issues/5562
   options = {
     "docker.volumes.enabled" = true
+    "docker.auth.config"     = "/etc/docker/auth.json"
   }
   host_volume "waypoint" {
     path      = "/opt/nomad/data/volume/waypoint"

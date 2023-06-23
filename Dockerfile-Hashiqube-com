@@ -1,0 +1,9 @@
+# https://docsify.js.org/#/deploy?id=docker
+
+FROM node:latest
+LABEL description="Hashiqube"
+COPY . /app
+WORKDIR /app
+RUN npm install -g docsify-cli@latest
+EXPOSE 3000/tcp
+ENTRYPOINT docsify serve --port 3000 .
