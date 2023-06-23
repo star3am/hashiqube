@@ -8,7 +8,7 @@ https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
 You should have done `vagrant up --provision` This sets up the base Virtual machine, with some default applications.
 Now please do,
 `vagrant up --provision-with minikube`
-```
+```log
 Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 ==> user.local.dev: Checking if box 'ubuntu/xenial64' version '20190918.0.0' is up to date...
 ==> user.local.dev: A newer version of the box 'ubuntu/xenial64' for provider 'virtualbox' is
@@ -77,7 +77,7 @@ From your computer you can interact with kubectl by using `vagrant ssh -c "sudo 
 Like so:
 `vagrant ssh -c "sudo kubectl get nodes"`                                           
 
-```
+```log
 NAME       STATUS   ROLES    AGE   VERSION
 minikube   Ready    master   59m   v1.17.0
 Connection to 127.0.0.1 closed.
@@ -85,7 +85,7 @@ Connection to 127.0.0.1 closed.
 
 `vagrant ssh -c "sudo kubectl get deployments"`
 
-```
+```log
 NAME             READY   UP-TO-DATE   AVAILABLE   AGE
 hello-minikube   1/1     1            1           59m
 Connection to 127.0.0.1 closed.
@@ -93,7 +93,7 @@ Connection to 127.0.0.1 closed.
 
 `vagrant ssh -c "sudo kubectl get services"`
 
-```
+```log
 NAME             TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)           AGE
 hello-minikube   NodePort    10.96.216.129   <none>        10800:30091/TCP   59m
 kubernetes       ClusterIP   10.96.0.1       <none>        443/TCP           60m
@@ -103,7 +103,7 @@ Connection to 127.0.0.1 closed.
 Or you can SSH into the VM by doing `vagrant ssh` and then using `sudo` do:
 `sudo kubectl get nodes`
 
-```
+```log
 NAME       STATUS   ROLES    AGE   VERSION
 minikube   Ready    master   63m   v1.17.0
 ```
@@ -112,7 +112,7 @@ minikube   Ready    master   63m   v1.17.0
 k9s is a CLI tool for interacting with k8s clusters. It wraps kubectl functionality to provide a terminal interface for interaction with clusters in an intuitive way. 
 
 With the minikube installation k9s is also installed on the Vagrant machine. To run, after provisioning minikube run the following commands:
-```
+```bash
 ssh vagrant
 k9s
 ```

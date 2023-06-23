@@ -7,7 +7,7 @@ Docsify is a magical documentation site generator. Docsify generates your docume
 ## Provision
 `vagrant up --provision-with docsify`
 
-```
+```log
 Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 ==> user.local.dev: Checking if box 'ubuntu/xenial64' version '20190918.0.0' is up to date...
 ==> user.local.dev: [vagrant-hostsupdater] Checking for host entries

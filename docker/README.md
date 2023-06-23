@@ -17,7 +17,7 @@ We will also build an Apache2.4 container from a Dockerfile and run it and expos
 
 When you run `vagrant up --provision-with docker` we will be running the bash commands below, but for more information you can look at the contents below.
 
-```
+```bash
 #/bin/bash
 # https://docs.docker.com/install/linux/docker-ce/ubuntu/
 sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes apt-transport-https ca-certificates curl gnupg-agent software-properties-common
@@ -48,7 +48,7 @@ vagrant ssh -c "docker exec -it apache2 /bin/bash -c "apache2 -t -v""
 
 `Dockerfile`
 
-```
+```docker
 FROM ubuntu:18.04
 
 # Install dependencies
@@ -74,7 +74,7 @@ CMD /root/run_apache.sh
 
 `vagrant up --provision-with docker`
 
-```
+```log
 Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 ==> user.local.dev: Checking if box 'ubuntu/xenial64' version '20190918.0.0' is up to date...
 ==> user.local.dev: [vagrant-hostsupdater] Checking for host entries

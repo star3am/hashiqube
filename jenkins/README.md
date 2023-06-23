@@ -9,7 +9,7 @@ For this demo we will use the Vault root access token for Jenkins access. Other 
 Let's start Jenkins
 
 `vagrant up --provision-with jenkins`
-```
+```log
 Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 ==> user.local.dev: Checking if box 'ubuntu/xenial64' version '20190918.0.0' is up to date...
 ==> user.local.dev: [vagrant-hostsupdater] Checking for host entries
@@ -56,7 +56,7 @@ Before we continue let's make sure Vault is running and it is unsealed. In a ter
 
 ### Vault
 `vagrant up --provision-with vault`
-```
+```log
 Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 ==> user.local.dev: Checking if box 'ubuntu/xenial64' version '20190918.0.0' is up to date...
 ==> user.local.dev: [vagrant-hostsupdater] Checking for host entries

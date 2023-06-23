@@ -19,7 +19,7 @@ With Red Hat® Ansible® Tower you can centralize and control your IT infrastruc
 
 `vagrant up --provision-with basetools,docsify,docker,minikube,ansible-tower`
 
-```
+```log
 Bringing machine 'hashiqube0.service.consul' up with 'virtualbox' provider...
 ==> hashiqube0.service.consul: Importing base box 'ubuntu/bionic64'...
 ==> hashiqube0.service.consul: Matching MAC address for NAT networking...
@@ -208,7 +208,7 @@ Now we can login to Hashiqube and use this Callback to trigger an Ansible Run, l
 Now let's use our Callback URL and the Host Config Key to trigger a run using Curl
 
 __vagrant@hashiqube0:~$__ `curl -s -i -X POST -H Content-Type:application/json --data '{"host_config_key": "UL3H6uRtDozHA13trZudrUwUPBw4rSo7rRvi"}' https://10.9.99.10:8043/api/v2/job_templates/9/callback/ -v -k`
-```
+```log
 *   Trying 10.9.99.10...
 * TCP_NODELAY set
 * Connected to 10.9.99.10 (10.9.99.10) port 8043 (#0)
@@ -313,7 +313,7 @@ ansible_connection: ssh
 Let's use our Callback URL and the Host Config Key to trigger a run using Curl
            
 __vagrant@ANSIBLE-ROLE-EX C:\Users\vagrant>__ `powershell.exe -Command "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12;[System.Net.ServicePointManager]::ServerCertificateValidationCallback = { $true };Invoke-WebRequest -UseBasicParsing -Uri https://10.9.99.10:8043/api/v2/job_templates/10/callback/ -Method POST -Body @{host_config_key='UL3H6uRtDozHA13trZudrUwUPBw4rSo7rRvi'}"`
-```
+```log
 StatusCode        : 201
 StatusDescription : Created
 Content           : {}
@@ -343,7 +343,7 @@ Ansible Tower: `pip3 install ansible-tower-cli`
 Using the Job template and inventory we created further up in the page we can now issue a run using AWX CLI
 
 __vagrant@hashiqube0:~$__ `awx --conf.host https://10.9.99.10:8043 -f human job_templates launch 9 --monitor --filter status --conf.insecure --conf.username admin --conf.password password`
-```
+```log
 ------Starting Standard Out Stream------
 [DEPRECATION WARNING]: COMMAND_WARNINGS option, the command warnings feature is
  being removed. This feature will be removed from ansible-core in version 2.14.
@@ -463,7 +463,7 @@ So using the configuration above, let's use terraform to kick of an ansible run 
 
 We are going to use local-exec and remote-exec
 
-```
+```hcl
 locals {
   timestamp = timestamp()
 }
@@ -522,7 +522,7 @@ commands will detect it and remind you to do so if necessary.
 
 __~/workspace/hashiqube/ansible-tower(master*) »__ `terraform apply --auto-approve`
 
-```
+```log
 null_resource.awx_cli: Refreshing state... [id=2181705754889762329]
 null_resource.awx_cli: Destroying... [id=2181705754889762329]
 null_resource.awx_cli: Destruction complete after 0s

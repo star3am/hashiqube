@@ -45,7 +45,7 @@ https://www.vagrantup.com/
 HashiCorp Vagrant provides the same, easy workflow regardless of your role as a developer, operator, or designer. It leverages a declarative configuration file which describes all your software requirements, packages, operating system configuration, users, and more.
 
 `vagrant up --provision`
-```                                                                                 
+```log               
 Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 ==> user.local.dev: Checking if box 'ubuntu/xenial64' version '20190918.0.0' is up to date...
 ==> user.local.dev: [vagrant-hostsupdater] Checking for host entries
@@ -186,7 +186,7 @@ Modules build and extend on the resources defined by providers.
 |Built on top of providers | Foundation for modules|
 
 `terraform plan`
-```
+```log
 Refreshing Terraform state in-memory prior to plan...
 The refreshed state will be used to calculate this plan, but will not be
 persisted to local or remote state storage.
@@ -251,7 +251,7 @@ Secure, store and tightly control access to tokens, passwords, certificates, enc
 [![Armon Dadgar: Introduction to HashiCorp Vault](https://img.youtube.com/vi/VYfl-DpZ5wM/maxresdefault.jpg)](https://www.youtube.com/watch?v=VYfl-DpZ5wM)
 
 `vagrant up --provision-with vault`  
-```                                                                     
+```log
 Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 ==> user.local.dev: Checking if box 'ubuntu/xenial64' version '20190918.0.0' is up to date...
 ==> user.local.dev: [vagrant-hostsupdater] Checking for host entries
@@ -330,7 +330,7 @@ Nomad is a highly available, distributed, data-center aware cluster and applicat
 [![Introduction to HashiCorp Nomad](https://img.youtube.com/vi/s_Fm9UtL4YU/maxresdefault.jpg)](https://www.youtube.com/watch?v=s_Fm9UtL4YU)
 
 `vagrant up --provision-with nomad`
-```                                                                        
+```log    
 Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 ==> user.local.dev: Checking if box 'ubuntu/xenial64' version '20190918.0.0' is up to date...
 ==> user.local.dev: A newer version of the box 'ubuntu/xenial64' for provider 'virtualbox' is
@@ -403,7 +403,7 @@ The new native Service Discovery in Nomad really does work seamlessly. With this
 
 `curl -H "Host: whoami.nomad.localhost" http://localhost:8080 -v`
 
-```
+```log
 *   Trying 127.0.0.1:8080...
 * Connected to localhost (127.0.0.1) port 8080 (#0)
 > GET / HTTP/1.1
@@ -476,7 +476,7 @@ port 8600
 Now names such as `nomad.service.consul` and `fabio.service.consul` will work
 
 `vagrant up --provision-with consul`                                                                      
-```
+```log
 Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 ==> user.local.dev: Checking if box 'ubuntu/xenial64' version '20190918.0.0' is up to date...
 ==> user.local.dev: [vagrant-hostsupdater] Checking for host entries
@@ -641,7 +641,7 @@ https://docs.hashicorp.com/sentinel/language/
 Sentinel is a language and framework for policy built to be embedded in existing software to enable fine-grained, logic-based policy decisions. A policy describes under what circumstances certain behaviors are allowed. Sentinel is an enterprise-only feature of HashiCorp Consul, Nomad, Terraform, and Vault.
 
 `vagrant up --provision-with sentinel`
-```
+```log
 Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 ==> user.local.dev: Checking if box 'ubuntu/bionic64' version '20191218.0.0' is up to date...
 ==> user.local.dev: [vagrant-hostsupdater] Checking for host entries
@@ -753,7 +753,7 @@ Once done, you will see __++++ To finish the installation go to http://10.9.99.1
 ![Terraform Enterprise](images/terraform-enterprise.png?raw=true "Terraform Enterprise")
 ![Terraform Enterprise](images/terraform-enterprise_logged_in.png?raw=true "Terraform Enterprise")
 `vagrant up --provision-with terraform-enterprise`
-```
+```log
 Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 ==> user.local.dev: Checking if box 'ubuntu/xenial64' version '20190918.0.0' is up to date...
 ==> user.local.dev: [vagrant-hostsupdater] Checking for host entries
@@ -802,32 +802,25 @@ https://www.waypointproject.io/
 Waypoint is a wonderful project and it's a firstclass citizen of Hashicorp and runs flawlessly on Nomad. 
 To run Waypoint on Nomad do: 
 
-```
-vagrant up --provision-with basetools --provider docker
-vagrant up --provision-with docker --provider docker
-vagrant up --provision-with consul --provider docker
-vagrant up --provision-with nomad --provider docker
-vagrant up --provision-with waypoint-nomad --provider docker
+```bash
+vagrant up --provision-with basetools,docker,consul,nomad,waypoint
 ```
 
 Waypoint cab also run on Kubernetes and we can test Waypoint using Minikube
 To run Waypoint on Kubernetes (Minikube) do: 
 
-```
-vagrant up --provision-with basetools --provider docker
-vagrant up --provision-with docker --provider docker
-vagrant up --provision-with minikube --provider docker
-vagrant up --provision-with waypoint-kubernetes-minikube --provider docker
+```bash
+vagrant up --provision-with basetools,docker,minikube,waypoint-kubernetes-minikube
 ```
 
 To access the documentation site you can run: 
 
-```
-vagrant up --provision-with docsify --provider docker
+```bash
+vagrant up --provision-with docsify
 ```
 
 `vagrant up --provision-with waypoint`
-```
+```log
 Bringing machine 'hashiqube0.service.consul' up with 'virtualbox' provider...
 ==> hashiqube0.service.consul: Checking if box 'ubuntu/bionic64' version '20200429.0.0' is up to date...
 ==> hashiqube0.service.consul: A newer version of the box 'ubuntu/bionic64' for provider 'virtualbox' is
@@ -1081,7 +1074,7 @@ Boundary is designed to grant access to critical systems using the principle of 
 ![Hashicorp Boundary](images/boundary-logged-in-page.png?raw=true "Hashicorp Boundary")
 
 `vagrant up --provision-with boundary`
-```
+```log
 Bringing machine 'hashiqube0.service.consul' up with 'virtualbox' provider...
 ==> hashiqube0.service.consul: Checking if box 'ubuntu/bionic64' version '20200429.0.0' is up to date...
 ==> hashiqube0.service.consul: [vagrant-hostsupdater] Checking for host entries

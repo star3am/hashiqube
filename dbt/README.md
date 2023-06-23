@@ -12,7 +12,7 @@ Review the dbt and adapter versions located in [common.sh](./common.sh)
 
 To control which adapter and version you would like to install with dbt, change the variable `DBT_WITH` to an accepted value
 
-```sh
+```bash
 DBT_WITH=postgres
 
 # AVAILABLE OPTIONS ARE:
@@ -29,7 +29,7 @@ DBT_WITH=postgres
 
 Next lets provision Hashiqube with basetools and dbt:
 
-```sh
+```bash
 vagrant up --provision-with basetools,docsify,docker,postgresql,dbt
 ```
 
@@ -65,7 +65,7 @@ These adapters require a previous version of dbt (not latest).
 
 `dbt --version` will output:
 
-```
+```log
 Core:
   - installed: 1.1.0
   - latest:    1.2.1 - Update available!
@@ -82,7 +82,7 @@ Plugins:
 
 Example 2 with other adapters:
 
-```
+```log
 Core:
   - installed: 1.2.1
   - latest:    1.2.1 - Up to date!

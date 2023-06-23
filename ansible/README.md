@@ -35,30 +35,6 @@ For this example we will use:
 From the Hashiqube Cloned repo do: 
 `cd ansible/roles/ansible-role-example-role && ./run.sh`
 
-## Gotcha's (Sorry!!)
-- M1 and M2 Mac Architectures are NOT supported at this stage
-- Hyper-V is not supported at this stage
-- Your Vagrant version on Windows and in WSL *MUST* be the same 
-- Installing WSL could give error: `Catastrophic failure`
-``` 
-PS C:\Windows\system32> wsl --install
-Installing: Windows Subsystem for Linux
-Catastrophic failure
-```
-Restart laptop, run this installation command again, and make sure nothing is downloading in the background at the same time when running the command.
-
-
-- WSL Ubuntu Install could give error: `An error occurred during installation. Distribution Name: 'Ubuntu' Error Code: 0x8000ffff`
-```
-PS C:\WINDOWS\system32> wsl --install -d ubuntu
-Installing: Ubuntu
-An error occurred during installation. Distribution Name: 'Ubuntu' Error Code: 0x8000ffff
-```
-Follow this link: https://askubuntu.com/questions/1434150/wsl-ubuntu-installation-fails-with-the-error-please-restart-wsl-with-the-follo and 
-https://learn.microsoft.com/en-us/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package
-
-Note : Run ``` wsl --install -d Ubuntu ``` in **non administrative** mode in powershell
-
 ## Ansible Role Example Role
 An example Ansible Role that you can use which covers, Red Hat, Centos, Ubuntu, Debian and Windows Targets. 
 
@@ -191,20 +167,20 @@ Install all the Tools you need in the [__Get Started Section__](#get-started-dep
 
 Install Python
 
-```
+```bash
 sudo apt update && sudo apt-get install -y python3 python3-pip python3-dev python3-virtualenv python3-venv
 sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 1 --force
 sudo update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 1 --force
 ```
 Install SSHPass program
 
-```
+```bash
 sudo apt-get install -y sshpass
 ```
 
 Install Hashicorp Package Sources
 
-```
+```bash
 wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg 
 
 echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
@@ -216,7 +192,7 @@ echo 1 > /proc/sys/fs/binfmt_misc/WSLInterop
 
 Install Powershell in Ubuntu on WSL
 
-```
+```bash
 sudo apt-get install -y wget apt-transport-https software-properties-common
 
 wget -q "https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb"
@@ -243,7 +219,7 @@ Install all the Tools you need in the [__Get Started Section__](#get-started-dep
 
 Install SSHPass
 
-```
+```bash
 brew tap esolitos/ipa
 brew install esolitos/ipa/sshpass
 brew install sshpass
@@ -281,7 +257,7 @@ Succesful ouput should be as below:
 
 ## Common Errors 
 
-```
+```log
 fatal: [ansible-role-example-role-ubuntu-2204]: FAILED! => {"msg": "to use the 'ssh' connection type with passwords or pkcs11_provider, you must install the sshpass program"}
 ```
 Did you install the SSHPass application? See [__Get Started Section__](#get-started-dependencies-the-tools-you-will-need) 

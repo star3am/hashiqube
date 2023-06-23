@@ -6,7 +6,7 @@ Let's start with Oracle's MySQL
 ## Oracle MySQL
 
 `vagrant up --provision-with mysql`
-```
+```log
 Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 ==> user.local.dev: Checking if box 'ubuntu/xenial64' version '20190918.0.0' is up to date...
 ==> user.local.dev: [vagrant-hostsupdater] Checking for host entries
@@ -41,7 +41,7 @@ Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 Let's verify that our mysql container is up and accepting connections
 
 `vagrant ssh -c "mysql -h 127.0.0.1 -u root -ppassword -e \"show databases;\""`
-```
+```log
 mysql: [Warning] Using a password on the command line interface can be insecure.
 +--------------------+
 | Database           |
@@ -57,7 +57,7 @@ mysql: [Warning] Using a password on the command line interface can be insecure.
 Now let's bring up Vault, lets make sure it's running, by doing:
 
 `vagrant up --provision-with vault`
-```
+```log
 Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 ==> user.local.dev: Checking if box 'ubuntu/xenial64' version '20190918.0.0' is up to date...
 ==> user.local.dev: [vagrant-hostsupdater] Checking for host entries
@@ -112,14 +112,14 @@ Now let's configure the vault user in Vaults database secrets engine to create u
 You will see we used `allowed_roles='mysql-role'` that does not exist yet, let's create it now
 
 `vagrant ssh -c "vault write database/roles/mysql-role db_name=db creation_statements=\"CREATE USER '{{name}}'@'%' IDENTIFIED BY '{{password}}';GRANT ALL PRIVILEGES ON db.* TO '{{name}}'@'%';\" default_ttl='1h' max_ttl='24h'"`
-```
+```log
 Success! Data written to: database/roles/mysql-role
 ```
 
 Let's quickly check the users before we ask Vault to give us credentials
 
 `vagrant ssh -c "mysql -h 127.0.0.1 -u root -ppassword -e \"SELECT User, Host from mysql.user;\""`
-```
+```log
 mysql: [Warning] Using a password on the command line interface can be insecure.
 +------------------+-----------+
 | User             | Host      |
@@ -136,7 +136,7 @@ mysql: [Warning] Using a password on the command line interface can be insecure.
 Now let's ask Vault for credentials
 
 `vagrant ssh -c "vault read database/creds/mysql-role"`
-```
+```log
 Key                Value
 ---                -----
 lease_id           database/creds/mysql-role/IhHPq0RcdmDdTIjsfLBePLcp
@@ -149,7 +149,7 @@ username           v-root-mysqlrole-zV7t3V0bJFZZJTg
 Ok now let's check the user table again for the new users existence based on the role `mysql-role`
 
 `vagrant ssh -c "mysql -h 127.0.0.1 -u root -ppassword -e \"SELECT User, Host from mysql.user;\""`
-```
+```log
 mysql: [Warning] Using a password on the command line interface can be insecure.
 +-----------------------------------+-----------+
 | User                              | Host      |
@@ -167,7 +167,7 @@ mysql: [Warning] Using a password on the command line interface can be insecure.
 Let's ask Vault for the connection details to mysql
 
 `vagrant ssh -c "curl --header 'X-Vault-Token:s.h7kojucmDDULDmxHAyr7jhrE' http://localhost:8200/v1/database/creds/mysql-role"`
-```
+```log
 {
 "request_id":"23116091-f72b-80f9-fb0e-6ce5418bae1d",
 "lease_id":"database/creds/mysql-role/7wMxCUzNcEaOrvCspBhXnjTM",
@@ -185,7 +185,7 @@ Let's ask Vault for the connection details to mysql
 
 a simple way to use this is passing credentials to a docker container, like so:
 
-```
+```log
 response=$(curl --header "X-Vault-Token:s.h7kojucmDDULDmxHAyr7jhrE" http://localhost:8200/v1/database/creds/mysql-role)
 export DBPASSWORD=$(echo $response | jq -r .data.password)
 export DBUSERNAME=$(echo $response | jq -r .data.username)
@@ -197,7 +197,7 @@ If we check the credentials after an hour, you will see that they have been remo
 
 `vagrant ssh -c "mysql -h 127.0.0.1 -u root -ppassword -e \"SELECT User, Host from mysql.user;\""`
 
-```
+```log
 mysql: [Warning] Using a password on the command line interface can be insecure.
 +------------------+-----------+
 | User             | Host      |
@@ -217,7 +217,7 @@ mysql: [Warning] Using a password on the command line interface can be insecure.
 ## Microsoft SQL (Mssql Express)
 
 `vagrant up --provision-with mssql`
-```
+```log
 Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 ==> user.local.dev: Checking if box 'ubuntu/xenial64' version '20190918.0.0' is up to date...
 ==> user.local.dev: A newer version of the box 'ubuntu/xenial64' for provider 'virtualbox' is
@@ -262,7 +262,7 @@ Now let's create a database called `mssql`
 
 Now let's verify that the database was successfully created.
 `docker exec -it mssql /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P P@ssw0rd -Q "SELECT name, database_id, create_date FROM sys.databases"`
-```
+```log
 name                                                                                                                             database_id create_date
 -------------------------------------------------------------------------------------------------------------------------------- ----------- -----------------------
 master                                                                                                                                     1 2003-04-08 09:13:36.390
@@ -275,7 +275,7 @@ mssql                                                                           
 ```
 
 Let's ensure the database engine in `vault secrets enable database`
-```
+```log
 Success! Enabled the database secrets engine at: database/
 ```
 
@@ -305,7 +305,7 @@ Now let's ask Vault to create some credentials for us
 And let's see if the credentials were created
 `docker exec -it mssql /opt/mssql-tools/bin/sqlcmd -S localhost -U v-root-mssql-5nBk5IA9hydRgzOkgB8M-1574220338 -P A1a-dninssZ6v3mNBOfK -Q "SELECT * FROM sys.server_principals"`
 
-```
+```log
 name                                                                                                                             principal_id sid                                                                                                                                                                          type type_desc                                                    is_disabled create_date             modify_date             default_database_name                                                                                                            default_language_name                                                                                                            credential_id owning_principal_id is_fixed_role
 -------------------------------------------------------------------------------------------------------------------------------- ------------ ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---- ------------------------------------------------------------ ----------- ----------------------- ----------------------- -------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ------------- ------------------- -------------
 sa                                                                                                                                          1 0x01                                                                                                                                                                         S    SQL_LOGIN                                                              0 2003-04-08 09:10:35.460 2019-11-20 03:23:54.283 master                                                                                                                           us_english                                                                                                                                NULL                NULL             0
@@ -326,11 +326,12 @@ v-root-mssql-5nBk5IA9hydRgzOkgB8M-1574220338                                    
 Now let's wait an hour and check if Vault has removed the credential
 
 `docker exec -it mssql /opt/mssql-tools/bin/sqlcmd -S localhost -U v-root-mssql-5nBk5IA9hydRgzOkgB8M-1574220338 -P A1a-dninssZ6v3mNBOfK -Q "SELECT * FROM sys.server_principals"`
-```
+```log
 Sqlcmd: Error: Microsoft ODBC Driver 17 for SQL Server : Login failed for user 'v-root-mssql-5nBk5IA9hydRgzOkgB8M-1574220338'..
 ```
-vagrant@riaannolan:~$ docker exec -it mssql /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P P@ssw0rd -Q "SELECT * FROM sys.server_principals"`
-```
+
+*vagrant@riaannolan:~$* `docker exec -it mssql /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P P@ssw0rd -Q "SELECT * FROM sys.server_principals"`
+```log
 name                                                                                                                             principal_id sid                                                                                                                                                                          type type_desc                                                    is_disabled create_date             modify_date             default_database_name                                                                                                            default_language_name                                                                                                            credential_id owning_principal_id is_fixed_role
 -------------------------------------------------------------------------------------------------------------------------------- ------------ ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---- ------------------------------------------------------------ ----------- ----------------------- ----------------------- -------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------- ------------- ------------------- -------------
 sa                                                                                                                                          1 0x01                                                                                                                                                                         S    SQL_LOGIN                                                              0 2003-04-08 09:10:35.460 2019-11-20 03:32:15.807 master                                                                                                                           us_english                                                                                                                                NULL                NULL             0
@@ -367,7 +368,7 @@ NT AUTHORITY\SYSTEM                                                             
 https://www.postgresql.org/
 
 `vagrant up --provision-with postgresql`
-```
+```log
 Bringing machine 'hashiqube0.service.consul' up with 'virtualbox' provider...
 ==> hashiqube0.service.consul: Checking if box 'ubuntu/bionic64' version '20200429.0.0' is up to date...
 ==> hashiqube0.service.consul: [vagrant-hostsupdater] Checking for host entries

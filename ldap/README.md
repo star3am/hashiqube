@@ -6,7 +6,7 @@ LDAP stands for Lightweight Directory Access Protocol. As the name suggests, it 
 ## Provision
 `vagrant up --provision-with ldap`
 
-```                                                                        
+```log
 Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 ==> user.local.dev: Checking if box 'ubuntu/xenial64' version '20190918.0.0' is up to date...
 ==> user.local.dev: A newer version of the box 'ubuntu/xenial64' for provider 'virtualbox' is
@@ -71,17 +71,17 @@ Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 ## Enable LDAP Auth in Vault
 
 `vault auth enable ldap`
-```
+```log
 Success! Enabled ldap auth method at: ldap/
 ```
 
 `vault write auth/ldap/config url="ldap://localhost:389" userdn="ou=people,dc=planetexpress,dc=com" groupdn="ou=people,dc=planetexpress,dc=com" groupattr="cn" insecure_tls=true userattr=uid starttls=false binddn="cn=admin,dc=planetexpress,dc=com" bindpass='GoodNewsEveryone'`
-```
+```log
 Success! Data written to: auth/ldap/config
 ```
 
 `vault login -method=ldap username=hermes`
-```
+```log
 Password (will be hidden):
 WARNING! The VAULT_TOKEN environment variable is set! This takes precedence
 over the value set by this command. To use the value set by this command,
