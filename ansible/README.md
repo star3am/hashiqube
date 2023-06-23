@@ -45,7 +45,7 @@ Ansible Galaxy is the Ansible's official community hub for sharing Ansible roles
 
 To download community roles and playbooks from remote repositories you need a requirements.txt file foe example
 
-```
+```yaml
 - src: 'https://github.com/ansible-lockdown/RHEL8-CIS'
   version: '1.3.0'
   scm: 'git'
