@@ -286,7 +286,7 @@ A Very special mention to HashiQube's contributors, Thank You All for your help,
  - Devang Dhameliya
  - Rajesh Cholleti
  - Nel-Marie Nolan
- - Adri Villela
+ - Adriana Villela
 
 ## Videos
 Videos were made with asciinema https://asciinema.org/
