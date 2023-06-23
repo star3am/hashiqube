@@ -19,10 +19,10 @@ HashiCorp was founded by Mitchell Hashimoto and Armon Dadgar in 2012 with the go
 
 | Dimension | Products | | | 
 |------|--------|------------|------------|
-| __Applications__ | ![Nomad](https://www.datocms-assets.com/2885/1620155098-brandhcnomadprimaryattributedcolor.svg) <br /> __Nomad__ <br /> Schedular and workload orchestrator to deploy and manage applications | ![Waypoint](https://www.datocms-assets.com/2885/1620155130-brandhcwaypointprimaryattributedcolor.svg) <br /> __Waypoint__ <br /> One workflow to build, deploy and release applications across platforms| | 
-| __Networking__ | ![Consul](https://www.datocms-assets.com/2885/1620155090-brandhcconsulprimaryattributedcolor.svg) <br /> __Consul__ <br /> Service Mesh across any cloud and runtime platform | | |
-| __Security__ | ![Boundary](https://www.datocms-assets.com/2885/1620155080-brandhcboundaryprimaryattributedcolor.svg) <br /> __Boundary__ <br /> Secure remote access to applications and critical systems | ![Vault](https://www.datocms-assets.com/2885/1620159869-brandvaultprimaryattributedcolor.svg) <br /> __Vault__ <br /> Secure management of secrets and sensitive data| |
-| __Infrastructure__ | ![Packer](https://www.datocms-assets.com/2885/1620155103-brandhcpackerprimaryattributedcolor.svg) <br /> __Packer__ <br /> Automated machine images from a single source configuration| ![Vagrant](https://www.datocms-assets.com/2885/1620155118-brandhcvagrantprimaryattributedcolor.svg) <br /> __Vagrant__ <br /> Single workflow to build and manage developer environments| ![Terraform](https://www.datocms-assets.com/2885/1620155113-brandhcterraformprimaryattributedcolor.svg) <br /> __Terraform__ <br /> Infrastructure automation to provision and manage any cloud service |
+| __Applications__ | ![Nomad](https://www.datocms-assets.com/2885/1620155098-brandhcnomadprimaryattributedcolor.svg) <br /> [__Nomad__](hashicorp/#nomad) <br /> Schedular and workload orchestrator to deploy and manage applications | ![Waypoint](https://www.datocms-assets.com/2885/1620155130-brandhcwaypointprimaryattributedcolor.svg) <br /> [__Waypoint__](hashicorp/#waypoint) <br /> One workflow to build, deploy and release applications across platforms| | 
+| __Networking__ | ![Consul](https://www.datocms-assets.com/2885/1620155090-brandhcconsulprimaryattributedcolor.svg) <br /> [__Consul__](hashicorp/#consul) <br /> Service Mesh across any cloud and runtime platform | | |
+| __Security__ | ![Boundary](https://www.datocms-assets.com/2885/1620155080-brandhcboundaryprimaryattributedcolor.svg) <br /> [__Boundary__](hashicorp/#boundary) <br /> Secure remote access to applications and critical systems | ![Vault](https://www.datocms-assets.com/2885/1620159869-brandvaultprimaryattributedcolor.svg) <br /> [__Vault__](hashicorp/#vault) <br /> Secure management of secrets and sensitive data| |
+| __Infrastructure__ | ![Packer](https://www.datocms-assets.com/2885/1620155103-brandhcpackerprimaryattributedcolor.svg) <br /> [__Packer__](hashicorp/#packer) <br /> Automated machine images from a single source configuration| ![Vagrant](https://www.datocms-assets.com/2885/1620155118-brandhcvagrantprimaryattributedcolor.svg) <br /> [__Vagrant__](hashicorp/#vagrant) <br /> Single workflow to build and manage developer environments| ![Terraform](https://www.datocms-assets.com/2885/1620155113-brandhcterraformprimaryattributedcolor.svg) <br /> [__Terraform__](hashicorp/#terraform) <br /> Infrastructure automation to provision and manage any cloud service |
 
 ## Links 
 
@@ -120,6 +120,8 @@ https://www.packer.io
 Packer is an open source tool for creating identical machine images for multiple platforms from a single source configuration. Packer is lightweight, runs on every major operating system, and is highly performant, creating machine images for multiple platforms in parallel.
 
 Packer will build a Docker container, use the Shell and Ansible provisioners, Ansible will also connect to Vault to retrieve secrets using a Token.
+
+[![Introduction to HashiCorp Packer](https://img.youtube.com/vi/r0I4TTO957w/maxresdefault.jpg)](https://www.youtube.com/watch?v=r0I4TTO957w)
 
 https://learn.hashicorp.com/vault/getting-started/secrets-engines
 https://docs.ansible.com/ansible/latest/plugins/lookup/hashi_vault.html
@@ -325,6 +327,8 @@ https://www.nomadproject.io/
 
 Nomad is a highly available, distributed, data-center aware cluster and application scheduler designed to support the modern datacenter with support for
 
+[![Introduction to HashiCorp Nomad](https://img.youtube.com/vi/s_Fm9UtL4YU/maxresdefault.jpg)](https://www.youtube.com/watch?v=s_Fm9UtL4YU)
+
 `vagrant up --provision-with nomad`
 ```                                                                        
 Bringing machine 'user.local.dev' up with 'virtualbox' provider...
@@ -459,6 +463,8 @@ Some routes are added via Consul, see `hashicorp/consul.sh`
 https://www.consul.io/
 
 Consul is a service networking solution to connect and secure services across any runtime platform and public or private cloud
+
+[![Introduction to HashiCorp Consul](https://img.youtube.com/vi/mxeMdl0KvBI/maxresdefault.jpg)](https://www.youtube.com/watch?v=mxeMdl0KvBI)
 
 ### Consul DNS
 To use Consul as a DNS resolver from your laptop, you can create the following file<br />
@@ -784,6 +790,8 @@ Waypoint supports
 - nomad
 - pack
 
+[![Introduction to HashiCorp Waypoint](https://img.youtube.com/vi/JL0Qeq4A6So/maxresdefault.jpg)](https://www.youtube.com/watch?v=JL0Qeq4A6So)
+
 https://www.hashicorp.com/blog/announcing-waypoint
 https://www.waypointproject.io/
 
@@ -1065,6 +1073,8 @@ c97d646ce0ef: Already exists :
 ## Boundary
 
 Boundary is designed to grant access to critical systems using the principle of least privilege, solving challenges organizations encounter when users need to securely access applications and machines. Traditional products that grant access to systems are cumbersome, painful to maintain, or are black boxes lacking extensible APIs. Boundary allows authenticated and authorized users to access secure systems in private networks without granting access to the larger network where those systems reside.
+
+[![Introduction to HashiCorp Boundary](https://img.youtube.com/vi/tUMe7EsXYBQ/maxresdefault.jpg)](https://www.youtube.com/watch?v=tUMe7EsXYBQ)
 
 ![Hashicorp Boundary](images/boundary-how-it-works.png?raw=true "Hashicorp Boundary")
 ![Hashicorp Boundary](images/boundary-login-page.png?raw=true "Hashicorp Boundary")
