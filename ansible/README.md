@@ -2,7 +2,7 @@
 https://www.ansible.com/
 
 ## About
-Ansible is an open-source software provisioning, configuration management, and application-deployment tool. It runs on many Unix-like systems, and can configure both Unix-like systems as well as Microsoft Windows. It includes its own declarative language to describe system configuration.
+Ansible is an open-source software provisioning, configuration management, and application-deployment tool. It runs on many Unix-like systems, and can configure both Unix-like systems as well as Microsoft Windows. It includes its own declarative language to describe system configuration in YAML.
 
 ## Molecule 
 https://molecule.readthedocs.io/en/latest/
@@ -15,14 +15,44 @@ Molecule encourages an approach that results in consistently developed roles tha
 
 Molecule supports only the latest two major versions of Ansible (N/N-1), meaning that if the latest version is 2.9.x, we will also test our code with 2.8.x.
 
+## Ansible Tasks
+
+When Ansible is executed it uses site.yml as the entry point, this simply points it to the __tasks__ directory.
+
+Because Ansible can operate on Windows, Linux (Deb and RPM based) systems, it's wise to split the tasks up to make it more readable. 
+
+## Main.yml
+Let's first look at the main.yml 
+
+As you can see below we are using Ansible Facts to direct the different Operating Systems to their own Task file. 
+
+[filename](roles/ansible-role-example-role/tasks/main.yml ':include :type=code')
+
+## Enterprise Linux
+Let's have a look at Enterprise Linux (RPM YUM based) el.yml
+
+[filename](roles/ansible-role-example-role/tasks/el.yml ':include :type=code')
+
+## Debian/Ubuntu Linux
+Let's have a look at Debian/Ubuntu Linux (DEB based) deb.yml
+
+[filename](roles/ansible-role-example-role/tasks/deb.yml ':include :type=code')
+
+## Windows
+Let's have a look at Windows windows.yml
+
+[filename](roles/ansible-role-example-role/tasks/windows.yml ':include :type=code')
+
 ## Molecule example
+
+Using Molecule, we can quickly test our Role or Playbook against many Operating Systems. 
 
 In our Ansible Role Example Role which supports Redhat, Centos, Ubuntu, Debian and Windows we have an example Molecule YAML file 
 
 [filename](roles/ansible-role-example-role/molecule/default/molecule.yml ':include :type=code')
 
 ## Practicle example
-Molecule sue providers such as docker or virtualbox to create the target instances to run the playbook against. 
+Molecule use providers such as docker or virtualbox to create the target instances to run the playbook against. 
 
 The Targets are configured in molecule/molecule.yml
 
