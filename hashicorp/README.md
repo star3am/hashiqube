@@ -140,11 +140,11 @@ Packer uses the HashiCorp Configuration Language - HCL - designed to allow conci
 
 ### Ubuntu 22.04
 
-[filename](packer/all/ubuntu-2204.pkr.hcl ':include :type=code')
+[filename](packer/linux/ubuntu/ubuntu-2204.pkr.hcl ':include :type=code')
 
 ### Windows 2019
 
-[filename](packer/all/windows-2019.pkr.hcl ':include :type=code')
+[filename](packer/windows/windowsserver/windows-2019.pkr.hcl ':include :type=code')
 ## The Code
 
 [filename](packer.sh ':include :type=code')
