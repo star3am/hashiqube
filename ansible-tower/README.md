@@ -159,31 +159,84 @@ Bringing machine 'hashiqube0.service.consul' up with 'virtualbox' provider...
 ```
 
 ## Summary
-After provision, you can access AWX Ansible Tower https://10.9.99.10:8043/ and login with User: __admin__ and Password: __password__
+After provision, you can access AWX Ansible Tower on http://localhost:8043 and login with User: __admin__ and the Password displayed at the end of the Provision operation.
 ![Ansible Tower](images/ansible-tower.png?raw=true "Ansible Tower")
+
+See the Output below at the end of the Provision Operation, specifically the Login URL and Password
+![Ansible Tower Password](images/ansible-tower-end-of-provision.png?raw=true "Ansible Tower Password")
 
 ## Run a playbook
 In order to run a playbook, we have to do a few things, we are going to login to AWX Ansible Tower
+
 Once logged in you will see this page
 
 ![Ansible Tower](images/ansible-tower-logged-in.png?raw=true "Ansible Tower")
 
 ## Add a project
-No we can add a project, click on Projects in the menue on the left and add a new project, here is an example 
+:bulb: This was automatically done for you in the Provisioning step, with this command: 
+
+```bash
+# https://docs.ansible.com/ansible-tower/latest/html/towercli/reference.html#awx-projects-create
+echo -e '\e[38;5;198m'"++++ "
+echo -e '\e[38;5;198m'"++++ Create projects ansible-role-example-role"
+echo -e '\e[38;5;198m'"++++ "
+sudo --preserve-env=PATH -u vagrant /home/vagrant/.local/bin/awx projects create --organization 'Default' --scm_update_on_launch true --scm_url https://github.com/star3am/ansible-role-example-role --scm_type git --name ansible-role-example-role --description ansible-role-example-role --wait $AWX_COMMON
+```
+
+Now we can add a project, click on Projects in the menue on the left and add a new project, here is an example 
 You can use my example repository https://github.com/star3am/ansible-role-example-role.git For the Source Control URL
 ![Ansible Tower](images/ansible-tower-add-project.png?raw=true "Ansible Tower")
 
 ## Add a Credential
+
+:bulb: This was automatically done for you in the Provisioning Operation using this code: 
+
+```bash
+# https://docs.ansible.com/ansible-tower/latest/html/towercli/reference.html#awx-credentials-create
+echo -e '\e[38;5;198m'"++++ "
+echo -e '\e[38;5;198m'"++++ Add credentials ansible"
+echo -e '\e[38;5;198m'"++++ "
+sudo --preserve-env=PATH -u vagrant /home/vagrant/.local/bin/awx credentials create --credential_type 'Machine' --organization 'Default' --name 'ansible' --inputs '{"username": "vagrant", "password": "vagrant"}' $AWX_COMMON
+```
+
 Navigate to Credentials in the left menue and add a new Credential of type "Machine" select the default organisation and add username __vagrant__ and password __vagrant__
 Ansible Tower will use these credentials to login to the Hashiqube VM when we run a job template.
-![Ansible Tower](images/ansible-tower-add-credentialt.png?raw=true "Ansible Tower")
+![Ansible Tower](images/ansible-tower-add-credential.png?raw=true "Ansible Tower")
 
 ## Add Inventory
+
+:bulb: This was automatically done for you in the Provisioning Operation using this code: 
+
+```bash
+# https://docs.ansible.com/ansible-tower/latest/html/towercli/reference.html#awx-inventory-list
+echo -e '\e[38;5;198m'"++++ "
+echo -e '\e[38;5;198m'"++++ Check if 'Demo Inventory' exists"
+echo -e '\e[38;5;198m'"++++ "
+sudo --preserve-env=PATH -u vagrant /home/vagrant/.local/bin/awx inventory list --wait $AWX_COMMON | grep -q 'Demo Inventory'
+if [ $? -eq 1 ]; then
+  echo -e '\e[38;5;198m'"++++ 'Demo Inventory' doesn't exist, creating"
+  sudo --preserve-env=PATH -u vagrant /home/vagrant/.local/bin/awx inventory create --name 'Demo Inventory' --description 'Demo Inventory' --organization 'Default' --wait $AWX_COMMON
+else
+  echo -e '\e[38;5;198m'"++++ 'Demo Inventory' exists"
+fi
+```
+
 Now let's add an Inventory, we will need this when we create the Job Template
 Click on Inventories on the menue in the left and add a new Inventory.
 ![Ansible Tower](images/ansible-tower-add-inventory.png?raw=true "Ansible Tower")
 
-## Add a Template
+## Add a Job Template
+
+:bulb: This was automatically done for you in the Provisioning Operation using this code: 
+
+```bash
+# https://docs.ansible.com/ansible-tower/latest/html/towercli/reference.html#awx-job-templates-create
+echo -e '\e[38;5;198m'"++++ "
+echo -e '\e[38;5;198m'"++++ Create job_templates ansible-role-example-role"
+echo -e '\e[38;5;198m'"++++ "
+sudo --preserve-env=PATH -u vagrant /home/vagrant/.local/bin/awx job_templates create --name ansible-role-example-role --description ansible-role-example-role --job_type run --inventory 'Demo Inventory' --project 'ansible-role-example-role' --become_enabled true --ask_limit_on_launch true --ask_tags_on_launch true --playbook site.yml --ask_limit_on_launch true --ask_tags_on_launch true --ask_variables_on_launch true --wait $AWX_COMMON
+```
+
 Next we are going to add a Job Template, navigate to Templates in the menue on the left and add a new Job Template
 Use the Inventory we created for Vagrant and the Project we created earlier. 
 
