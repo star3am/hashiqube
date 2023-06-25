@@ -1,5 +1,8 @@
 # HashiCorp
+
 http://www.hashicorp.com
+
+![Hashicorp Logo](images/hashicorp-logo.png?raw=true "Hashicorp Logo")
 
 ## About
 HashiCorp delivers consistent workflows to provision, secure, connect, and run any infrastructure for any application.
@@ -40,7 +43,10 @@ As we move beyond the cloud into Hyperscale computing applications must be desig
 [![Kelsey Hightower: 12-Factor Apps and the HashiStack](https://img.youtube.com/vi/NVl9cIiPF80/maxresdefault.jpg)](https://www.youtube.com/watch?v=NVl9cIiPF80)
 
 ## Vagrant
+
 https://www.vagrantup.com/
+
+![Vagrant Logo](images/vagrant-logo.png?raw=true "Vagrant Logo")
 
 HashiCorp Vagrant provides the same, easy workflow regardless of your role as a developer, operator, or designer. It leverages a declarative configuration file which describes all your software requirements, packages, operating system configuration, users, and more.
 
@@ -115,7 +121,10 @@ Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 ```
 
 ## Packer
+
 https://www.packer.io
+
+![Packer Logo](images/packer-logo.png?raw=true "Packer Logo")
 
 Packer is an open source tool for creating identical machine images for multiple platforms from a single source configuration. Packer is lightweight, runs on every major operating system, and is highly performant, creating machine images for multiple platforms in parallel.
 
@@ -150,7 +159,10 @@ Packer uses the HashiCorp Configuration Language - HCL - designed to allow conci
 [filename](packer.sh ':include :type=code')
 
 ## Terraform
+
 https://www.terraform.io/
+
+![Terraform Logo](images/terraform-logo.png?raw=true "Terraform Logo")
 
 Terraform is an open-source infrastructure as code software tool created by HashiCorp. It enables users to define and provision a datacenter infrastructure using a high-level configuration language known as Hashicorp Configuration Language, or optionally JSON.
 
@@ -254,7 +266,10 @@ can't guarantee that exactly these actions will be performed if
 [filename](terraform.sh ':include :type=code')
 
 ## Vault
+
 https://www.vaultproject.io/
+
+![Vault Logo](images/vault-logo.png?raw=true "Vault Logo")
 
 Manage Secrets and Protect Sensitive Data.
 Secure, store and tightly control access to tokens, passwords, certificates, encryption keys for protecting secrets and other sensitive data using a UI, CLI, or HTTP API.
@@ -334,7 +349,10 @@ Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 [filename](vault.sh ':include :type=code')
 
 ## Nomad
+
 https://www.nomadproject.io/
+
+![Nomad Logo](images/nomad-logo.png?raw=true "Nomad Logo")
 
 Nomad is a highly available, distributed, data-center aware cluster and application scheduler designed to support the modern datacenter with support for
 
@@ -471,7 +489,10 @@ Some routes are added via Consul, see `hashicorp/consul.sh`
 [filename](nomad.sh ':include :type=code')
 
 ## Consul
+
 https://www.consul.io/
+
+![Consul Logo](images/consul-logo.png?raw=true "Consul Logo")
 
 Consul is a service networking solution to connect and secure services across any runtime platform and public or private cloud
 
@@ -787,7 +808,11 @@ Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 
 ## Waypoint
 
+https://www.waypointproject.io/
+
 A consistent developer workflow to build, deploy, and release applications across any platform.
+
+![Waypoint Logo](images/waypoint-logo.png?raw=true "Waypoint Logo")
 
 Waypoint supports
 - aws-ec2
@@ -1075,6 +1100,10 @@ c97d646ce0ef: Already exists :
 [filename](waypoint.sh ':include :type=code')
 
 ## Boundary
+
+https://www.boundaryproject.io/
+
+![Boundary Logo](images/boundary-logo.png?raw=true "Boundary Logo")
 
 Boundary is designed to grant access to critical systems using the principle of least privilege, solving challenges organizations encounter when users need to securely access applications and machines. Traditional products that grant access to systems are cumbersome, painful to maintain, or are black boxes lacking extensible APIs. Boundary allows authenticated and authorized users to access secure systems in private networks without granting access to the larger network where those systems reside.
 

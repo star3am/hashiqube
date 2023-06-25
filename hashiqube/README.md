@@ -1,5 +1,7 @@
 # Hashiqube
 
+![Hashiqube Logo](images/logo-qube.png?raw=true "Hashiqube Logo")
+
 This Provider (Basetools) installs some essential tools that Hashiqube provisioners need, this is one of the first provisioners that has to be run. Amongst other it also installs Python and Pip and sets the Message of the Day MOTD. 
 
 ```

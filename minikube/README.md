@@ -1,4 +1,9 @@
 # Minikube
+
+https://minikube.sigs.k8s.io/docs/start/
+
+![Minikube Logo](images/minikube-logo.png?raw=true "Minikube Logo")
+
 This page shows you how to install Minikube, a tool that runs a single-node Kubernetes cluster in a virtual machine on your personal computer.
 https://kubernetes.io/docs/tasks/tools/install-minikube/
 https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
