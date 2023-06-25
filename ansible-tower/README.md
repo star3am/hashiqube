@@ -934,4 +934,4 @@ Apply complete! Resources: 1 added, 0 changed, 1 destroyed.
 
 [filename](ansible-tower.sh ':include :type=code')
 
-[filename](main.tf ':include :type=code')
+[filename](main.tf ':include :type=code hcl')

@@ -7,6 +7,8 @@ This page has 2 sections:
 
 https://code.visualstudio.com/
 
+![VSCode Microsoft Visual Studio Code](images/vscode-logo.png?raw=true "VSCode Microsoft Visual Studio Code")
+
 Visual Studio Code or VSCode is a Code Editor, also referred to as an IDE. It's made by Microsoft, it's completely free, very powerful and run on all Operating Systems and Architectures. 
 
 It has many extensions and plugins and can help you write betetr code faster. 
