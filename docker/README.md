@@ -1,8 +1,8 @@
 # Docker
 
-https://www.docker.com/
-https://docs.docker.com/
-https://docs.docker.com/compose/
+https://www.docker.com/ <br />
+https://docs.docker.com/ <br />
+https://docs.docker.com/compose/ <br />
 
 ![Docker Logo](images/docker-logo.png?raw=true "Docker Logo")
 ## Information
