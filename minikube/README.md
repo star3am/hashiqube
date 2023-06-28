@@ -133,7 +133,12 @@ Press "0" to display all namespaces.
   
 
 ## Traefik on Minikube
-https://doc.traefik.io/traefik/v1.7/user-guide/kubernetes/
+https://doc.traefik.io/traefik/v1.7/user-guide/kubernetes/ <br />
+Traefik Dashboard: http://localhost:18181/dashboard/<br />
+Traefik Loadbalancer: http://localhost:18080<br />
+Traefik Documentation: http://localhost:3333/#/minikube/README?id=traefik-on-minikube
+
+![Traefik Logo](images/traefik-logo.png?raw=true "Traefik Logo")
 
 This guide explains how to use Traefik as an Ingress controller for a Kubernetes cluster.
 

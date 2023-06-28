@@ -416,6 +416,8 @@ Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 https://traefik.io/blog/traefik-proxy-fully-integrates-with-hashicorp-nomad/ <br />
 https://doc.traefik.io/traefik/v2.8/providers/nomad/
 
+![Traefik Logo](images/traefik-logo.png?raw=true "Traefik Logo")
+
 We are thrilled to announce the full integration of the new Nomad built-in Service Discovery with Traefik Proxy. This is a first-of-its-kind ingress integration that simplifies ingress in HashiCorp Nomad. Utilizing Nomad directly with Traefik Proxy has never been so easy!
 
 In early May, Hashicorp announced Nomad Version 1.3. Among other updates, it also includes a nice list of improvements on usability and developer experience. Before this release, when using service discovery with Nomad, Traefik Proxy users had to use Hashicorp Consul and Nomad side-by-side in order to benefit from Traefik Proxy’s famous automatic configuration. Now, Nomad has a simple and straightforward way to use service discovery built-in. This improves direct usability a lot! Not only in simple test environments but also on the edge.
