@@ -1,9 +1,10 @@
 # HashiQube Overview
-HashiQube is a VM or Docker Container with a Docker daemon inside. It runs all HashiCorp products. __Vault, Terraform, Nomad, Consul, Waypoint, Boundary, Vagrant, Packer and Sentinel.__
-It also runs a host of other popular Open Source DevOps / DevSecOps applications showcasing how simple integration with HashiCorp products can result in tangible learnings and benefits for all its users
+HashiQube is a Docker Container (Default) or a VM (Virtualbox) with a Docker daemon inside. It runs all HashiCorp products. __Vault, Terraform, Nomad, Consul, Waypoint, Boundary, Vagrant, Packer and Sentinel.__
+It also runs a host of other popular Open Source DevOps / DevSecOps applications (Minikube, Ansible AWX Tower, Traefik etc.) showcasing how simple integration with HashiCorp products can result in tangible learnings and benefits for all its users.
+
 Once Hashiqube is up an internet connection is no longer needed meaning sales pitches and demos for potential and existing customers is greatly aided.
 
-Hashiqube was created by Riaan Nolan, to help him learn about Hashicorp's suite of fantastic software, and Hashiqube can help you too! Good luck to you!! 
+Hashiqube was created by Riaan Nolan, to help him learn about Hashicorp's suite of fantastic software, and Hashiqube can help you too! Good luck on your learning pathway! 
 
 You are welcome to connect with Riaan Nolan on Linkedin https://www.linkedin.com/in/riaannolan/ <br />
 Riaan Nolan's Credly profile: https://www.credly.com/users/riaan-nolan.e657145c
@@ -21,8 +22,10 @@ HashiQube Terraform Registry module: https://registry.terraform.io/modules/star3
 
 ## Purpose
 HashiQube has been created to enable anyone who is interested in secure automation pipelines the ability to run a suite of ‘best in class’ tools their local machines at the cost of a small amount of system resources.
-The Qube gives all interested parties the empowerment  to  deploy these tools in a way covers multiple use cases effectively providing a ‘concept to completion’ test bed using open source HashiCorp products.
-The original use case was born the desire to demystify DevSecOps utilising Terraform, Vault, Consul, Sentinel and Nomad as well as some other well know open source CI/CD tools by providing a ‘hands-on’ environment that demonstrates the value of secret and credential management in standard software development pipeline.
+
+Hashiqube gives all interested parties the empowerment to  deploy these tools in a way covers multiple use cases effectively providing a ‘concept to completion’ test bed using open source HashiCorp products.
+
+The original use case was born the desire to demystify DevSecOps utilising Terraform, Vault, Consul, Sentinel and Nomad as well as some other well know open source CI/CD tools by providing a ‘hands-on’ environment that demonstrates the value of secret and credential management in a standard software development pipeline.
 
 Thanks to the flexibility of the HashiCorp products there is no need to wonder how to achieve the goals of bringing software to market in a more secure and timely fashion, just Vagrant up!
 
@@ -134,10 +137,18 @@ Now you can use DNS like nomad.service.consul:9999 vault.service.consul:9999 via
 * [__Minikube__](minikube/#minikube) - Minikube implements a local Kubernetes cluster on macOS, Linux, and Windows.
 * [__Newrelic Kubernetes Monitoring__](newrelic-kubernetes-monitoring/#newrelic-kubernetes-monitoring) - Monitor Kubernetes Clusters and Workloads with Newrelic
 * [__Docsify__](docsify/#docsify) - A magical documentation site generator
+* [__Mermaid__](mermaid/#mermaid) - Generation of diagram and flowchart from text in a similar manner as markdown
+* [__Prometheus__](prometheus-grafana/#prometheus-and-grafana) - Open-source monitoring system with dimensional data model, flexible query language, efficient time series database & modern alerting
+* [__Grafana__](prometheus-grafana/#prometheus-and-grafana) - Grafana is the open source analytics & monitoring solution for every database
+* [__Elasticsearch__](elasticsearch-kibana-cerebro/#elasticsearch-kibana-and-cerebro) - Elasticsearch is a search engine based on the Lucene library
+* [__Kibana__](elasticsearch-kibana-cerebro/#elasticsearch-kibana-and-cerebro) - Kibana is an open source data visualization dashboard for Elasticsearch
+* [__Cerebro__](elasticsearch-kibana-cerebro/#elasticsearch-kibana-and-cerebro) - Cerebro is the evolution of the previous Elasticsearch plugin Elasticsearch kopf
 * [__Ansible-Tower__](ansible-tower/#ansible-tower) - Is a web-based solution that makes Ansible even more easy to use for IT teams of all kinds. It’s designed to be the hub for all of your automation tasks.
 * [__Dbt__](dbt/#dbt) - Dbt is a data transformation tool that enables data analysts and engineers to transform, test and document data in the cloud data warehouse
 * [__Airflow__](apache-airflow/#apache-airflow) - Apache Airflow is an open-source workflow management platform for data engineering pipelines
 * [__Visual-Studio-Code__](visual-studio-code/#visual-studio-code) - Visual Studio Code is a code editor redefined and optimized for building and debugging modern web and cloud applications
+* [__Portainer__](portainer/#portainer) - A lightweight service delivery platform for containerized applications that can be used to manage Docker, Swarm, Kubernetes and ACI environments. It is designed to be as simple to deploy as it is to use.
+* [__Gitlab__](gitlab/#gitlab) - GitLab is a complete DevOps platform, delivered as a single application
 
 Once the stack is up you will have a large number of services running and available on `localhost` <br />
 For Documentation please open http://localhost:3333 in your browser
@@ -271,8 +282,6 @@ I have worked for Multi-National companies in Portugal, Germany, China, South Af
 You are welcome to connect with me on Linkedin https://www.linkedin.com/in/riaannolan/ <br />
 Credly profile: https://www.credly.com/users/riaan-nolan.e657145c
 
-![Riaan automate all the things](images/automate-all-the-things.png?raw=true "Riaan automate all the things")
-
 ![My Hashicorp Badges](images/hashicorp-badges.png?raw=true "My Hashicorp Badges")
 
 ## Contributors and Special mentions
@@ -297,3 +306,5 @@ Videos were made with asciinema https://asciinema.org/
 
 ## License
 HashiQube is available as open-source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+
+![Automate all the things](images/automate-all-the-things.png?raw=true "Automate all the things")

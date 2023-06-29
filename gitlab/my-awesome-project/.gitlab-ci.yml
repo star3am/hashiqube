@@ -1,0 +1,79 @@
+variables:
+  REGION: eu-west-1
+
+stages:
+  - build
+  - test
+  - dev
+  - stg
+  - prd
+
+build:
+  stage: build
+  tags:
+    - my
+    - awesome
+    - project
+  script:
+    - echo "Building image..."
+    #- docker build -t my_image .
+    - echo "Tagging image..."
+    - docker tag my_image:latest ${REPOSITORY_URL}:${CI_COMMIT_REF_NAME}
+    - echo "Pushing image..."
+    - docker push my_image:latest
+  #only:
+  #  - main
+  #   - staging
+  #   - master
+
+test:
+  stage: test
+  tags:
+    - my
+    - awesome
+    - project
+  script:
+    - echo "Run some tests on the container image..."
+  # only:
+  #   - develop
+  #   - staging
+  #   - master
+
+dev:
+  stage: dev
+  tags:
+    - my
+    - awesome
+    - project
+  script:
+    - echo "Prepare Job environment..."
+    - pwd
+    - ls -la
+  only:
+    - develop
+
+stg:
+  stage: stg
+  tags:
+    - my
+    - awesome
+    - project
+  script:
+    - echo "Prepare Job environment..."
+    - pwd
+    - ls -la
+  only:
+    - main
+
+prd:
+  stage: prd
+  tags:
+    - my
+    - awesome
+    - project
+  script:
+    - echo "Prepare Job environment..."
+    - pwd
+    - ls -la
+  only:
+    - tags

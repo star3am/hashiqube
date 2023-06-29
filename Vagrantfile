@@ -71,6 +71,9 @@ Vagrant::configure("2") do |config|
       config.vm.network "forwarded_port", guest: 22, host: machine[:ssh_port], id: 'ssh', auto_correct: true
 
       if machines.size == 1 # only expose these ports if 1 machine, else conflicts
+        config.vm.network "forwarded_port", guest: 3000, host: 3000 # grafana
+        config.vm.network "forwarded_port", guest: 9090, host: 9090 # prometheus
+        config.vm.network "forwarded_port", guest: 9093, host: 9093 # prometheus-alertmanager
         config.vm.network "forwarded_port", guest: 8200, host: 8200 # vault
         config.vm.network "forwarded_port", guest: 8201, host: 8201 # vault
         config.vm.network "forwarded_port", guest: 4646, host: 4646 # nomad
@@ -90,6 +93,9 @@ Vagrant::configure("2") do |config|
         config.vm.network "forwarded_port", guest: 8301, host: 8301 # consul
         config.vm.network "forwarded_port", guest: 8302, host: 8302 # consul
         config.vm.network "forwarded_port", guest: 8600, host: 8600, protocol: 'udp' # consul dns
+        config.vm.network "forwarded_port", guest: 9200, host: 9200 # elasticsearch
+        config.vm.network "forwarded_port", guest: 5601, host: 5601 # kibana
+        config.vm.network "forwarded_port", guest: 5602, host: 5602 # cerebro
         config.vm.network "forwarded_port", guest: 8888, host: 8888 # ansible/roles/www
         config.vm.network "forwarded_port", guest: 8889, host: 8889 # docker/apache2
         config.vm.network "forwarded_port", guest: 5001, host: 5001 # docker registry on minikube
@@ -106,6 +112,7 @@ Vagrant::configure("2") do |config|
         config.vm.network "forwarded_port", guest: 1433, host: 1433 # mssql
         config.vm.network "forwarded_port", guest: 9998, host: 9998 # fabio-dashboard
         config.vm.network "forwarded_port", guest: 9999, host: 9999 # fabiolb
+        config.vm.network "forwarded_port", guest: 9333, host: 9333 # portainer
         config.vm.network "forwarded_port", guest: 10888, host: 10888 # minikube dashboard
         config.vm.network "forwarded_port", guest: 18080, host: 18080 # minikube-traefik
         config.vm.network "forwarded_port", guest: 18181, host: 18181 # minikube-traefik-admin
@@ -114,6 +121,8 @@ Vagrant::configure("2") do |config|
         config.vm.network "forwarded_port", guest: 18889, host: 18889 # apache airflow
         config.vm.network "forwarded_port", guest: 3333, host: 3333 # docsify
         config.vm.network "forwarded_port", guest: 8043, host: 8043 # ansible-tower
+        config.vm.network "forwarded_port", guest: 5580, host: 5580 # gitlab
+        config.vm.network "forwarded_port", guest: 32022, host: 32022 # gitlab-shell
         config.vm.network "forwarded_port", guest: 7777, host: 7777 # vscode-server
         config.vm.network "forwarded_port", guest: 28080, host: 28080 # dbt docs serve
         config.vm.network "forwarded_port", guest: 8000, host: 8000 # markdown-quiz-generator
@@ -297,6 +306,22 @@ Vagrant::configure("2") do |config|
       # install jenkins
       # vagrant up --provision-with jenkins to only run this on vagrant up
       config.vm.provision "jenkins", run: "never", type: "shell", preserve_order: true, privileged: false, path: "jenkins/jenkins.sh"
+
+      # prometheus and grafana
+      # vagrant up --provision-with prometheus-grafana to only run this on vagrant up
+      config.vm.provision "prometheus-grafana", run: "never", type: "shell", preserve_order: true, privileged: false, path: "prometheus-grafana/prometheus-grafana.sh"
+
+      # elasticsearch and kibana and cerebro
+      # vagrant up --provision-with elasticsearch-kibana-cerebro to only run this on vagrant up
+      config.vm.provision "elasticsearch-kibana-cerebro", run: "never", type: "shell", preserve_order: true, privileged: false, path: "elasticsearch-kibana-cerebro/elasticsearch-kibana-cerebro.sh"
+
+      # portainer
+      # vagrant up --provision-with portainer to only run this on vagrant up
+      config.vm.provision "portainer", run: "never", type: "shell", preserve_order: true, privileged: false, path: "portainer/portainer.sh"
+
+      # gitlab
+      # vagrant up --provision-with gitlab to only run this on vagrant up
+      config.vm.provision "gitlab", run: "never", type: "shell", preserve_order: true, privileged: false, path: "gitlab/gitlab.sh"
 
       # minikube
       # vagrant up --provision-with minikube to only run this on vagrant up
