@@ -271,6 +271,8 @@ I have worked for Multi-National companies in Portugal, Germany, China, South Af
 You are welcome to connect with me on Linkedin https://www.linkedin.com/in/riaannolan/ <br />
 Credly profile: https://www.credly.com/users/riaan-nolan.e657145c
 
+![Riaan automate all the things](images/automate-all-the-things.png?raw=true "Riaan automate all the things")
+
 ![My Hashicorp Badges](images/hashicorp-badges.png?raw=true "My Hashicorp Badges")
 
 ## Contributors and Special mentions
