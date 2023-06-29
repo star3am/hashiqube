@@ -1,0 +1,34 @@
+---
+version: "3.4"
+services:
+  tools:
+    tty: true
+    # Build the container from the Dockerfile before we run it
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    # If you have build and pushed this container to a registry you can use it below and disable build above
+    # image: tools-${ARCH}:latest
+    network_mode: "bridge"
+    volumes:
+      - ".:/app"
+    #   - "~/.ssh:/home/ubuntu/.ssh"
+    # Add your .aws or .azure or .kube directories here
+    # - "$AZURE_CONFIG_DIR:/home/ubuntu/.azure"
+    working_dir: "/app"
+    environment:
+      - ARCH
+      - ARM_CLIENT_ID
+      - ARM_CLIENT_SECRET
+      - ARM_SUBSCRIPTION_ID
+      - ARM_TENANT_ID
+      - ARM_PARTNER_ID
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
+      - AWS_SESSION_TOKEN
+      - TF_LOG
+      - TGENV_AUTO_INSTALL=true
+      # TODO: Below is supposed to cache Terraform plugins, but I get lock contention errors
+      # FIXME: Error: Failed to install provider from shared cache
+      # Error while importing hashicorp/null v3.1.1 from the shared cache directory: the provider cache at .terraform/providers has a copy of registry.terraform.io/hashicorp/null 3.1.1 that doesn't match any of the checksums recorded in the dependency lock file.
+      # - TF_PLUGIN_CACHE_DIR=/home/ubuntu/.terraform.d/plugin-cache

@@ -1,0 +1,19 @@
+# ignore passwords file
+passwords.txt
+
+# ignore logs directory
+logs/
+
+# ignore the git and cache folders
+.git
+.cache
+
+# ingore all markdown and class files
+*.md
+**/*.class
+
+# ignore ISO images
+*.iso
+
+# ignore devcontainer directory
+.devcontainer
