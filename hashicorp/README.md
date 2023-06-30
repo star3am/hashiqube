@@ -418,6 +418,12 @@ Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 ```
 ![Nomad](images/nomad.png?raw=true "Nomad")
 
+## Monitoring Hashicorp Nomad
+
+We use Prometheus and Grafana to Monitor Nomad
+
+See: [__Monitoring Hashicorp Nomad__](prometheus-grafana/README?id=monitoring-hashicorp-nomad)
+
 ## Traefik Load Balancer for Nomad
 https://traefik.io/blog/traefik-proxy-fully-integrates-with-hashicorp-nomad/ <br />
 https://doc.traefik.io/traefik/v2.8/providers/nomad/

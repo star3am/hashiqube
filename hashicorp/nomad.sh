@@ -65,6 +65,17 @@ plugin "raw_exec" {
   }
 }
 
+# https://developer.hashicorp.com/nomad/docs/configuration/telemetry
+# https://developer.hashicorp.com/nomad/docs/configuration/telemetry#prometheus
+# https://developer.hashicorp.com/nomad/docs/operations/monitoring-nomad
+telemetry {
+  collection_interval = "1s"
+  disable_hostname = true
+  prometheus_metrics = true
+  publish_allocation_metrics = true
+  publish_node_metrics = true
+}
+
 consul {
   address = "10.9.99.10:8500"
 }

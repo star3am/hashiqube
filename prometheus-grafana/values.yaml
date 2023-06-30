@@ -7,18 +7,25 @@ extraScrapeConfigs: |
     bearer_token: "VAULT_TOKEN"
     static_configs:
     - targets: ['10.9.99.10:8200']
-  # - job_name: 'prometheus-blackbox-exporter'
-  #   metrics_path: /probe
-  #   params:
-  #     module: [http_2xx]
-  #   static_configs:
-  #     - targets:
-  #       - https://example.com
-  #   relabel_configs:
-  #     - source_labels: [__address__]
-  #       target_label: __param_target
-  #     - source_labels: [__param_target]
-  #       target_label: instance
-  #     - target_label: __address__
-  #       replacement: prometheus-blackbox-exporter:9115
-
+  - job_name: consul
+    honor_timestamps: true
+    scrape_interval: 15s
+    scrape_timeout: 10s
+    metrics_path: '/v1/agent/metrics'
+    scheme: http
+    params:
+      format: ['prometheus']
+    static_configs:
+    - targets: ['10.9.99.10:8500']
+  - job_name: nomad
+    consul_sd_configs:
+    - server: '10.9.99.10:8500'
+      services: ['nomad-client', 'nomad']
+    relabel_configs:
+    - source_labels: ['__meta_consul_tags']
+      regex: '(.*)http(.*)'
+      action: keep
+    scrape_interval: 5s
+    metrics_path: /v1/metrics
+    params:
+      format: ['prometheus']

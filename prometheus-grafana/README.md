@@ -124,6 +124,63 @@ Navigating to Grafana -> Dashboards you should now be able to see the Hashicorp 
 
 ![Grafana Hashicorp Vault Dashboard](images/grafana-hashicorp-vault-dashboard.png?raw=true "Grafana Hashicorp Vault Dashboard")
 
+## Monitoring Hashicorp Nomad
+
+https://developer.hashicorp.com/nomad/docs/configuration/telemetry <br />
+https://developer.hashicorp.com/nomad/docs/configuration/telemetry#prometheus <br />
+https://developer.hashicorp.com/nomad/docs/operations/monitoring-nomad <br />
+https://developer.hashicorp.com/nomad/tutorials/manage-clusters/prometheus-metrics
+
+
+In hashicorp/nomad.sh we enabled Telemetry in the Nomad config file see `hashicorp/nomad.sh`
+
+```hcl
+# https://developer.hashicorp.com/nomad/docs/configuration/telemetry
+# https://developer.hashicorp.com/nomad/docs/configuration/telemetry#prometheus
+# https://developer.hashicorp.com/nomad/docs/operations/monitoring-nomad
+# https://developer.hashicorp.com/nomad/tutorials/manage-clusters/prometheus-metrics
+telemetry {
+  collection_interval = "1s"
+  disable_hostname = true
+  prometheus_metrics = true
+  publish_allocation_metrics = true
+  publish_node_metrics = true
+}
+```
+
+When we install Prometheus with Helm we set a values.yaml file that specify an `extraScrapeConfigs` You guessed it! Nomad...
+
+`helm install prometheus prometheus-community/prometheus -f /vagrant/prometheus-grafana/values.yaml`
+
+[filename](values.yaml ':include :type=code')
+
+You should now see the Nomad target in Prometheus web interface at http://localhost:9090/targets
+
+![Prometheus Nomad Target](images/prometheus-targets-nomad.png?raw=true "Prometheus Nomad Target")
+
+We now need to Grafana Datasource of Type Prometheus based on this Target
+
+Please navigate to http://localhost:3000/connections/your-connections/datasources
+
+And add a Nomad Datasource
+
+Name: Nomad
+URL: http://10.9.99.10:9090
+
+![Grafana Datasource Prometheus Nomad](images/grafana-datasource-prometheus-vault.png?raw=true "Grafana Datasource Prometheus Nomad")
+
+Now, let's import the Nomad Grafana Dashboard, to do that, click on the top right + and select `Import Dashboard` ref: https://grafana.com/grafana/dashboards/12904-hashicorp-vault/
+
+![Grafana Import Dashboard Nomad 12904](images/grafana-import-dashboard-vault-12904.png?raw=true "Grafana Import Dashboard Vault 12904")
+
+Enter `12904` and click on Load
+
+![Grafana Import Dashboard Vault 12904 Load](images/grafana-import-dashboard-vault-12904-load.png?raw=true "Grafana Import Dashboard Vault 12904 Load")
+
+Navigating to Grafana -> Dashboards you should now be able to see the Hashicorp Nomad Grafana Dashboard
+
+![Grafana Hashicorp Nomad Dashboard](images/grafana-hashicorp-vault-dashboard.png?raw=true "Grafana Hashicorp Nomad Dashboard")
+
 ## Prometheus Grafana Vagrant Provisioner 
 
 [filename](prometheus-grafana.sh ':include :type=code')

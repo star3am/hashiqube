@@ -51,6 +51,11 @@ echo -e '\e[38;5;198m'"++++ "
 sed -i "s/VAULT_TOKEN/$VAULT_TOKEN/g" /vagrant/prometheus-grafana/values.yaml
 
 echo -e '\e[38;5;198m'"++++ "
+echo -e '\e[38;5;198m'"++++ cleanup prometheus"
+echo -e '\e[38;5;198m'"++++ "
+sudo --preserve-env=PATH -u vagrant helm list
+sudo --preserve-env=PATH -u vagrant helm delete prometheus --namespace default
+echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ helm install prometheus prometheus-community/prometheus"
 echo -e '\e[38;5;198m'"++++ "
 sudo --preserve-env=PATH -u vagrant helm install prometheus prometheus-community/prometheus -f /vagrant/prometheus-grafana/values.yaml
@@ -68,6 +73,12 @@ echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ helm search repo grafana"
 echo -e '\e[38;5;198m'"++++ "
 sudo --preserve-env=PATH -u vagrant helm search repo grafana
+
+echo -e '\e[38;5;198m'"++++ "
+echo -e '\e[38;5;198m'"++++ cleanup grafana"
+echo -e '\e[38;5;198m'"++++ "
+sudo --preserve-env=PATH -u vagrant helm list
+sudo --preserve-env=PATH -u vagrant helm delete grafana --namespace default
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ helm install grafana grafana/grafana"
 echo -e '\e[38;5;198m'"++++ "

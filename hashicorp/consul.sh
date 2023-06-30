@@ -47,6 +47,13 @@ server_name = "hashiqube0.service.consul"
 ui_config {
   enabled = true
 }
+# https://lvinsf.medium.com/monitor-consul-using-prometheus-and-grafana-1f2354cc002f
+# https://grafana.com/grafana/dashboards/13396-consul-server-monitoring/
+# https://developer.hashicorp.com/consul/docs/agent/telemetry
+telemetry {
+  prometheus_retention_time = 24h
+  disable_hostname = true
+}
 EOF
 cat <<EOF | sudo tee /etc/consul.d/vault.json
   {"service":
