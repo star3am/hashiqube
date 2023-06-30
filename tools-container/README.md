@@ -28,7 +28,7 @@ You will need the following tools installed on the build agent to use this
 You can add your own pre-commit hooks, and there is support for all Operating Systems and most Languages.
 
 Most of all, have fun becoming a better developer <3
-=======
+
 ## Command Line CLI Supported
 | Name | Azure | Google | AWS | Kubectl | Dbt | Terraform | Terragrunt | TFENV | Python | Pip | Packer | Cookiecutter | Pre-Commit |
 |------|-------|--------|-----|-------|-------|-----------|------------|-------|--------|-----|--------|--------------|------------|
