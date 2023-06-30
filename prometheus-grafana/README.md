@@ -5,14 +5,22 @@ We need a monitoring and alerting solution. For this we have chosen to use Prome
 https://grafana.com/
 Grafana is a multi-platform open source analytics and interactive visualization web application. It provides charts, graphs, and alerts for the web when connected to supported data sources.
 
+![Grafana](images/grafana-logo.png?raw=true "Grafana")
+
 ## Prometheus
 Prometheus is an open source monitoring system for which Grafana provides out-of-the-box support. This topic walks you through the steps to create a series of dashboards in Grafana to display system metrics for a server monitored by Prometheus.
+
+![Prometheus](images/prometheus-logo.png?raw=true "Prometheus")
 
 ## Provision
 
 In order to provision Prometheus and Grafana, you need bastetools, docker, minikube as dependencies. 
 
 `vagrant up --provision-with basetools,docker,minikube,prometheus-grafana`
+
+Prometheus http://localhost:9090 <br />
+Alertmanager http://localhost:9093 <br />
+Grafana http://localhost:3000 and login with Username: admin Password: Password displayed in the Terminal
 
 Look at Minikube dashboard for progress update and the terminal output. 
 ```
