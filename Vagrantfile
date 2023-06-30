@@ -307,22 +307,6 @@ Vagrant::configure("2") do |config|
       # vagrant up --provision-with jenkins to only run this on vagrant up
       config.vm.provision "jenkins", run: "never", type: "shell", preserve_order: true, privileged: false, path: "jenkins/jenkins.sh"
 
-      # prometheus and grafana
-      # vagrant up --provision-with prometheus-grafana to only run this on vagrant up
-      config.vm.provision "prometheus-grafana", run: "never", type: "shell", preserve_order: true, privileged: false, path: "prometheus-grafana/prometheus-grafana.sh"
-
-      # elasticsearch and kibana and cerebro
-      # vagrant up --provision-with elasticsearch-kibana-cerebro to only run this on vagrant up
-      config.vm.provision "elasticsearch-kibana-cerebro", run: "never", type: "shell", preserve_order: true, privileged: false, path: "elasticsearch-kibana-cerebro/elasticsearch-kibana-cerebro.sh"
-
-      # portainer
-      # vagrant up --provision-with portainer to only run this on vagrant up
-      config.vm.provision "portainer", run: "never", type: "shell", preserve_order: true, privileged: false, path: "portainer/portainer.sh"
-
-      # gitlab
-      # vagrant up --provision-with gitlab to only run this on vagrant up
-      config.vm.provision "gitlab", run: "never", type: "shell", preserve_order: true, privileged: false, path: "gitlab/gitlab.sh"
-
       # minikube
       # vagrant up --provision-with minikube to only run this on vagrant up
       config.vm.provision "minikube", run: "never", type: "shell", preserve_order: true, privileged: false, path: "minikube/minikube.sh"
@@ -342,6 +326,22 @@ Vagrant::configure("2") do |config|
       # markdown-quiz-generator 
       # vagrant up --provision-with markdown-quiz-generator to only run this on vagrant up
       config.vm.provision "markdown-quiz-generator", run: "never", type: "shell", preserve_order: true, privileged: false, path: "markdown-quiz-generator/markdown-quiz-generator.sh"
+
+      # prometheus and grafana
+      # vagrant up --provision-with prometheus-grafana to only run this on vagrant up
+      config.vm.provision "prometheus-grafana", run: "never", type: "shell", preserve_order: true, privileged: false, path: "prometheus-grafana/prometheus-grafana.sh"
+
+      # elasticsearch and kibana and cerebro
+      # vagrant up --provision-with elasticsearch-kibana-cerebro to only run this on vagrant up
+      config.vm.provision "elasticsearch-kibana-cerebro", run: "never", type: "shell", preserve_order: true, privileged: false, path: "elasticsearch-kibana-cerebro/elasticsearch-kibana-cerebro.sh"
+
+      # portainer
+      # vagrant up --provision-with portainer to only run this on vagrant up
+      config.vm.provision "portainer", run: "never", type: "shell", preserve_order: true, privileged: false, path: "portainer/portainer.sh"
+
+      # gitlab
+      # vagrant up --provision-with gitlab to only run this on vagrant up
+      config.vm.provision "gitlab", run: "never", type: "shell", preserve_order: true, privileged: false, path: "gitlab/gitlab.sh"
 
       # vagrant up --provision-with bootstrap to only run this on vagrant up
       config.vm.provision "welcome", preserve_order: true, type: "shell", privileged: true, inline: <<-SHELL
