@@ -5,7 +5,7 @@ Let's start with Oracle's MySQL
 
 ## Oracle MySQL
 
-`vagrant up --provision-with mysql`
+`vagrant up --provision-with basetools,docker,docsify,vault,mysql`
 ```log
 Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 ==> user.local.dev: Checking if box 'ubuntu/xenial64' version '20190918.0.0' is up to date...
@@ -56,7 +56,7 @@ mysql: [Warning] Using a password on the command line interface can be insecure.
 
 Now let's bring up Vault, lets make sure it's running, by doing:
 
-`vagrant up --provision-with vault`
+`vagrant up --provision-with basetools,docker,docsify,vault`
 ```log
 Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 ==> user.local.dev: Checking if box 'ubuntu/xenial64' version '20190918.0.0' is up to date...
@@ -216,7 +216,8 @@ mysql: [Warning] Using a password on the command line interface can be insecure.
 
 ## Microsoft SQL (Mssql Express)
 
-`vagrant up --provision-with mssql`
+`vagrant up --provision-with basetools,docker,docsify,vault,mssql`
+
 ```log
 Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 ==> user.local.dev: Checking if box 'ubuntu/xenial64' version '20190918.0.0' is up to date...
@@ -367,7 +368,8 @@ NT AUTHORITY\SYSTEM                                                             
 
 https://www.postgresql.org/
 
-`vagrant up --provision-with postgresql`
+`vagrant up --provision-with basetools,docker,docsify,vault,postgresql`
+
 ```log
 Bringing machine 'hashiqube0.service.consul' up with 'virtualbox' provider...
 ==> hashiqube0.service.consul: Checking if box 'ubuntu/bionic64' version '20200429.0.0' is up to date...

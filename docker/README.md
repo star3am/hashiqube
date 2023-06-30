@@ -9,7 +9,7 @@ https://docs.docker.com/compose/ <br />
 
 https://docs.docker.com/install/linux/docker-ce/ubuntu/
 
-`vagrant up --provision-with docker`
+`vagrant up --provision-with basetools,docker,docsify`
 
 In this section we will show you how to install docker.io on Ubuntu.
 We will also build an Apache2.4 container from a Dockerfile and run it and expose it on your host machine via Vagrant port_forward on http://localhost:8889

@@ -19,7 +19,7 @@ With Red Hat® Ansible® Tower you can centralize and control your IT infrastruc
 
 ## Provision
 
-`vagrant up --provision-with basetools,docsify,docker,minikube,ansible-tower`
+`vagrant up --provision-with basetools,docker,docsify,minikube,ansible-tower`
 
 ```log
 Bringing machine 'hashiqube0.service.consul' up with 'virtualbox' provider...

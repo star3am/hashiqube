@@ -4,7 +4,7 @@ https://www.vaultproject.io/docs/auth/ldap.html
 LDAP stands for Lightweight Directory Access Protocol. As the name suggests, it is a lightweight client-server protocol for accessing directory services, specifically X. 500-based directory services. LDAP runs over TCP/IP or other connection oriented transfer services.
 
 ## Provision
-`vagrant up --provision-with ldap`
+`vagrant up --provision-with basetools,docker,docsify,ldap`
 
 ```log
 Bringing machine 'user.local.dev' up with 'virtualbox' provider...

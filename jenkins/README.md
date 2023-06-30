@@ -8,7 +8,7 @@ For this demo we will use the Vault root access token for Jenkins access. Other 
 
 Let's start Jenkins
 
-`vagrant up --provision-with jenkins`
+`vagrant up --provision-with basetools,docker,docsify,jenkins`
 ```log
 Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 ==> user.local.dev: Checking if box 'ubuntu/xenial64' version '20190918.0.0' is up to date...

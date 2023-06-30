@@ -5,8 +5,9 @@ MAKING DOCKER MANAGEMENT EASY.
 Build and manage your Docker environments with ease today.
 
 ## Provision
-`vagrant up --provision-with portainer`                                                                 
-```
+`vagrant up --provision-with basetools,docker,docsify,portainer`
+
+```log
 Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 ==> user.local.dev: Checking if box 'ubuntu/xenial64' version '20190918.0.0' is up to date...
 ==> user.local.dev: [vagrant-hostsupdater] Checking for host entries

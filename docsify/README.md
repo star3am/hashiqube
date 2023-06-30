@@ -5,7 +5,7 @@ https://docsify.js.org/
 Docsify is a magical documentation site generator. Docsify generates your documentation website on the fly. Unlike GitBook, it does not generate static html files. Instead, it smartly loads and parses your Markdown files and displays them as a website. To start using it, all you need to do is create an index.html and deploy it on GitHub Pages.
 
 ## Provision
-`vagrant up --provision-with docsify`
+`vagrant up --provision-with basetools,docsify`
 
 ```log
 Bringing machine 'user.local.dev' up with 'virtualbox' provider...

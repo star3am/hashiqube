@@ -12,7 +12,7 @@ https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
 
 You should have done `vagrant up --provision` This sets up the base Virtual machine, with some default applications.
 Now please do,
-`vagrant up --provision-with minikube`
+`vagrant up --provision-with basetools,docker,docsify,minikube`
 ```log
 Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 ==> user.local.dev: Checking if box 'ubuntu/xenial64' version '20190918.0.0' is up to date...

@@ -17,7 +17,7 @@ https://github.com/localstack/awscli-local
 
 ## Localstack
 
-`vagrant up --provision-with localstack`
+`vagrant up --provision-with basetools,docker,docsify,localstack`
 
 ## Localstack usage
 

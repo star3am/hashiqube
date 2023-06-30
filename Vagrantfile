@@ -264,6 +264,10 @@ Vagrant::configure("2") do |config|
       # vagrant up --provision-with localstack to only run this on vagrant up
       config.vm.provision "localstack", run: "never", type: "shell", preserve_order: true, privileged: false, path: "localstack/localstack.sh"
 
+      # minikube
+      # vagrant up --provision-with minikube to only run this on vagrant up
+      config.vm.provision "minikube", run: "never", type: "shell", preserve_order: true, privileged: false, path: "minikube/minikube.sh"
+
       # vscode-server
       # vagrant up --provision-with vscode-server to only run this on vagrant up
       config.vm.provision "vscode-server", run: "never", type: "shell", preserve_order: true, privileged: false, path: "visual-studio-code/vscode-server.sh"
@@ -306,10 +310,6 @@ Vagrant::configure("2") do |config|
       # install jenkins
       # vagrant up --provision-with jenkins to only run this on vagrant up
       config.vm.provision "jenkins", run: "never", type: "shell", preserve_order: true, privileged: false, path: "jenkins/jenkins.sh"
-
-      # minikube
-      # vagrant up --provision-with minikube to only run this on vagrant up
-      config.vm.provision "minikube", run: "never", type: "shell", preserve_order: true, privileged: false, path: "minikube/minikube.sh"
 
       # apache-airflow
       # vagrant up --provision-with apache-airflow to only run this on vagrant up

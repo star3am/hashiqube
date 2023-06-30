@@ -12,7 +12,7 @@ __Cerebro__ is an open source(MIT License) elasticsearch web admin tool built us
 
 ## Provision
 
-`vagrant up --provision-with elasticsearch-kibana-cerebro`
+`vagrant up --provision-with basetools,docker,docsify,elasticsearch-kibana-cerebro`
 
 ```
 Bringing machine 'user.local.dev' up with 'virtualbox' provider...
