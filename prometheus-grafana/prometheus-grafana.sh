@@ -43,10 +43,17 @@ echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ helm search repo prometheus-community"
 echo -e '\e[38;5;198m'"++++ "
 sudo --preserve-env=PATH -u vagrant helm search repo prometheus-community
+
+# https://developer.hashicorp.com/vault/docs/configuration/telemetry#prometheus
+echo -e '\e[38;5;198m'"++++ "
+echo -e '\e[38;5;198m'"++++ Set Vault token in values.yaml for prometheus for monitoring Vault"
+echo -e '\e[38;5;198m'"++++ "
+sed -i "s/VAULT_TOKEN/$VAULT_TOKEN/g" /vagrant/prometheus-grafana/values.yaml
+
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ helm install prometheus prometheus-community/prometheus"
 echo -e '\e[38;5;198m'"++++ "
-sudo --preserve-env=PATH -u vagrant helm install prometheus prometheus-community/prometheus
+sudo --preserve-env=PATH -u vagrant helm install prometheus prometheus-community/prometheus -f /vagrant/prometheus-grafana/values.yaml
 
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Helm add Grafana repo"
@@ -128,6 +135,17 @@ while ! ( sudo netstat -nlp | grep 3000 ) && (( $attempts < $max_attempts )); do
 done
 
 ps aux | grep kubectl | grep -ve sudo -ve grep -ve bin
+
+# https://developer.hashicorp.com/vault/tutorials/monitoring/monitor-telemetry-grafana-prometheus
+# https://developer.hashicorp.com/vault/docs/configuration/telemetry#prometheus
+echo -e '\e[38;5;198m'"++++ "
+echo -e '\e[38;5;198m'"++++ Vault policy write prometheus-metrics path /sys/metrics"
+echo -e '\e[38;5;198m'"++++ "
+vault policy write prometheus-metrics - << EOF
+path "/sys/metrics*" {
+  capabilities = ["read", "list"]
+}
+EOF
 
 # https://github.com/grafana/grafana/issues/29296
 echo -e '\e[38;5;198m'"++++ Prometheus http://localhost:9090"

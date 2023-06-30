@@ -144,6 +144,6 @@ This guide explains how to use Traefik as an Ingress controller for a Kubernetes
 
 ![Traefik on Minikube](images/minikube-traefik-dashboard.png?raw=true "Traefik on Minikube")
 
-## The Code
+## Minikube Vagrant Provisioner
 
 [filename](minikube.sh ':include :type=code')

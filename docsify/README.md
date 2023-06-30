@@ -75,6 +75,6 @@ Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 After provision, you can access Docsify and HashiQube documentation at http://localhost:3333/
 ![Docsify](images/docsify.png?raw=true "Docsify")
 
-## The Code
+## Docsify Vagrant Provisioner
 
 [filename](docsify.sh ':include :type=code')

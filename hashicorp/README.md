@@ -154,7 +154,7 @@ Packer uses the HashiCorp Configuration Language - HCL - designed to allow conci
 ### Windows 2019
 
 [filename](packer/windows/windowsserver/windows-2019.pkr.hcl ':include :type=code')
-## The Code
+## Packer Vagrant Provisioner
 
 [filename](packer.sh ':include :type=code')
 
@@ -261,7 +261,7 @@ can't guarantee that exactly these actions will be performed if
 "terraform apply" is subsequently run.
 ```
 
-## The Code
+## Terraform Vagrant Provisioner
 
 [filename](terraform.sh ':include :type=code')
 
@@ -344,7 +344,13 @@ Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 ```
 ![Vault](images/vault.png?raw=true "Vault")
 
-## The Code
+## Monitoring Hashicorp Vault
+
+We use Prometheus and Grafana to Monitor Vault
+
+See: [__Monitoring Hashicorp Vault__](prometheus-grafana/README?id=monitoring-hashicorp-vault)
+
+## Vault Vagrant Provisioner
 
 [filename](vault.sh ':include :type=code')
 
@@ -486,7 +492,7 @@ When you register a service in Consul all you need to add is a tag that announce
 Fabio runs as a Nomad job, see `hashicorp/nomad/jobs/fabio.nomad`
 Some routes are added via Consul, see `hashicorp/consul.sh`
 
-## The Code
+## Nomad Vagrant Provisioner
 
 [filename](nomad.sh ':include :type=code')
 
@@ -663,7 +669,7 @@ Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 ```    
 ![Consul](images/consul.png?raw=true "Consul")
 
-## The Code
+## Consul Vagrant Provisioner
 
 [filename](consul.sh ':include :type=code')
 
@@ -1097,7 +1103,7 @@ c97d646ce0ef: Already exists :
     hashiqube0.service.consul: bM152PWkXxfoy4vA51JFhR7LmV9FA9RLbSpHoKrysFnwnRCAGzV2RExsyAmBrHu784d1WZRW6Cx4MkhvWzkDHvEn49c4wkSZYScfJ
 ```
 
-## The Code
+## Waypoint Vagrant Provisioner
 
 [filename](waypoint.sh ':include :type=code')
 
@@ -1181,6 +1187,6 @@ Bringing machine 'hashiqube0.service.consul' up with 'virtualbox' provider...
     hashiqube0.service.consul: /tmp/vagrant-shell: line 5:  5093 Terminated              sh -c 'sudo tail -f /var/log/boundary.log | { sed "/worker successfully authed/ q" && kill $$ ;}'
 ```
 
-## The Code
+## Boundary Vagrant Provisioner
 
 [filename](boundary.sh ':include :type=code')

@@ -123,7 +123,7 @@ In this way, if we have already run the model, the next RUN and TEST will execut
 
 This would open space as well to implement cool stuff, such as running the model over a pull request. 
 
-## The Code
+## DBT Vagrant Provisioner
 
 [filename](common.sh ':include :type=code')
 

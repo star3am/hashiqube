@@ -128,6 +128,12 @@ storage "raft" {
 #  address = "127.0.0.1:8500"
 #  path    = "vault"
 # }
+# https://developer.hashicorp.com/vault/docs/configuration/telemetry
+# https://developer.hashicorp.com/vault/docs/configuration/telemetry#prometheus
+telemetry {
+  disable_hostname = true
+  prometheus_retention_time = "12h"
+}
 api_addr             = "http://10.9.99.10:8200"
 max_lease_ttl        = "10h"
 default_lease_ttl    = "10h"

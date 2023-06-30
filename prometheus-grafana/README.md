@@ -16,7 +16,9 @@ Prometheus is an open source monitoring system for which Grafana provides out-of
 
 In order to provision Prometheus and Grafana, you need bastetools, docker, minikube as dependencies. 
 
-`vagrant up --provision-with basetools,docker,minikube,prometheus-grafana`
+:bulb: We enable Vault, because we monitor it with Prometheus and we enable Minikube because we host Grafana and Prometheus on Minikkube using Helm
+
+`vagrant up --provision-with basetools,docker,vault,minikube,prometheus-grafana`
 
 Prometheus http://localhost:9090 <br />
 Alertmanager http://localhost:9093 <br />
@@ -73,4 +75,55 @@ and you should be able to see some graphs.
 
 ![Grafana Dashboard Kubernetes Cluster (Prometheus)](images/grafana_dashboard_6417.png?raw=true "Grafana Dashboard Kubernetes Cluster (Prometheus)")
 
+## Monitoring Hashicorp Vault
 
+https://developer.hashicorp.com/vault/docs/configuration/telemetry#prometheus <br />
+https://developer.hashicorp.com/vault/docs/configuration/telemetry
+
+In hashicorp/vault.sh we enabled Telemetry in the Vault config file see `hashicorp/vault.sh`
+
+```hcl
+# https://developer.hashicorp.com/vault/docs/configuration/telemetry
+# https://developer.hashicorp.com/vault/docs/configuration/telemetry#prometheus
+telemetry {
+  disable_hostname = true
+  prometheus_retention_time = "12h"
+}
+```
+
+When we install Prometheus with Helm we set a values.yaml file that specify an `extraScrapeConfigs` You guessed it! Vault...
+
+`helm install prometheus prometheus-community/prometheus -f /vagrant/prometheus-grafana/values.yaml`
+
+[filename](values.yaml ':include :type=code')
+
+You should now see the Vault target in Prometheus web interface at http://localhost:9090/targets
+
+![Prometheus Vault Target](images/prometheus-targets-vault.png?raw=true "Prometheus Vault Target")
+
+We now need to Grafana Datasource of Type Prometheus based on this Target
+
+Please navigate to http://localhost:3000/connections/your-connections/datasources
+
+And add a Vault Datasource
+
+Name: Vault
+URL: http://10.9.99.10:9090
+
+![Grafana Datasource Prometheus Vault](images/grafana-datasource-prometheus-vault.png?raw=true "Grafana Datasource Prometheus Vault")
+
+Now, let's import the Vault Grafana Dashboard, to do that, click on the top right + and select `Import Dashboard` ref: https://grafana.com/grafana/dashboards/12904-hashicorp-vault/
+
+![Grafana Import Dashboard Vault 12904](images/grafana-import-dashboard-vault-12904.png?raw=true "Grafana Import Dashboard Vault 12904")
+
+Enter `12904` and click on Load
+
+![Grafana Import Dashboard Vault 12904 Load](images/grafana-import-dashboard-vault-12904-load.png?raw=true "Grafana Import Dashboard Vault 12904 Load")
+
+Navigating to Grafana -> Dashboards you should now be able to see the Hashicorp Vault Grafana Dashboard
+
+![Grafana Hashicorp Vault Dashboard](images/grafana-hashicorp-vault-dashboard.png?raw=true "Grafana Hashicorp Vault Dashboard")
+
+## Prometheus Grafana Vagrant Provisioner 
+
+[filename](prometheus-grafana.sh ':include :type=code')

@@ -210,7 +210,7 @@ mysql: [Warning] Using a password on the command line interface can be insecure.
 | root             | localhost |
 +------------------+-----------+
 ```
-## The Code
+## MySQL Vagrant Provisioner
 
 [filename](mysql.sh ':include :type=code')
 
@@ -360,7 +360,7 @@ NT AUTHORITY\SYSTEM                                                             
 (21 rows affected)
 ```
 
-## The Code
+## MSSQL Vagrant Provisioner
 
 [filename](mssql.sh ':include :type=code')
 
@@ -453,6 +453,6 @@ Bringing machine 'hashiqube0.service.consul' up with 'virtualbox' provider...
     hashiqube0.service.consul:  v-token-postgres-3AhBH3pbmVNnkbxXV8K3-1598841098 | Password valid until 2020-08-31 03:31:43+00                | {}
 ```
 
-## The Code
+## PostgreSQL Vagrant Provisioner
 
 [filename](postgresql.sh ':include :type=code')

@@ -130,7 +130,7 @@ Now check the assets with aws local inside vagrant
 2006-02-04 03:45:09 localstack-s3-bucket
 ```
 
-## The Code
+## Localstack Terraform Examples
 
 [filename](variables.tf ':include :type=code')
 
