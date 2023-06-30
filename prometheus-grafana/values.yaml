@@ -4,7 +4,7 @@ extraScrapeConfigs: |
     params:
       format: ['prometheus']
     scheme: http
-    bearer_token: "hvs.m29F723W1wV8R8ths0ycs71x"
+    bearer_token: "VAULT_TOKEN"
     static_configs:
     - targets: ['10.9.99.10:8200']
   # - job_name: 'prometheus-blackbox-exporter'

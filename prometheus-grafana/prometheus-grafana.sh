@@ -147,6 +147,12 @@ path "/sys/metrics*" {
 }
 EOF
 
+# https://developer.hashicorp.com/vault/docs/configuration/telemetry#prometheus
+echo -e '\e[38;5;198m'"++++ "
+echo -e '\e[38;5;198m'"++++ Reset Vault token in values.yaml"
+echo -e '\e[38;5;198m'"++++ "
+sed -i "s/bearer_token: .*/bearer_token: \"VAULT_TOKEN\"/g" /vagrant/prometheus-grafana/values.yaml
+
 # https://github.com/grafana/grafana/issues/29296
 echo -e '\e[38;5;198m'"++++ Prometheus http://localhost:9090"
 echo -e '\e[38;5;198m'"++++ Alertmanager http://localhost:9093"
