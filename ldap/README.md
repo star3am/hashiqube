@@ -104,6 +104,6 @@ policies               ["default"]
 token_meta_username    hermes
 ```
 
-## The Code
+## Ldap Vault Vagrant Provisioner
 
 [filename](ldap.sh ':include :type=code')

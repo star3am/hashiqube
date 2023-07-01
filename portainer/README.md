@@ -56,3 +56,7 @@ Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 Please open http://localhost:9333
 
 ![Portainer](images/portainer.png?raw=true "Portainer")
+
+## Portainer Vagrant Provisioner
+
+[filename](portainer.sh ':include :type=code')

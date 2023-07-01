@@ -132,8 +132,8 @@ Now check the assets with aws local inside vagrant
 
 ## Localstack Terraform Examples
 
-[filename](variables.tf ':include :type=code')
+[filename](variables.tf ':include :type=code hcl')
 
-[filename](main.tf ':include :type=code')
+[filename](main.tf ':include :type=code hcl')
 
-[filename](outputs.tf ':include :type=code')
+[filename](outputs.tf ':include :type=code hcl')
