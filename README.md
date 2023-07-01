@@ -1,6 +1,6 @@
-# HashiQube Overview
-HashiQube is a Docker Container (Default) or a VM (Virtualbox) with a Docker daemon inside. It runs all HashiCorp products. __Vault, Terraform, Nomad, Consul, Waypoint, Boundary, Vagrant, Packer and Sentinel.__
-It also runs a host of other popular Open Source DevOps / DevSecOps applications (Minikube, Ansible AWX Tower, Traefik etc.) showcasing how simple integration with HashiCorp products can result in tangible learnings and benefits for all its users.
+# Hashiqube Overview
+Hashiqube is a Docker Container (Default) or a VM (Virtualbox) with a Docker daemon inside. It runs all Hashicorp products. __Vault, Terraform, Nomad, Consul, Waypoint, Boundary, Vagrant, Packer and Sentinel.__
+It also runs a host of other popular Open Source DevOps / DevSecOps applications (Minikube, Ansible AWX Tower, Traefik etc.) showcasing how simple integration with Hashicorp products can result in tangible learnings and benefits for all its users.
 
 Once Hashiqube is up an internet connection is no longer needed meaning sales pitches and demos for potential and existing customers is greatly aided.
 
@@ -22,24 +22,24 @@ It can be visualized with below diagram.
 ![HashiQube Diagram](images/hashiqube-diagram.png?raw=true "HashiQube Diagram")
 
 ## Links
-HashiCorp blog post: https://www.hashicorp.com/resources/hashiqube-a-development-lab-using-all-the-hashicorp-products <br />
-HashiQube Website: https://hashiqube.com <br />
-HashiQube Github: https://github.com/star3am/hashiqube <br />
-HashiQube Youtube: https://www.youtube.com/watch?v=6jGDAGWaFiw <br />
-HashiQube Medium: https://medium.com/search?q=hashiqube <br />
-HashiQube Terraform Registry module: https://registry.terraform.io/modules/star3am/hashiqube/hashicorp/latest <br />
+Hashicorp blog post: https://www.hashicorp.com/resources/hashiqube-a-development-lab-using-all-the-hashicorp-products <br />
+Hashiqube Website: https://hashiqube.com <br />
+Hashiqube Github: https://github.com/star3am/hashiqube <br />
+Hashiqube Youtube: https://www.youtube.com/watch?v=6jGDAGWaFiw <br />
+Hashiqube Medium: https://medium.com/search?q=hashiqube <br />
+Hashiqube Terraform Registry module: https://registry.terraform.io/modules/star3am/hashiqube/hashicorp/latest <br />
 
-## HashiQube Integrations
+## Hashiqube Integrations
 ![HashiQube](images/thestack.png?raw=true "HashiQube")
 
 ## Purpose
-HashiQube has been created to enable anyone who is interested in secure automation pipelines the ability to run a suite of ‘best in class’ tools their local machines at the cost of a small amount of system resources.
+Hashiqube has been created to enable anyone who is interested in secure automation pipelines the ability to run a suite of ‘best in class’ tools their local machines at the cost of a small amount of system resources.
 
-Hashiqube gives all interested parties the empowerment to  deploy these tools in a way covers multiple use cases effectively providing a ‘concept to completion’ test bed using open source HashiCorp products.
+Hashiqube gives all interested parties the empowerment to  deploy these tools in a way covers multiple use cases effectively providing a ‘concept to completion’ test bed using open source Hashicorp products.
 
 The original use case was born the desire to demystify DevSecOps utilising Terraform, Vault, Consul, Sentinel and Nomad as well as some other well know open source CI/CD tools by providing a ‘hands-on’ environment that demonstrates the value of secret and credential management in a standard software development pipeline.
 
-Thanks to the flexibility of the HashiCorp products there is no need to wonder how to achieve the goals of bringing software to market in a more secure and timely fashion, just Vagrant up!
+Thanks to the flexibility of the Hashicorp products there is no need to wonder how to achieve the goals of bringing software to market in a more secure and timely fashion, just Vagrant up!
 
 ## Supported Architectures
 | Name | Docker | Virtualbox | Hyper-V
@@ -62,7 +62,7 @@ Thanks to the flexibility of the HashiCorp products there is no need to wonder h
 * Documentation locally available at http://localhost:3333
 
 ## Components
-HashiQube is made up out of a number of components and some rely on each other. 
+Hashiqube is made up out of a number of components and some rely on each other. 
 
 For example you can run components seperately as demonstrated below.
 ```bash
@@ -166,7 +166,6 @@ Once the stack is up you will have a large number of services running and availa
 For Documentation please open http://localhost:3333 in your browser
 
 ![Hashiqube Integrations](images/logo-qube.png?raw=true "Hashiqube Integrations")
-
 ## Other
 * LDAP can be accessed on ldap://localhost:389
 * Localstack web http://localhost:8080
