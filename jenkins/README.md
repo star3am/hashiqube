@@ -1,5 +1,8 @@
 # Jenkins
+
 This will help you start the Jenkins container, login with the initial admin token and create a user and password for subsequent logins.
+
+![Jenkins Logo](images/jenkins-logo.png?raw=true "Jenkins Logo")
 
 We will also configure Jenkins Hashicorp Vault Plugin https://github.com/jenkinsci/hashicorp-vault-plugin
 After that, we will configure Vault's secret engines, KV store version 1 and 2 and set some keys.

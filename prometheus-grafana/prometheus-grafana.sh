@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack
 # https://prometheus.io/docs/visualization/grafana/#using
 # https://blog.marcnuri.com/prometheus-grafana-setup-minikube
 

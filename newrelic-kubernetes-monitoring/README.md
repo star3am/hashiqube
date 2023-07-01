@@ -1,5 +1,7 @@
 # Newrelic Kubernetes Monitoring
 
+![Newrelic Logo](images/newrelic-logo.png?raw=true "Newrelic Logo")
+
 This page shows you how to install Newrelic Monitoring using Helm on Minikube
 
 https://docs.newrelic.com/docs/kubernetes-pixie/kubernetes-integration/installation/kubernetes-integration-install-configure

@@ -5,6 +5,8 @@ Let's start with Oracle's MySQL
 
 ## Oracle MySQL
 
+![MySQL Logo](images/mysql-logo.png?raw=true "MySQL Logo")
+
 `vagrant up --provision-with basetools,docker,docsify,vault,mysql`
 ```log
 Bringing machine 'user.local.dev' up with 'virtualbox' provider...
@@ -216,6 +218,8 @@ mysql: [Warning] Using a password on the command line interface can be insecure.
 
 ## Microsoft SQL (Mssql Express)
 
+![Microsoft SQL Logo](images/mssql-logo.png?raw=true "Microsoft SQL Logo")
+
 `vagrant up --provision-with basetools,docker,docsify,vault,mssql`
 
 ```log
@@ -367,6 +371,8 @@ NT AUTHORITY\SYSTEM                                                             
 ## PostgreSQL 
 
 https://www.postgresql.org/
+
+![PostgreSQL Logo](images/postgresql-logo.png?raw=true "PostgreSQL Logo")
 
 `vagrant up --provision-with basetools,docker,docsify,vault,postgresql`
 

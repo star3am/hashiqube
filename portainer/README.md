@@ -1,6 +1,8 @@
 # Portainer
 https://www.portainer.io/
 
+![Portainer Logo](images/portainer-logo.png?raw=true "Portainer Logo")
+
 MAKING DOCKER MANAGEMENT EASY.
 Build and manage your Docker environments with ease today.
 

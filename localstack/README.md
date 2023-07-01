@@ -1,6 +1,8 @@
 # Localstack
 https://localstack.cloud/
 
+![Localstack Logo](images/localstack-logo.png?raw=true "Localstack Logo")
+
 LocalStack provides an easy-to-use test/mocking framework for developing Cloud applications. It spins up a testing environment on your local machine that provides the same functionality and APIs as the real AWS cloud environment.
 
 ## Terraform and Localstack

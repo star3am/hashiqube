@@ -2,6 +2,8 @@
 
 [data build tool](https://www.getdbt.com/)
 
+![DBT Logo](images/dbt-logo.png?raw=true "DBT Logo")
+
 dbt is a data transformation tool that enables data analysts and engineers to transform, test and document data in the cloud data warehouse.
 
 ![alt](https://www.getdbt.com/ui/img/png/analytics-engineering-dbt.png)

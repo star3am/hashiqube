@@ -1,6 +1,8 @@
 # LDAP
 https://www.vaultproject.io/docs/auth/ldap.html
 
+![LDAP Logo](images/ldap-logo.png?raw=true "LDAP Logo")
+
 LDAP stands for Lightweight Directory Access Protocol. As the name suggests, it is a lightweight client-server protocol for accessing directory services, specifically X. 500-based directory services. LDAP runs over TCP/IP or other connection oriented transfer services.
 
 ## Provision

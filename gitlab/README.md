@@ -2,6 +2,8 @@
 https://docs.gitlab.com/omnibus/docker/ <br />
 https://gitlab.com/ <br />
 
+![Gitlab Logo](images/gitlab-logo.png?raw=true "Gitlab Logo")
+
 GitLab is a complete DevOps platform
 With GitLab, you get a complete CI/CD toolchain in a single application. One interface. One conversation. One permission model. Thousands of features. You'll be amazed at everything GitLab can do today. And we're just getting started.
 
