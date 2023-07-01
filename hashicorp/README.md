@@ -10,6 +10,7 @@ HashiCorp was founded by Mitchell Hashimoto and Armon Dadgar in 2012 with the go
 
 ## HashiStack
 * [Terraform](/hashicorp/?id=terraform)
+* [Terraform Cloud](/hashicorp/README?id=terraform-cloud)
 * [Vault](/hashicorp/?id=vault)
 * [Consul](/hashicorp/?id=consul)
 * [Nomad](/hashicorp/?id=nomad)
@@ -786,6 +787,34 @@ Bringing machine 'user.local.dev' up with 'virtualbox' provider...
     user.local.dev: ++++ sentinel apply -config ./test/aws-alb-redirect/pass.json aws-alb-redirect.sentinel
     user.local.dev: Pass
 ```
+
+## Terraform Cloud
+https://app.terraform.io/
+https://www.hashicorp.com/resources/what-is-terraform-cloud
+
+Terraform Cloud is a SaaS that we support—that instead, when you run Terraform you still could run it on your local machine, but now it saves and retrieves the state file from Terraform Cloud—which is running over here.
+
+This simplifies a lot of things. First of all, this is pretty much invisible. It still exists, but we manage it for you. Second of all, we could perform a lot more security on this access. You can see who is accessing your state file, control who accesses the state file, and more.
+
+In addition to that, Terraform Cloud will also version and back up your state file so that you could go back in time and see what your infrastructure looked like in the past—or if something went wrong, you could restore a past version. This is something that's really tricky with a local file because this is a normal file on your computer—you would have to be responsible for this yourself. In Terraform Cloud's case, you could still talk directly to the various cloud providers. That's how Terraform Cloud works today. That's the major benefit that remote state brings for you.
+
+[![Introduction to Terraform Cloud](https://img.youtube.com/vi/ihAKcn9SE_M/maxresdefault.jpg)](https://www.youtube.com/watch?v=ihAKcn9SE_M)
+
+## Terraform Cloud collaboration/governance
+
+On top of remote state, there are a number of other features in Terraform Cloud in other tiers that enable things like centralized runs, plan approvals, and more. This changes this behavior, so that instead of talking directly to the cloud providers it talks instead to Terraform Cloud.
+
+Here, instead of talking directly to the cloud providers, what would happen is all your requests to plan and apply would go through Terraform Cloud. Then from here—would then go to the cloud providers. As I said, this is optional. You could use the state storage and talk directly to the cloud providers or you could add this on and use this in the middle.
+
+The benefit is you have a full history here of all the runs that have ever happened. Terraform ensures that only one run happens at a time—and you can get approvals. So, if Alice submits a plan to change infrastructure, Bob has to approve it before it goes through.
+
+You can see how having a SaaS around Terraform can simplify and hide a lot of internal details that are difficult to do with Terraform alone. Broadly, the theme around this is collaboration.
+
+Terraform on your computer—by itself—is a great, powerful tool. But it makes it really hard as soon as you're working with a team or with many people. You can do it. There are ways to coordinate this, but we're introducing Terraform Cloud to make this easy and automatic, and idiomatic in terms of how it should work across all Terraform users.
+
+This makes it clean to have access control here, access control here, history—and you still keep the same Terraform workflow. It's still terraform plan, terraform apply, just like you would here. It will automatically use Terraform Cloud in the backend.
+
+![Hashiqube Multi-Cloud](images/hashiqube-multi-cloud-terraform-cloud-plan.png?raw=true "Hashiqube Multi-Cloud")
 
 ## Terraform Enterprise
 https://www.terraform.io/docs/enterprise/index.html
