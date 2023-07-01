@@ -789,8 +789,12 @@ Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 ```
 
 ## Terraform Cloud
-https://app.terraform.io/
-https://www.hashicorp.com/resources/what-is-terraform-cloud
+https://app.terraform.io/ <br>
+https://www.hashicorp.com/resources/what-is-terraform-cloud <br>
+__Authentication__<br>
+https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/service_principal_client_secret#creating-a-service-principal <br>
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs#environment-variables <br>
+https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference.html#authentication-configuration
 
 Terraform Cloud is a SaaS that we support—that instead, when you run Terraform you still could run it on your local machine, but now it saves and retrieves the state file from Terraform Cloud—which is running over here.
 
