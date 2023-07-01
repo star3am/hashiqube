@@ -120,8 +120,6 @@ Please navigate to http://localhost:3000/connections/your-connections/datasource
 Name: Prometheus <br />
 URL: http://10.9.99.10:9090
 
-![Grafana Datasource Prometheus Vault](images/grafana-datasource-prometheus-vault.png?raw=true "Grafana Datasource Prometheus Vault")
-
 Now, let's import the Vault Grafana Dashboard, to do that, click on the top right + and select `Import Dashboard` ref: https://grafana.com/grafana/dashboards/12904-hashicorp-vault/
 
 Enter `12904` and click on Load
@@ -172,8 +170,6 @@ And add a Nomad Datasource
 
 Name: Nomad
 URL: http://10.9.99.10:9090
-
-![Grafana Datasource Prometheus Nomad](images/grafana-datasource-prometheus-vault.png?raw=true "Grafana Datasource Prometheus Nomad")
 
 Now, let's import the Nomad Grafana Dashboard, to do that, click on the top right + and select `Import Dashboard` ref: https://grafana.com/grafana/dashboards/12787-nomad-jobs/
 
