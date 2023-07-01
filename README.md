@@ -9,6 +9,18 @@ Hashiqube was created by Riaan Nolan, to help him learn about Hashicorp's suite 
 You are welcome to connect with Riaan Nolan on Linkedin https://www.linkedin.com/in/riaannolan/ <br />
 Riaan Nolan's Credly profile: https://www.credly.com/users/riaan-nolan.e657145c
 
+## Hashiqube Diagram
+
+In essence Hashiqube is a Docker Container (With a Docker Daemon inside DnD) running on your local laptop. It runs all the Hashicorp products and other popular Open Source tools, such as Minikube, Ansible AWX Tower, Prometheus and Grafana and many, many more. 
+
+You can also run Hashiqube on AWS, GCP and Azure. This is called Hashiqube Multi-Cloud, see: [__Multi-Cloud__](multi-cloud/README)
+
+Hashiqube is a Training / Development Lab for you to practise, learn or demo POC stuff with, it should not be run in production.
+
+It can be visualized with below diagram.
+
+![HashiQube Diagram](images/hashiqube-diagram.png?raw=true "HashiQube Diagram")
+
 ## Links
 HashiCorp blog post: https://www.hashicorp.com/resources/hashiqube-a-development-lab-using-all-the-hashicorp-products <br />
 HashiQube Website: https://hashiqube.com <br />
