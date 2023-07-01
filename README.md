@@ -11,7 +11,7 @@ Riaan Nolan's Credly profile: https://www.credly.com/users/riaan-nolan.e657145c
 
 ## Hashiqube Diagram
 
-In essence Hashiqube is a Docker Container (With a Docker Daemon inside DnD) running on your local laptop. It runs all the Hashicorp products and other popular Open Source tools, such as Minikube, Ansible AWX Tower, Prometheus and Grafana and many, many more. 
+In essence Hashiqube is a Docker Container (by default) or a Virtual Machine with a Docker Daemon inside running on your local laptop. It runs all the Hashicorp products and other popular Open Source tools, such as Minikube, Ansible AWX Tower, Prometheus and Grafana and many, many more.
 
 You can also run Hashiqube on AWS, GCP and Azure. This is called Hashiqube Multi-Cloud, see: [__Multi-Cloud__](multi-cloud/README)
 
