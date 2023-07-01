@@ -77,8 +77,6 @@ Select Prometheus and enter the URL of Prometheus, in this case we will use http
 
 Lastly we can import a dashboard, lick on the `+` in the left menue and select `Import` now enter `6417` and click import 
 
-![Grafana Import Dashboard 6417](images/grafana_import_dashboard_6417.png?raw=true "Grafana Import Dashboard 6417")
-
 and you should be able to see some graphs. 
 
 ![Grafana Dashboard Kubernetes Cluster (Prometheus)](images/grafana_dashboard_6417.png?raw=true "Grafana Dashboard Kubernetes Cluster (Prometheus)")
@@ -126,11 +124,7 @@ URL: http://10.9.99.10:9090
 
 Now, let's import the Vault Grafana Dashboard, to do that, click on the top right + and select `Import Dashboard` ref: https://grafana.com/grafana/dashboards/12904-hashicorp-vault/
 
-![Grafana Import Dashboard Vault 12904](images/grafana-import-dashboard-vault-12904.png?raw=true "Grafana Import Dashboard Vault 12904")
-
 Enter `12904` and click on Load
-
-![Grafana Import Dashboard Vault 12904 Load](images/grafana-import-dashboard-vault-12904-load.png?raw=true "Grafana Import Dashboard Vault 12904 Load")
 
 Navigating to Grafana -> Dashboards you should now be able to see the Hashicorp Vault Grafana Dashboard
 
@@ -183,11 +177,7 @@ URL: http://10.9.99.10:9090
 
 Now, let's import the Nomad Grafana Dashboard, to do that, click on the top right + and select `Import Dashboard` ref: https://grafana.com/grafana/dashboards/12787-nomad-jobs/
 
-![Grafana Import Dashboard Nomad 12787](images/grafana-import-dashboard-nomad-12787.png?raw=true "Grafana Import Dashboard Vault 12787")
-
 Enter `12787` and click on Load
-
-![Grafana Import Dashboard Nomad 12787 Load](images/grafana-import-dashboard-nomad-12787-load.png?raw=true "Grafana Import Dashboard Nomad 12787 Load")
 
 Navigating to Grafana -> Dashboards you should now be able to see the Hashicorp Nomad Grafana Dashboard
 
@@ -211,13 +201,9 @@ telemetry {
 }
 ```
 
-Now, let's import the Consul Grafana Dashboard, to do that, click on the top right + and select `Import Dashboard` ref: https://grafana.com/grafana/dashboards/2351-consul/
+Now, let's import the Consul Grafana Dashboard, to do that, click on the top right + and select `Import Dashboard` ref: https://grafana.com/grafana/dashboards/10642-consul/
 
-![Grafana Import Dashboard Consul 2351](images/grafana-import-dashboard-consul-2351.png?raw=true "Grafana Import Dashboard Consul 2351")
-
-Enter `2351` and click on Load
-
-![Grafana Import Dashboard Consul 2351 Load](images/grafana-import-dashboard-consul-2351-load.png?raw=true "Grafana Import Dashboard Consul 2351 Load")
+Enter `10642` and click on Load
 
 Navigating to Grafana -> Dashboards you should now be able to see the Hashicorp Consul Grafana Dashboard
 
@@ -242,11 +228,7 @@ sudo echo '{
 
 Now, let's import the Docker Grafana Dashboard, to do that, click on the top right + and select `Import Dashboard` ref: https://grafana.com/grafana/dashboards/10619-docker-host-container-overview/
 
-![Grafana Import Dashboard Docker 10619](images/grafana-import-dashboard-docker-10619.png?raw=true "Grafana Import Dashboard Docker 10619")
-
 Enter `10619` and click on Load
-
-![Grafana Import Dashboard Docker 10619 Load](images/grafana-import-dashboard-docker-10619-load.png?raw=true "Grafana Import Dashboard Docker 10619 Load")
 
 Navigating to Grafana -> Dashboards you should now be able to see the Docker Grafana Dashboard
 
