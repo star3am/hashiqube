@@ -814,6 +814,15 @@ Terraform on your computer—by itself—is a great, powerful tool. But it makes
 
 This makes it clean to have access control here, access control here, history—and you still keep the same Terraform workflow. It's still terraform plan, terraform apply, just like you would here. It will automatically use Terraform Cloud in the backend.
 
+## Hashiqube Multi-Cloud
+
+I use Terraform Cloud to build and test the Terraform changes for Hashiqube's Multi-Cloud Terraform Registry Module
+
+You can read more about Hashiqube Multi-Cloud here:
+[__Hashiqube Multi Cloud__](/multi-cloud/#terraform-hashicorp-hashiqube)
+
+https://registry.terraform.io/modules/star3am/hashiqube/hashicorp/latest
+
 ![Hashiqube Multi-Cloud](images/hashiqube-multi-cloud-terraform-cloud-plan.png?raw=true "Hashiqube Multi-Cloud")
 
 ## Terraform Enterprise
