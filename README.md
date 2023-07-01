@@ -1,5 +1,5 @@
 # Hashiqube Overview
-Hashiqube is a Docker Container (Default) or a VM (Virtualbox) with a Docker daemon inside. It runs all Hashicorp products. __Vault, Terraform, Nomad, Consul, Waypoint, Boundary, Vagrant, Packer and Sentinel.__
+Hashiqube is a Docker Container (Default) or a VM (Virtualbox). Hashiqube has a Docker daemon inside. It runs all Hashicorp products. __Vault, Terraform, Nomad, Consul, Waypoint, Boundary, Vagrant, Packer and Sentinel.__
 It also runs a host of other popular Open Source DevOps / DevSecOps applications (Minikube, Ansible AWX Tower, Traefik etc.) showcasing how simple integration with Hashicorp products can result in tangible learnings and benefits for all its users.
 
 Once Hashiqube is up an internet connection is no longer needed meaning sales pitches and demos for potential and existing customers is greatly aided.
@@ -11,7 +11,11 @@ Riaan Nolan's Credly profile: https://www.credly.com/users/riaan-nolan.e657145c
 
 ## Hashiqube Diagram
 
-In essence Hashiqube is a Docker Container (by default) or a Virtual Machine with a Docker Daemon inside running on your local laptop. It runs all the Hashicorp products and other popular Open Source tools, such as Minikube, Ansible AWX Tower, Prometheus and Grafana and many, many more.
+In essence Hashiqube is a Docker Container (by default) or a Virtual Machine.
+
+Hashiqube has a Docker Daemon inside. And it runs on your local laptop or a cloud instance.
+
+Hashiqube runs all the Hashicorp products and other popular Open Source tools, such as Minikube, Ansible AWX Tower, Prometheus and Grafana and many, many more, See [__Hashiqube Integrations__](/?id=hashiqube-integrations-1)
 
 You can also run Hashiqube on AWS, GCP and Azure. This is called Hashiqube Multi-Cloud, see: [__Multi-Cloud__](multi-cloud/README)
 
