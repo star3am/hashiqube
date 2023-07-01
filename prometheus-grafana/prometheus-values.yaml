@@ -29,3 +29,6 @@ extraScrapeConfigs: |
     metrics_path: /v1/metrics
     params:
       format: ['prometheus']
+  - job_name: 'docker'
+    static_configs:
+    - targets: ['10.9.99.10:9323']

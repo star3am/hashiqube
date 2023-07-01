@@ -21,8 +21,10 @@ sudo docker rm grafana prometheus
 yes | sudo docker system prune -a
 yes | sudo docker system prune --volumes
 for i in $(ps aux | grep kubectl | grep -ve sudo -ve grep -ve bin | grep -e grafana -e prometheus -e alertmanager | tr -s " " | cut -d " " -f2); do kill -9 $i; done
+sudo --preserve-env=PATH -u vagrant helm list
 sudo --preserve-env=PATH -u vagrant helm uninstall prometheus
 sudo --preserve-env=PATH -u vagrant helm uninstall grafana
+sudo --preserve-env=PATH -u vagrant helm list
 
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ helm version"
@@ -46,19 +48,16 @@ sudo --preserve-env=PATH -u vagrant helm search repo prometheus-community
 
 # https://developer.hashicorp.com/vault/docs/configuration/telemetry#prometheus
 echo -e '\e[38;5;198m'"++++ "
-echo -e '\e[38;5;198m'"++++ Set Vault token in values.yaml for prometheus for monitoring Vault"
+echo -e '\e[38;5;198m'"++++ Set Vault token in prometheus-values.yaml for prometheus for monitoring Vault"
 echo -e '\e[38;5;198m'"++++ "
-sed -i "s/VAULT_TOKEN/$VAULT_TOKEN/g" /vagrant/prometheus-grafana/values.yaml
+export VAULT_TOKEN=$(grep 'Initial Root Token' /etc/vault/init.file | cut -d ':' -f2 | tr -d ' ')
+sed -i "s/bearer_token: .*/bearer_token: \"$VAULT_TOKEN\"/g" /vagrant/prometheus-grafana/prometheus-values.yaml
+cat /vagrant/prometheus-grafana/prometheus-values.yaml
 
-echo -e '\e[38;5;198m'"++++ "
-echo -e '\e[38;5;198m'"++++ cleanup prometheus"
-echo -e '\e[38;5;198m'"++++ "
-sudo --preserve-env=PATH -u vagrant helm list
-sudo --preserve-env=PATH -u vagrant helm delete prometheus --namespace default
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ helm install prometheus prometheus-community/prometheus"
 echo -e '\e[38;5;198m'"++++ "
-sudo --preserve-env=PATH -u vagrant helm install prometheus prometheus-community/prometheus -f /vagrant/prometheus-grafana/values.yaml
+sudo --preserve-env=PATH -u vagrant helm install prometheus prometheus-community/prometheus -f /vagrant/prometheus-grafana/prometheus-values.yaml
 
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Helm add Grafana repo"
@@ -75,14 +74,9 @@ echo -e '\e[38;5;198m'"++++ "
 sudo --preserve-env=PATH -u vagrant helm search repo grafana
 
 echo -e '\e[38;5;198m'"++++ "
-echo -e '\e[38;5;198m'"++++ cleanup grafana"
-echo -e '\e[38;5;198m'"++++ "
-sudo --preserve-env=PATH -u vagrant helm list
-sudo --preserve-env=PATH -u vagrant helm delete grafana --namespace default
-echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ helm install grafana grafana/grafana"
 echo -e '\e[38;5;198m'"++++ "
-sudo --preserve-env=PATH -u vagrant helm install grafana grafana/grafana
+sudo --preserve-env=PATH -u vagrant helm install grafana grafana/grafana -f /vagrant/prometheus-grafana/grafana-values.yaml
 
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Waiting for Prometheus and Alertmanager and Grafana to become available.."
@@ -152,6 +146,8 @@ ps aux | grep kubectl | grep -ve sudo -ve grep -ve bin
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Vault policy write prometheus-metrics path /sys/metrics"
 echo -e '\e[38;5;198m'"++++ "
+export VAULT_ADDR=http://127.0.0.1:8200
+env | grep VAULT_ADDR
 vault policy write prometheus-metrics - << EOF
 path "/sys/metrics*" {
   capabilities = ["read", "list"]
@@ -160,9 +156,9 @@ EOF
 
 # https://developer.hashicorp.com/vault/docs/configuration/telemetry#prometheus
 echo -e '\e[38;5;198m'"++++ "
-echo -e '\e[38;5;198m'"++++ Reset Vault token in values.yaml"
+echo -e '\e[38;5;198m'"++++ Reset Vault token in prometheus-values.yaml"
 echo -e '\e[38;5;198m'"++++ "
-sed -i "s/bearer_token: .*/bearer_token: \"VAULT_TOKEN\"/g" /vagrant/prometheus-grafana/values.yaml
+sed -i "s/bearer_token: .*/bearer_token: \"VAULT_TOKEN\"/g" /vagrant/prometheus-grafana/prometheus-values.yaml
 
 # https://github.com/grafana/grafana/issues/29296
 echo -e '\e[38;5;198m'"++++ Prometheus http://localhost:9090"

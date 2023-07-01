@@ -110,8 +110,8 @@ StartLimitBurst=3
 
 ## Configure unit start rate limiting. Units which are started more than
 ## *burst* times within an *interval* time span are not permitted to start any
-## more. Use `StartLimitIntervalSec` or `StartLimitInterval` (depending on
-## systemd version) to configure the checking interval and `StartLimitBurst`
+## more. Use StartLimitIntervalSec or StartLimitInterval (depending on
+## systemd version) to configure the checking interval and StartLimitBurst
 ## to configure how many starts per interval are allowed. The values in the
 ## commented lines are defaults.
 

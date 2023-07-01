@@ -1,0 +1,12 @@
+plugins:
+  - digrich-bubblechart-panel
+  - grafana-clock-panel
+  - grafana-piechart-panel
+
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+    - name: Prometheus
+      type: prometheus
+      url: http://10.9.99.10:9090

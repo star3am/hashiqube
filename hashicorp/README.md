@@ -675,6 +675,12 @@ Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 ```    
 ![Consul](images/consul.png?raw=true "Consul")
 
+## Monitoring Hashicorp Consul
+
+We use Prometheus and Grafana to Monitor Consul
+
+See: [__Monitoring Hashicorp Consul__](prometheus-grafana/README?id=monitoring-hashicorp-consul)
+
 ## Consul Vagrant Provisioner
 
 [filename](consul.sh ':include :type=code')

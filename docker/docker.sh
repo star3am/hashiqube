@@ -21,6 +21,7 @@ sudo apt-get update -qq < /dev/null > /dev/null
 sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq --allow-downgrades --assume-yes docker-ce=5:20.10.9~3-0~ubuntu-focal docker-ce-cli containerd.io=1.5.11-1 docker-compose-plugin < /dev/null > /dev/null
 sudo usermod -aG docker vagrant
 sudo mkdir -p /etc/docker
+# https://docs.docker.com/config/daemon/prometheus/
 sudo echo '{
   "metrics-addr": "0.0.0.0:9323",
   "experimental": true,

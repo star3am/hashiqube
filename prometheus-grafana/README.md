@@ -16,9 +16,9 @@ Prometheus is an open source monitoring system for which Grafana provides out-of
 
 In order to provision Prometheus and Grafana, you need bastetools, docker, minikube as dependencies. 
 
-:bulb: We enable Vault, because we monitor it with Prometheus and we enable Minikube because we host Grafana and Prometheus on Minikkube using Helm
+:bulb: We enable Vault, Consul and Nomad, because we monitor these with Prometheus and we enable Minikube because we host Grafana and Prometheus on Minikkube and deploy it using Helm
 
-`vagrant up --provision-with basetools,docker,vault,minikube,prometheus-grafana`
+`vagrant up --provision-with basetools,docker,docsify,vault,consul,nomad,minikube,prometheus-grafana`
 
 Prometheus http://localhost:9090 <br />
 Alertmanager http://localhost:9093 <br />
@@ -56,11 +56,19 @@ You can also open Prometheus web interface and look at Status -> Targets
 
 ![Prometheus Targets](images/prometheus.png?raw=true "Prometheus Targets")
 
+## Grafana Datasource Prometheus
+
+:bulb: We have done this automatically during the provisioning step, in the grafana-values.yaml file see below
+
+[filename](grafana-values.yaml ':include :type=code')
+
 To use Prometheus as a Datasource in Grafana, we need to add it so let's do that now, please head over to Grafana on http://localhost:3000 and login with user: `admin` and the password: `TOKEN_IN_TERMINAL_OUTPUT` 
 
 ![Grafana Login](images/grafana.png?raw=true "Grafana Login")
 
 Click on Configuration -> Datasources 
+
+:bulb: We have done this automatically during the provisioning step
 
 Click add Data sources
 Select Prometheus and enter the URL of Prometheus, in this case we will use http://10.9.99.10:9090
@@ -91,23 +99,27 @@ telemetry {
 }
 ```
 
-When we install Prometheus with Helm we set a values.yaml file that specify an `extraScrapeConfigs` You guessed it! Vault...
+When we install Prometheus with Helm we set a prometheus-values.yaml file that specify an `extraScrapeConfigs` You guessed it! Vault...
 
-`helm install prometheus prometheus-community/prometheus -f /vagrant/prometheus-grafana/values.yaml`
+`helm install prometheus prometheus-community/prometheus -f /vagrant/prometheus-grafana/prometheus-values.yaml`
 
-[filename](values.yaml ':include :type=code')
+[filename](prometheus-values.yaml ':include :type=code')
 
 You should now see the Vault target in Prometheus web interface at http://localhost:9090/targets
 
 ![Prometheus Vault Target](images/prometheus-targets-vault.png?raw=true "Prometheus Vault Target")
 
-We now need to Grafana Datasource of Type Prometheus based on this Target
+## Grafana Datasource Prometheus
+
+:bulb: We have done this automatically during the provisioning step, in the grafana-values.yaml file see below
+
+[filename](grafana-values.yaml ':include :type=code')
+
+We now need to add a Grafana Datasource of Type Prometheus based on these Targets
 
 Please navigate to http://localhost:3000/connections/your-connections/datasources
 
-And add a Vault Datasource
-
-Name: Vault
+Name: Prometheus <br />
 URL: http://10.9.99.10:9090
 
 ![Grafana Datasource Prometheus Vault](images/grafana-datasource-prometheus-vault.png?raw=true "Grafana Datasource Prometheus Vault")
@@ -148,11 +160,11 @@ telemetry {
 }
 ```
 
-When we install Prometheus with Helm we set a values.yaml file that specify an `extraScrapeConfigs` You guessed it! Nomad...
+When we install Prometheus with Helm we set a prometheus-values.yaml file that specify an `extraScrapeConfigs` You guessed it! Nomad...
 
-`helm install prometheus prometheus-community/prometheus -f /vagrant/prometheus-grafana/values.yaml`
+`helm install prometheus prometheus-community/prometheus -f /vagrant/prometheus-grafana/prometheus-values.yaml`
 
-[filename](values.yaml ':include :type=code')
+[filename](prometheus-values.yaml ':include :type=code')
 
 You should now see the Nomad target in Prometheus web interface at http://localhost:9090/targets
 
@@ -169,17 +181,76 @@ URL: http://10.9.99.10:9090
 
 ![Grafana Datasource Prometheus Nomad](images/grafana-datasource-prometheus-vault.png?raw=true "Grafana Datasource Prometheus Nomad")
 
-Now, let's import the Nomad Grafana Dashboard, to do that, click on the top right + and select `Import Dashboard` ref: https://grafana.com/grafana/dashboards/12904-hashicorp-vault/
+Now, let's import the Nomad Grafana Dashboard, to do that, click on the top right + and select `Import Dashboard` ref: https://grafana.com/grafana/dashboards/12787-nomad-jobs/
 
-![Grafana Import Dashboard Nomad 12904](images/grafana-import-dashboard-vault-12904.png?raw=true "Grafana Import Dashboard Vault 12904")
+![Grafana Import Dashboard Nomad 12787](images/grafana-import-dashboard-nomad-12787.png?raw=true "Grafana Import Dashboard Vault 12787")
 
-Enter `12904` and click on Load
+Enter `12787` and click on Load
 
-![Grafana Import Dashboard Vault 12904 Load](images/grafana-import-dashboard-vault-12904-load.png?raw=true "Grafana Import Dashboard Vault 12904 Load")
+![Grafana Import Dashboard Nomad 12787 Load](images/grafana-import-dashboard-nomad-12787-load.png?raw=true "Grafana Import Dashboard Nomad 12787 Load")
 
 Navigating to Grafana -> Dashboards you should now be able to see the Hashicorp Nomad Grafana Dashboard
 
-![Grafana Hashicorp Nomad Dashboard](images/grafana-hashicorp-vault-dashboard.png?raw=true "Grafana Hashicorp Nomad Dashboard")
+![Grafana Hashicorp Nomad Dashboard](images/grafana-hashicorp-nomad-dashboard.png?raw=true "Grafana Hashicorp Nomad Dashboard")
+
+## Monitoring Hashicorp Consul
+
+https://lvinsf.medium.com/monitor-consul-using-prometheus-and-grafana-1f2354cc002f <br />
+https://grafana.com/grafana/dashboards/13396-consul-server-monitoring/ <br />
+https://developer.hashicorp.com/consul/docs/agent/telemetry
+
+In hashicorp/consul.sh we enabled Telemetry in the Consul config file see `hashicorp/consul.sh`
+
+```hcl
+# https://lvinsf.medium.com/monitor-consul-using-prometheus-and-grafana-1f2354cc002f
+# https://grafana.com/grafana/dashboards/13396-consul-server-monitoring/
+# https://developer.hashicorp.com/consul/docs/agent/telemetry
+telemetry {
+  prometheus_retention_time = "24h"
+  disable_hostname = true
+}
+```
+
+Now, let's import the Consul Grafana Dashboard, to do that, click on the top right + and select `Import Dashboard` ref: https://grafana.com/grafana/dashboards/2351-consul/
+
+![Grafana Import Dashboard Consul 2351](images/grafana-import-dashboard-consul-2351.png?raw=true "Grafana Import Dashboard Consul 2351")
+
+Enter `2351` and click on Load
+
+![Grafana Import Dashboard Consul 2351 Load](images/grafana-import-dashboard-consul-2351-load.png?raw=true "Grafana Import Dashboard Consul 2351 Load")
+
+Navigating to Grafana -> Dashboards you should now be able to see the Hashicorp Consul Grafana Dashboard
+
+![Grafana Hashicorp Consul Dashboard](images/grafana-hashicorp-consul-dashboard.png?raw=true "Grafana Hashicorp Consul Dashboard")
+
+## Monitoring Docker
+
+https://docs.docker.com/config/daemon/prometheus/
+
+In docker/docker.sh we enabled Telemetry in the Docker config file see `docker/docker.sh`
+
+```bash
+# https://docs.docker.com/config/daemon/prometheus/
+sudo echo '{
+  "metrics-addr": "0.0.0.0:9323",
+  "experimental": true,
+  "storage-driver": "overlay2",
+  "insecure-registries": ["10.9.99.10:5001", "10.9.99.10:5002", "localhost:5001", "localhost:5002"]
+}
+' >/etc/docker/daemon.json
+```
+
+Now, let's import the Docker Grafana Dashboard, to do that, click on the top right + and select `Import Dashboard` ref: https://grafana.com/grafana/dashboards/10619-docker-host-container-overview/
+
+![Grafana Import Dashboard Docker 10619](images/grafana-import-dashboard-docker-10619.png?raw=true "Grafana Import Dashboard Docker 10619")
+
+Enter `10619` and click on Load
+
+![Grafana Import Dashboard Docker 10619 Load](images/grafana-import-dashboard-docker-10619-load.png?raw=true "Grafana Import Dashboard Docker 10619 Load")
+
+Navigating to Grafana -> Dashboards you should now be able to see the Docker Grafana Dashboard
+
+![Grafana Docker Dashboard](images/grafana-docker-dashboard.png?raw=true "Grafana Docker Dashboard")
 
 ## Prometheus Grafana Vagrant Provisioner 
 

@@ -51,7 +51,7 @@ ui_config {
 # https://grafana.com/grafana/dashboards/13396-consul-server-monitoring/
 # https://developer.hashicorp.com/consul/docs/agent/telemetry
 telemetry {
-  prometheus_retention_time = 24h
+  prometheus_retention_time = "24h"
   disable_hostname = true
 }
 EOF
@@ -121,8 +121,8 @@ StartLimitBurst=3
 
 ## Configure unit start rate limiting. Units which are started more than
 ## *burst* times within an *interval* time span are not permitted to start any
-## more. Use `StartLimitIntervalSec` or `StartLimitInterval` (depending on
-## systemd version) to configure the checking interval and `StartLimitBurst`
+## more. Use StartLimitIntervalSec or StartLimitInterval (depending on
+## systemd version) to configure the checking interval and StartLimitBurst
 ## to configure how many starts per interval are allowed. The values in the
 ## commented lines are defaults.
 
