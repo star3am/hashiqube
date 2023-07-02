@@ -218,43 +218,43 @@ Vagrant::configure("2") do |config|
 
       # docsify
       # vagrant up --provision-with docsify to only run this on vagrant up
-      config.vm.provision "docsify", type: "shell", preserve_order: true, privileged: false, path: "docsify/docsify.sh"
+      config.vm.provision "docsify", type: "shell", preserve_order: false, privileged: false, path: "docsify/docsify.sh"
 
       # install vault
       # vagrant up --provision-with vault to only run this on vagrant up
-      config.vm.provision "vault", type: "shell", preserve_order: true, privileged: true, path: "hashicorp/vault.sh"
+      config.vm.provision "vault", type: "shell", preserve_order: false, privileged: true, path: "hashicorp/vault.sh"
 
       # install consul
       # vagrant up --provision-with consul to only run this on vagrant up
-      config.vm.provision "consul", type: "shell", preserve_order: true, privileged: true, path: "hashicorp/consul.sh"
+      config.vm.provision "consul", type: "shell", preserve_order: false, privileged: true, path: "hashicorp/consul.sh"
 
       # install nomad
       # vagrant up --provision-with nomad to only run this on vagrant up
-      config.vm.provision "nomad", type: "shell", preserve_order: true, privileged: true, path: "hashicorp/nomad.sh"
+      config.vm.provision "nomad", type: "shell", preserve_order: false, privileged: true, path: "hashicorp/nomad.sh"
 
       # install waypoint on kubernetes using minikube
       # vagrant up --provision-with waypoint-kubernetes-minikube to only run this on vagrant up
-      config.vm.provision "waypoint-kubernetes-minikube", run: "never", type: "shell", preserve_order: true, privileged: true, path: "hashicorp/waypoint.sh", args: "waypoint-kubernetes-minikube"
+      config.vm.provision "waypoint-kubernetes-minikube", run: "never", type: "shell", preserve_order: false, privileged: true, path: "hashicorp/waypoint.sh", args: "waypoint-kubernetes-minikube"
 
       # install waypoint on nomad
       # vagrant up --provision-with waypoint-nomad to only run this on vagrant up
-      config.vm.provision "waypoint-nomad", run: "never", type: "shell", preserve_order: true, privileged: true, path: "hashicorp/waypoint.sh", args: "waypoint-nomad"
+      config.vm.provision "waypoint-nomad", run: "never", type: "shell", preserve_order: false, privileged: true, path: "hashicorp/waypoint.sh", args: "waypoint-nomad"
 
       # install waypoint on nomad
       # vagrant up --provision-with waypoint to only run this on vagrant up
-      config.vm.provision "waypoint", type: "shell", preserve_order: true, privileged: true, path: "hashicorp/waypoint.sh", args: "waypoint-nomad"
+      config.vm.provision "waypoint", type: "shell", preserve_order: false, privileged: true, path: "hashicorp/waypoint.sh", args: "waypoint-nomad"
 
       # install boundary
       # vagrant up --provision-with boundary to only run this on vagrant up
-      config.vm.provision "boundary", type: "shell", preserve_order: true, privileged: true, path: "hashicorp/boundary.sh"
+      config.vm.provision "boundary", type: "shell", preserve_order: false, privileged: true, path: "hashicorp/boundary.sh"
 
       # install packer
       # vagrant up --provision-with packer to only run this on vagrant up
-      config.vm.provision "packer", type: "shell", preserve_order: true, privileged: true, path: "hashicorp/packer.sh"
+      config.vm.provision "packer", type: "shell", preserve_order: false, privileged: true, path: "hashicorp/packer.sh"
 
       # install sentinel
       # vagrant up --provision-with sentinel to only run this on vagrant up
-      config.vm.provision "sentinel", type: "shell", preserve_order: true, privileged: true, path: "hashicorp/sentinel.sh"
+      config.vm.provision "sentinel", type: "shell", preserve_order: false, privileged: true, path: "hashicorp/sentinel.sh"
 
       # install terraform
       # vagrant up --provision-with terraform to only run this on vagrant up
@@ -266,27 +266,27 @@ Vagrant::configure("2") do |config|
 
       # minikube
       # vagrant up --provision-with minikube to only run this on vagrant up
-      config.vm.provision "minikube", run: "never", type: "shell", preserve_order: true, privileged: false, path: "minikube/minikube.sh"
+      config.vm.provision "minikube", run: "never", type: "shell", preserve_order: false, privileged: false, path: "minikube/minikube.sh"
 
       # vscode-server
       # vagrant up --provision-with vscode-server to only run this on vagrant up
-      config.vm.provision "vscode-server", run: "never", type: "shell", preserve_order: true, privileged: false, path: "visual-studio-code/vscode-server.sh"
+      config.vm.provision "vscode-server", run: "never", type: "shell", preserve_order: false, privileged: false, path: "visual-studio-code/vscode-server.sh"
 
       # vagrant up --provision-with ldap to only run this on vagrant up
       # run ldap docker container for testing with vault (for example) ldap login
-      config.vm.provision "ldap", run: "never", type: "shell", preserve_order: true, privileged: true, path: "ldap/ldap.sh"
+      config.vm.provision "ldap", run: "never", type: "shell", preserve_order: false, privileged: true, path: "ldap/ldap.sh"
 
       # vagrant up --provision-with mysql to only run this on vagrant up
       # run mysql docker container for testing with vault
-      config.vm.provision "mysql", run: "never", type: "shell", preserve_order: true, privileged: false, path: "database/mysql.sh"
+      config.vm.provision "mysql", run: "never", type: "shell", preserve_order: false, privileged: false, path: "database/mysql.sh"
 
       # vagrant up --provision-with postgresql to only run this on vagrant up
       # run postgresql docker container for testing with vault
-      config.vm.provision "postgresql", run: "never", type: "shell", preserve_order: true, privileged: false, path: "database/postgresql.sh"
+      config.vm.provision "postgresql", run: "never", type: "shell", preserve_order: false, privileged: false, path: "database/postgresql.sh"
 
       # vagrant up --provision-with mssql to only run this on vagrant up
       # run mssql docker container for testing with vault
-      config.vm.provision "mssql", run: "never", type: "shell", preserve_order: true, privileged: false, path: "database/mssql.sh"
+      config.vm.provision "mssql", run: "never", type: "shell", preserve_order: false, privileged: false, path: "database/mssql.sh"
 
       # install apache2 with ansible
       # vagrant up --provision-with ansible_local to only run this on vagrant up
@@ -309,31 +309,31 @@ Vagrant::configure("2") do |config|
 
       # install jenkins
       # vagrant up --provision-with jenkins to only run this on vagrant up
-      config.vm.provision "jenkins", run: "never", type: "shell", preserve_order: true, privileged: false, path: "jenkins/jenkins.sh"
+      config.vm.provision "jenkins", run: "never", type: "shell", preserve_order: false, privileged: false, path: "jenkins/jenkins.sh"
 
       # apache-airflow
       # vagrant up --provision-with apache-airflow to only run this on vagrant up
-      config.vm.provision "apache-airflow", run: "never", type: "shell", preserve_order: true, privileged: false, path: "apache-airflow/apache-airflow.sh"
+      config.vm.provision "apache-airflow", run: "never", type: "shell", preserve_order: false, privileged: false, path: "apache-airflow/apache-airflow.sh"
 
       # ansible-tower
       # vagrant up --provision-with ansible-tower to only run this on vagrant up
-      config.vm.provision "ansible-tower", run: "never", type: "shell", preserve_order: true, privileged: false, path: "ansible-tower/ansible-tower.sh"
+      config.vm.provision "ansible-tower", run: "never", type: "shell", preserve_order: false, privileged: false, path: "ansible-tower/ansible-tower.sh"
 
       # dbt 
       # vagrant up --provision-with dbt to only run this on vagrant up
-      config.vm.provision "dbt", run: "never", type: "shell", preserve_order: true, privileged: false, path: "dbt/dbt-global.sh"
+      config.vm.provision "dbt", run: "never", type: "shell", preserve_order: false, privileged: false, path: "dbt/dbt-global.sh"
 
       # markdown-quiz-generator 
       # vagrant up --provision-with markdown-quiz-generator to only run this on vagrant up
-      config.vm.provision "markdown-quiz-generator", run: "never", type: "shell", preserve_order: true, privileged: false, path: "markdown-quiz-generator/markdown-quiz-generator.sh"
+      config.vm.provision "markdown-quiz-generator", run: "never", type: "shell", preserve_order: false, privileged: false, path: "markdown-quiz-generator/markdown-quiz-generator.sh"
 
       # prometheus and grafana
       # vagrant up --provision-with prometheus-grafana to only run this on vagrant up
-      config.vm.provision "prometheus-grafana", run: "never", type: "shell", preserve_order: true, privileged: false, path: "prometheus-grafana/prometheus-grafana.sh"
+      config.vm.provision "prometheus-grafana", run: "never", type: "shell", preserve_order: false, privileged: false, path: "prometheus-grafana/prometheus-grafana.sh"
 
       # elasticsearch and kibana and cerebro
       # vagrant up --provision-with elasticsearch-kibana-cerebro to only run this on vagrant up
-      config.vm.provision "elasticsearch-kibana-cerebro", run: "never", type: "shell", preserve_order: true, privileged: false, path: "elasticsearch-kibana-cerebro/elasticsearch-kibana-cerebro.sh"
+      config.vm.provision "elasticsearch-kibana-cerebro", run: "never", type: "shell", preserve_order: false, privileged: false, path: "elasticsearch-kibana-cerebro/elasticsearch-kibana-cerebro.sh"
 
       # portainer
       # vagrant up --provision-with portainer to only run this on vagrant up
@@ -341,7 +341,7 @@ Vagrant::configure("2") do |config|
 
       # gitlab
       # vagrant up --provision-with gitlab to only run this on vagrant up
-      config.vm.provision "gitlab", run: "never", type: "shell", preserve_order: true, privileged: false, path: "gitlab/gitlab.sh"
+      config.vm.provision "gitlab", run: "never", type: "shell", preserve_order: false, privileged: false, path: "gitlab/gitlab.sh"
 
       # vagrant up --provision-with bootstrap to only run this on vagrant up
       config.vm.provision "welcome", preserve_order: true, type: "shell", privileged: true, inline: <<-SHELL
