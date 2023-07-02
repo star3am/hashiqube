@@ -44,7 +44,15 @@
 </url>
 
 <url>
+  <loc>https://hashiqube.com/elasticsearch-kibana-cerebro/README</loc>
+</url>
+
+<url>
   <loc>https://hashiqube.com/git/README</loc>
+</url>
+
+<url>
+  <loc>https://hashiqube.com/gitlab/README</loc>
 </url>
 
 <url>
@@ -77,6 +85,18 @@
 
 <url>
   <loc>https://hashiqube.com/newrelic-kubernetes-monitoring/README</loc>
+</url>
+
+<url>
+  <loc>https://hashiqube.com/portainer/README</loc>
+</url>
+
+<url>
+  <loc>https://hashiqube.com/prometheus-grafana/README</loc>
+</url>
+
+<url>
+  <loc>https://hashiqube.com/tools-container/README</loc>
 </url>
 
 <url>
