@@ -8,6 +8,7 @@ GitLab is a complete DevOps platform
 With GitLab, you get a complete CI/CD toolchain in a single application. One interface. One conversation. One permission model. Thousands of features. You'll be amazed at everything GitLab can do today. And we're just getting started.
 
 `vagrant up --provision-with basetools,docker,docsify,minikube,gitlab`
+
 ```
 Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 ==> user.local.dev: Checking if box 'ubuntu/bionic64' version '20191218.0.0' is up to date...
