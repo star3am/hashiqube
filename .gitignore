@@ -8,6 +8,7 @@
 **.backup
 **.rli
 **.lock**
+dbt/jaffle_shop
 sonarqube/logs**
 sonarqube/data/es6**
 sonarqube/data/sonar.lock.db
