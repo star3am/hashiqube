@@ -9,7 +9,24 @@ Hashiqube was created by Riaan Nolan, to help him learn about Hashicorp's suite 
 You are welcome to connect with Riaan Nolan on Linkedin https://www.linkedin.com/in/riaannolan/ <br />
 Riaan Nolan's Credly profile: https://www.credly.com/users/riaan-nolan.e657145c
 
-## Hashiqube Diagram
+## Pre-requisites
+* 10GB of disk space
+* Admin rights / sudo
+* Docker (Default) or Virtualbox
+* Vagrant
+* `vagrant up --provision`
+
+## Instructions
+:bulb: Docker is the Default and preferred way to run Hashiqube
+
+* Docker - Download __Docker__ from https://www.docker.com/products/docker-desktop and install
+* Vagrant - Download __Vagrant__ from https://www.vagrantup.com/downloads.html and install
+* Virtualbox (Optional) - Download __Virtualbox__ from https://www.virtualbox.org/wiki/Downloads and install
+* Using `git` - clone this repo `git clone $repo .` [__What is Git?__](git/#git)
+* Inside the local repo folder, do `vagrant up --provision` - This will setup, Vault, Nomad, Consul, Terraform, Localstack and Docker
+* Documentation locally available at http://localhost:3333
+
+## Hashiqube Diagrams
 
 In essence Hashiqube is a Docker Container (by default) or a Virtual Machine.
 
@@ -36,6 +53,47 @@ Hashiqube Terraform Registry module: https://registry.terraform.io/modules/star3
 ## Hashiqube Integrations
 ![HashiQube](images/thestack.png?raw=true "HashiQube")
 
+* [__Multi Cloud__](multi-cloud/#terraform-hashicorp-hashiqube) - Hashiqube on AWS, GCP and Azure (Clustered) https://registry.terraform.io/modules/star3am/hashiqube/hashicorp/latest
+* [__Vagrant__](hashicorp/#vagrant) - Vagrant is an open-source software product for building and maintaining portable virtual software development environments; e.g., for VirtualBox, KVM, Hyper-V, Docker containers, VMware, and AWS. It tries to simplify the software configuration management of virtualization in order to increase development productivity
+* [__Vault__](hashicorp/#vault) - Secure, store and tightly control access to tokens, passwords, certificates, encryption keys for protecting secrets and other sensitive data using a UI, CLI, or HTTP API.
+* [__Consul__](hashicorp/#consul) - Consul uses service identities and traditional networking practices to help organizations securely connect applications running in any environment.
+* [__Nomad__](hashicorp/#nomad) - A simple and flexible scheduler and orchestrator to deploy and manage containers and non-containerized applications across on-prem and clouds at scale.
+* [__Traefik__](hashicorp/#traefik-load-balancer-for-nomad) - Traefik is a modern HTTP reverse proxy and load balancer that seamlessly integrates with Nomad
+* [__Fabio__](hashicorp/#fabio-load-balancer-for-nomad) - Fabio is an HTTP and TCP reverse proxy that configures itself with data from Consul
+* [__Terraform__](hashicorp/#terraform) - Use Infrastructure as Code to provision and manage any cloud, infrastructure, or service
+* [__Packer__](hashicorp/#packer) - Create identical machine images for multiple platforms from a single source configuration.
+* [__Sentinel__](hashicorp/#sentinel) - Sentinel is an embedded policy-as-code framework
+* [__Waypoint__](hashicorp/#waypoint) - Waypoint is an open source solution that provides a modern workflow for build, deploy, and release across platforms
+* [__Boundary__](hashicorp/#boundary) - Simple and secure remote access to any system from anywhere based on user identity.
+* [__Docker__](docker/#docker) - Securely build, share and run any application, anywhere
+* [__Localstack__](localstack/#localstack) - A fully functional local AWS cloud stack
+* [__Ansible__](ansible/#ansible) - Ansible is a suite of software tools that enables infrastructure as code. It is open-source and the suite includes software provisioning, configuration management, and application deployment functionality.
+* [__LDAP__](ldap/#ldap) - Lightweight Directory Access Protocol
+* [__Jenkins__](jenkins/#jenkins) - Jenkins is an open source automation server. It helps automate the parts of software development related to building, testing, and deploying, facilitating continuous integration and continuous delivery. 
+* [__Oracle MySQL__](database/#oracle-mysql) - MySQL is an open-source relational database management system (RDBMS)
+* [__Microsoft MSSQL__](database/#microsoft-sql-mssql-express) - Microsoft SQL Server is a relational database management system developed by Microsoft
+* [__PostgreSQL__](database/#postgresql) - PostgreSQL, also known as Postgres, is a free and open-source relational database management system emphasizing extensibility and SQL compliance.
+* [__Minikube__](minikube/#minikube) - Minikube implements a local Kubernetes cluster on macOS, Linux, and Windows.
+* [__Newrelic Kubernetes Monitoring__](newrelic-kubernetes-monitoring/#newrelic-kubernetes-monitoring) - Monitor Kubernetes Clusters and Workloads with Newrelic
+* [__Docsify__](docsify/#docsify) - A magical documentation site generator
+* [__Mermaid__](mermaid/#mermaid) - Generation of diagram and flowchart from text in a similar manner as markdown
+* [__Prometheus__](prometheus-grafana/#prometheus-and-grafana) - Open-source monitoring system with dimensional data model, flexible query language, efficient time series database & modern alerting
+* [__Grafana__](prometheus-grafana/#prometheus-and-grafana) - Grafana is the open source analytics & monitoring solution for every database
+* [__Elasticsearch__](elasticsearch-kibana-cerebro/#elasticsearch-kibana-and-cerebro) - Elasticsearch is a search engine based on the Lucene library
+* [__Kibana__](elasticsearch-kibana-cerebro/#elasticsearch-kibana-and-cerebro) - Kibana is an open source data visualization dashboard for Elasticsearch
+* [__Cerebro__](elasticsearch-kibana-cerebro/#elasticsearch-kibana-and-cerebro) - Cerebro is the evolution of the previous Elasticsearch plugin Elasticsearch kopf
+* [__Ansible-Tower__](ansible-tower/#ansible-tower) - Is a web-based solution that makes Ansible even more easy to use for IT teams of all kinds. It’s designed to be the hub for all of your automation tasks.
+* [__Dbt__](dbt/#dbt) - Dbt is a data transformation tool that enables data analysts and engineers to transform, test and document data in the cloud data warehouse
+* [__Airflow__](apache-airflow/#apache-airflow) - Apache Airflow is an open-source workflow management platform for data engineering pipelines
+* [__Visual-Studio-Code__](visual-studio-code/#visual-studio-code) - Visual Studio Code is a code editor redefined and optimized for building and debugging modern web and cloud applications
+* [__Portainer__](portainer/#portainer) - A lightweight service delivery platform for containerized applications that can be used to manage Docker, Swarm, Kubernetes and ACI environments. It is designed to be as simple to deploy as it is to use.
+* [__Gitlab__](gitlab/#gitlab) - GitLab is a complete DevOps platform, delivered as a single application
+
+Once the stack is up you will have a large number of services running and available on `localhost` <br />
+For Documentation please open http://localhost:3333 in your browser
+
+![Hashiqube Integrations](images/logo-qube.png?raw=true "Hashiqube Integrations")
+
 ## Purpose
 Hashiqube has been created to enable anyone who is interested in secure automation pipelines the ability to run a suite of ‘best in class’ tools their local machines at the cost of a small amount of system resources.
 
@@ -54,16 +112,6 @@ Thanks to the flexibility of the Hashicorp products there is no need to wonder h
 | windows | ✓ | ✘ | ✘ |
 | mac intel | ✓ | ✓ | ✘ |
 | mac apple | ✓ | ✘ | ✘ |
-
-## Instructions
-:bulb: Docker is the Default and preferred way to run Hashiqube
-
-* Docker - Download __Docker__ from https://www.docker.com/products/docker-desktop and install
-* Vagrant - Download __Vagrant__ from https://www.vagrantup.com/downloads.html and install
-* Virtualbox (Optional) - Download __Virtualbox__ from https://www.virtualbox.org/wiki/Downloads and install
-* Using `git` - clone this repo `git clone $repo .` [__What is Git?__](git/#git)
-* Inside the local repo folder, do `vagrant up --provision` - This will setup, Vault, Nomad, Consul, Terraform, Localstack and Docker
-* Documentation locally available at http://localhost:3333
 
 ## Components
 Hashiqube is made up out of a number of components and some rely on each other. 
@@ -114,13 +162,6 @@ port 8600
 ```
 Now you can use DNS like nomad.service.consul:9999 vault.service.consul:9999 via Fabio Load Balancer <br />
 
-## Pre-requisites
-* 10GB of disk space
-* Admin rights / sudo (you will be asked to update ETC Host file)
-* Docker (Default) and/or Virtualbox
-* Vagrant
-* `vagrant up --provision`
-
 ## The HashiStack
 | Dimension | Products | | | 
 |------|--------|------------|------------|
@@ -129,47 +170,6 @@ Now you can use DNS like nomad.service.consul:9999 vault.service.consul:9999 via
 | __Security__ | ![Boundary](https://www.datocms-assets.com/2885/1620155080-brandhcboundaryprimaryattributedcolor.svg) <br /> [__Boundary__](hashicorp/#boundary) <br /> Secure remote access to applications and critical systems | ![Vault](https://www.datocms-assets.com/2885/1620159869-brandvaultprimaryattributedcolor.svg) <br /> [__Vault__](hashicorp/#vault) <br /> Secure management of secrets and sensitive data| |
 | __Infrastructure__ | ![Packer](https://www.datocms-assets.com/2885/1620155103-brandhcpackerprimaryattributedcolor.svg) <br /> [__Packer__](hashicorp/#packer) <br /> Automated machine images from a single source configuration| ![Vagrant](https://www.datocms-assets.com/2885/1620155118-brandhcvagrantprimaryattributedcolor.svg) <br /> [__Vagrant__](hashicorp/#vagrant) <br /> Single workflow to build and manage developer environments| ![Terraform](https://www.datocms-assets.com/2885/1620155113-brandhcterraformprimaryattributedcolor.svg) <br /> [__Terraform__](hashicorp/#terraform) <br /> Infrastructure automation to provision and manage any cloud service |
 
-## Hashiqube Integrations
-* [__Multi Cloud__](multi-cloud/#terraform-hashicorp-hashiqube) - Hashiqube on AWS, GCP and Azure (Clustered) https://registry.terraform.io/modules/star3am/hashiqube/hashicorp/latest
-* [__Vagrant__](hashicorp/#vagrant) - Vagrant is an open-source software product for building and maintaining portable virtual software development environments; e.g., for VirtualBox, KVM, Hyper-V, Docker containers, VMware, and AWS. It tries to simplify the software configuration management of virtualization in order to increase development productivity
-* [__Vault__](hashicorp/#vault) - Secure, store and tightly control access to tokens, passwords, certificates, encryption keys for protecting secrets and other sensitive data using a UI, CLI, or HTTP API.
-* [__Consul__](hashicorp/#consul) - Consul uses service identities and traditional networking practices to help organizations securely connect applications running in any environment.
-* [__Nomad__](hashicorp/#nomad) - A simple and flexible scheduler and orchestrator to deploy and manage containers and non-containerized applications across on-prem and clouds at scale.
-* [__Traefik__](hashicorp/#traefik-load-balancer-for-nomad) - Traefik is a modern HTTP reverse proxy and load balancer that seamlessly integrates with Nomad
-* [__Fabio__](hashicorp/#fabio-load-balancer-for-nomad) - Fabio is an HTTP and TCP reverse proxy that configures itself with data from Consul
-* [__Terraform__](hashicorp/#terraform) - Use Infrastructure as Code to provision and manage any cloud, infrastructure, or service
-* [__Packer__](hashicorp/#packer) - Create identical machine images for multiple platforms from a single source configuration.
-* [__Sentinel__](hashicorp/#sentinel) - Sentinel is an embedded policy-as-code framework
-* [__Waypoint__](hashicorp/#waypoint) - Waypoint is an open source solution that provides a modern workflow for build, deploy, and release across platforms
-* [__Boundary__](hashicorp/#boundary) - Simple and secure remote access to any system from anywhere based on user identity.
-* [__Docker__](docker/#docker) - Securely build, share and run any application, anywhere
-* [__Localstack__](localstack/#localstack) - A fully functional local AWS cloud stack
-* [__Ansible__](ansible/#ansible) - Ansible is a suite of software tools that enables infrastructure as code. It is open-source and the suite includes software provisioning, configuration management, and application deployment functionality.
-* [__LDAP__](ldap/#ldap) - Lightweight Directory Access Protocol
-* [__Jenkins__](jenkins/#jenkins) - Jenkins is an open source automation server. It helps automate the parts of software development related to building, testing, and deploying, facilitating continuous integration and continuous delivery. 
-* [__Oracle MySQL__](database/#oracle-mysql) - MySQL is an open-source relational database management system (RDBMS)
-* [__Microsoft MSSQL__](database/#microsoft-sql-mssql-express) - Microsoft SQL Server is a relational database management system developed by Microsoft
-* [__PostgreSQL__](database/#postgresql) - PostgreSQL, also known as Postgres, is a free and open-source relational database management system emphasizing extensibility and SQL compliance.
-* [__Minikube__](minikube/#minikube) - Minikube implements a local Kubernetes cluster on macOS, Linux, and Windows.
-* [__Newrelic Kubernetes Monitoring__](newrelic-kubernetes-monitoring/#newrelic-kubernetes-monitoring) - Monitor Kubernetes Clusters and Workloads with Newrelic
-* [__Docsify__](docsify/#docsify) - A magical documentation site generator
-* [__Mermaid__](mermaid/#mermaid) - Generation of diagram and flowchart from text in a similar manner as markdown
-* [__Prometheus__](prometheus-grafana/#prometheus-and-grafana) - Open-source monitoring system with dimensional data model, flexible query language, efficient time series database & modern alerting
-* [__Grafana__](prometheus-grafana/#prometheus-and-grafana) - Grafana is the open source analytics & monitoring solution for every database
-* [__Elasticsearch__](elasticsearch-kibana-cerebro/#elasticsearch-kibana-and-cerebro) - Elasticsearch is a search engine based on the Lucene library
-* [__Kibana__](elasticsearch-kibana-cerebro/#elasticsearch-kibana-and-cerebro) - Kibana is an open source data visualization dashboard for Elasticsearch
-* [__Cerebro__](elasticsearch-kibana-cerebro/#elasticsearch-kibana-and-cerebro) - Cerebro is the evolution of the previous Elasticsearch plugin Elasticsearch kopf
-* [__Ansible-Tower__](ansible-tower/#ansible-tower) - Is a web-based solution that makes Ansible even more easy to use for IT teams of all kinds. It’s designed to be the hub for all of your automation tasks.
-* [__Dbt__](dbt/#dbt) - Dbt is a data transformation tool that enables data analysts and engineers to transform, test and document data in the cloud data warehouse
-* [__Airflow__](apache-airflow/#apache-airflow) - Apache Airflow is an open-source workflow management platform for data engineering pipelines
-* [__Visual-Studio-Code__](visual-studio-code/#visual-studio-code) - Visual Studio Code is a code editor redefined and optimized for building and debugging modern web and cloud applications
-* [__Portainer__](portainer/#portainer) - A lightweight service delivery platform for containerized applications that can be used to manage Docker, Swarm, Kubernetes and ACI environments. It is designed to be as simple to deploy as it is to use.
-* [__Gitlab__](gitlab/#gitlab) - GitLab is a complete DevOps platform, delivered as a single application
-
-Once the stack is up you will have a large number of services running and available on `localhost` <br />
-For Documentation please open http://localhost:3333 in your browser
-
-![Hashiqube Integrations](images/logo-qube.png?raw=true "Hashiqube Integrations")
 ## Other
 * LDAP can be accessed on ldap://localhost:389
 * Localstack web http://localhost:8080
