@@ -17,6 +17,7 @@ Riaan Nolan's Credly profile: https://www.credly.com/users/riaan-nolan.e657145c
 * `vagrant up --provision`
 
 ## Instructions
+:clock3: Duration 15 - 30 minutes <br>
 :bulb: Docker is the Default and preferred way to run Hashiqube
 
 * Docker - Download __Docker__ from https://www.docker.com/products/docker-desktop and install
