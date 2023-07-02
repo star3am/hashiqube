@@ -33,7 +33,7 @@ In essence Hashiqube is a Docker Container (by default) or a Virtual Machine.
 
 Hashiqube has a Docker Daemon inside. And it runs on your local laptop or a cloud instance.
 
-Hashiqube runs all the Hashicorp products and other popular Open Source tools, such as Minikube, Ansible AWX Tower, Prometheus and Grafana and many, many more, See [__Hashiqube Integrations__](/?id=hashiqube-integrations-1)
+Hashiqube runs all the Hashicorp products and other popular Open Source tools, such as Minikube, Ansible AWX Tower, Prometheus and Grafana and many, many more, See [__Hashiqube Integrations__](/?id=hashiqube-integrations)
 
 You can also run Hashiqube on AWS, GCP and Azure. This is called Hashiqube Multi-Cloud, see: [__Multi-Cloud__](multi-cloud/README)
 
