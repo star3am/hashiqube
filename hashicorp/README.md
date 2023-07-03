@@ -277,7 +277,8 @@ Secure, store and tightly control access to tokens, passwords, certificates, enc
 
 [![Armon Dadgar: Introduction to HashiCorp Vault](https://img.youtube.com/vi/VYfl-DpZ5wM/maxresdefault.jpg)](https://www.youtube.com/watch?v=VYfl-DpZ5wM)
 
-`vagrant up --provision-with vault`  
+`vagrant up --provision-with basetools,docsify,vault`
+
 ```log
 Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 ==> user.local.dev: Checking if box 'ubuntu/xenial64' version '20190918.0.0' is up to date...
@@ -365,7 +366,8 @@ Nomad is a highly available, distributed, data-center aware cluster and applicat
 
 [![Introduction to HashiCorp Nomad](https://img.youtube.com/vi/s_Fm9UtL4YU/maxresdefault.jpg)](https://www.youtube.com/watch?v=s_Fm9UtL4YU)
 
-`vagrant up --provision-with nomad`
+`vagrant up --provision-with basetools,docker,docsify,consul,nomad`
+
 ```log    
 Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 ==> user.local.dev: Checking if box 'ubuntu/xenial64' version '20190918.0.0' is up to date...
@@ -441,7 +443,7 @@ In early May, Hashicorp announced Nomad Version 1.3. Among other updates, it als
 
 ![Traefik Load Balancer](images/traefik-proxy.png?raw=true "Traefik Load Balancer")
 
-`vagrant up --provision-with nomad --provider docker`
+`vagrant up --provision-with basetools,docker,docsify,consul,nomad`
 
 The new native Service Discovery in Nomad really does work seamlessly. With this integration, delivering load balancing, dynamic routing configuration, and ingress traffic routing become easier than ever. Check out the Traefik Proxy 2.8 Release Candidate and the Nomad 1.3 release notes.
 
@@ -494,9 +496,11 @@ When you register a service in Consul all you need to add is a tag that announce
 `http://localhost:9999/` and `http://localhost:9998`
 
 ![Fabio Load Balancer](images/fabio.png?raw=true "Fabio Load Balancer")
-`vagrant up --provision-with nomad`
+
+`vagrant up --provision-with basetools,docker,docsify,consul,nomad`
 
 Fabio runs as a Nomad job, see `hashicorp/nomad/jobs/fabio.nomad`
+
 Some routes are added via Consul, see `hashicorp/consul.sh`
 
 ## Nomad Vagrant Provisioner
@@ -522,7 +526,8 @@ port 8600
 ```
 Now names such as `nomad.service.consul` and `fabio.service.consul` will work
 
-`vagrant up --provision-with consul`                                                                      
+`vagrant up --provision-with basetools,docker,docsify,consul`
+
 ```log
 Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 ==> user.local.dev: Checking if box 'ubuntu/xenial64' version '20190918.0.0' is up to date...
@@ -693,7 +698,8 @@ https://docs.hashicorp.com/sentinel/language/
 
 Sentinel is a language and framework for policy built to be embedded in existing software to enable fine-grained, logic-based policy decisions. A policy describes under what circumstances certain behaviors are allowed. Sentinel is an enterprise-only feature of HashiCorp Consul, Nomad, Terraform, and Vault.
 
-`vagrant up --provision-with sentinel`
+`vagrant up --provision-with basetools,docsify,sentinel`
+
 ```log
 Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 ==> user.local.dev: Checking if box 'ubuntu/bionic64' version '20191218.0.0' is up to date...
@@ -871,7 +877,9 @@ Once done, you will see __++++ To finish the installation go to http://10.9.99.1
 
 ![Terraform Enterprise](images/terraform-enterprise.png?raw=true "Terraform Enterprise")
 ![Terraform Enterprise](images/terraform-enterprise_logged_in.png?raw=true "Terraform Enterprise")
+
 `vagrant up --provision-with terraform-enterprise`
+
 ```log
 Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 ==> user.local.dev: Checking if box 'ubuntu/xenial64' version '20190918.0.0' is up to date...
@@ -925,15 +933,19 @@ https://www.waypointproject.io/
 Waypoint is a wonderful project and it's a firstclass citizen of Hashicorp and runs flawlessly on Nomad. 
 To run Waypoint on Nomad do: 
 
+## Waypoint on Nomad
+
 ```bash
 vagrant up --provision-with basetools,docker,consul,nomad,waypoint
 ```
 
-Waypoint cab also run on Kubernetes and we can test Waypoint using Minikube
+Waypoint can also run on Kubernetes and we can test Waypoint using Minikube
 To run Waypoint on Kubernetes (Minikube) do: 
 
+## Waypoint on Kubernetes
+
 ```bash
-vagrant up --provision-with basetools,docker,minikube,waypoint-kubernetes-minikube
+vagrant up --provision-with basetools,docker,docsify,minikube,waypoint-kubernetes-minikube
 ```
 
 To access the documentation site you can run: 
@@ -942,7 +954,8 @@ To access the documentation site you can run:
 vagrant up --provision-with docsify
 ```
 
-`vagrant up --provision-with waypoint`
+`vagrant up --provision-with basetools,docker,docsify,consul,nomad,waypoint`
+
 ```log
 Bringing machine 'hashiqube0.service.consul' up with 'virtualbox' provider...
 ==> hashiqube0.service.consul: Checking if box 'ubuntu/bionic64' version '20200429.0.0' is up to date...
@@ -1200,7 +1213,8 @@ Boundary is designed to grant access to critical systems using the principle of 
 ![Hashicorp Boundary](images/boundary-login-page.png?raw=true "Hashicorp Boundary")
 ![Hashicorp Boundary](images/boundary-logged-in-page.png?raw=true "Hashicorp Boundary")
 
-`vagrant up --provision-with boundary`
+`vagrant up --provision-with basetools,docsify,boundary`
+
 ```log
 Bringing machine 'hashiqube0.service.consul' up with 'virtualbox' provider...
 ==> hashiqube0.service.consul: Checking if box 'ubuntu/bionic64' version '20200429.0.0' is up to date...
