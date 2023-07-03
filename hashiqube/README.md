@@ -8,7 +8,7 @@ This Provider (Basetools) installs some essential tools that Hashiqube provision
 swapspace rkhunter jq curl unzip software-properties-common bzip2 git make python3.9 python3-pip python3-dev python3-venv python3-virtualenv golang-go apt-utils ntp update-motd toilet figlet nano iputils-ping dnsutils iptables telnet
 ```
 
-## Hashiqune Vagrant Provisioner
+## Hashiqube (Basetools) Vagrant Provisioner
 
 [filename](basetools.sh ':include :type=code')
 
