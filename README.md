@@ -10,11 +10,13 @@ You are welcome to connect with Riaan Nolan on Linkedin https://www.linkedin.com
 Riaan Nolan's Credly profile: https://www.credly.com/users/riaan-nolan.e657145c
 
 ## Pre-requisites
-* 10GB of disk space
+* 10GB of disk space and 4G Ram (Minimum) `vagrant up --provision` 8G Ram Recommended
 * Admin rights / sudo
 * Docker (Default) or Virtualbox
 * Vagrant
 * `vagrant up --provision`
+
+:bulb: If you want to run Minikube and a workload like AWX Ansible Tower, or Airflow you need at least 8G Ram - If you want to run Gitlab aswell, you need to give Docker resources at least 12G Ram
 
 ## Instructions
 :clock3: Duration 15 - 30 minutes <br>
