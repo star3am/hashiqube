@@ -164,4 +164,4 @@ Lint Dockerfiles.........................................................Passed
 ```
 
 ## Module Documentation
-- See [__docs folder__](docs/#providers)
+- See [__docs folder__](/tools-container/docs/#providers)
