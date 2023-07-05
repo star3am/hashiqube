@@ -200,7 +200,7 @@ function waypoint-kubernetes-minikube() {
   echo -e '\e[38;5;198m'"++++ Waypoint Up"
   sudo --preserve-env=PATH -u vagrant waypoint up
   echo -e '\e[38;5;198m'"++++ Waypoint Deploy"
-  sudo --preserve-env=PATH -u vagrant waypoint deploy
+  sudo --preserve-env=PATH -u vagrant waypoint deploy > /dev/null 2>&1 &
   echo -e '\e[38;5;198m'"++++ Waypoint Server https://localhost:19702 and enter the following Token displayed below"
   echo $WAYPOINT_TOKEN_MINIKUBE
 }
