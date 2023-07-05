@@ -1,13 +1,16 @@
-# pre-commit
+# Tools Container
 
 ![Pre-Commit](images/009-owl.png?raw=true "Pre-Commit")
 
 This is an example repository showing how to use Git pre-commit to help you become a better developer.
+
+The Dockerfile supports Multi-OS, and Multi-Architecture
+Windows, Linux, Mac (Intel and ARM Chipsets)
+
 It does great little things for you such as check your YAML and JSON syntax. But it also helps you stay safe and secure by scanning your repository for AWS credentials and SSH private_key files.
 
 ## Install
 
-### Local Development
 You will need the following tools to get started before you can use this repo and commence local development
 
 - Docker Desktop
@@ -24,6 +27,35 @@ You will need the following tools installed on the build agent to use this
 
 - Git
 - Docker Daemon
+- Docker Compose
+
+### Sample Gitlab Build Pipeline
+
+A sample Gitlab pipeline, with the only dependency on the build agent being Docker and Docker Compose. 
+
+The commands are executed within the Docker Container, making your dependency tool chain very small.
+
+`.gitlab-ci.yml`
+
+[filename](gitlab-ci.yml ':include :type=code yaml')
+
+## The Dockerfile
+
+And the Dockerfile which installs all the tools needed such as Terraform, kubectl, AWS cli, Gcloud cli and Azure cli and more 
+
+`Dockerfile`
+
+[filename](Dockerfile.txt ':include :type=code docker')
+
+## Pre-Commit
+
+https://pre-commit.com/
+
+A framework for managing and maintaining multi-language pre-commit hooks.
+
+`.pre-commit.yaml`
+
+[filename](pre-commit-config.yaml ':include :type=code yaml')
 
 You can add your own pre-commit hooks, and there is support for all Operating Systems and most Languages.
 
@@ -71,8 +103,6 @@ For local development we use Docker and Docker compose. See run.sh
 | Mac | ✓ | ✓ |
 | Windows | ✘ | ✘ |
 
-## Pre-Commit
-
 ### A FAIL
 ```shell
 git commit -am "update default tgenv to amd64"
@@ -105,6 +135,7 @@ Lint Dockerfiles.........................................................Passed
 ### A PASS
 ```shell
 git commit -am "fix pre-commit dont commit to branch"
+
 pre-commit installed at /home/ubuntu/.git-template/hooks/pre-commit
 [INFO] Initializing environment for https://github.com/pre-commit/pre-commit-hooks.
 [INFO] Initializing environment for https://github.com/antonbabenko/pre-commit-terraform.
@@ -133,4 +164,4 @@ Lint Dockerfiles.........................................................Passed
 ```
 
 ## Module Documentation
-- See docs folder
+- See [__docs folder__](docs/#providers)
