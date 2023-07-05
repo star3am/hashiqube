@@ -114,6 +114,7 @@ Vagrant::configure("2") do |config|
         config.vm.network "forwarded_port", guest: 9999, host: 9999 # fabiolb
         config.vm.network "forwarded_port", guest: 9333, host: 9333 # portainer
         config.vm.network "forwarded_port", guest: 10888, host: 10888 # minikube dashboard
+        config.vm.network "forwarded_port", guest: 11888, host: 11888 # helm dashboard
         config.vm.network "forwarded_port", guest: 18080, host: 18080 # minikube-traefik
         config.vm.network "forwarded_port", guest: 18181, host: 18181 # minikube-traefik-admin
         config.vm.network "forwarded_port", guest: 31506, host: 31506 # tech-challange-minikube

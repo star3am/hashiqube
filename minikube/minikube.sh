@@ -292,9 +292,21 @@ function minikube-install() {
   echo -e '\e[38;5;198m'"++++ "
   sudo --preserve-env=PATH -u vagrant docker stats --no-stream -a
 
+  # https://github.com/komodorio/helm-dashboard
+  echo -e '\e[38;5;198m'"++++ "
+  echo -e '\e[38;5;198m'"++++ Installing Helm Dashboard"
+  echo -e '\e[38;5;198m'"++++ "
+  sudo --preserve-env=PATH -u vagrant helm plugin install https://github.com/komodorio/helm-dashboard.git
+  echo -e '\e[38;5;198m'"++++ "
+  echo -e '\e[38;5;198m'"++++ Running Helm Dashboard"
+  echo -e '\e[38;5;198m'"++++ "
+  sudo --preserve-env=PATH -u vagrant helm dashboard --bind=0.0.0.0 --port 11888 --no-browser --no-analytics > /dev/null 2>&1 &
+
   echo -e '\e[38;5;198m'"++++ "
   echo -e '\e[38;5;198m'"++++ Minikube Dashboard: http://localhost:10888"
   echo -e '\e[38;5;198m'"++++ Minikube Documentation: http://localhost:3333/#/minikube/README"
+  echo -e '\e[38;5;198m'"++++ Helm Dashboard: http://localhost:11888"
+  echo -e '\e[38;5;198m'"++++ Helm Dashboard Documentation: http://localhost:3333/#/minikube/README?id=helm-dashboard-by-komodor"
   echo -e '\e[38;5;198m'"++++ Hello Minikube application: http://localhost:18888"
   echo -e '\e[38;5;198m'"++++ Traefik Dashboard: http://localhost:18181/dashboard/"
   echo -e '\e[38;5;198m'"++++ Traefik Loadbalancer: http://localhost:18080"

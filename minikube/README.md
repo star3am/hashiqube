@@ -75,7 +75,8 @@ Bringing machine 'user.local.dev' up with 'virtualbox' provider...
     user.local.dev: minikube dashboard: http://10.9.99.10:10888/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/#/overview?namespace=default
 ```    
 Let's verify that our Minikube is running, we can go to the Dashboard by visiting in your browser:
-http://10.9.99.10:10888/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/#/overview?namespace=kubernetes-dashboard
+http://localhost:10888/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/#/overview?namespace=kubernetes-dashboard
+
 ![Minikube](images/minikube.png?raw=true "Minikube")
 
 From your computer you can interact with kubectl by using `vagrant ssh -c "sudo kubectl command"`
@@ -113,6 +114,30 @@ NAME       STATUS   ROLES    AGE   VERSION
 minikube   Ready    master   63m   v1.17.0
 ```
 
+## Helm Dashboard by Komodor
+
+https://github.com/komodorio/helm-dashboard
+
+![Helm Dashboard](images/helm-dashboard-logo.png?raw=true "Helm Dashboard")
+
+Helm Dashboard is an open-source project which offers a UI-driven way to view the installed Helm charts, see their revision history and corresponding k8s resources. Also, you can perform simple actions like roll back to a revision or upgrade to newer version. This project is part of Komodor's vision of helping Kubernetes users to navigate and troubleshoot their clusters, the project is NOT an official project by the helm team.
+
+Key capabilities of the tool:
+
+- See all installed charts and their revision history
+- See manifest diff of the past revisions
+- Browse k8s resources resulting from the chart
+- Easy rollback or upgrade version with a clear and easy manifest diff
+- Integration with popular problem scanners
+- Easy switch between multiple clusters
+- Can be used locally, or installed into Kubernetes cluster
+- Does not require Helm or Kubectl installed
+
+You can access Helm Dashboard
+http://localhost:11888/
+
+![Helm Dashboard](images/helm-dashboard.png?raw=true "Helm Dashboard")
+
 ## K9s CLI for Minikube
 k9s is a CLI tool for interacting with k8s clusters. It wraps kubectl functionality to provide a terminal interface for interaction with clusters in an intuitive way. 
 
@@ -130,7 +155,6 @@ Press "0" to display all namespaces.
 - Press ":" to bring up command prompt. You can enter commands to change screens. e.g. "deployments" takes you to list of deployments.
 - You can navigate around with arrow keys then press buttons as listed in the top right to interact with the highlighted item. e.g "l" to show logs of selected pod. 
 - For full instructions and preview video see the k9s website: https://k9scli.io/
-  
 
 ## Traefik on Minikube
 https://doc.traefik.io/traefik/v1.7/user-guide/kubernetes/ <br />
