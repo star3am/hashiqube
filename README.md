@@ -25,7 +25,7 @@ Riaan Nolan's Credly profile: https://www.credly.com/users/riaan-nolan.e657145c
 * Docker - Download __Docker__ from https://www.docker.com/products/docker-desktop and install
 * Vagrant - Download __Vagrant__ from https://www.vagrantup.com/downloads.html and install
 * Virtualbox (Optional) - Download __Virtualbox__ from https://www.virtualbox.org/wiki/Downloads and install
-* Using `git` - clone this repo `git clone $repo .` [__What is Git?__](git/#git)
+* Using `git` - clone this repo `git clone https://github.com/star3am/hashiqube.git` [__What is Git?__](git/#git)
 * Inside the local repo folder, do `vagrant up --provision` - This will setup, Vault, Nomad, Consul, Terraform, Localstack and Docker
 * Documentation locally available at http://localhost:3333
 
