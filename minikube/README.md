@@ -77,7 +77,45 @@ Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 Let's verify that our Minikube is running, we can go to the Dashboard by visiting in your browser:
 http://localhost:10888/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/#/overview?namespace=kubernetes-dashboard
 
+## Minikube Dashboard 
+
+The Dashboard is a web-based Kubernetes user interface. You can use it to:
+
+- deploy containerized applications to a Kubernetes cluster
+- troubleshoot your containerized application
+- manage the cluster resources
+- get an overview of applications running on your cluster
+- creating or modifying individual Kubernetes resources (such as Deployments, Jobs, DaemonSets, etc)
+
+For example, you can scale a Deployment, initiate a rolling update, restart a pod or deploy new applications using a deploy wizard.
+
 ![Minikube](images/minikube.png?raw=true "Minikube")
+
+## Kubernetes Pods
+
+Pods are the smallest deployable units of computing that you can create and manage in Kubernetes.
+
+A Pod (as in a pod of whales or pea pod) is a group of one or more containers, with shared storage and network resources, and a specification for how to run the containers. A Pod's contents are always co-located and co-scheduled, and run in a shared context. A Pod models an application-specific "logical host": it contains one or more application containers which are relatively tightly coupled. In non-cloud contexts, applications executed on the same physical or virtual machine are analogous to cloud applications executed on the same logical host.
+
+As well as application containers, a Pod can contain init containers that run during Pod startup. You can also inject ephemeral containers for debugging if your cluster offers this.
+
+![Kubernetes Pods](images/minikube-dashboard-pods.png?raw=true "Kubernetes Pods")
+
+## Kubernetes Services
+
+In Kubernetes, a Service is a method for exposing a network application that is running as one or more Pods in your cluster.
+
+A key aim of Services in Kubernetes is that you don't need to modify your existing application to use an unfamiliar service discovery mechanism. You can run code in Pods, whether this is a code designed for a cloud-native world, or an older app you've containerized. You use a Service to make that set of Pods available on the network so that clients can interact with it.
+
+If you use a Deployment to run your app, that Deployment can create and destroy Pods dynamically. From one moment to the next, you don't know how many of those Pods are working and healthy; you might not even know what those healthy Pods are named. Kubernetes Pods are created and destroyed to match the desired state of your cluster. Pods are ephemeral resources (you should not expect that an individual Pod is reliable and durable).
+
+Each Pod gets its own IP address (Kubernetes expects network plugins to ensure this). For a given Deployment in your cluster, the set of Pods running in one moment in time could be different from the set of Pods running that application a moment later.
+
+This leads to a problem: if some set of Pods (call them "backends") provides functionality to other Pods (call them "frontends") inside your cluster, how do the frontends find out and keep track of which IP address to connect to, so that the frontend can use the backend part of the workload?
+
+Enter Services.
+
+![Kubernetes Services](images/minikube-dashboard-service.png?raw=true "Kubernetes Services")
 
 From your computer you can interact with kubectl by using `vagrant ssh -c "sudo kubectl command"`
 Like so:
