@@ -1,12 +1,15 @@
-# Hashiqube Overview
+# HashiQube - A Development Lab Using All the HashiCorp Products
+
+## Overview
+
 Hashiqube is a Docker Container (Default) or a VM (Virtualbox). Hashiqube has a Docker daemon inside. It runs all Hashicorp products. __Vault, Terraform, Nomad, Consul, Waypoint, Boundary, Vagrant, Packer and Sentinel.__
 It also runs a host of other popular Open Source DevOps / DevSecOps applications (Minikube, Ansible AWX Tower, Traefik etc.) showcasing how simple integration with Hashicorp products can result in tangible learnings and benefits for all its users.
 
 Once Hashiqube is up an internet connection is no longer needed meaning sales pitches and demos for potential and existing customers is greatly aided.
 
-Hashiqube was created by Riaan Nolan, to help him learn about Hashicorp's suite of fantastic software, and Hashiqube can help you too! Good luck on your learning pathway! 
+Hashiqube has been created to help Engineers, Developers and anyone who wants to practise, learn or demo HashiCorp products to get started quickly with a local lab. 
 
-You are welcome to connect with Riaan Nolan on Linkedin https://www.linkedin.com/in/riaannolan/ <br />
+You are welcome to connect with me on Linkedin https://www.linkedin.com/in/riaannolan/ <br />
 Riaan Nolan's Credly profile: https://www.credly.com/users/riaan-nolan.e657145c
 
 ## Pre-requisites
@@ -18,7 +21,7 @@ Riaan Nolan's Credly profile: https://www.credly.com/users/riaan-nolan.e657145c
 
 :bulb: If you want to run Minikube and a workload like AWX Ansible Tower, or Airflow you need at least 8G Ram - If you want to run Gitlab aswell, you need to give Docker resources at least 12G Ram
 
-## Instructions
+## Installation Instructions
 :clock3: Duration 15 - 30 minutes <br>
 :bulb: Docker is the Default and preferred way to run Hashiqube
 
@@ -29,7 +32,7 @@ Riaan Nolan's Credly profile: https://www.credly.com/users/riaan-nolan.e657145c
 * Inside the local repo folder, do `vagrant up --provision` - This will setup, Vault, Nomad, Consul, Terraform, Localstack and Docker
 * Documentation locally available at http://localhost:3333
 
-## Hashiqube Diagrams
+## HashiQube Diagrams
 
 In essence Hashiqube is a Docker Container (by default) or a Virtual Machine.
 
@@ -99,7 +102,7 @@ For Documentation please open http://localhost:3333 in your browser
 
 ![Hashiqube Integrations](images/logo-qube.png?raw=true "Hashiqube Integrations")
 
-## Purpose
+## HashiQube's Purpose
 Hashiqube has been created to enable anyone who is interested in secure automation pipelines the ability to run a suite of ‘best in class’ tools their local machines at the cost of a small amount of system resources.
 
 Hashiqube gives all interested parties the empowerment to  deploy these tools in a way covers multiple use cases effectively providing a ‘concept to completion’ test bed using open source Hashicorp products.
@@ -234,6 +237,7 @@ and re-run `vagrant up --provision`
 __Error__ response from daemon: cannot stop container: 6c0c8135620ff47efe12df417a0df0e57d7a81a7f7ca06d011323fbb52e573db: tried to kill container, but did not receive an exit event <br />
 __Command__ `vagrant destroy` <br />
 __Solution__ run `vagrant destroy` again <br />
+
 ```
     hashiqube0.service.consul: Are you sure you want to destroy the 'hashiqube0.service.consul' VM? [y/N] y
 ==> hashiqube0.service.consul: Stopping container...
@@ -250,32 +254,32 @@ __Error__ The IP address configured for the host-only network is not within the 
 update the address used to be within the allowed ranges and run the command again. <br />
 __Command__ `vagrant up --provision` <br /> 
 __Solution__ Ensure the following contents are present in `/etc/vbox/networks.conf` <br>
+
 ```
 * 10.0.0.0/8 192.168.0.0/16
 * 2001::/64
 ```
 
-## To investigate
-### CI/CD
-    Gatling: (load testing) https://gatling.io/open-source
-    Spinnaker for multi-cloud / multi swim lane CD tool: https://www.spinnaker.io/concepts/
-    Build agent showing code clean and dirty.
-        Java
-        Python
-        JavaScript
+__Error__ Vagrant cannot forward the specified ports on this VM, since they would collide with some other application that is already listening on these ports. The forwarded port to `9200` is already in use on the host machine.
 
-### Monitoring / Dash-boarding
-    Hygiea dashboard: https://github.com/Hygieia/Hygieia
-    Alerting will be handled by a local docker messaging server such as Gotify: https://github.com/gotify/server
+To fix this, modify your current project's Vagrantfile to use another port. Example, where '1234' would be replaced by a unique host port: 
 
-### Containerisation and API’s
-    Gloo: https://docs.solo.io/gloo/latest/introduction/
+```
+config.vm.network :forwarded_port, guest: 9200, host: 1234
+```
+
+Sometimes, Vagrant will attempt to auto-correct this for you. In this case, Vagrant was unable to. This is usually because the guest machine is in a state which doesn't allow modifying port forwarding. You could try 'vagrant reload' (equivalent of running a halt followed by an up) so vagrant can attempt to auto-correct this upon booting. Be warned that any unsaved work might be lost. <br />
+__Command__ `vagrant up --provision` <br />
+__Info__ When I run `vagrant up` I get an error about a port collision, in this case it is port `9200` - The reason is that I have an Elasticsearch container running on my local laptop, and since HashiQube also run Elasticsearch this port is taken. <br />
+__Solution__ I stop the Elasticsearch docker container and I run `vagrant up` again, or I hash the line out in the Vagrantfile like the example below <br />
+
+```
+# config.vm.network "forwarded_port", guest: 9200, host: 9200 # elasticsearch
+```
 
 ## Support & Feedback
 For suggestions, feedback and queries please branch or and submit a Pull Request or directly contact Riaan Nolan, creator of the HashiQube via Github: https://github.com/star3am/hashiqube
 
-## About
-Hashiqube has been created to help Engineers, Developers and anyone who wants to practise, learn or demo Hashicorp products to get started quickly with a local lab. 
 
 ### About Hashiqube
 Hashiqube runs all the Hashicorp products and a host of other popular Open Source software taht is heavily used in the industry. 
