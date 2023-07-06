@@ -2,7 +2,7 @@
 
 ## Overview
 
-Hashiqube is a Docker Container (Default) or a VM (Virtualbox). Hashiqube has a Docker daemon inside. It runs all Hashicorp products. __Vault, Terraform, Nomad, Consul, Waypoint, Boundary, Vagrant, Packer and Sentinel.__
+Hashiqube is a Docker Container (Default) or a Virtual Machine VM (Virtualbox). Hashiqube has a Docker daemon inside. It runs all Hashicorp products. __Vault, Terraform, Nomad, Consul, Waypoint, Boundary, Vagrant, Packer and Sentinel.__
 It also runs a host of other popular Open Source DevOps / DevSecOps applications (Minikube, Ansible AWX Tower, Traefik etc.) showcasing how simple integration with Hashicorp products can result in tangible learnings and benefits for all its users.
 
 Once Hashiqube is up an internet connection is no longer needed meaning sales pitches and demos for potential and existing customers is greatly aided.
