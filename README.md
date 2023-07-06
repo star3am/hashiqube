@@ -155,7 +155,7 @@ Now that docker is installed we need to ensure that the docker environment and s
 
 ##### Docker Desktop Resources
 
-:bulb: You can quite happily run Hashiqube with 8G of RAM, but once you start running, Vault, Nomad, Consul, Waypoint, Boundary AND you want to run Minikube with let's say AWX Ansible Tower, the processes will start contending for resources and you will get weird errors. For that reason, below screenshot is my setup with 12G of RAM. For reference I use an M1 Macbook Air with 16G or RAM as my personal laptop.
+:bulb: You can quite happily run Hashiqube with 4G (minimum)  or 8G (recommended) of RAM, but once you start running, Vault, Nomad, Consul, Waypoint, Boundary AND you want to run Minikube with let's say AWX Ansible Tower at the same time, the processes will start contending for resources and you will get weird errors. For that reason, below screenshot is my setup with 12G of RAM. For reference I use an M1 Macbook Air with 16G or RAM as my personal laptop. I frequently run all of HashiQube's services to test with, for example, I'll run Vault, Nomad, Consul, Waypoint, Boundary and Minikube with Grafana and Prometheus to test the monitoring of Vault, Nomad and Consul, for that reason 4G Ram would not be enough.
 
 ![Docker Desktop Resources](images/docker_installed_resources.png?raw=true "Docker Desktop Resources")
 
