@@ -8,6 +8,14 @@ sudo docker stop mysql
 sudo docker rm mysql
 yes | sudo docker system prune -a
 yes | sudo docker system prune --volumes
+
+arch=$(lscpu | grep "Architecture" | awk '{print $NF}')
+if [[ $arch == x86_64* ]]; then
+  ARCH="amd64"
+elif  [[ $arch == aarch64 ]]; then
+  ARCH="arm64"
+fi
+
 if pgrep -x "vault" >/dev/null
 then
   echo -e '\e[38;5;198m'"++++ "
@@ -26,13 +34,24 @@ echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Bring up a MySQL database on Docker"
 echo -e '\e[38;5;198m'"++++ "
 sudo DEBIAN_FRONTEND=noninteractive apt-get --assume-yes install mysql-client
-sudo docker run \
-  --memory 512M \
+if [[ $arch == x86_64* ]]; then
+  sudo docker run \
+  --memory 1024M \
   --name mysql \
   -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=mysqldb \
   -p 3306:3306 \
   -d mysql:latest \
   --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+elif  [[ $arch == aarch64 ]]; then
+  sudo docker run \
+  --memory 1024M \
+  --name mysql \
+  -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=mysqldb \
+  -p 3306:3306 \
+  -d arm64v8/mysql:latest \
+  --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+fi
+
 sleep 60;
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Show databases"
