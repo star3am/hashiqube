@@ -128,7 +128,7 @@ minikube   Ready    master   59m   v1.17.0
 Connection to 127.0.0.1 closed.
 ```
 
-Ahandy one is get all: 
+A handy one is get all: 
 `vagrant ssh -c "kubectl get all -A"` or inside Hashiqube simply `kubectl get all -A`
 
 ```log
