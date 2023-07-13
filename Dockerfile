@@ -42,7 +42,7 @@ RUN useradd -m -G sudo -s /bin/bash vagrant && \
 # Establish ssh keys for vagrant
 RUN mkdir -p /home/vagrant/.ssh; \
     chmod 700 /home/vagrant/.ssh
-ADD https://raw.githubusercontent.com/hashicorp/vagrant/master/keys/vagrant.pub /home/vagrant/.ssh/authorized_keys
+RUN wget -q -O /home/vagrant/.ssh/authorized_keys https://raw.githubusercontent.com/hashicorp/vagrant/master/keys/vagrant.pub
 RUN chmod 600 /home/vagrant/.ssh/authorized_keys; \
     chown -R vagrant:vagrant /home/vagrant/.ssh
 
