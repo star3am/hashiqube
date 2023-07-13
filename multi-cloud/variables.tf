@@ -26,7 +26,7 @@ variable "debug_user_data" {
 variable "vagrant_provisioners" {
   description = "The list of services you would like to run in Hashiqube, the more you run, the bigger instance youd need with more RAM"
   type        = string
-  default     = "basetools,docker,vault,consul,nomad,boundary,waypoint"
+  default     = "basetools,docker,consul,vault,nomad,boundary,waypoint"
 }
 
 variable "whitelist_cidr" {
@@ -37,7 +37,7 @@ variable "whitelist_cidr" {
 
 variable "ssh_public_key" {
   type        = string
-  default     = "~/.ssh/id_rsa.pub"
+  default     = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQ......"
   description = "SSH public key"
 }
 

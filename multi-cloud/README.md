@@ -58,10 +58,31 @@ f6bc621e730e   7b224f871e2a   "/usr/sbin/init"   58 minutes ago   Up 58 minutes 
 
 Everything you need is done via the Dockerfile, and once you open this project folder with VSCode Dev Containers, you will be dropped into a container built of the Dockerfile with Terraform already installed. 
 
-You simple need to configure your Cloud authentication, and this is done: 
-- AWS `~/.aws/config`
-- GCP `~/.gcp/credentials.json`
-- Azure with `az login` (The credentials are then passed into the container via the ENV variables in the docker-compose.yml file) 
+You simple need to configure your Cloud authentication, and this is done by exporting the following Environment variables, be sure to look at the helpful links
+
+Authentication
+- Azure: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/service_principal_client_secret#creating-a-service-principal
+- AWS: https://registry.terraform.io/providers/hashicorp/aws/latest/docs#environment-variables
+- GCP: https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference.html#authentication-configuration
+
+```
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/service_principal_client_secret#creating-a-service-principal
+export AWS_ACCESS_KEY_ID=YOUR_AWS_ACCESS_KEY_ID
+export AWS_SECRET_ACCESS_KEY=YOUR_AWS_SECRET_ACCESS_KEY
+export AWS_REGION=YOUR_AWS_REGION
+
+# https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference.html#authentication-configuration
+export GOOGLE_CREDENTIALS=’YOUR_GOOGLE_CREDENTIALS_FILE_JSON’
+
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/service_principal_client_secret#creating-a-service-principal
+export ARM_CLIENT_ID=YOUR_ARM_CLIENT_ID
+export ARM_CLIENT_SECRET=YOUR_ARM_CLIENT_SECRET
+export ARM_SUBSCRIPTION_ID=YOUR_ARM_SUBSCRIPTION_ID
+export ARM_TENANT_ID=YOUR_ARM_TENANT_ID
+```
+
+Also see terraform.auto.tfvars.example which you should copy to terraform.auto.tfvars and fill in the details
+
 - Run `terraform plan` and `terraform apply`
 - The Terraform Output will look something like: 
 

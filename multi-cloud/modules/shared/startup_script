@@ -65,7 +65,7 @@ printf " * Get Nomad Server Members: nomad server members\n"
 printf " * Get Consul Info:          consul info\n"
 printf " * Get Consul Members:       consul members -wan\n"
 printf " * Get Waypoint Token:       vagrant ssh -c 'cat /home/vagrant/.waypoint-nomad-token'\n"
-printf " * SSH into Hashiqube:       vagrant ssh\n"
+printf " * SSH into Hashiqube:       cd hashiqube; vagrant ssh\n"
 printf "\n"
 EOF
 # remove unneeded motd files
@@ -97,6 +97,10 @@ for i in $(grep -Rlz '10.9.99.10' /home/ubuntu/hashiqube/); do sudo -u ubuntu se
 for i in $(grep -Rlz 'hashiqube0' /home/ubuntu/hashiqube/); do sudo -u ubuntu sed -i "s/hashiqube0/hashiqube-$DC/g" $i; done < /dev/null > /dev/null
 # set different DCs for the nodes
 for i in $(grep -Rlz 'dc1' /home/ubuntu/hashiqube/); do sudo -u ubuntu sed -i "s/dc1/$DC/g" $i; done < /dev/null > /dev/null
+# consul configs
+for i in $(grep -Rlz "$HASHIQUBE_IP" /home/ubuntu/hashiqube/hashicorp/consul.sh); do sudo -u ubuntu sed -i "s/$HASHIQUBE_IP/$INSTANCE_IP/g" $i; done < /dev/null > /dev/null
+# vault configs
+for i in $(grep -Rlz "$HASHIQUBE_IP" /home/ubuntu/hashiqube/hashicorp/vault.sh); do sudo -u ubuntu sed -i "s/$HASHIQUBE_IP/$INSTANCE_IP/g" $i; done < /dev/null > /dev/null
 sudo -u ubuntu vagrant up --provision-with ${VAGRANT_PROVISIONERS}
 # cluster join
 if [[ $HASHIQUBE_AZURE_IP ]]; then
@@ -104,18 +108,24 @@ if [[ $HASHIQUBE_AZURE_IP ]]; then
   sudo -u ubuntu vagrant ssh -c "consul members -wan"
   sudo -u ubuntu vagrant ssh -c "nomad server join ${HASHIQUBE_AZURE_IP}"
   sudo -u ubuntu vagrant ssh -c "nomad server members"
+  sudo -u ubuntu vagrant ssh -c "vault operator raft join http://${HASHIQUBE_AZURE_IP}:8200"
+  sudo -u ubuntu vagrant ssh -c "vault operator raft list-peers"
 fi
 if [[ $HASHIQUBE_AWS_IP ]]; then
   sudo -u ubuntu vagrant ssh -c "consul join -wan ${HASHIQUBE_AWS_IP}"
   sudo -u ubuntu vagrant ssh -c "consul members -wan"
   sudo -u ubuntu vagrant ssh -c "nomad server join ${HASHIQUBE_AWS_IP}"
   sudo -u ubuntu vagrant ssh -c "nomad server members"
+  sudo -u ubuntu vagrant ssh -c "vault operator raft join http://${HASHIQUBE_AWS_IP}:8200"
+  sudo -u ubuntu vagrant ssh -c "vault operator raft list-peers"
 fi
 if [[ $HASHIQUBE_GCP_IP ]]; then
   sudo -u ubuntu vagrant ssh -c "consul join -wan ${HASHIQUBE_GCP_IP}"
   sudo -u ubuntu vagrant ssh -c "consul members -wan"
   sudo -u ubuntu vagrant ssh -c "nomad server join ${HASHIQUBE_GCP_IP}"
   sudo -u ubuntu vagrant ssh -c "nomad server members"
+  sudo -u ubuntu vagrant ssh -c "vault operator raft join http://${HASHIQUBE_GCP_IP}:8200"
+  sudo -u ubuntu vagrant ssh -c "vault operator raft list-peers"
 fi
 echo "Hashiqube Setup Complete"
 echo USER-DATA END $(date '+%Y-%m-%d %H:%M:%S')

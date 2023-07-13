@@ -24,22 +24,25 @@ terraform {
 
 provider "aws" {
   region                   = var.aws_region
-  shared_credentials_files = [file(var.aws_credentials)]
-  profile                  = var.aws_profile
+  # Default authentication is via ENV variables see: https://registry.terraform.io/providers/hashicorp/aws/latest/docs#environment-variables
+  # shared_credentials_files = [file(var.aws_credentials)]
+  # profile                  = var.aws_profile
 }
 
 provider "azurerm" {
+  # Default authentication is via ENV variables see: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/service_principal_client_secret#creating-a-service-principal
   features {}
 }
 
 provider "google" {
-  credentials = file(var.gcp_credentials)
+  # Default authentication is via ENV variables see: https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference.html#authentication-configuration
+  # credentials = file(var.gcp_credentials)
   project     = var.gcp_project
   region      = var.gcp_region
 }
 
 data "external" "myipaddress" {
-  program = ["bash", "-c", "curl -k 'https://api.ipify.org?format=json'"]
+  program = ["bash", "-c", "curl -m 10 -sk 'https://api.ipify.org?format=json'"]
 }
 
 resource "null_resource" "hashiqube" {

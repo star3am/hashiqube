@@ -198,7 +198,7 @@ resource "azurerm_linux_virtual_machine" "hashiqube" {
   }
   admin_ssh_key {
     username   = "ubuntu"
-    public_key = file(var.ssh_public_key)
+    public_key = var.ssh_public_key
   }
   custom_data = base64gzip(templatefile("${path.module}/../../modules/shared/startup_script",{
     HASHIQUBE_AZURE_IP = azurerm_public_ip.hashiqube.ip_address

@@ -1,5 +1,7 @@
 deploy_to_aws = true
 deploy_to_gcp = true
 deploy_to_azure = true
+ssh_public_key = "" # The contents of your ~/.ssh/id_rsa.pub
 aws_profile = "default"
 gcp_project = "default"
+gcp_region = "australia-southeast1"

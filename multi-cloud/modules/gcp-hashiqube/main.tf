@@ -72,7 +72,7 @@ resource "google_compute_instance_template" "hashiqube" {
     VAGRANT_PROVISIONERS = var.vagrant_provisioners
   })
   metadata = {
-    ssh-keys = "ubuntu:${file(var.ssh_public_key)}"
+    ssh-keys = "ubuntu:${var.ssh_public_key}"
   }
   network_interface {
     subnetwork = data.google_compute_subnetwork.hashiqube.self_link
