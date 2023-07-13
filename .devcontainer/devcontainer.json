@@ -1,0 +1,24 @@
+// https://code.visualstudio.com/docs/devcontainers/attach-container
+{
+  //"description": "We dont specify dockerComposeFile or build becasue we attach to a running container that is created with Vagrant",
+  //"dockerComposeFile": "../docker-compose.yml",
+  //"service": "hashiqube",
+  //"build": { "dockerfile": "../Dockerfile" },
+  "workspaceFolder": "/vagrant",
+  "remoteUser": "vagrant",
+  "remoteEnv": { "MY_VARIABLE": "some-value" },
+  "postAttachCommand": "pwd && whoami",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash"
+      },
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "hashicorp.terraform",
+        "nhoizey.gremlins",
+        "hashicorp.hcl"
+      ]
+    }
+  }
+}
