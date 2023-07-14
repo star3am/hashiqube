@@ -21,7 +21,7 @@ variable "ec2_instance" {
     {
       ami_id        = "ami-02e8cbf7681c3ae51"
       instance_type = "t1.micro"
-      az            = "ap-southeast-2"
+      az            = "ap-southeast-1"
       set_public_ip = false
       subnet_id     = "subnet-07e73ebcae662e4a3"
       security_group = [
@@ -51,7 +51,7 @@ variable "ec2_instance" {
       instance_type = "t2.micro"
       az            = "ap-southeast-2"
       set_public_ip = false
-      subnet_id     = "subnet-07e73ebcae662e4a3"
+      subnet_id     = "subnet-3ebcae667e72e4a3"
       security_group = [
         "dev-node"
       ]
@@ -77,9 +77,9 @@ variable "ec2_instance" {
     {
       ami_id        = "ami-02e8cbf7681c3ae51"
       instance_type = "t3.micro"
-      az            = "ap-southeast-2"
+      az            = "ap-southeast-3"
       set_public_ip = false
-      subnet_id     = "subnet-07e73ebcae662e4a3"
+      subnet_id     = "subnet-07e7662e4a3ebcae"
       security_group = [
         "dev-node"
       ]
@@ -101,6 +101,24 @@ variable "ec2_instance" {
           devicename = "/dev/sdg"
         }
       ]
+    }
+  ]
+}
+
+variable "tunnels" {
+  type = list
+  default = [
+    {
+      host = "*.google.com"
+      type = "host"
+      address = "8.8.8.8/32"
+      description = "google description"
+    },
+    {
+      host = "*.example.com"
+      type = "address"
+      address = "0.0.0.0/0"
+      description = "example description"
     }
   ]
 }
