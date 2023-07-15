@@ -106,18 +106,18 @@ variable "ec2_instance" {
 }
 
 variable "tunnels" {
-  type = list
+  type = list(any)
   default = [
     {
-      host = "*.google.com"
-      type = "host"
-      address = "8.8.8.8/32"
+      host        = "*.google.com"
+      type        = "host"
+      address     = "8.8.8.8/32"
       description = "google description"
     },
     {
-      host = "*.example.com"
-      type = "address"
-      address = "0.0.0.0/0"
+      host        = "*.example.com"
+      type        = "address"
+      address     = "0.0.0.0/0"
       description = "example description"
     }
   ]

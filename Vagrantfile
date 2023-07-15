@@ -223,43 +223,43 @@ Vagrant::configure("2") do |config|
 
       # install vault
       # vagrant up --provision-with vault to only run this on vagrant up
-      config.vm.provision "vault", type: "shell", preserve_order: false, privileged: true, path: "hashicorp/vault.sh"
+      config.vm.provision "vault", type: "shell", preserve_order: false, privileged: true, path: "vault/vault.sh"
 
       # install consul
       # vagrant up --provision-with consul to only run this on vagrant up
-      config.vm.provision "consul", type: "shell", preserve_order: false, privileged: true, path: "hashicorp/consul.sh"
+      config.vm.provision "consul", type: "shell", preserve_order: false, privileged: true, path: "consul/consul.sh"
 
       # install nomad
       # vagrant up --provision-with nomad to only run this on vagrant up
-      config.vm.provision "nomad", type: "shell", preserve_order: false, privileged: true, path: "hashicorp/nomad.sh"
+      config.vm.provision "nomad", type: "shell", preserve_order: false, privileged: true, path: "nomad/nomad.sh"
 
       # install waypoint on kubernetes using minikube
       # vagrant up --provision-with waypoint-kubernetes-minikube to only run this on vagrant up
-      config.vm.provision "waypoint-kubernetes-minikube", run: "never", type: "shell", preserve_order: false, privileged: true, path: "hashicorp/waypoint.sh", args: "waypoint-kubernetes-minikube"
+      config.vm.provision "waypoint-kubernetes-minikube", run: "never", type: "shell", preserve_order: false, privileged: true, path: "waypoint/waypoint.sh", args: "waypoint-kubernetes-minikube"
 
       # install waypoint on nomad
       # vagrant up --provision-with waypoint-nomad to only run this on vagrant up
-      config.vm.provision "waypoint-nomad", run: "never", type: "shell", preserve_order: false, privileged: true, path: "hashicorp/waypoint.sh", args: "waypoint-nomad"
+      config.vm.provision "waypoint-nomad", run: "never", type: "shell", preserve_order: false, privileged: true, path: "waypoint/waypoint.sh", args: "waypoint-nomad"
 
       # install waypoint on nomad
       # vagrant up --provision-with waypoint to only run this on vagrant up
-      config.vm.provision "waypoint", type: "shell", preserve_order: false, privileged: true, path: "hashicorp/waypoint.sh", args: "waypoint-nomad"
+      config.vm.provision "waypoint", type: "shell", preserve_order: false, privileged: true, path: "waypoint/waypoint.sh", args: "waypoint-nomad"
 
       # install boundary
       # vagrant up --provision-with boundary to only run this on vagrant up
-      config.vm.provision "boundary", type: "shell", preserve_order: false, privileged: true, path: "hashicorp/boundary.sh"
+      config.vm.provision "boundary", type: "shell", preserve_order: false, privileged: true, path: "boundary/boundary.sh"
 
       # install packer
       # vagrant up --provision-with packer to only run this on vagrant up
-      config.vm.provision "packer", type: "shell", preserve_order: false, privileged: true, path: "hashicorp/packer.sh"
+      config.vm.provision "packer", type: "shell", preserve_order: false, privileged: true, path: "packer/packer.sh"
 
       # install sentinel
       # vagrant up --provision-with sentinel to only run this on vagrant up
-      config.vm.provision "sentinel", type: "shell", preserve_order: false, privileged: true, path: "hashicorp/sentinel.sh"
+      config.vm.provision "sentinel", type: "shell", preserve_order: false, privileged: true, path: "sentinel/sentinel.sh"
 
       # install terraform
       # vagrant up --provision-with terraform to only run this on vagrant up
-      config.vm.provision "terraform", preserve_order: true, type: "shell", privileged: true, path: "hashicorp/terraform.sh"
+      config.vm.provision "terraform", preserve_order: true, type: "shell", privileged: true, path: "terraform/terraform.sh"
 
       # install localstack
       # vagrant up --provision-with localstack to only run this on vagrant up

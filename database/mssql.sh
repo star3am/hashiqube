@@ -17,7 +17,7 @@ else
   echo -e '\e[38;5;198m'"++++ "
   echo -e '\e[38;5;198m'"++++ Ensure Vault is running.."
   echo -e '\e[38;5;198m'"++++ "
-  sudo bash /vagrant/hashicorp/vault.sh
+  sudo bash /vagrant/vault/vault.sh
 fi
 export VAULT_ADDR=http://127.0.0.1:8200
 vault status

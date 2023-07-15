@@ -15,7 +15,7 @@ echo -e '\e[38;5;198m'"CPU is $ARCH"
 if [[ ! -f /usr/local/bin/terraform ]];
 then
   echo -e '\e[38;5;198m'"++++ Ensure Terraform is not installed, installing"
-  sudo bash /vagrant/hashicorp/terraform.sh
+  sudo bash /vagrant/terraform/terraform.sh
 else
   echo -e '\e[38;5;198m'"++++ Terraform is installed"
 fi

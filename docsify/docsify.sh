@@ -1,7 +1,7 @@
 #!/bin/bash
 
 curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes nodejs
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq --assume-yes nodejs < /dev/null > /dev/null
 sudo npm i docsify-cli -g --loglevel=error
 cd /vagrant
 # This generates SUMMARY.md which is the menu for Docsify

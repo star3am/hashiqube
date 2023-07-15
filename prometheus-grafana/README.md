@@ -86,7 +86,7 @@ and you should be able to see some graphs.
 https://developer.hashicorp.com/vault/docs/configuration/telemetry#prometheus <br />
 https://developer.hashicorp.com/vault/docs/configuration/telemetry
 
-In hashicorp/vault.sh we enabled Telemetry in the Vault config file see `hashicorp/vault.sh`
+In vault/vault.sh we enabled Telemetry in the Vault config file see `vault/vault.sh`
 
 ```hcl
 # https://developer.hashicorp.com/vault/docs/configuration/telemetry
@@ -136,7 +136,7 @@ https://developer.hashicorp.com/nomad/docs/operations/monitoring-nomad <br />
 https://developer.hashicorp.com/nomad/tutorials/manage-clusters/prometheus-metrics
 
 
-In hashicorp/nomad.sh we enabled Telemetry in the Nomad config file see `hashicorp/nomad.sh`
+In nomad/nomad.sh we enabled Telemetry in the Nomad config file see `nomad/nomad.sh`
 
 ```hcl
 # https://developer.hashicorp.com/nomad/docs/configuration/telemetry
@@ -185,7 +185,7 @@ https://lvinsf.medium.com/monitor-consul-using-prometheus-and-grafana-1f2354cc00
 https://grafana.com/grafana/dashboards/13396-consul-server-monitoring/ <br />
 https://developer.hashicorp.com/consul/docs/agent/telemetry
 
-In hashicorp/consul.sh we enabled Telemetry in the Consul config file see `hashicorp/consul.sh`
+In consul/consul.sh we enabled Telemetry in the Consul config file see `consul/consul.sh`
 
 ```hcl
 # https://lvinsf.medium.com/monitor-consul-using-prometheus-and-grafana-1f2354cc002f

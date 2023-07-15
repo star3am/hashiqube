@@ -268,8 +268,6 @@ After Molecule bringing up the Ubuntu VM in VirtualBox, to test connection to va
 Succesful ouput should be as below:
 ![image-4.png](roles/ansible-role-example-role/image-4.png)
 
-
-
 ## Windows (Ubuntu with WSL)
 ![Ansible Molecule on Windows](roles/ansible-role-example-role/images/molecule-run-on-wsl-windows.png?raw=true "Ansible Moleculeon Windows")
 

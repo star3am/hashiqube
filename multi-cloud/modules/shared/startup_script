@@ -98,9 +98,9 @@ for i in $(grep -Rlz 'hashiqube0' /home/ubuntu/hashiqube/); do sudo -u ubuntu se
 # set different DCs for the nodes
 for i in $(grep -Rlz 'dc1' /home/ubuntu/hashiqube/); do sudo -u ubuntu sed -i "s/dc1/$DC/g" $i; done < /dev/null > /dev/null
 # consul configs
-for i in $(grep -Rlz "$HASHIQUBE_IP" /home/ubuntu/hashiqube/hashicorp/consul.sh); do sudo -u ubuntu sed -i "s/$HASHIQUBE_IP/$INSTANCE_IP/g" $i; done < /dev/null > /dev/null
+for i in $(grep -Rlz "$HASHIQUBE_IP" /home/ubuntu/hashiqube/consul/consul.sh); do sudo -u ubuntu sed -i "s/$HASHIQUBE_IP/$INSTANCE_IP/g" $i; done < /dev/null > /dev/null
 # vault configs
-for i in $(grep -Rlz "$HASHIQUBE_IP" /home/ubuntu/hashiqube/hashicorp/vault.sh); do sudo -u ubuntu sed -i "s/$HASHIQUBE_IP/$INSTANCE_IP/g" $i; done < /dev/null > /dev/null
+for i in $(grep -Rlz "$HASHIQUBE_IP" /home/ubuntu/hashiqube/vault/vault.sh); do sudo -u ubuntu sed -i "s/$HASHIQUBE_IP/$INSTANCE_IP/g" $i; done < /dev/null > /dev/null
 sudo -u ubuntu vagrant up --provision-with ${VAGRANT_PROVISIONERS}
 # cluster join
 if [[ $HASHIQUBE_AZURE_IP ]]; then

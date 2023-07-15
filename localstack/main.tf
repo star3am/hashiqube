@@ -61,7 +61,7 @@ locals {
     range(length(local.ec2_instance_disk_allocations_flattened)),
     local.ec2_instance_disk_allocations_flattened
   )
-  
+
   tunnels_with_index = zipmap(
     range(length(var.tunnels)),
     var.tunnels

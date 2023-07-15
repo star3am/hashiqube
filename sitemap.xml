@@ -60,6 +60,42 @@
 </url>
 
 <url>
+  <loc>https://hashiqube.com/vault/README</loc>
+</url>
+
+<url>
+  <loc>https://hashiqube.com/terraform/README</loc>
+</url>
+
+<url>
+  <loc>https://hashiqube.com/nomad/README</loc>
+</url>
+
+<url>
+  <loc>https://hashiqube.com/consul/README</loc>
+</url>
+
+<url>
+  <loc>https://hashiqube.com/vagrant/README</loc>
+</url>
+
+<url>
+  <loc>https://hashiqube.com/packer/README</loc>
+</url>
+
+<url>
+  <loc>https://hashiqube.com/boundary/README</loc>
+</url>
+
+<url>
+  <loc>https://hashiqube.com/waypoint/README</loc>
+</url>
+
+<url>
+  <loc>https://hashiqube.com/sentinel/README</loc>
+</url>
+
+<url>
   <loc>https://hashiqube.com/jenkins/README</loc>
 </url>
 

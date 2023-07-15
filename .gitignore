@@ -4,7 +4,7 @@
 **.DS_Store
 *.zip
 **.terraform
-**.tfstate
+**.tfstate**
 **.backup
 **.rli
 **.lock**
@@ -16,8 +16,8 @@ sonarqube/data/es6**
 sonarqube/data/sonar.lock.db
 jenkins/jenkins_home/**
 **packer_cache*
-hashicorp/packer/windows/output**
-hashicorp/packer/windows/ansible/connection_plugins/__pycache__**
+packer/packer/windows/output**
+packer/packer/windows/ansible/connection_plugins/__pycache__**
 **.box
 **.iso
 **__pycache__

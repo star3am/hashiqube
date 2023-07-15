@@ -62,17 +62,17 @@ Hashiqube Terraform Registry module: https://registry.terraform.io/modules/star3
 ![HashiQube](images/thestack.png?raw=true "HashiQube")
 
 * [__Multi Cloud__](multi-cloud/#terraform-hashicorp-hashiqube) - Hashiqube on AWS, GCP and Azure (Clustered) https://registry.terraform.io/modules/star3am/hashiqube/hashicorp/latest
-* [__Vagrant__](hashicorp/#vagrant) - Vagrant is an open-source software product for building and maintaining portable virtual software development environments; e.g., for VirtualBox, KVM, Hyper-V, Docker containers, VMware, and AWS. It tries to simplify the software configuration management of virtualization in order to increase development productivity `vagrant up --provision`
-* [__Vault__](hashicorp/#vault) - Secure, store and tightly control access to tokens, passwords, certificates, encryption keys for protecting secrets and other sensitive data using a UI, CLI, or HTTP API `vagrant up --provision-with basetools,vault`
-* [__Consul__](hashicorp/#consul) - Consul uses service identities and traditional networking practices to help organizations securely connect applications running in any environment `vagrant up --provision-with basetools,consul`
-* [__Nomad__](hashicorp/#nomad) - A simple and flexible scheduler and orchestrator to deploy and manage containers and non-containerized applications across on-prem and clouds at scale `vagrant up --provision-with basetools,docker,nomad`
-* [__Traefik__](hashicorp/#traefik-load-balancer-for-nomad) - Traefik is a modern HTTP reverse proxy and load balancer that seamlessly integrates with Nomad `vagrant up --provision-with basetools,docker,nomad` or `vagrant up --provision-with basetools,docker,minikube`
-* [__Fabio__](hashicorp/#fabio-load-balancer-for-nomad) - Fabio is an HTTP and TCP reverse proxy that configures itself with data from Consul `vagrant up --provision-with basetools,docker,nomad`
-* [__Terraform__](hashicorp/#terraform) - Use Infrastructure as Code to provision and manage any cloud, infrastructure, or service `vagrant up --provision-with basetools,docker,localstack,terraform`
-* [__Packer__](hashicorp/#packer) - Create identical machine images for multiple platforms from a single source configuration.
-* [__Sentinel__](hashicorp/#sentinel) - Sentinel is an embedded policy-as-code framework
-* [__Waypoint__](hashicorp/#waypoint) - Waypoint is an open source solution that provides a modern workflow for build, deploy, and release across platforms `vagrant up --provision-with basetools,docker,waypoint` or `vagrant up --provision-with basetools,docker,waypoint-kubernetes-minikube`
-* [__Boundary__](hashicorp/#boundary) - Simple and secure remote access to any system from anywhere based on user identity `vagrant up --provision-with basetools,boundary`
+* [__Vagrant__](vagrant/#vagrant) - Vagrant is an open-source software product for building and maintaining portable virtual software development environments; e.g., for VirtualBox, KVM, Hyper-V, Docker containers, VMware, and AWS. It tries to simplify the software configuration management of virtualization in order to increase development productivity `vagrant up --provision`
+* [__Vault__](vault/#vault) - Secure, store and tightly control access to tokens, passwords, certificates, encryption keys for protecting secrets and other sensitive data using a UI, CLI, or HTTP API `vagrant up --provision-with basetools,vault`
+* [__Consul__](consul/#consul) - Consul uses service identities and traditional networking practices to help organizations securely connect applications running in any environment `vagrant up --provision-with basetools,consul`
+* [__Nomad__](nomad/#nomad) - A simple and flexible scheduler and orchestrator to deploy and manage containers and non-containerized applications across on-prem and clouds at scale `vagrant up --provision-with basetools,docker,nomad`
+* [__Traefik__](nomad/#traefik-load-balancer-for-nomad) - Traefik is a modern HTTP reverse proxy and load balancer that seamlessly integrates with Nomad `vagrant up --provision-with basetools,docker,nomad` or `vagrant up --provision-with basetools,docker,minikube`
+* [__Fabio__](nomad/#fabio-load-balancer-for-nomad) - Fabio is an HTTP and TCP reverse proxy that configures itself with data from Consul `vagrant up --provision-with basetools,docker,nomad`
+* [__Terraform__](terraform/#terraform) - Use Infrastructure as Code to provision and manage any cloud, infrastructure, or service `vagrant up --provision-with basetools,docker,localstack,terraform`
+* [__Packer__](packer/#packer) - Create identical machine images for multiple platforms from a single source configuration.
+* [__Sentinel__](sentinel/#sentinel) - Sentinel is an embedded policy-as-code framework
+* [__Waypoint__](waypoint/#waypoint) - Waypoint is an open source solution that provides a modern workflow for build, deploy, and release across platforms `vagrant up --provision-with basetools,docker,waypoint` or `vagrant up --provision-with basetools,docker,waypoint-kubernetes-minikube`
+* [__Boundary__](boundary/#boundary) - Simple and secure remote access to any system from anywhere based on user identity `vagrant up --provision-with basetools,boundary`
 * [__Docker__](docker/#docker) - Securely build, share and run any application, anywhere `vagrant up --provision-with basetools,docker`
 * [__Localstack__](localstack/#localstack) - A fully functional local AWS cloud stack `vagrant up --provision-with basetools,docker,localstack,terraform`
 * [__Ansible__](ansible/#ansible) - Ansible is a suite of software tools that enables infrastructure as code. It is open-source and the suite includes software provisioning, configuration management, and application deployment functionality.
@@ -173,10 +173,10 @@ Now you can use DNS like nomad.service.consul:9999 vault.service.consul:9999 via
 ## The HashiStack
 | Dimension | Products | | | 
 |------|--------|------------|------------|
-| __Applications__ | ![Nomad](https://www.datocms-assets.com/2885/1620155098-brandhcnomadprimaryattributedcolor.svg) <br /> [__Nomad__](hashicorp/#nomad) <br /> Schedular and workload orchestrator to deploy and manage applications | ![Waypoint](https://www.datocms-assets.com/2885/1620155130-brandhcwaypointprimaryattributedcolor.svg) <br /> [__Waypoint__](hashicorp/#waypoint) <br /> One workflow to build, deploy and release applications across platforms| | 
-| __Networking__ | ![Consul](https://www.datocms-assets.com/2885/1620155090-brandhcconsulprimaryattributedcolor.svg) <br /> [__Consul__](hashicorp/#consul) <br /> Service Mesh across any cloud and runtime platform | | |
-| __Security__ | ![Boundary](https://www.datocms-assets.com/2885/1620155080-brandhcboundaryprimaryattributedcolor.svg) <br /> [__Boundary__](hashicorp/#boundary) <br /> Secure remote access to applications and critical systems | ![Vault](https://www.datocms-assets.com/2885/1620159869-brandvaultprimaryattributedcolor.svg) <br /> [__Vault__](hashicorp/#vault) <br /> Secure management of secrets and sensitive data| |
-| __Infrastructure__ | ![Packer](https://www.datocms-assets.com/2885/1620155103-brandhcpackerprimaryattributedcolor.svg) <br /> [__Packer__](hashicorp/#packer) <br /> Automated machine images from a single source configuration| ![Vagrant](https://www.datocms-assets.com/2885/1620155118-brandhcvagrantprimaryattributedcolor.svg) <br /> [__Vagrant__](hashicorp/#vagrant) <br /> Single workflow to build and manage developer environments| ![Terraform](https://www.datocms-assets.com/2885/1620155113-brandhcterraformprimaryattributedcolor.svg) <br /> [__Terraform__](hashicorp/#terraform) <br /> Infrastructure automation to provision and manage any cloud service |
+| __Applications__ | ![Nomad](https://www.datocms-assets.com/2885/1620155098-brandhcnomadprimaryattributedcolor.svg) <br /> [__Nomad__](nomad/#nomad) <br /> Schedular and workload orchestrator to deploy and manage applications | ![Waypoint](https://www.datocms-assets.com/2885/1620155130-brandhcwaypointprimaryattributedcolor.svg) <br /> [__Waypoint__](waypoint/#waypoint) <br /> One workflow to build, deploy and release applications across platforms| | 
+| __Networking__ | ![Consul](https://www.datocms-assets.com/2885/1620155090-brandhcconsulprimaryattributedcolor.svg) <br /> [__Consul__](consul/#consul) <br /> Service Mesh across any cloud and runtime platform | | |
+| __Security__ | ![Boundary](https://www.datocms-assets.com/2885/1620155080-brandhcboundaryprimaryattributedcolor.svg) <br /> [__Boundary__](boundary/#boundary) <br /> Secure remote access to applications and critical systems | ![Vault](https://www.datocms-assets.com/2885/1620159869-brandvaultprimaryattributedcolor.svg) <br /> [__Vault__](vault/#vault) <br /> Secure management of secrets and sensitive data| |
+| __Infrastructure__ | ![Packer](https://www.datocms-assets.com/2885/1620155103-brandhcpackerprimaryattributedcolor.svg) <br /> [__Packer__](packer/#packer) <br /> Automated machine images from a single source configuration| ![Vagrant](https://www.datocms-assets.com/2885/1620155118-brandhcvagrantprimaryattributedcolor.svg) <br /> [__Vagrant__](vagrant/#vagrant) <br /> Single workflow to build and manage developer environments| ![Terraform](https://www.datocms-assets.com/2885/1620155113-brandhcterraformprimaryattributedcolor.svg) <br /> [__Terraform__](terraform/#terraform) <br /> Infrastructure automation to provision and manage any cloud service |
 
 ## Other
 * LDAP can be accessed on ldap://localhost:389
@@ -210,6 +210,25 @@ Now you can use DNS like nomad.service.consul:9999 vault.service.consul:9999 via
 
 ### Errors you might encounter
 :bulb: If you see this error message
+
+`vagrant destroy`
+
+```
+    hashiqube0: Are you sure you want to destroy the 'hashiqube0' VM? [y/N] y
+There are errors in the configuration of this machine. Please fix
+the following errors and try again:
+
+shell provisioner:
+* `path` for shell provisioner does not exist on the host system: /Users/riaan/workspace/personal/hashiqube/vault/vault.sh
+```
+
+__Command__ `docker ps` <br />
+```
+CONTAINER ID IMAGE COMMAND CREATED STATUS  PORTS NAMES
+1d835d757279   15f77507dce7   "/usr/sbin/init"   38 hours ago   Up 38 hours   0.0.0.0:1433->1433/tcp, 0.0.0.0:3000->3000/tcp, 0.0.0.0:3306->3306/tcp, 0.0.0.0:3333->3333/tcp, 0.0.0.0:4566->4566/tcp, 0.0.0.0:4646-4648->4646-4648/tcp, 0.0.0.0:5001-5002->5001-5002/tcp, 0.0.0.0:5432->5432/tcp, 0.0.0.0:5580->5580/tcp, 0.0.0.0:5601-5602->5601-5602/tcp, 0.0.0.0:7777->7777/tcp, 0.0.0.0:8000->8000/tcp, 0.0.0.0:8043->8043/tcp, 0.0.0.0:8080->8080/tcp, 0.0.0.0:8088->8088/tcp, 0.0.0.0:8181->8181/tcp, 0.0.0.0:8200-8201->8200-8201/tcp, 0.0.0.0:8300-8302->8300-8302/tcp, 0.0.0.0:8500-8502->8500-8502/tcp, 0.0.0.0:8888-8889->8888-8889/tcp, 0.0.0.0:9001-9002->9001-9002/tcp, 0.0.0.0:9011->9011/tcp, 0.0.0.0:9022->9022/tcp, 0.0.0.0:9090->9090/tcp, 0.0.0.0:9093->9093/tcp, 0.0.0.0:9200->9200/tcp, 0.0.0.0:9333->9333/tcp, 0.0.0.0:9701-9702->9701-9702/tcp, 0.0.0.0:9998-9999->9998-9999/tcp, 0.0.0.0:10888->10888/tcp, 0.0.0.0:11888->11888/tcp, 0.0.0.0:18080->18080/tcp, 0.0.0.0:18181->18181/tcp, 0.0.0.0:18888-18889->18888-18889/tcp, 0.0.0.0:19200->19200/tcp, 0.0.0.0:19701-19702->19701-19702/tcp, 0.0.0.0:28080->28080/tcp, 0.0.0.0:31506->31506/tcp, 0.0.0.0:32022->32022/tcp, 0.0.0.0:8600->8600/udp, 0.0.0.0:2255->22/tcp, 0.0.0.0:33389->389/tcp   hashiqube_hashiqube0_1689246032
+```
+
+__Solution__ run `docker stop 1d835d757279` <br />
 
 ```
 The IP address configured for the host-only network is not within the
