@@ -1,1 +1,0 @@
-../windows/windowsserver/windows-2016.pkr.hcl

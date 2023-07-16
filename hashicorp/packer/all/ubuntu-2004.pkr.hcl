@@ -1,1 +1,0 @@
-../linux/ubuntu/ubuntu-2004.pkr.hcl

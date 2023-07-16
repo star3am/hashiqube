@@ -1,1 +1,0 @@
-../linux/ubuntu/ubuntu-1804.pkr.hcl
