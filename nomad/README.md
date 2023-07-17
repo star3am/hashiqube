@@ -6,7 +6,9 @@ https://www.nomadproject.io/
 
 Nomad is a highly available, distributed, data-center aware cluster and application scheduler designed to support the modern datacenter with support for
 
-[![Introduction to HashiCorp Nomad](https://img.youtube.com/vi/s_Fm9UtL4YU/maxresdefault.jpg)](https://www.youtube.com/watch?v=s_Fm9UtL4YU)
+Increasingly, teams want to move away from the traditional tight coupling of application and operating system. So they need an abstraction layer to help developers and operators work together, and save money with better hardware utilization. Introducing HashiCorp Nomad.
+
+[![Introduction to HashiCorp Nomad](images/maxresdefault.jpeg)](https://www.youtube.com/watch?v=s_Fm9UtL4YU)
 
 `vagrant up --provision-with basetools,docker,docsify,consul,nomad`
 

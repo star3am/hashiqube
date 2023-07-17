@@ -7,7 +7,9 @@ https://www.vaultproject.io/
 Manage Secrets and Protect Sensitive Data.
 Secure, store and tightly control access to tokens, passwords, certificates, encryption keys for protecting secrets and other sensitive data using a UI, CLI, or HTTP API.
 
-[![Armon Dadgar: Introduction to HashiCorp Vault](https://img.youtube.com/vi/VYfl-DpZ5wM/maxresdefault.jpg)](https://www.youtube.com/watch?v=VYfl-DpZ5wM)
+In this whiteboard video, Armon Dadgar, HashiCorp's co-founder and CTO, explains Vault, a tool for securely accessing secrets. A secret is anything that you want to tightly control access to, such as API keys, passwords, or certificates.
+
+[![Armon Dadgar: Introduction to HashiCorp Vault](images/maxresdefault.jpeg)](https://www.youtube.com/watch?v=VYfl-DpZ5wM)
 
 `vagrant up --provision-with basetools,docsify,vault`
 

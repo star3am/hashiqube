@@ -8,7 +8,13 @@ Packer is an open source tool for creating identical machine images for multiple
 
 Packer will build a Docker container, use the Shell and Ansible provisioners, Ansible will also connect to Vault to retrieve secrets using a Token.
 
-[![Introduction to HashiCorp Packer](https://img.youtube.com/vi/r0I4TTO957w/maxresdefault.jpg)](https://www.youtube.com/watch?v=r0I4TTO957w)
+Keeping track of base images can be challenging. In this whiteboard video, HashiCorp Co-Founder and CTO Armon Dadgar explains how HCP Packer forms the core of a multi-cloud golden image pipeline.
+
+HashiCorp Packer allows you to codify and automate build pipelines for machine images in multiple formats. But how do you make these images discoverable and ensure only the correct versions are deployed to production?
+
+HCP Packer, part of the HashiCorp Cloud Platform, provides a registry that tracks your image metadata and presents it to downstream processes through an API. Together with the Packer data source in the HCP provider for Terraform, this forms the foundation of a multi-cloud golden image pipeline to automate the lifecycle of images from build through deployment.
+
+[![Introduction to HashiCorp Packer](images/maxresdefault.jpeg)](https://www.youtube.com/watch?v=r0I4TTO957w)
 
 https://learn.hashicorp.com/vault/getting-started/secrets-engines
 https://docs.ansible.com/ansible/latest/plugins/lookup/hashi_vault.html

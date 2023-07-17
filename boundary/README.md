@@ -6,7 +6,9 @@ https://www.boundaryproject.io/
 
 Boundary is designed to grant access to critical systems using the principle of least privilege, solving challenges organizations encounter when users need to securely access applications and machines. Traditional products that grant access to systems are cumbersome, painful to maintain, or are black boxes lacking extensible APIs. Boundary allows authenticated and authorized users to access secure systems in private networks without granting access to the larger network where those systems reside.
 
-[![Introduction to HashiCorp Boundary](https://img.youtube.com/vi/tUMe7EsXYBQ/maxresdefault.jpg)](https://www.youtube.com/watch?v=tUMe7EsXYBQ)
+In this whiteboard overview, HashiCorp Co-Founder and CTO, Armon Dadgar introduces HashiCorp Boundary—a identity-based secure access management solution. Learn what challenges it is designed to solve and see how it works.
+
+[![Introduction to HashiCorp Boundary](images/maxresdefault.jpeg)](https://www.youtube.com/watch?v=tUMe7EsXYBQ)
 
 ![Hashicorp Boundary](images/boundary-how-it-works.png?raw=true "Hashicorp Boundary")
 ![Hashicorp Boundary](images/boundary-login-page.png?raw=true "Hashicorp Boundary")

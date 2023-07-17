@@ -6,7 +6,11 @@ https://www.consul.io/
 
 Consul is a service networking solution to connect and secure services across any runtime platform and public or private cloud
 
-[![Introduction to HashiCorp Consul](https://img.youtube.com/vi/mxeMdl0KvBI/maxresdefault.jpg)](https://www.youtube.com/watch?v=mxeMdl0KvBI)
+HashiCorp co-founder and CTO Armon Dadgar gives a whiteboard overview of HashiCorp Consul, a service networking solution to connect, configure, and secure services in dynamic infrastructure.
+
+[![Introduction to HashiCorp Consul](images/maxresdefault.jpeg)](https://www.youtube.com/watch?v=mxeMdl0KvBI)
+
+For hands-on interactive labs with Consul, visit HashiCorp Learn https://hashi.co/learnconsul 
 
 ### Consul DNS
 To use Consul as a DNS resolver from your laptop, you can create the following file<br />

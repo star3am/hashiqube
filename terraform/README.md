@@ -15,7 +15,10 @@ Terraform is an open-source infrastructure as code software tool created by Hash
 Because of this flexibility, Terraform can be used to solve many different problems.
 
 ### Introduction to Terraform
-[![Armon Dadgar: Introduction to Terraform](https://img.youtube.com/vi/h970ZBgKINg/maxresdefault.jpg)](https://www.youtube.com/watch?v=h970ZBgKINg)
+
+HashiCorp Co-Founder and CTO, Armon Dadgar, explains the basics of Terraform, what it is, and how it works in this informative whiteboard video. 
+
+[![Armon Dadgar: Introduction to Terraform](images/maxresdefault.jpeg)](https://www.youtube.com/watch?v=h970ZBgKINg)
 
 ### Terraform lifecycle
 The Terraform lifecycle consists of the following four phases
@@ -25,7 +28,10 @@ terraform init -> terraform plan -> terraform apply -> terraform destroy
 ```
 
 ### Terraform Best Practices
-[![Armon Dadgar: Terraform Workflow at Scale, Best Practices](https://img.youtube.com/vi/9c0s93GcXVw/maxresdefault.jpg)](https://www.youtube.com/watch?v=9c0s93GcXVw)
+
+What is the optimal workflow process for Terraform in a large, multi-team enterprise? Watch this whiteboard video by Terraform co-creator Armon Dadgar to find out about the high-scale Terraform best practices. Speaker: Armon Dadgar, Co-Founder & CTO, HashiCorp
+
+[![Armon Dadgar: Terraform Workflow at Scale, Best Practices](images/maxresdefault-terraform-best-practices.jpeg)](https://www.youtube.com/watch?v=9c0s93GcXVw)
 
 ### Terraform Language
 HashiCorp Configuration Language (HCL)
@@ -122,7 +128,9 @@ This simplifies a lot of things. First of all, this is pretty much invisible. It
 
 In addition to that, Terraform Cloud will also version and back up your state file so that you could go back in time and see what your infrastructure looked like in the past—or if something went wrong, you could restore a past version. This is something that's really tricky with a local file because this is a normal file on your computer—you would have to be responsible for this yourself. In Terraform Cloud's case, you could still talk directly to the various cloud providers. That's how Terraform Cloud works today. That's the major benefit that remote state brings for you.
 
-[![Introduction to Terraform Cloud](https://img.youtube.com/vi/ihAKcn9SE_M/maxresdefault.jpg)](https://www.youtube.com/watch?v=ihAKcn9SE_M)
+HashiCorp co-founder and CTO Mitchell Hashimoto gives a short whiteboard illustration of Terraform Cloud—a new service from HashiCorp that removes the hassle of managing Terraform state files across multiple teams, while also providing a centralized change history and policy governance.
+
+[![Introduction to Terraform Cloud](images/maxresdefault-terraform-cloud.jpeg)](https://www.youtube.com/watch?v=ihAKcn9SE_M)
 
 ## Terraform Cloud collaboration/governance
 

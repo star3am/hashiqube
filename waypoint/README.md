@@ -18,7 +18,9 @@ Waypoint supports
 - nomad
 - pack
 
-[![Introduction to HashiCorp Waypoint](https://img.youtube.com/vi/JL0Qeq4A6So/hqdefault.jpg)](https://www.youtube.com/watch?v=JL0Qeq4A6So)
+In this whiteboard overview, HashiCorp Co-Founder and CTO, Armon Dadgar introduces HashiCorp Waypoint—a project that unifies workflows for build, deploy, and release across platforms. Learn what challenges it is designed to solve and see how it works.
+
+[![Introduction to HashiCorp Waypoint](images/maxresdefault.jpeg)](https://www.youtube.com/watch?v=JL0Qeq4A6So)
 
 https://www.hashicorp.com/blog/announcing-waypoint
 https://www.waypointproject.io/
