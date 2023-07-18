@@ -80,6 +80,38 @@ Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 ```
 ![Vault](images/vault.png?raw=true "Vault")
 
+### Performance Replication
+
+Vault supports two types of replication:
+
+__Performance Replication__, in which multiple clusters are simultaneously active in different geographical regions so that applications can interact with nearby Vault servers. This reduces latency when applications request secrets from Vault.
+
+When multiple clusters are joined in a performance replication set, one is the primary while the others are secondary. All the clusters can service read requests themselves, but write requests are forwarded to the primary cluster.
+
+After the primary cluster saves new secrets, it replicates them to the secondary clusters. So, even when a request is initially sent to a secondary cluster, from Vault's point of view the data always flows from the primary cluster to the secondary clusters.
+
+This is important to keep in mind when we talk about mount filters and local mounts.
+
+__A Mount Filter__ is a configuration that tells the primary cluster which secrets engines and auth methods should have their data replicated from the primary cluster to specific secondary clusters.
+
+They can be dynamically enabled and removed both before and after performance replication has been configured.
+
+A generalization of a mount filter is a __Path Filter__ which can filter both mounts and namespaces in Vault Enterprise.
+
+A __Local Mount__ is a secret engine or auth method that is designated as local when it is created. It's data is not replicated to other clusters.
+
+Additionally, requests to do writes against it are handled by the cluster it was created in, even if that cluster is a performance secondary. In that case, the primary performance cluster will not see any of the local mount's data.
+
+A mount that is not local is considered a replicated mount. All mounts are replicated by default unless they are explicitly designated as local mounts when they are created.
+
+Use a mount filter when you want to restrict the flow of data from a performance primary to secondary clusters. Use a local mount when you want to restrict the flow of data from secondary clusters to the primary cluster and any other secondaries.
+
+You can learn more about the difference between local and replicated mounts at https://developer.hashicorp.com/vault/tutorials/enterprise/performance-replication#replicated-vs-local-backend-mounts
+
+__Disaster Recovery Replication__, in which only one cluster is active while the other secondary clusters serve as warm standbys in case the primary cluster suffers a catastrophic failure.
+
+`Both kinds of replication can be used simultaneously.`
+
 ## Vault Vagrant Provisioner
 
 `vault.sh`

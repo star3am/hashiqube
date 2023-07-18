@@ -95,7 +95,7 @@ After=network-online.target
 #After=consul.service
 
 [Service]
-#EnvironmentFile=/etc/nomad.d/nomad.env
+# EnvironmentFile=/etc/nomad.d/nomad.env
 ExecReload=/bin/kill -HUP $MAINPID
 ExecStart=/usr/local/bin/nomad agent -config=/etc/nomad/server.conf -dev-connect
 KillMode=process
@@ -104,6 +104,7 @@ LimitNOFILE=65536
 LimitNPROC=infinity
 Restart=on-failure
 RestartSec=2
+LogsDirectory=nomad
 StandardOutput=append:/var/log/nomad.log
 StandardError=append:/var/log/nomad.log
 StartLimitBurst=3

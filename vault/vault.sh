@@ -84,6 +84,7 @@ KillMode=process
 KillSignal=SIGINT
 Restart=on-failure
 RestartSec=5
+LogsDirectory=vault
 StandardOutput=append:/var/log/vault.log
 StandardError=append:/var/log/vault.log
 TimeoutStopSec=30

@@ -106,7 +106,7 @@ Wants=network-online.target
 After=network-online.target
 
 [Service]
-#EnvironmentFile=/etc/consul.d/consul.env
+# EnvironmentFile=/etc/consul.d/consul.env
 ExecReload=/bin/kill -HUP $MAINPID
 ExecStart=/usr/local/bin/consul agent -dev -client="0.0.0.0" -bind="0.0.0.0" -enable-script-checks -config-file=/etc/consul/server.hcl -config-dir=/etc/consul.d
 KillMode=process
@@ -115,6 +115,7 @@ LimitNOFILE=65536
 LimitNPROC=infinity
 Restart=on-failure
 RestartSec=2
+LogsDirectory=consul
 StandardOutput=append:/var/log/consul.log
 StandardError=append:/var/log/consul.log
 StartLimitBurst=3
