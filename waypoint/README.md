@@ -294,6 +294,42 @@ c97d646ce0ef: Already exists :
     hashiqube0.service.consul: bM152PWkXxfoy4vA51JFhR7LmV9FA9RLbSpHoKrysFnwnRCAGzV2RExsyAmBrHu784d1WZRW6Cx4MkhvWzkDHvEn49c4wkSZYScfJ
 ```
 
+## Waypoint Nomad .hcl 
+
+The following Waypoint job file will deploy our Nomad T-Rex NodeJS Application to Nomad
+
+[filename](waypoint/custom-examples/nomad-trex-nodejs/waypoint.hcl ':include :type=code hcl')
+
+## Waypoint Kubernetes .hcl 
+
+The following Waypoint job file will deploy our Nomad T-Rex NodeJS Application to Kubernetes (Minikube)
+
+[filename](waypoint/custom-examples/kubernetes-trex-nodejs/waypoint.hcl ':include :type=code hcl')
+
+## Waypoint T-Rex Dockerfile
+
+Both the Nomad and Kubernetes Applications have a similar Dockerfile
+
+```Dockerfile
+# syntax=docker/dockerfile:1
+
+FROM node:14.20.0
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+RUN echo "nameserver 10.9.99.10" > /etc/resolv.conf
+
+EXPOSE 6001
+
+CMD [ "node", "index.js" ]
+```
+
 ## Waypoint Vagrant Provisioner
 
 `waypoint.sh`
