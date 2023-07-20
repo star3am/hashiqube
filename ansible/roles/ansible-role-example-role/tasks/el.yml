@@ -92,10 +92,12 @@
     and ansible_facts['distribution'] == "RedHat"
     and ansible_facts['distribution_major_version'] == "8")
 
-# amazon-ebs.redhat-83: TASK [/Users/riaannolan/workspace/servian.com/soe-image-factory/ansible/RHEL8-CIS : SCORED | 1.4.1 | PATCH | Ensure AIDE is installed | Install AIDE] ***
+# amazon-ebs.redhat-83: TASK [/Users/riaan/workspace/personal/soe-image-factory/ansible/RHEL8-CIS : SCORED | 1.4.1 | 
+PATCH | Ensure AIDE is installed | Install AIDE] ***
 # amazon-ebs.redhat-83: fatal: [none]: FAILED! => {"changed": false, "failures": ["No package aide available."], "msg": "Failed to install some of the specified packages", "rc": 1, "results": []}
 # amazon-ebs.redhat-83: failed: [none] (item=firewalld) => {"ansible_loop_var": "item", "changed": false, "failures": ["No package firewalld available."], "item": "firewalld", "msg": "Failed to install some of the specified packages", "rc": 1, "results": []}
-# amazon-ebs.redhat-83: TASK [/Users/riaannolan/workspace/servian.com/soe-image-factory/ansible/RHEL8-CIS : SCORED | 3.4.1.1 | PATCH | Ensure a Firewall package is installed] ***
+# amazon-ebs.redhat-83: TASK [/Users/riaan/workspace/personal/soe-image-factory/ansible/RHEL8-CIS : SCORED | 3.4.1.1 | PATCH | 
+Ensure a Firewall package is installed] ***
 # amazon-ebs.redhat-83: fatal: [none]: FAILED! => {"changed": false, "failures": ["No package firewalld available."], "msg": "Failed to install some of the specified packages", "rc": 1, "results": []}
 # FIX RHEL8-CIS SCORED | 1.4.1 | PATCH | Ensure AIDE is installed
 # FIX RHEL8-CIS SCORED | 3.4.1.1 | PATCH | Ensure a Firewall package is installed

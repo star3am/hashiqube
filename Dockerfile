@@ -19,7 +19,6 @@ RUN apt-get -qq clean < /dev/null > /dev/null
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Enable systemd (from Matthew Warman's mcwarman/vagrant-provider)
-# Ref: https://github.com/servian/hashiqube/issues/12
 RUN find /lib/systemd/system/sysinit.target.wants -mindepth 1 -not -name "systemd-tmpfiles-setup.service" -delete; \
     find /lib/systemd/system/multi-user.target.wants -mindepth 1 -not -name "systemd-user-sessions.service" -delete; \
     rm -f /etc/systemd/system/*.wants/*; \
