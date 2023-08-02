@@ -58,6 +58,7 @@ Hashiqube Github: https://github.com/star3am/hashiqube <br />
 Hashiqube Youtube: https://www.youtube.com/watch?v=6jGDAGWaFiw <br />
 Hashiqube Medium: https://medium.com/search?q=hashiqube <br />
 Hashiqube Terraform Registry module: https://registry.terraform.io/modules/star3am/hashiqube/hashicorp/latest <br />
+Terraform Development Environment: https://medium.com/@riaan.nolan/top-gun-terraform-development-environment-60ac00d49577
 
 ## Hashiqube Integrations
 ![HashiQube](images/thestack.png?raw=true "HashiQube")
