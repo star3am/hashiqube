@@ -199,3 +199,42 @@ sudo gitlab-runner register --non-interactive --url "http://localhost:5580" --re
 ```
 
 ![Gitlab-Runner](images/gitlab-runner.png?raw=true "Gitlab-Runner")
+
+## Gitlab Pipeline
+
+```
+variables:
+  REPOSITORY_URL: xxxxxxxxxxxxx.dkr.ecr.eu-west-1.amazonaws.com/container
+
+stages:
+  - test
+  - build
+  - dev
+  - stg
+  - prd
+
+test:
+  stage: test
+  script:
+    - echo 'Here you can run tests'
+
+build:
+  stage: build
+  script:
+    - echo 'After Test stage was successful, here you can run build your container'
+
+dev:
+  stage: dev
+  script:
+    - echo 'After Build stage was successful, here you can run your Development environment deployment'
+
+stg:
+  stage: stg
+  script:
+    - echo 'After Dev stage was successful, here you can run your Staging environment deployment'
+
+prd:
+  stage: prd
+  script:
+    - echo 'After Stg stage was successful, here you can run your Production environment deployment'
+```

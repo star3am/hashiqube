@@ -58,30 +58,26 @@ echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Launch Gitlab on minikube using Helm Charts"
 echo -e '\e[38;5;198m'"++++ "
 
+# https://docs.gitlab.com/charts/charts/globals.html#configure-host-settings
 # https://helm.sh/docs/helm/helm_upgrade/
+# https://docs.gitlab.com/charts/installation/deployment.html
+# https://docs.gitlab.com/charts/installation/command-line-options.html
 # https://gitlab.com/gitlab-org/charts/gitlab/-/blob/master/doc/installation/command-line-options.md
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Helm install gitlab"
 echo -e '\e[38;5;198m'"++++ "
-echo -e "sudo --preserve-env=PATH -u vagrant helm install \
-  --namespace default gitlab \
-  --timeout 600s \
-  --set global.edition=ce \
-  --set global.hosts.https=false \
-  --set global.hosts.domain=localhost \
-  --set global.hosts.externalIP=$(sudo --preserve-env=PATH -u vagrant minikube ip) \
-  --set gitlab-runner.install=false \
-  --set registry.enabled=false \
-  --set gitlab.webservice.registry.enabled=false \
-  --set gitlab.sidekiq.registry.enabled=false \
-  --set gitlab-runner.runners.privileged=true \
-  -f https://gitlab.com/gitlab-org/charts/gitlab/raw/master/examples/values-minikube-minimum.yaml gitlab/gitlab"
 sudo --preserve-env=PATH -u vagrant helm install \
   --namespace default gitlab \
   --timeout 600s \
   --set global.edition=ce \
   --set global.hosts.https=false \
   --set global.hosts.domain=localhost \
+  --set global.hosts.gitlab.name=localhost:5580 \
+  --set global.hosts.gitlab.hostnameOverride=localhost \
+  --set global.hosts.ssh=localhost \
+  --set global.hosts.kas.name=localhost \
+  --set global.hosts.minio.name=localhost \
+  --set global.hosts.shell.port=32022 \
   --set global.hosts.externalIP=$(sudo --preserve-env=PATH -u vagrant minikube ip) \
   --set gitlab-runner.install=false \
   --set registry.enabled=false \
@@ -90,6 +86,18 @@ sudo --preserve-env=PATH -u vagrant helm install \
   --set gitlab-runner.runners.privileged=true \
   --set redis.resources.requests.memory=128Mi \
   -f https://gitlab.com/gitlab-org/charts/gitlab/raw/master/examples/values-minikube-minimum.yaml gitlab/gitlab
+
+# IMPORTANT: 
+# --set global.hosts.gitlab.hostnameOverride=localhost \
+# --set gitlab-runner.gitlabUrl=localhost:5580 \
+# --set global.webservice.serviceName=localhost \
+# --set global.workhorse.host=localhost \
+# --set global.workhorse.serviceName=gitlab-webservice-default \
+# --set global.hosts.gitlab.servicePort=5580 \
+# --set global.workhorse.port=5580 \
+# --set global.hosts.gitlab.name=localhost \
+# --set global.hosts.gitlab.hostnameOverride=localhost \
+# --set global.hosts.hostSuffix="" \
 
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Stretch your legs, get a coffee or a drink, ETA 10m.."
@@ -115,14 +123,10 @@ sudo --preserve-env=PATH -u vagrant kubectl get po | grep gitlab
 sudo --preserve-env=PATH -u vagrant kubectl get events | grep -e Memory -e OOM
 
 # https://gitlab.com/gitlab-org/charts/gitlab/-/issues/2572 Error 422
-echo -e '\e[38;5;198m'"++++ "
-echo -e '\e[38;5;198m'"++++ The easiest way to access this service is to let kubectl to forward the port:"
-echo -e '\e[38;5;198m'"++++ kubectl port-forward service/gitlab-webservice-default 5580:8181"
-echo -e '\e[38;5;198m'"++++ "
 # https://stackoverflow.com/questions/67084554/how-to-kubectl-port-forward-gitlab-webservice
 attempts=0
 max_attempts=20
-while ! ( sudo netstat -nlp | grep 5580 ) && (( $attempts < $max_attempts )); do
+while ! ( sudo netstat -nlp | grep "0.0.0.0:5580" ) && (( $attempts < $max_attempts )); do
   attempts=$((attempts+1))
   sleep 60;
   echo -e '\e[38;5;198m'"++++ "
@@ -131,11 +135,18 @@ while ! ( sudo netstat -nlp | grep 5580 ) && (( $attempts < $max_attempts )); do
   sudo --preserve-env=PATH -u vagrant kubectl port-forward -n default service/gitlab-webservice-default 5580:8181 --address="0.0.0.0" > /dev/null 2>&1 &
 done
 
+attempts=0
+max_attempts=20
+while ! ( sudo netstat -nlp | grep "0.0.0.0:80" ) && (( $attempts < $max_attempts )); do
+  attempts=$((attempts+1))
+  sleep 60;
+  echo -e '\e[38;5;198m'"++++ "
+  echo -e '\e[38;5;198m'"++++ kubectl port-forward -n default service/gitlab-webservice-default 80:8181 --address=\"0.0.0.0\", (${attempts}/${max_attempts}) sleep 60s"
+  echo -e '\e[38;5;198m'"++++ "
+  sudo --preserve-env=PATH -u vagrant kubectl port-forward -n default service/gitlab-webservice-default 80:8181 --address="0.0.0.0" > /dev/null 2>&1 &
+done
+
 # https://gitlab.com/gitlab-org/charts/gitlab/-/issues/2572 Error 422
-echo -e '\e[38;5;198m'"++++ "
-echo -e '\e[38;5;198m'"++++ The easiest way to access this service is to let kubectl to forward the port:"
-echo -e '\e[38;5;198m'"++++ kubectl port-forward service/gitlab-gitlab-shell 32022:32022"
-echo -e '\e[38;5;198m'"++++ "
 # https://stackoverflow.com/questions/67084554/how-to-kubectl-port-forward-gitlab-webservice
 attempts=0
 max_attempts=20
@@ -148,9 +159,6 @@ while ! ( sudo netstat -nlp | grep 32022 ) && (( $attempts < $max_attempts )); d
   sudo --preserve-env=PATH -u vagrant kubectl port-forward -n default service/gitlab-gitlab-shell 32022:32022 --address="0.0.0.0" > /dev/null 2>&1 &
 done
 
-echo -e '\e[38;5;198m'"++++ "
-echo -e '\e[38;5;198m'"++++ Check that Gitlab web interface is available, eta 3m"
-echo -e '\e[38;5;198m'"++++ "
 attempts=0
 max_attempts=30
 while ! ( curl -s -w '%{http_code}' -o /dev/null "http://localhost:5580/users/sign_in" | grep 200) && (( $attempts < $max_attempts )); do
@@ -178,8 +186,7 @@ sudo gitlab-runner install --user=gitlab-runner --working-directory=/home/gitlab
 sudo gitlab-runner start
 
 echo -e '\e[38;5;198m'"++++ "
-echo -e '\e[38;5;198m'"++++ Gitlab CE http://localhost:5580 and login with Username: root and Password: "
-echo -e '\e[38;5;198m'"++++ "
+echo -e '\e[38;5;198m'"++++ Gitlab CE http://localhost:5580 and login with Username: root and below password: "
 sudo --preserve-env=PATH -u vagrant kubectl get secret gitlab-gitlab-initial-root-password -ojsonpath='{.data.password}' | base64 --decode ; echo
 
 echo -e '\e[38;5;198m'"++++ "

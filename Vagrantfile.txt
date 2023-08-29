@@ -80,7 +80,7 @@ Vagrant::configure("2") do |config|
         config.vm.network "forwarded_port", guest: 4647, host: 4647 # nomad
         config.vm.network "forwarded_port", guest: 4648, host: 4648 # nomad
         config.vm.network "forwarded_port", guest: 8080, host: 8080 # nomad-traefik
-        config.vm.network "forwarded_port", guest: 8181, host: 8181 # nomad-traefik-admin
+        config.vm.network "forwarded_port", guest: 8081, host: 8081 # nomad-traefik-admin
         config.vm.network "forwarded_port", guest: 19702, host: 19702 # waypoint-kubernetes-minikube
         config.vm.network "forwarded_port", guest: 19701, host: 19701 # waypoint-api-kubernetes-minikube
         config.vm.network "forwarded_port", guest: 9702, host: 9702 # waypoint-nomad
@@ -123,6 +123,7 @@ Vagrant::configure("2") do |config|
         config.vm.network "forwarded_port", guest: 3333, host: 3333 # docsify
         config.vm.network "forwarded_port", guest: 8043, host: 8043 # ansible-tower
         config.vm.network "forwarded_port", guest: 5580, host: 5580 # gitlab
+        config.vm.network "forwarded_port", guest: 8181, host: 8181 # gitlab-workhorse gitlab-api
         config.vm.network "forwarded_port", guest: 32022, host: 32022 # gitlab-shell
         config.vm.network "forwarded_port", guest: 7777, host: 7777 # vscode-server
         config.vm.network "forwarded_port", guest: 28080, host: 28080 # dbt docs serve

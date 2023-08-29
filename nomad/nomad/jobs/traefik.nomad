@@ -12,7 +12,7 @@ job "traefik" {
          static = 8080
       }
       port  "admin"{
-         static = 8181
+         static = 8081
       }
     }
 
