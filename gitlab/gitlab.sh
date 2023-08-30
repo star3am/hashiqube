@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# https://docs.gitlab.com/charts/installation/version_mappings.html#previous-chart-versions
+GITLAB_HELM_CHART_VERSION=7.2.4 # Which is Gitlab v16.2.4
+
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Cleanup"
 echo -e '\e[38;5;198m'"++++ "
@@ -58,6 +61,8 @@ echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Launch Gitlab on minikube using Helm Charts"
 echo -e '\e[38;5;198m'"++++ "
 
+# BUG: https://gitlab.com/gitlab-org/charts/gitlab/-/issues/4205
+# https://docs.gitlab.com/charts/charts/globals.html
 # https://docs.gitlab.com/charts/charts/globals.html#configure-host-settings
 # https://helm.sh/docs/helm/helm_upgrade/
 # https://docs.gitlab.com/charts/installation/deployment.html
@@ -66,20 +71,17 @@ echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Helm install gitlab"
 echo -e '\e[38;5;198m'"++++ "
-sudo --preserve-env=PATH -u vagrant helm install \
+sudo --preserve-env=PATH -u vagrant helm install --version $GITLAB_HELM_CHART_VERSION \
   --namespace default gitlab \
   --timeout 600s \
   --set global.edition=ce \
   --set global.hosts.https=false \
   --set global.hosts.domain=localhost \
-  --set global.hosts.gitlab.name=localhost:5580 \
-  --set global.hosts.gitlab.hostnameOverride=localhost \
-  --set global.hosts.ssh=localhost \
-  --set global.hosts.kas.name=localhost \
-  --set global.hosts.minio.name=localhost \
-  --set global.hosts.shell.port=32022 \
+  --set global.hosts.hostSuffix="" \
   --set global.hosts.externalIP=$(sudo --preserve-env=PATH -u vagrant minikube ip) \
+  --set global.hosts.gitlab.name=localhost \
   --set gitlab-runner.install=false \
+  --set gitlab-runner.gitlabUrl="localhost:5580" \
   --set registry.enabled=false \
   --set gitlab.webservice.registry.enabled=false \
   --set gitlab.sidekiq.registry.enabled=false \
@@ -87,7 +89,19 @@ sudo --preserve-env=PATH -u vagrant helm install \
   --set redis.resources.requests.memory=128Mi \
   -f https://gitlab.com/gitlab-org/charts/gitlab/raw/master/examples/values-minikube-minimum.yaml gitlab/gitlab
 
-# IMPORTANT: 
+# INFO: Other flags I have tried during this process 
+# --set global.hosts.domain=localhost \
+# --set global.hosts.gitlab.name=localhost \
+# --set global.hosts.gitlab.hostnameOverride=localhost \
+# --set global.hosts.ssh=localhost \
+# --set global.hosts.kas.name=localhost \
+# --set global.hosts.minio.name=localhost \
+# --set global.workhorse.host=localhost \
+# --set global.webservice.serviceName=webservice-default \
+# --set global.webservice.port=5580 \
+# --set gitlab.webservice.service.workhorseExternalPort=5580 \
+# --set global.hosts.shell.port=32022 \
+# --set global.hosts.externalIP=$(sudo --preserve-env=PATH -u vagrant minikube ip) \
 # --set global.hosts.gitlab.hostnameOverride=localhost \
 # --set gitlab-runner.gitlabUrl=localhost:5580 \
 # --set global.webservice.serviceName=localhost \
@@ -146,6 +160,17 @@ while ! ( sudo netstat -nlp | grep "0.0.0.0:80" ) && (( $attempts < $max_attempt
   sudo --preserve-env=PATH -u vagrant kubectl port-forward -n default service/gitlab-webservice-default 80:8181 --address="0.0.0.0" > /dev/null 2>&1 &
 done
 
+attempts=0
+max_attempts=20
+while ! ( sudo netstat -nlp | grep "0.0.0.0:8181" ) && (( $attempts < $max_attempts )); do
+  attempts=$((attempts+1))
+  sleep 60;
+  echo -e '\e[38;5;198m'"++++ "
+  echo -e '\e[38;5;198m'"++++ kubectl port-forward -n default service/gitlab-webservice-default 8181:8181 --address=\"0.0.0.0\", (${attempts}/${max_attempts}) sleep 60s"
+  echo -e '\e[38;5;198m'"++++ "
+  sudo --preserve-env=PATH -u vagrant kubectl port-forward -n default service/gitlab-webservice-default 8181:8181 --address="0.0.0.0" > /dev/null 2>&1 &
+done
+
 # https://gitlab.com/gitlab-org/charts/gitlab/-/issues/2572 Error 422
 # https://stackoverflow.com/questions/67084554/how-to-kubectl-port-forward-gitlab-webservice
 attempts=0
@@ -172,24 +197,14 @@ done
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Installing Gitlab-Runner"
 echo -e '\e[38;5;198m'"++++ "
-sudo rm -rf /etc/systemd/system/gitlab-runner.service
-if [[ $arch == x86_64* ]]; then
-  ARCH="amd64"
-  sudo curl -L --output /usr/bin/gitlab-runner "https://gitlab-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-runner-linux-amd64"
-elif  [[ $arch == aarch64 ]]; then
-  ARCH="arm64"
-  sudo curl -L --output /usr/bin/gitlab-runner "https://gitlab-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-runner-linux-arm64"
-fi
-sudo chmod +x /usr/bin/gitlab-runner
-sudo useradd --comment 'GitLab Runner' --create-home gitlab-runner --shell /bin/bash
-sudo gitlab-runner install --user=gitlab-runner --working-directory=/home/gitlab-runner
-sudo gitlab-runner start
+curl -s https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.deb.sh | sudo bash
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq --allow-downgrades --assume-yes gitlab-runner=16.3.0 < /dev/null > /dev/null
 
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Gitlab CE http://localhost:5580 and login with Username: root and below password: "
 sudo --preserve-env=PATH -u vagrant kubectl get secret gitlab-gitlab-initial-root-password -ojsonpath='{.data.password}' | base64 --decode ; echo
 
 echo -e '\e[38;5;198m'"++++ "
-echo -e '\e[38;5;198m'"++++ Please login to Gitlab and create a project called My awesome project"
+echo -e '\e[38;5;198m'"++++ Please login to Gitlab and create a project called test"
 echo -e '\e[38;5;198m'"++++ Please follow the rest of the instructions here: http://localhost:3333/#/gitlab/README?id=you-are-here"
 echo -e '\e[38;5;198m'"++++ "
