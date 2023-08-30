@@ -570,7 +570,7 @@ prd:
 
 Here is a screenshot of what I did, and the commands will be below that you can copy and past. 
 
-![Gitlab add pipeline file to Test Repository](image/gitlab-add-pipeline-file-to-test-repository.png?raw=true "Gitlab add pipeline file to Test Repository")
+![Gitlab add pipeline file to Test Repository](images/gitlab-add-pipeline-file-to-test-repository.png?raw=true "Gitlab add pipeline file to Test Repository")
 
 `cd test`
 
