@@ -21,7 +21,7 @@ http://localhost:10888/
 
 `vagrant up --provision-with basetools,docker,docsify,minikube,gitlab`
 
-```
+```log
 Bringing machine 'hashiqube0' up with 'docker' provider...
 ==> hashiqube0: Creating and configuring docker networks...
 ==> hashiqube0: Building the container from a Dockerfile...
@@ -531,7 +531,7 @@ Now that we have cloned the Test repository locally, we can add files to it. For
 
 So create a new file in the test reposiroty directory, called `.gitlab-ci.yml` with the following content
 
-```
+```yaml
 variables:
   REPOSITORY_URL: xxxxxxxxxxxxx.dkr.ecr.eu-west-1.amazonaws.com/container
 
@@ -703,5 +703,6 @@ To see what the Pipeline Jobs did, please navigate to `Jobs` on the left and the
 
 And that's it for now folks, thank you for taking the time to go through this tutorial with me and thank you for using Hashiqube, I hope you had fun! 
 
+## Gitlab Vagrant Provisioner
 
-
+[filename](gitlab.sh ':include :type=code')
