@@ -100,3 +100,7 @@ After provision, you can access Kuma on http://localhost:3001 and login with Use
 Uptime Kuma also has a status page
 
 ![Uptime Kuma](images/uptime-kuma-status-page.png?raw=true "Uptime Kuma")
+
+And you can also view the Check history
+
+![Uptime Kuma](images/uptime-kuma-check-page.png?raw=true "Uptime Kuma")

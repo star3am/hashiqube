@@ -7,7 +7,8 @@ https://gitlab.com/ <br />
 GitLab is a complete DevOps platform
 With GitLab, you get a complete CI/CD toolchain in a single application. One interface. One conversation. One permission model. Thousands of features. You'll be amazed at everything GitLab can do today. And we're just getting started.
 
-You can get Gitlab up and running by running the following command in the hashiqube source repository that you cloned earlier `vagrant up --provision-with basetools,docker,docsify,minikube,gitlab`
+You can get Gitlab up and running by running the following command in the hashiqube source repository that you cloned earlier <br>
+`vagrant up --provision-with basetools,docker,docsify,minikube,gitlab`
 
 :clock3: Duration 15 - 30 minutes <br>
 :bangbang: Your Docker daemon should at least have 12G Ram (Gitlab takes 6G alone, Minikube 2G and 2G for the Operating System in Hashiqube) <br>
