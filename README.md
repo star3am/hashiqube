@@ -33,6 +33,12 @@ Riaan Nolan's Credly profile: https://www.credly.com/users/riaan-nolan.e657145c
 * Inside the local repo folder, do `vagrant up --provision` - This will setup, Vault, Nomad, Consul, Terraform, Localstack and Docker
 * Documentation locally available at http://localhost:3333
 
+## Documentation and Status
+:loudspeaker: For Hashiqube Local Documentaion and Status after you completed the steps above in __Installation Instructions__
+
+:book: Documentation: http://localhost:3333 <br>
+:vertical_traffic_light: Status of Integrations: http://localhost:3001
+
 ## HashiQube Diagrams
 
 In essence Hashiqube is a Docker Container (by default) or a Virtual Machine.

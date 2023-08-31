@@ -31,6 +31,7 @@
   * [Terraform](terraform/README.md)
   * [Tools-container](tools-container/README.md)
   * [Typography](typography/README.md)
+  * [Uptime-kuma](uptime-kuma/README.md)
   * [Vagrant](vagrant/README.md)
   * [Vault](vault/README.md)
   * [Visual-studio-code](visual-studio-code/README.md)
