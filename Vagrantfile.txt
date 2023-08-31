@@ -128,6 +128,7 @@ Vagrant::configure("2") do |config|
         config.vm.network "forwarded_port", guest: 7777, host: 7777 # vscode-server
         config.vm.network "forwarded_port", guest: 28080, host: 28080 # dbt docs serve
         config.vm.network "forwarded_port", guest: 8000, host: 8000 # markdown-quiz-generator
+        config.vm.network "forwarded_port", guest: 3001, host: 3001 # uptime-kuma
       end
 
       config.vm.hostname = "#{machine[:name]}"
@@ -221,6 +222,10 @@ Vagrant::configure("2") do |config|
       # docsify
       # vagrant up --provision-with docsify to only run this on vagrant up
       config.vm.provision "docsify", type: "shell", preserve_order: false, privileged: false, path: "docsify/docsify.sh"
+
+      # install uptime-kuma
+      # vagrant up --provision-with uptime-kuma to only run this on vagrant up
+      config.vm.provision "uptime-kuma", preserve_order: true, type: "shell", path: "uptime-kuma/uptime-kuma.sh"
 
       # install vault
       # vagrant up --provision-with vault to only run this on vagrant up
