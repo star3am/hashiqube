@@ -25,6 +25,8 @@ fi
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Start is Uptime Kuma"
 echo -e '\e[38;5;198m'"++++ "
-docker run -d --restart=always -p 3001:3001 -v /vagrant/uptime-kuma:/app/data --name uptime-kuma louislam/uptime-kuma:1
+sudo mkdir -p /tmp/uptime-kuma
+sudo cp /vagrant/uptime-kuma/kuma.db /tmp/uptime-kuma/
+docker run -d --restart=always -p 3001:3001 -v /tmp/uptime-kuma:/app/data --name uptime-kuma louislam/uptime-kuma:1
 
 echo -e '\e[38;5;198m'"++++ Uptime Kuma: http://localhost:3001/ and login with Username: admin and Password: P@ssw0rd"
