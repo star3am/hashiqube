@@ -21,3 +21,6 @@ packer/packer/windows/ansible/connection_plugins/__pycache__**
 **.box
 **.iso
 **__pycache__
+uptime-kuma/kuma.db
+uptime-kuma/kuma.db-sh
+uptime-kuma/kuma.db-wal
