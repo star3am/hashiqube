@@ -104,3 +104,9 @@ Uptime Kuma also has a status page
 And you can also view the Check history
 
 ![Uptime Kuma](images/uptime-kuma-check-page.png?raw=true "Uptime Kuma")
+
+## Uptime Kuma Vagrant Provisioner
+
+`uptime-kuma.sh`
+
+[filename](uptime-kuma.sh ':include :type=code')
