@@ -23,7 +23,7 @@ else
 fi
 
 echo -e '\e[38;5;198m'"++++ "
-echo -e '\e[38;5;198m'"++++ Start is Uptime Kuma"
+echo -e '\e[38;5;198m'"++++ Start Uptime Kuma"
 echo -e '\e[38;5;198m'"++++ "
 sudo mkdir -p /tmp/uptime-kuma
 sudo cp /vagrant/uptime-kuma/kuma.db /tmp/uptime-kuma/

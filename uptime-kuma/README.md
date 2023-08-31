@@ -91,6 +91,10 @@ Bringing machine 'hashiqube0' up with 'docker' provider...
     hashiqube0: ++++ Uptime Kuma: http://localhost:3001/ and login with Username: admin and Password: P@ssw0rd
 ```
 
+## Summary
+
+After provision, you can access Kuma on http://localhost:3001 and login with Username: admin and Password: P@ssw0rd
+
 ![Uptime Kuma](images/uptime-kuma-dashboard.png?raw=true "Uptime Kuma")
 
 Uptime Kuma also has a status page
