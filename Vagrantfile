@@ -129,6 +129,7 @@ Vagrant::configure("2") do |config|
         config.vm.network "forwarded_port", guest: 28080, host: 28080 # dbt docs serve
         config.vm.network "forwarded_port", guest: 8000, host: 8000 # markdown-quiz-generator
         config.vm.network "forwarded_port", guest: 3001, host: 3001 # uptime-kuma
+        config.vm.network "forwarded_port", guest: 6001, host: 6001 # trex
       end
 
       config.vm.hostname = "#{machine[:name]}"
@@ -349,6 +350,10 @@ Vagrant::configure("2") do |config|
       # gitlab
       # vagrant up --provision-with gitlab to only run this on vagrant up
       config.vm.provision "gitlab", run: "never", type: "shell", preserve_order: false, privileged: false, path: "gitlab/gitlab.sh"
+
+      # trex
+      # vagrant up --provision-with basetools,docker,trex to only run this on vagrant up
+      config.vm.provision "trex", run: "never", type: "shell", preserve_order: false, privileged: true, path: "waypoint/trex.sh"
 
       # vagrant up --provision-with welcome to only run this on vagrant up
       config.vm.provision "welcome", preserve_order: true, type: "shell", privileged: true, inline: <<-SHELL
