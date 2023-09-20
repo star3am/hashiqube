@@ -211,6 +211,8 @@ Use the token in the output "Login with `4ed0dc30230c4310a58a22207414c3aa`" to l
 
 ![Jenkins](images/jenkins_initial_admin_token_login.png?raw=true "Jenkins")
 
+![Jenkins](images/jenkins_admin_login.png?raw=true "Jenkins")
+
 Install the suggested plugins for Jenkins.
 
 ![Jenkins](images/jenkins_install_suggested_plugins.png?raw=true "Jenkins")
