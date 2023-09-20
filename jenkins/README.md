@@ -1,5 +1,7 @@
 # Jenkins
 
+## About
+
 This will help you start the Jenkins container, login with the initial admin token and create a user and password for subsequent logins.
 
 ![Jenkins Logo](images/jenkins-logo.png?raw=true "Jenkins Logo")
@@ -15,6 +17,8 @@ After that, we will configure Vault's secret engines, KV store version 1 and 2 a
 For this demo we will use the Vault root access token for Jenkins access. Other authentication methods like LDAP can be enabled later.
 
 Let's start Jenkins
+
+## Provision
 
 `vagrant up --provision-with basetools,docker,docsify,vault,jenkins`
 
@@ -207,11 +211,15 @@ Bringing machine 'hashiqube0' up with 'docker' provider...
     hashiqube0: ++++ Login with username: admin and password: 050fb849cef940cba7065f10d4d10a8c
 ```
 
+## Login
+
 Use the token in the output "Login with `4ed0dc30230c4310a58a22207414c3aa`" to login to Jenkins.
 
 ![Jenkins](images/jenkins_initial_admin_token_login.png?raw=true "Jenkins")
 
 ![Jenkins](images/jenkins_admin_login.png?raw=true "Jenkins")
+
+## Plugins
 
 Install the suggested plugins for Jenkins.
 
@@ -245,7 +253,8 @@ Now click top Right `Enable Automatic Refresh` this will take you back to the Je
 
 Before we continue let's make sure Vault is running and it is unsealed. In a terminal please run
 
-### Vault
+## Vault
+
 `vagrant up --provision-with vault`
 ```log
 Bringing machine 'user.local.dev' up with 'virtualbox' provider...
@@ -301,6 +310,7 @@ Vault has made a version 2 of the KV secrets engine, to help us distinguish betw
 Now that KV v2 has been enabled, let's add some secrets, please click on `Create secret +` (Top right)
 
 Here we now need to reference the Jenkinsfile that I have prepared for you, the following
+
 ```
 def secrets = [
   [path: 'kv2/secret/another_test', engineVersion: 2, secretValues: [
@@ -343,6 +353,8 @@ Now we need to add the Vault root token for Jenkins to communicate with Vault
 
 ![Jenkins](images/jenkins_manage_jenkins_configure_system_vault_initial_root_token.png?raw=true "Jenkins")
 
+## Terraform Cloud
+
 Now we can create our first Jenkins job!
 
 But let's quickly add the Token for Terraform Cloud.
@@ -359,9 +371,13 @@ And lastly we need to create a Terraform Cloud Token that Jenkins will use to Au
 
 ![Terraform Cloud Token](images/terraform-cloud-token.png?raw=true "Terraform Cloud Token")
 
+## Credential
+
 Now we can add this Token as a `Secret Text` in Jenkins Credential Manager
 
 ![Jenkins Credential Secret Text Terraform Cloud Token](images/jenkins_credential-secret-text.png?raw=true "Jenkins Credential Secret Text Terraform Cloud Token")
+
+## Jenkinsfile pipeline
 
 In Jenkins click on `New Item -> Pipeline` and give it a name, I used `vault-jenkins` and click apply.
 Scroll down until you get to the pipeline definition and enter the following data (it is the Jenkinsfile in the jenkins directory)
@@ -544,10 +560,14 @@ EOF
 
 Click Save.
 
+## Job
+
 Now let's build the job, click on `Build Now` (Right menu) You should see bottom left a successful build.
 ![Jenkins](images/jenkins_job_vault-jenkins_build.png?raw=true "Jenkins")
 
-The Jenkins Console log output will look like
+## Output
+
+The Jenkins Console log output will look like, you will see that the job clones a repository, runs Aquasec's TFSec and run a Terraform Plan on Terraform Cloud, and finally fetches secrets from Vault
 
 ```log
 Started by user admin
