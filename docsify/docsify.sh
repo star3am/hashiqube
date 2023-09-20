@@ -1,7 +1,18 @@
 #!/bin/bash
 
-curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq --assume-yes nodejs < /dev/null > /dev/null
+# https://github.com/nodesource/distributions#installation-instructions
+
+sudo apt-get update
+sudo apt-get install -y ca-certificates curl gnupg
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
+
+NODE_MAJOR=20
+echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
+
+sudo apt-get update
+sudo apt-get install -qq --assume-yes nodejs < /dev/null > /dev/null
+
 sudo npm i docsify-cli -g --loglevel=error
 cd /vagrant
 # This generates SUMMARY.md which is the menu for Docsify

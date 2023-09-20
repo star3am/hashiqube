@@ -379,6 +379,8 @@ Now we can add this Token as a `Secret Text` in Jenkins Credential Manager
 
 ## Jenkinsfile pipeline
 
+Jenkinsfile pipeline example that runs Terraform and retrieve secrets from Vault
+
 In Jenkins click on `New Item -> Pipeline` and give it a name, I used `vault-jenkins` and click apply.
 Scroll down until you get to the pipeline definition and enter the following data (it is the Jenkinsfile in the jenkins directory)
 
@@ -410,7 +412,9 @@ EOF
   }
 ```
 
-```
+And below is the `Jenkinsfile`
+
+```groovy
 // https://github.com/jenkinsci/hashicorp-vault-plugin
 // https://www.jenkins.io/doc/book/pipeline/jenkinsfile/
 
