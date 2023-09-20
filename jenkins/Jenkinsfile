@@ -1,9 +1,108 @@
 // https://github.com/jenkinsci/hashicorp-vault-plugin
+// https://www.jenkins.io/doc/book/pipeline/jenkinsfile/
+
+import hudson.model.Job
+import jenkins.scm.api.mixin.ChangeRequestSCMHead
+import jenkins.scm.api.mixin.TagSCMHead
+import org.jenkinsci.plugins.workflow.multibranch.BranchJobProperty
 
 node {
+  properties([disableConcurrentBuilds()])
 
-  stage('Checkout Source Code') {
-    sh 'echo "Check out application source code"'
+  stage('Checkout https://github.com/star3am/terraform-hashicorp-hashiqube') {
+    git(
+      url: "https://github.com/star3am/terraform-hashicorp-hashiqube.git",
+      branch: "master",
+      changelog: true,
+      poll: true
+    )
+  }
+
+  stage('Echo Variables') {
+    echo "JOB_NAME: ${env.JOB_NAME}"
+    echo "BUILD_ID: ${env.BUILD_ID}"
+    echo "BUILD_NUMBER: ${env.BUILD_NUMBER}"
+    echo "BRANCH_NAME: ${env.BRANCH_NAME}"
+    echo "PULL_REQUEST: ${env.CHANGE_ID}"
+    echo "BUILD_NUMBER: ${env.BUILD_NUMBER}"
+    echo "BUILD_URL: ${env.BUILD_URL}"
+    echo "NODE_NAME: ${env.NODE_NAME}"
+    echo "BUILD_TAG: ${env.BUILD_TAG}"
+    echo "JENKINS_URL: ${env.JENKINS_URL}"
+    echo "EXECUTOR_NUMBER: ${env.EXECUTOR_NUMBER}"
+    echo "WORKSPACE: ${env.WORKSPACE}"
+    echo "GIT_COMMIT: ${env.GIT_COMMIT}"
+    echo "GIT_URL: ${env.GIT_URL}"
+    echo "GIT_BRANCH: ${env.GIT_BRANCH}"
+    LAST_COMMIT_MSG = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%s'")
+    echo "LAST_COMMIT_MSG: ${LAST_COMMIT_MSG}"
+    env.ARCH = sh(returnStdout: true, script: "lscpu | grep 'Architecture' | tr -s ' ' | cut -d ' ' -f 2 | tr -d '[:space:]'")
+    echo "ARCH: ${env.ARCH}"
+    env.PATH = "${env.PATH}:${env.WORKSPACE}/bin"
+    env.TF_CLI_ARGS = "-no-color"
+    echo sh(script: 'env|sort', returnStdout: true)
+    sh('echo $(hostname)')
+  }
+
+  stage('Create Backend Config for Terraform Cloud') {
+    withCredentials([string(credentialsId: 'YOUR_CREDENTIALS_ID', variable: 'SECRET')]) {
+      sh """
+        cat <<EOF | tee backend.tf
+terraform {
+  cloud {
+    organization = "YOUR_TF_CLOUD_ORGANIZATION"
+    workspaces {
+      name = "YOUR_TF_WORKSPACE"
+    }
+    token = "${SECRET}"
+  }
+}
+EOF
+      """
+    }
+  }
+
+  stage('Install Dependencies') {
+    sh """
+      pwd
+      mkdir -p bin
+    """
+    if (env.ARCH == "x86_64*") {
+      script {
+        env.arch = "amd64"
+        echo "${env.arch}"
+      }
+    }
+    if (env.ARCH == 'aarch64') {
+      script {
+        env.arch = "arm64"
+        echo "${env.arch}"
+      }
+    }
+    sh """
+      curl -s "https://releases.hashicorp.com/terraform/1.5.7/terraform_1.5.7_linux_${env.arch}.zip" --output bin/terraform.zip
+      (cd bin && unzip -o terraform.zip)
+      curl -Lso bin/tfsec "https://github.com/aquasecurity/tfsec/releases/download/v1.28.4/tfsec-linux-${env.arch}"
+      chmod +x bin/tfsec
+      pwd
+      ls -la
+      ls -la bin/
+      terraform -v
+      echo "${env.arch}"
+      echo "${env.PATH}"
+    """
+  }
+
+  stage('Run Aquasecurity TFSec') {
+    sh('tfsec ./modules --no-color --soft-fail')
+  }
+
+  stage('Run Terraform init') {
+    sh('terraform init')
+  }
+
+  stage('Run Terraform plan on Terraform Cloud') {
+    sh('terraform plan')
   }
 
   stage('Get ENV vars from Vault') {
