@@ -9,12 +9,7 @@ import org.jenkinsci.plugins.workflow.multibranch.BranchJobProperty
 node {
   properties([disableConcurrentBuilds()])
 
-  // This does not work for me? 
-  // environment {
-  //   PATH = "${env.PATH}:${env.WORKSPACE}/bin"
-  // }
-
-  stage('Checkout Repository') {
+  stage('Checkout https://github.com/star3am/terraform-hashicorp-hashiqube') {
     git(
       url: "https://github.com/star3am/terraform-hashicorp-hashiqube.git",
       branch: "master",
@@ -44,31 +39,33 @@ node {
     env.ARCH = sh(returnStdout: true, script: "lscpu | grep 'Architecture' | tr -s ' ' | cut -d ' ' -f 2 | tr -d '[:space:]'")
     echo "ARCH: ${env.ARCH}"
     env.PATH = "${env.PATH}:${env.WORKSPACE}/bin"
+    env.TF_CLI_ARGS = "-no-color"
     echo sh(script: 'env|sort', returnStdout: true)
     sh('echo $(hostname)')
   }
 
-  stage('Create Terraform Backend Config') {
-    sh """
-      cat <<EOF | tee backend.hcl
+  stage('Create Backend Config for Terraform Cloud') {
+    withCredentials([string(credentialsId: 'YOUR_CREDENTIALS_ID', variable: 'SECRET')]) {
+      sh """
+        cat <<EOF | tee backend.tf
 terraform {
   cloud {
-    organization = "my-org"
+    organization = "YOUR_TF_CLOUD_ORGANIZATION"
     workspaces {
-      tags = ["networking"]
+      name = "YOUR_TF_WORKSPACE"
     }
+    token = "${SECRET}"
   }
 }
 EOF
-    """
+      """
+    }
   }
 
   stage('Install Dependencies') {
     sh """
       pwd
-      ls -la 
       mkdir -p bin
-      ls -la bin/
     """
     if (env.ARCH == "x86_64*") {
       script {
@@ -83,55 +80,64 @@ EOF
       }
     }
     sh """
-      curl "https://releases.hashicorp.com/terraform/1.5.7/terraform_1.5.7_linux_${env.arch}.zip" --output bin/terraform.zip
+      curl -s "https://releases.hashicorp.com/terraform/1.5.7/terraform_1.5.7_linux_${env.arch}.zip" --output bin/terraform.zip
       (cd bin && unzip -o terraform.zip)
+      curl -Lso bin/tfsec "https://github.com/aquasecurity/tfsec/releases/download/v1.28.4/tfsec-linux-${env.arch}"
+      chmod +x bin/tfsec
       pwd
-      ls -la 
-      mkdir -p bin
+      ls -la
       ls -la bin/
-      bin/terraform -v
+      terraform -v
       echo "${env.arch}"
       echo "${env.PATH}"
     """
   }
 
-  stage('Run run.sh') {
-    sh('./run-without-make.sh')
+  stage('Run Aquasecurity TFSec') {
+    sh('tfsec ./modules --no-color --soft-fail')
   }
 
-  // stage('Get ENV vars from Vault') {
-  //   // define the secrets and the env variables
-  //   // engine version can be defined on secret, job, folder or global.
-  //   // the default is engine version 2 unless otherwise specified globally.
-  //   def secrets = [
-  //     [path: 'kv2/secret/another_test', engineVersion: 2, secretValues: [
-  //     [vaultKey: 'another_test']]],
-  //     [path: 'kv1/secret/testing/value_one', engineVersion: 1, secretValues: [
-  //     [vaultKey: 'value_one']]],
-  //     [path: 'kv1/secret/testing/value_two', engineVersion: 1, secretValues: [
-  //     [envVar: 'my_var', vaultKey: 'value_two']]]
-  //   ]
+  stage('Run Terraform init') {
+    sh('terraform init')
+  }
 
-  //   // optional configuration, if you do not provide this the next higher configuration
-  //   // (e.g. folder or global) will be used
-  //   def configuration = [vaultUrl: 'http://10.9.99.10:8200',
-  //     vaultCredentialId: 'vault-initial-root-token',
-  //     engineVersion: 1]
+  stage('Run Terraform plan on Terraform Cloud') {
+    sh('terraform plan')
+  }
 
-  //   // inside this block your credentials will be available as env variables
-  //   withVault([configuration: configuration, vaultSecrets: secrets]) {
-  //     sh 'echo $value_one'
-  //     sh 'echo $my_var'
-  //     sh 'echo $another_test'
-  //   }
-  // }
+  stage('Get ENV vars from Vault') {
+    // define the secrets and the env variables
+    // engine version can be defined on secret, job, folder or global.
+    // the default is engine version 2 unless otherwise specified globally.
+    def secrets = [
+      [path: 'kv2/secret/another_test', engineVersion: 2, secretValues: [
+      [vaultKey: 'another_test']]],
+      [path: 'kv1/secret/testing/value_one', engineVersion: 1, secretValues: [
+      [vaultKey: 'value_one']]],
+      [path: 'kv1/secret/testing/value_two', engineVersion: 1, secretValues: [
+      [envVar: 'my_var', vaultKey: 'value_two']]]
+    ]
 
-  // stage('Echo some ENV vars') {
-  //   withCredentials([[$class: 'VaultTokenCredentialBinding', credentialsId: 'vault-initial-root-token', vaultAddr: 'http://10.9.99.10:8200']]) {
-  //     // values will be masked
-  //     sh 'echo TOKEN=$VAULT_TOKEN'
-  //     sh 'echo ADDR=$VAULT_ADDR'
-  //   }
-  //   echo sh(script: 'env|sort', returnStdout: true)
-  // }
+    // optional configuration, if you do not provide this the next higher configuration
+    // (e.g. folder or global) will be used
+    def configuration = [vaultUrl: 'http://10.9.99.10:8200',
+      vaultCredentialId: 'vault-initial-root-token',
+      engineVersion: 1]
+
+    // inside this block your credentials will be available as env variables
+    withVault([configuration: configuration, vaultSecrets: secrets]) {
+      sh 'echo $value_one'
+      sh 'echo $my_var'
+      sh 'echo $another_test'
+    }
+  }
+
+  stage('Echo some ENV vars') {
+    withCredentials([[$class: 'VaultTokenCredentialBinding', credentialsId: 'vault-initial-root-token', vaultAddr: 'http://10.9.99.10:8200']]) {
+      // values will be masked
+      sh 'echo TOKEN=$VAULT_TOKEN'
+      sh 'echo ADDR=$VAULT_ADDR'
+    }
+    echo sh(script: 'env|sort', returnStdout: true)
+  }
 }
