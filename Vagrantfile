@@ -353,7 +353,7 @@ Vagrant::configure("2") do |config|
 
       # trex
       # vagrant up --provision-with basetools,docker,trex to only run this on vagrant up
-      config.vm.provision "trex", run: "never", type: "shell", preserve_order: false, privileged: true, path: "waypoint/trex.sh"
+      config.vm.provision "trex", run: "never", type: "shell", preserve_order: false, privileged: true, path: "trex/trex.sh"
 
       # vagrant up --provision-with welcome to only run this on vagrant up
       config.vm.provision "welcome", preserve_order: true, type: "shell", privileged: true, inline: <<-SHELL

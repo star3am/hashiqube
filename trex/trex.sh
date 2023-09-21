@@ -9,7 +9,7 @@ yes | sudo docker system prune --volumes
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Docker build -t trex ."
 echo -e '\e[38;5;198m'"++++ "
-cd /vagrant/waypoint/waypoint/custom-examples/trex-nodejs
+cd /vagrant/trex/trex-nodejs
 docker build -t trex .
 
 echo -e '\e[38;5;198m'"++++ "
