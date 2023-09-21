@@ -30,6 +30,7 @@
   * [Sentinel](sentinel/README.md)
   * [Terraform](terraform/README.md)
   * [Tools-container](tools-container/README.md)
+  * [Trex](trex/README.md)
   * [Typography](typography/README.md)
   * [Uptime-kuma](uptime-kuma/README.md)
   * [Vagrant](vagrant/README.md)
