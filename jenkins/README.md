@@ -311,7 +311,7 @@ Now that KV v2 has been enabled, let's add some secrets, please click on `Create
 
 Here we now need to reference the Jenkinsfile that I have prepared for you, the following
 
-```
+```groovy
 def secrets = [
   [path: 'kv2/secret/another_test', engineVersion: 2, secretValues: [
   [vaultKey: 'another_test']]]
@@ -331,7 +331,7 @@ Also enable KV v1
 
 And set the keys below
 
-```
+```sh
 Path: secret/testing
 Key: value_one Value: Any data of your choice for Vault KV v1 value_one
 Key: value_two Value: Any data of your choice for Vault KV v1 value_two
@@ -392,7 +392,7 @@ Be sure to update the relevant Terraform Cloud part of the Jenkinsfile
 
 `YOUR_TF_WORKSPACE_NAME`
 
-```
+```groovy
   stage('Create Backend Config for Terraform Cloud') {
     withCredentials([string(credentialsId: 'YOUR_CREDENTIALS_ID', variable: 'SECRET')]) {
       sh """
