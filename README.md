@@ -1,5 +1,7 @@
 # HashiQube - A Development Lab Using All the HashiCorp Products
 
+![HashiQube](images/hashiqube-banner.png?raw=true "HashiQube ")
+
 ## Overview
 
 Hashiqube is a Docker Container (Default) or a Virtual Machine VM (Virtualbox). Hashiqube has a Docker daemon inside. It runs all Hashicorp products. [Vault](/vault/?id=vault), [Terraform](/terraform/?id=terraform), [Nomad](/nomad/?id=nomad), [Consul](/consul/?id=consul), [Waypoint](/waypoint/?id=waypoint), [Boundary](/boundary/?id=boundary), [Vagrant](/vagrant/?id=vagrant), [Packer](/packer/?id=packer) and [Sentinel](/sentinel/?id=sentinel).
