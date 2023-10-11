@@ -2,16 +2,16 @@
 
 ## Overview
 
-Hashiqube is a Docker Container (Default) or a Virtual Machine VM (Virtualbox). Hashiqube has a Docker daemon inside. It runs all Hashicorp products. [Vault](/vault/?id=vault), [Terraform](/terraform/?id=terraform), [Nomad](/nomad/?id=nomad), [Consul](/consul/?id=consul), [Waypoint](/waypoint/?id=waypoint), [Boundary](/boundary/?id=boundary), [Vagrant](/vagrant/?id=vagrant), [Packer](/packer/?id=packer) and [Sentinel](/sentinel/?id=sentinel).
+Hashiqube is a Docker Container (Default) or a Virtual Machine VM (Virtualbox). Hashiqube has a Docker daemon inside. It runs all Hashicorp products: [**Vault**](/vault/?id=vault), [**Terraform**](/terraform/?id=terraform), [**Nomad**](/nomad/?id=nomad), [**Consul**](/consul/?id=consul), [**Waypoint**](/waypoint/?id=waypoint), [**Boundary**](/boundary/?id=boundary), [**Vagrant**](/vagrant/?id=vagrant), [**Packer**](/packer/?id=packer) and [**Sentinel**](/sentinel/?id=sentinel).
 
-It also runs a host of other popular Open Source DevOps / DevSecOps applications (Minikube, Ansible AWX Tower, Traefik etc.) showcasing how simple integration with Hashicorp products can result in tangible learnings and benefits for all its users.
+It also runs a host of other popular Open Source DevOps/DevSecOps applications (Minikube, Ansible AWX Tower, Traefik etc.) showcasing how simple integration with Hashicorp products can result in tangible learnings and benefits for all its users.
 
-Once Hashiqube is up an internet connection is no longer needed meaning sales pitches and demos for potential and existing customers is greatly aided.
+Once Hashiqube is up an internet connection is no longer needed meaning sales pitches and demos for potential and existing customers are greatly aided.
 
 Hashiqube has been created to help Engineers, Developers and anyone who wants to practise, learn or demo HashiCorp products to get started quickly with a local lab. 
 
-You are welcome to connect with me on Linkedin https://www.linkedin.com/in/riaannolan/ <br />
-Riaan Nolan's Credly profile: https://www.credly.com/users/riaan-nolan.e657145c
+Please connect with me on [**Linkedin - Riaan Nolan**](https://www.linkedin.com/in/riaannolan/) or check out [**my Credly profile**](https://www.credly.com/users/riaan-nolan.e657145c)
+<br />
 
 ## Pre-requisites
 * 10GB of disk space and 4G Ram (Minimum) `vagrant up --provision` 8G Ram Recommended
@@ -20,34 +20,34 @@ Riaan Nolan's Credly profile: https://www.credly.com/users/riaan-nolan.e657145c
 * Vagrant
 * `vagrant up --provision`
 
-:bulb: If you want to run Minikube and a workload like AWX Ansible Tower, or Airflow you need at least 8G Ram - If you want to run Gitlab aswell, you need to give Docker resources at least 12G Ram
+:bulb: If you want to run Minikube and a workload like AWX Ansible Tower, or Airflow you need at least 8G RAM - If you want to run Gitlab as well, you need to give Docker resources at least 12G RAM
 
 ## Installation Instructions
 :clock3: Duration 15 - 30 minutes <br>
 :bulb: Docker is the Default and preferred way to run Hashiqube
 
-* Docker - Download __Docker__ from https://www.docker.com/products/docker-desktop and install
-* Vagrant - Download __Vagrant__ from https://www.vagrantup.com/downloads.html and install
-* Virtualbox (Optional) - Download __Virtualbox__ from https://www.virtualbox.org/wiki/Downloads and install
-* Using `git` - clone this repo `git clone https://github.com/star3am/hashiqube.git` [__What is Git?__](git/#git)
-* Inside the local repo folder, do `vagrant up --provision` - This will setup, Vault, Nomad, Consul, Terraform, Localstack and Docker
+* Docker - Download __Docker__ from the [**Docker desktop installer**](https://www.docker.com/products/docker-desktop) and install
+* Vagrant - Download __Vagrant__ from the [**Vagrant installer**](https://www.vagrantup.com/downloads.html) and install
+* Virtualbox (Optional) - Download __Virtualbox__ from the [**Virtualbox installer**](https://www.virtualbox.org/wiki/Downloads) and install
+* Using `git` - clone this repo `git clone s://github.com/star3am/hashiqube.git` [__What is Git?__](git/#git)
+* Inside the local repo folder, do `vagrant up --provision` - This will set up, Vault, Nomad, Consul, Terraform, Localstack and Docker
 * Documentation locally available at http://localhost:3333
 
 ## Documentation and Status
-:loudspeaker: For Hashiqube Local Documentaion and Status after you completed the steps above in __Installation Instructions__
+:loudspeaker: For Hashiqube Local Documentation and Status after you complete the steps above in __Installation Instructions__
 
 :book: Documentation: http://localhost:3333 <br>
 :vertical_traffic_light: Status of Integrations: http://localhost:3001
 
 ## HashiQube Diagrams
 
-In essence Hashiqube is a Docker Container (by default) or a Virtual Machine.
+In essence, Hashiqube is a Docker Container (by default) or a Virtual Machine.
 
-Hashiqube has a Docker Daemon inside meaning we can run docker containers / pods inside Hashiqube using Kubernetes or Nomad or Docker run.
+Hashiqube has a Docker Daemon inside meaning we can run docker containers/pods inside Hashiqube using Kubernetes or Nomad or Docker run.
 
 Hashiqube runs on your local laptop, PC or a cloud instance.
 
-Hashiqube runs all the Hashicorp products and other popular Open Source tools, such as Minikube, Ansible AWX Tower, Prometheus and Grafana and many, many more, See [__Hashiqube Integrations__](/?id=hashiqube-integrations)
+Hashiqube runs all the Hashicorp products and other popular Open Source tools, such as Minikube, Ansible AWX Tower, Prometheus and Grafana and many, many more, see: [__Hashiqube Integrations__](/?id=hashiqube-integrations)
 
 You can also run Hashiqube on AWS, GCP and Azure. This is called Hashiqube Multi-Cloud, see: [__Multi-Cloud__](multi-cloud/README)
 
@@ -58,18 +58,18 @@ Hashiqube can be visualized with the diagrams below.
 ![HashiQube Diagram](images/hashiqube-diagram.png?raw=true "HashiQube Diagram")
 
 ## Links
-Hashicorp blog post: https://www.hashicorp.com/resources/hashiqube-a-development-lab-using-all-the-hashicorp-products <br />
-Hashiqube Website: https://hashiqube.com <br />
-Hashiqube Github: https://github.com/star3am/hashiqube <br />
-Hashiqube Youtube: https://www.youtube.com/watch?v=6jGDAGWaFiw <br />
-Hashiqube Medium: https://medium.com/search?q=hashiqube <br />
-Hashiqube Terraform Registry module: https://registry.terraform.io/modules/star3am/hashiqube/hashicorp/latest <br />
-Terraform Development Environment: https://medium.com/@riaan.nolan/top-gun-terraform-development-environment-60ac00d49577
+* [**Hashicorp blog post**](https://www.hashicorp.com/resources/hashiqube-a-development-lab-using-all-the-hashicorp-products) <br />
+* [**Hashiqube Website**](https://hashiqube.com) <br />
+* [**Hashiqube Github**](https://github.com/star3am/hashiqube) <br />
+* [**Hashiqube Youtube**](https://www.youtube.com/watch?v=6jGDAGWaFiw) <br />
+* [**Hashiqube Medium**](https://medium.com/search?q=hashiqube) <br />
+* [**Hashiqube Terraform Registry module**](https://registry.terraform.io/modules/star3am/hashiqube/hashicorp/latest) <br />
+* [**Terraform Development Environment**](https://medium.com/@riaan.nolan/top-gun-terraform-development-environment-60ac00d49577)
 
 ## Hashiqube Integrations
 ![HashiQube](images/thestack.png?raw=true "HashiQube")
 
-* [__Multi Cloud__](multi-cloud/#terraform-hashicorp-hashiqube) - Hashiqube on AWS, GCP and Azure (Clustered) https://registry.terraform.io/modules/star3am/hashiqube/hashicorp/latest
+* [__Multi Cloud__](multi-cloud/#terraform-hashicorp-hashiqube) - [**Hashiqube on AWS, GCP and Azure (Clustered)**](https://registry.terraform.io/modules/star3am/hashiqube/hashicorp/latest)
 * [__Vagrant__](vagrant/#vagrant) - Vagrant is an open-source software product for building and maintaining portable virtual software development environments; e.g., for VirtualBox, KVM, Hyper-V, Docker containers, VMware, and AWS. It tries to simplify the software configuration management of virtualization in order to increase development productivity `vagrant up --provision`
 * [__Vault__](vault/#vault) - Secure, store and tightly control access to tokens, passwords, certificates, encryption keys for protecting secrets and other sensitive data using a UI, CLI, or HTTP API `vagrant up --provision-with basetools,vault`
 * [__Consul__](consul/#consul) - Consul uses service identities and traditional networking practices to help organizations securely connect applications running in any environment `vagrant up --provision-with basetools,consul`
@@ -111,11 +111,11 @@ For Documentation please open http://localhost:3333 in your browser
 ![Hashiqube Integrations](images/logo-qube.png?raw=true "Hashiqube Integrations")
 
 ## HashiQube's Purpose
-Hashiqube has been created to enable anyone who is interested in secure automation pipelines the ability to run a suite of ‘best in class’ tools their local machines at the cost of a small amount of system resources.
+Hashiqube has been created to enable anyone who is interested in secure automation pipelines the ability to run a suite of ‘best in class’ tools on their local machines at the cost of a small amount of system resources.
 
-Hashiqube gives all interested parties the empowerment to  deploy these tools in a way covers multiple use cases effectively providing a ‘concept to completion’ test bed using open source Hashicorp products.
+Hashiqube gives all interested parties the empowerment to  deploy these tools in a way that covers multiple use cases effectively providing a ‘concept to completion’ test bed using open-source Hashicorp products.
 
-The original use case was born the desire to demystify DevSecOps utilising Terraform, Vault, Consul, Sentinel and Nomad as well as some other well know open source CI/CD tools by providing a ‘hands-on’ environment that demonstrates the value of secret and credential management in a standard software development pipeline.
+The original use case was born from the desire to demystify DevSecOps utilising Terraform, Vault, Consul, Sentinel and Nomad as well as some other well-known open source CI/CD tools by providing a ‘hands-on’ environment that demonstrates the value of secret and credential management in a standard software development pipeline.
 
 Thanks to the flexibility of the Hashicorp products there is no need to wonder how to achieve the goals of bringing software to market in a more secure and timely fashion, just Vagrant up!
 
@@ -130,9 +130,9 @@ Thanks to the flexibility of the Hashicorp products there is no need to wonder h
 | mac apple | ✓ | ✘ | ✘ |
 
 ## Components
-Hashiqube is made up out of a number of components and some rely on each other. 
+Hashiqube is made up of a number of components and some rely on each other. 
 
-For example you can run components seperately as demonstrated below.
+For example, you can run components separately as demonstrated below.
 ```bash
 vagrant up --provision-with basetools
 vagrant up --provision-with docker
@@ -150,7 +150,7 @@ vagrant up --provision-with basetools,docker,minikube,postgresql,dbt,apache-airf
 #### Docker Desktop
 Docker Desktop is an easy-to-install application for your Mac or Windows environment that enables you to build and share containerized applications and microservices. It's a graphical user interface for the docker service.
 
-* Download __Docker Desktop__ from https://www.docker.com/products/docker-desktop and install it on your laptop, to verify bring up the Docker Desktop application. 
+* [__Download Docker Desktop__](https://www.docker.com/products/docker-desktop) and install it on your laptop, to verify and bring up the Docker Desktop application.
 
 If you have HashiQube running, you won't see any containers but you will be able to open the application. 
 
@@ -159,11 +159,11 @@ If you have HashiQube running, you won't see any containers but you will be able
 Now that docker is installed we need to ensure that the docker environment and settings are configured
 
 - Ensure you have the latest version installed
-- Ensure that your Operating System is updated see: https://www.docker.com/blog/speed-boost-achievement-unlocked-on-docker-desktop-4-6-for-mac/
+- Ensure that your Operating System is updated, see: [**Speed boost achievement unlocked on Docker Desktop 4.6 for Mac**](https://www.docker.com/blog/speed-boost-achievement-unlocked-on-docker-desktop-4-6-for-mac/)
 
 ##### Docker Desktop Resources
 
-:bulb: You can quite happily run Hashiqube with 4G (minimum)  or 8G (recommended) of RAM, but once you start running, Vault, Nomad, Consul, Waypoint, Boundary AND you want to run Minikube with let's say AWX Ansible Tower at the same time, the processes will start contending for resources and you will get weird errors. For that reason, below screenshot is my setup with 12G of RAM. For reference I use an M1 Macbook Air with 16G or RAM as my personal laptop. I frequently run all of HashiQube's services to test with, for example, I'll run Vault, Nomad, Consul, Waypoint, Boundary and Minikube with Grafana and Prometheus to test the monitoring of Vault, Nomad and Consul, for that reason 4G Ram would not be enough.
+:bulb: You can quite happily run Hashiqube with 4G (minimum)  or 8G (recommended) of RAM, but once you start running, Vault, Nomad, Consul, Waypoint, Boundary AND you want to run Minikube with let's say AWX Ansible Tower at the same time, the processes will start contending for resources and you will get weird errors. For that reason, the below screenshot is my setup with 12G of RAM. For reference, I use an M1 Macbook Air with 16G or RAM as my personal laptop. I frequently run all of HashiQube's services to test with, for example, I'll run Vault, Nomad, Consul, Waypoint, Boundary and Minikube with Grafana and Prometheus to test the monitoring of Vault, Nomad and Consul, for that reason 4G Ram would not be enough.
 
 ![Docker Desktop Resources](images/docker_installed_resources.png?raw=true "Docker Desktop Resources")
 
@@ -201,20 +201,20 @@ Now you can use DNS like nomad.service.consul:9999 vault.service.consul:9999 via
 * Fabio http://localhost:9999
 
 ### Vagrant Basic Usage
-* vagrant up --provision OR vagrant up --provision-with bootstrap|nomad|consul|vault|docker|ldap
-* vagrant global-status # to see which VMs are active
-* vagrant global-status --prune # to remove stale VMs from Vagrant cache
-* vagrant status # vagrant status
-* vagrant reload
-* vagrant up
-* vagrant destroy
-* vagrant provision
-* vagrant plugin list
+* ```vagrant up --provision``` OR ```vagrant up --provision-with bootstrap|nomad|consul|vault|docker|ldap```
+* ```vagrant global-status``` # to see which VMs are active
+* ```vagrant global-status --prune``` # to remove stale VMs from Vagrant cache
+* ```vagrant status``` # vagrant status
+* ```vagrant reload```
+* ```vagrant up```
+* ```vagrant destroy```
+* ```vagrant provision```
+* ```vagrant plugin list```
 
 ### Docker Basic Usage
-* docker image ls
-* docker ps
-* docker stop
+* ```docker image ls```
+* ```docker ps```
+* ```docker stop```
 
 ### Errors you might encounter
 :bulb: If you see this error message
@@ -289,29 +289,29 @@ __Solution__ Ensure the following contents are present in `/etc/vbox/networks.co
 
 __Error__ Vagrant cannot forward the specified ports on this VM, since they would collide with some other application that is already listening on these ports. The forwarded port to `9200` is already in use on the host machine.
 
-To fix this, modify your current project's Vagrantfile to use another port. Example, where '1234' would be replaced by a unique host port: 
+To fix this, modify your current project's Vagrantfile to use another port. For example, where '1234' would be replaced by a unique host port: 
 
 ```
 config.vm.network :forwarded_port, guest: 9200, host: 1234
 ```
 
-Sometimes, Vagrant will attempt to auto-correct this for you. In this case, Vagrant was unable to. This is usually because the guest machine is in a state which doesn't allow modifying port forwarding. You could try 'vagrant reload' (equivalent of running a halt followed by an up) so vagrant can attempt to auto-correct this upon booting. Be warned that any unsaved work might be lost. <br />
+Sometimes, Vagrant will attempt to auto-correct this for you. In this case, Vagrant was unable to. This is usually because the guest machine is in a state which doesn't allow modifying port forwarding. You could try 'vagrant reload' (the equivalent of running a halt followed by an up) so vagrant can attempt to auto-correct this upon booting. Be warned that any unsaved work might be lost. <br />
 __Command__ `vagrant up --provision` <br />
-__Info__ When I run `vagrant up` I get an error about a port collision, in this case it is port `9200` - The reason is that I have an Elasticsearch container running on my local laptop, and since HashiQube also run Elasticsearch this port is taken. <br />
-__Solution__ I stop the Elasticsearch docker container and I run `vagrant up` again, or I hash the line out in the Vagrantfile like the example below <br />
+__Info__ When I run `vagrant up` I get an error about a port collision, in this case, it is port `9200` - The reason is that I have an Elasticsearch container running on my local laptop, and since HashiQube also run Elasticsearch this port is taken. <br />
+__Solution__ I stop the Elasticsearch docker container and run `vagrant up` again, or I hash the line out in the Vagrantfile like the example below <br />
 
 ```
 # config.vm.network "forwarded_port", guest: 9200, host: 9200 # elasticsearch
 ```
 
 ## Support & Feedback
-For suggestions, feedback and queries please branch or and submit a Pull Request or directly contact Riaan Nolan, creator of the HashiQube via Github: https://github.com/star3am/hashiqube
+For suggestions, feedback and queries please branch or and submit a Pull Request or directly contact Riaan Nolan, creator of the HashiQube via [**Github - star3am/hashiqube**](https://github.com/star3am/hashiqube)
 
 
 ### About Hashiqube
-Hashiqube runs all the Hashicorp products and a host of other popular Open Source software taht is heavily used in the industry. 
+Hashiqube runs all the Hashicorp products and a host of other popular Open Source software that is heavily used in the industry. 
 
-Once you have done `vagrant up --provision` you will have access to Vault, Nomad, Consul, Boundary, Waypoint and this documnetation page on your local computer.
+Once you have done `vagrant up --provision` you will have access to Vault, Nomad, Consul, Boundary, Waypoint and this documentation page on your local computer.
 
 * Vault http://localhost:8200 `vagrant up --provision-with basetools,vault`
 * Nomad http://localhost:4646 `vagrant up --provision-with basetools,docker,nomad`
@@ -326,12 +326,12 @@ In addition to the Core Hashicorp products, Hashiqube also runs a host of other 
 ![Hashiqube Integrations](images/logo-qube.png?raw=true "Hashiqube Integrations")
 
 ### About Me
-My name is Riaan Nolan and I was born in South Africa. I started out as a Web Developer in 2000 and from there progressed into Systems Administration, with a strong focus on Automation, Infrastrtucture and Configuration as Code.
+My name is Riaan Nolan and I was born in South Africa. I started out as a Web Developer in 2000 and from there progressed into Systems Administration, with a strong focus on Automation, Infrastructure and Configuration as Code.
 
-I have worked for Multi-National companies in Portugal, Germany, China, South Africa, United States and Australia. 
+I have worked for Multi-National companies in Portugal, Germany, China, South Africa, the United States and Australia. 
 
-You are welcome to connect with me on Linkedin https://www.linkedin.com/in/riaannolan/ <br />
-Credly profile: https://www.credly.com/users/riaan-nolan.e657145c
+Please connect with me on [**Linkedin - Riaan Nolan**](https://www.linkedin.com/in/riaannolan/) or check out [**my Credly profile**](https://www.credly.com/users/riaan-nolan.e657145c)
+<br />
 
 ![My Hashicorp Badges](images/hashicorp-badges.png?raw=true "My Hashicorp Badges")
 
@@ -351,11 +351,11 @@ A Very special mention to HashiQube's contributors, Thank You All for your help,
  - Adriana Villela
 
 ## Videos
-Videos were made with asciinema https://asciinema.org/
+Videos were made with [**asciinema**](https://asciinema.org/)
 - asciinema rec -i 1
 - asciicast2gif -S 1 -s 2 tmpd1zpq13n-ascii.cast tmpd1zpq13n-ascii.gif
 
 ## License
-HashiQube is available as open-source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+HashiQube is available as open-source under the terms of the [**MIT License**](https://opensource.org/licenses/MIT).
 
 ![Automate all the things](images/automate-all-the-things.png?raw=true "Automate all the things")
