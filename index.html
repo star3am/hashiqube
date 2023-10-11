@@ -31,29 +31,95 @@
   />
   <script src="/docsify/lib/mermaid.min.js"></script>
   <style>
+    /*
+      Hashiqube Theme
+      Version 0.0.1
+    */
+    :root {
+      --hashi-gradient: 90deg,
+        #ff8f28 0%,
+        #ff50a4 33%,
+        #7917b6 66%,
+        #0e71bd 100%;
+      --hashi-yellow: #ffbc0a;
+      --hashi-blue: #4c93e7;
+      --hashi-teal: #24bba3;
+      --hashi-purple: #7917b6;
+      --hashi-pink: #ff50a4;
+    }
+
     .header img {
       width: 80%;
       display: none;
       top: 0px;
       right: 0px;
     }
+
     .app-name-link img {
-      width: 200px;
+      max-width: 160px;
+      -webkit-transition-property: all;
+      -webkit-transition-duration: 0.3s;
+      -webkit-transition-timing-function: ease;
     }
-    .sidebar-nav ul ul, .sidebar nav ul ul {
+
+    .app-name-link img:hover {
+      transform: scale(1.2);
+    }
+
+    .sidebar-nav ul ul,
+    .sidebar nav ul ul {
       margin-left: 0px;
     }
+
     .search .input-wrap {
-      margin-top: 50px !important;
+      margin-top: 10px !important;
     }
-    .sidebar {
+
+    aside.sidebar {
       width: auto;
+      display: flex;
+      flex-direction: column;
+      padding-top: 110px;
     }
+
+    aside.sidebar :nth-child(1) {
+      order: 2;
+    }
+
+    aside.sidebar :nth-child(2) {
+      order: 1;
+    }
+
+    aside.sidebar :nth-child(3) {
+      order: 3;
+    }
+
     .sidebar-toggle {
-      top: 7px !important;
       position: fixed !important;
       bottom: auto;
+      left: 0px;
+      right: 0px;
+      background: linear-gradient(var(--hashi-gradient));
+      display: block;
+      height: 70px;
+      padding: 0;
+      width: 100% !important;
     }
+
+    .sidebar-toggle-button {
+      display: flex;
+      width: 70px;
+      height: 70px;
+      text-align: center;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: var(--hashi-blue);
+      right: 0;
+      top: 0;
+      position: absolute;
+    }
+
     .sidebar-toggle span {
       background-color: #000000;
       display: block;
@@ -61,48 +127,71 @@
       width: 20px;
       height: 2px;
     }
+
     #docsify-darklight-theme {
       position: fixed;
-      left: 45px;
-      top: 5px;
-      width: 25px;
-      height: 25px;
+      right: 140px;
+      top: 0;
+      width: 70px;
+      left: auto;
+      height: 70px;
       z-index: 1000;
+      background: var(--hashi-teal);
     }
+
     .sidebar ul li a {
       font-size: 16px;
-    }  
+    }
+
     .content {
       padding-top: 10px;
+      left: 240px;
     }
+
     .markdown-section {
-      padding-top: 10px;
+      padding-top: 110px;
       max-width: 1050px;
     }
+
     .footer {
       position: relative;
       display: none;
       text-align: center;
       bottom: 10px;
     }
-    #docsify-darklight-theme {
-      position: fixed;
-      right: 70px;
-      top: 12px;
-      width: 25px;
-      height: 25px;
-    }
+
     .github-corner svg {
       fill: transparent;
-      color: #ff0090;
+      color: #ffffff;
+      padding: 0px;
+      margin: 0px;
+      margin-left: 0px;
+      position: relative;
+      right: 15px;
+      height: 70px;
+      width: 70px;
     }
-    /* body .docsify-pagination-container {
-      border-width: 5px;
-      border-color: red;
-      background: #282a36;
-    } */
+
+    .github-corner {
+      border-bottom: 0;
+      position: fixed;
+      right: 70px;
+      text-decoration: none;
+      top: 0;
+      z-index: 1;
+      box-sizing: border-box;
+      width: 70px;
+      height: 70px;
+      margin-left: -12px;
+      overflow: hidden;
+      background: var(--hashi-yellow);
+      z-index: 100;
+      box-sizing: border-box;
+      padding: 8px 0 0 5px;
+    }
+
     .progress-bar {
-      background: linear-gradient(90deg, rgb(255, 143, 40) 0%, rgb(255, 80, 164) 33%, rgb(121, 23, 182) 66%, rgb(14, 113, 189) 100%);
+      background: linear-gradient(var(--hashi-gradient));
       height: 7px;
       position: fixed;
       bottom: 0px;
@@ -110,10 +199,11 @@
       width: 100%;
       padding-bottom: 10px;
     }
-  </style>
-  <style>
-    :root {
-      --sidebar-padding: 0 5px;
+
+    #docsify-darklight-theme {
+      background-repeat: no-repeat;
+      background-size: 30px;
+      background-position: center;
     }
   </style>
 <body>
