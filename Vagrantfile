@@ -360,7 +360,7 @@ Vagrant::configure("2") do |config|
         echo -e '\e[38;5;198m'"HashiQube has now been provisioned, and your services should be running."
         echo -e '\e[38;5;198m'"Below are some links for you to get started."
         echo -e '\e[38;5;198m'"Local documentation http://localhost:3333 Open this first."
-        echo -e '\e[38;5;198m'"Hashiqube status http://localhost:3001 Open this first."
+        echo -e '\e[38;5;198m'"Hashiqube status http://localhost:3001 and login with Username: admin and Password: P@ssw0rd"
         echo -e '\e[38;5;198m'"Online documentation https://hashiqube.com"
         echo -e '\e[38;5;198m'"Vault http://localhost:8200 with $(cat /etc/vault/init.file | grep Root)"
         echo -e '\e[38;5;198m'"Consul http://localhost:8500"
