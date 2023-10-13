@@ -351,6 +351,7 @@ A Very special mention to HashiQube's contributors, Thank You All for your help,
  - Rajesh Cholleti
  - Nel-Marie Nolan
  - Adriana Villela
+ - Charle Van Der Walt
 
 ## Videos
 Videos were made with asciinema https://asciinema.org/
