@@ -418,6 +418,10 @@ You will need to capture the following details from the Hashicorp Cloud Portal a
 
 ![Hashicorp Cloud Portal](images/jenkins-global-credentials.png?raw=true "Hashicorp Cloud Portal")
 
+When you run the pipeline, you will see in your stage the following output, notice that the secret from HCP Vault Secrets are masked.
+
+![Hashicorp Cloud Portal](images/hashicorp-cloud-platform-vault-secrets-jenkins-stage.png?raw=true "Hashicorp Cloud Portal")
+
 ## Terraform Cloud
 
 Now we can create our first Jenkins job!
