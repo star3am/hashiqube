@@ -4,7 +4,7 @@
 
 ## Overview
 
-Hashiqube is a Docker Container (Default) or a Virtual Machine VM (Virtualbox). Hashiqube is a DevOps Development Lab and has a Docker daemon inside meaning, we can run containers inside Hashiqube. It runs all Hashicorp products. [Vault](/vault/?id=vault), [Terraform](/terraform/?id=terraform), [Nomad](/nomad/?id=nomad), [Consul](/consul/?id=consul), [Waypoint](/waypoint/?id=waypoint), [Boundary](/boundary/?id=boundary), [Vagrant](/vagrant/?id=vagrant), [Packer](/packer/?id=packer) and [Sentinel](/sentinel/?id=sentinel).
+Hashiqube is a DevOps Lab in a Docker Container. Hashiqube has a Docker daemon inside meaning, we can run containers inside Hashiqube using Kubernetes (Minikube) or Nomad or Docker run. It runs all Hashicorp products. [Vault](/vault/?id=vault), [Terraform](/terraform/?id=terraform), [Nomad](/nomad/?id=nomad), [Consul](/consul/?id=consul), [Waypoint](/waypoint/?id=waypoint), [Boundary](/boundary/?id=boundary), [Vagrant](/vagrant/?id=vagrant), [Packer](/packer/?id=packer) and [Sentinel](/sentinel/?id=sentinel).
 
 It also runs a host of other popular Open Source DevOps / DevSecOps applications (Minikube, Ansible AWX Tower, Traefik etc.) showcasing how simple integration with Hashicorp products can result in tangible learnings and benefits for all its users.
 
@@ -16,11 +16,9 @@ You are welcome to connect with me on Linkedin https://www.linkedin.com/in/riaan
 Riaan Nolan's Credly profile: https://www.credly.com/users/riaan-nolan.e657145c
 
 ## Pre-requisites
-* 10GB of disk space and 4G Ram (Minimum) `vagrant up --provision` 8G Ram Recommended
-* Admin rights / sudo
-* Docker (Default) or Virtualbox
+* 10GB of disk space and 4G Ram (Minimum) - 8G Ram Recommended
+* Docker
 * Vagrant
-* `vagrant up --provision`
 
 :bulb: If you want to run Minikube and a workload like AWX Ansible Tower, or Airflow you need at least 8G Ram - If you want to run Gitlab aswell, you need to give Docker resources at least 12G Ram
 
@@ -30,7 +28,6 @@ Riaan Nolan's Credly profile: https://www.credly.com/users/riaan-nolan.e657145c
 
 * Docker - Download __Docker__ from https://www.docker.com/products/docker-desktop and install
 * Vagrant - Download __Vagrant__ from https://www.vagrantup.com/downloads.html and install
-* Virtualbox (Optional) - Download __Virtualbox__ from https://www.virtualbox.org/wiki/Downloads and install
 * Using `git` - clone this repo `git clone https://github.com/star3am/hashiqube.git` [__What is Git?__](git/#git)
 * Inside the local repo folder, do `vagrant up --provision` - This will setup, Vault, Nomad, Consul, Terraform, Localstack and Docker
 * Documentation locally available at http://localhost:3333
