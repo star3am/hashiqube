@@ -84,13 +84,17 @@ EOF
     }
     sh """
       curl -s "https://releases.hashicorp.com/terraform/1.5.7/terraform_1.5.7_linux_${env.arch}.zip" --output bin/terraform.zip
-      (cd bin && unzip -o terraform.zip)
+      (cd bin && unzip -o terraform.zip && cd ${env.WORKSPACE})
       curl -Lso bin/tfsec "https://github.com/aquasecurity/tfsec/releases/download/v1.28.4/tfsec-linux-${env.arch}"
       chmod +x bin/tfsec
+      curl -s "https://releases.hashicorp.com/vlt/1.0.0/vlt_1.0.0_linux_${env.arch}.zip" --output bin/vlt.zip
+      (cd bin && unzip -o vlt.zip && cd ${env.WORKSPACE})
       pwd
       ls -la
       ls -la bin/
       terraform -v
+      tfsec -v
+      vlt -v
       echo "${env.arch}"
       echo "${env.PATH}"
     """
@@ -106,6 +110,18 @@ EOF
 
   stage('Run Terraform plan on Terraform Cloud') {
     sh('terraform plan')
+  }
+
+  // https://developer.hashicorp.com/hcp/docs/vault-secrets/commands/config
+  // https://developer.hashicorp.com/vault/tutorials/hcp-vault-secrets-get-started/hcp-vault-secrets-retrieve-secret
+  stage('Get Secret from HCP Vault Secrets') {
+    withCredentials([usernamePassword(credentialsId: 'YOUR_CREDENTIALS_ID', usernameVariable: 'HCP_CLIENT_ID', passwordVariable: 'HCP_CLIENT_SECRET')]) {
+      sh """
+        HCP_CLIENT_ID=${HCP_CLIENT_ID} HCP_CLIENT_SECRET=${HCP_CLIENT_SECRET} vlt login
+        vlt secrets list --organization YOUR_HCP_ORGANIZATION_NAME --project YOUR_HCP_PROJECT_NAME --app-name YOUR_HCP_APP_NAME
+        vlt secrets get --organization YOUR_HCP_ORGANIZATION_NAME --project YOUR_HCP_PROJECT_NAME --app-name YOUR_HCP_APP_NAME Password
+      """
+    }
   }
 
   stage('Get ENV vars from Vault') {
