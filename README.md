@@ -117,7 +117,7 @@ Hashiqube has been created to enable anyone who is interested in secure automati
 
 Hashiqube gives all interested parties the empowerment to  deploy these tools in a way that covers multiple use cases effectively providing a ‘concept to completion’ test bed using open-source Hashicorp products.
 
-The original use case was born from the desire to demystify DevSecOps utilising Terraform, Vault, Consul, Sentinel and Nomad as well as some other well-known open source CI/CD tools by providing a ‘hands-on’ environment that demonstrates the value of secret and credential management in a standard software development pipeline.
+The original use case was born from the desire to demystify DevSecOps utilising Terraform, Vault, Consul, Sentinel and Nomad as well as some other well known open source CI/CD tools by providing a ‘hands-on’ environment that demonstrates the value of secret and credential management in a standard software development pipeline.
 
 Thanks to the flexibility of the Hashicorp products there is no need to wonder how to achieve the goals of bringing software to market in a more secure and timely fashion, just Vagrant up!
 
@@ -152,7 +152,7 @@ vagrant up --provision-with basetools,docker,minikube,postgresql,dbt,apache-airf
 #### Docker Desktop
 Docker Desktop is an easy-to-install application for your Mac or Windows environment that enables you to build and share containerized applications and microservices. It's a graphical user interface for the docker service.
 
-* [Download Docker Desktop](https://www.docker.com/products/docker-desktop) and install it on your laptop, to verify and bring up the Docker Desktop application.
+* [Download Docker Desktop](https://www.docker.com/products/docker-desktop) and install it on your laptop, to verify and bring up the Docker Desktop application. 
 
 If you have HashiQube running, you won't see any containers but you will be able to open the application. 
 
@@ -307,7 +307,7 @@ __Solution__ I stop the Elasticsearch docker container and run `vagrant up` agai
 ```
 
 ## Support & Feedback
-For suggestions, feedback and queries please branch or and submit a Pull Request or directly contact Riaan Nolan, creator of the HashiQube via [Github - hashiqube](https://github.com/star3am/hashiqube)
+For suggestions, feedback and queries please branch or and submit a Pull Request or directly contact __Riaan Nolan__, creator of the HashiQube via [Github - hashiqube](https://github.com/star3am/hashiqube)
 
 
 ### About Hashiqube
@@ -328,11 +328,11 @@ In addition to the Core Hashicorp products, Hashiqube also runs a host of other 
 ![Hashiqube Integrations](images/logo-qube.png?raw=true "Hashiqube Integrations")
 
 ### About Me
-My name is Riaan Nolan and I was born in South Africa. I started out as a Web Developer in 2000 and from there progressed into Systems Administration, with a strong focus on Automation, Infrastructure and Configuration as Code.
+My name is __Riaan Nolan__ and I was born in South Africa. I started out as a Web Developer in 2000 and from there progressed into Systems Administration, with a strong focus on Automation, Infrastructure and Configuration as Code.
 
-I have worked for Multi-National companies in Portugal, Germany, China, South Africa, the United States and Australia. 
+I have worked for Multi-National companies in Portugal, Germany, China, South Africa, United States and Australia. 
 
-Please connect with me on [LinkedIn (Riaan Nolan)](https://www.linkedin.com/in/riaannolan/) or check out [my Credly profile](https://www.credly.com/users/riaan-nolan.e657145c)
+Please connect with me on [LinkedIn](https://www.linkedin.com/in/riaannolan/) or check out [my Credly profile](https://www.credly.com/users/riaan-nolan.e657145c)
 <br />
 
 ![My Hashicorp Badges](images/hashicorp-badges.png?raw=true "My Hashicorp Badges")
@@ -351,6 +351,7 @@ A Very special mention to HashiQube's contributors, Thank You All for your help,
  - Rajesh Cholleti
  - Nel-Marie Nolan
  - Adriana Villela
+ - [Charle Van Der Walt](https://nz.linkedin.com/in/charle-van-der-walt-b9ba2628)
  - [JJ Badenhorst](https://github.com/badj)
 
 ## Videos
