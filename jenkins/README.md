@@ -6,7 +6,7 @@ Jenkins is an open source automation server. It helps automate the parts of soft
 
 ## About
 
-This DevOps Jenkins Lab will help you with a practicle example of a Jenkinsfile pipeline to do the following: 
+This DevOps Jenkins Lab will help you with a practice example of a Jenkinsfile pipeline to do the following:
 
 - Retrieve Secrets from Vault in Hashiqube
 - Retrieve Secrets from HCP Vault Secrets (Hashicorp Cloud Platform)
@@ -16,13 +16,13 @@ This provisioner will help you start the Jenkins container, login with the initi
 
 ![Jenkins Logo](images/jenkins-logo.png?raw=true "Jenkins Logo")
 
-We will also configure Jenkins to do the following for us: 
+We will also configure Jenkins to do the following for us:
 
 - Clone https://github.com/star3am/terraform-hashicorp-hashiqube
 - Install https://github.com/aquasecurity/tfsec Aquasec's TFSec and scan our modules
 - Install Terraform and run Terraform Plan on Terraform Cloud
 - Install Hashicorp Vault Plugin https://github.com/jenkinsci/hashicorp-vault-plugin
-After that, we will configure Vault's secret engines, KV store version 1 and 2 and set some keys.
+  After that, we will configure Vault's secret engines, KV store version 1 and 2 and set some keys.
 
 For this demo we will use the Vault root access token for Jenkins access. Other authentication methods like LDAP can be enabled later.
 
@@ -412,7 +412,7 @@ You will need to capture the following details from the Hashicorp Cloud Portal a
 
 `YOUR_HCP_ORGANIZATION_NAME`
 
-`YOUR_HCP_PROJECT_NAME` 
+`YOUR_HCP_PROJECT_NAME`
 
 `YOUR_HCP_APP_NAME`
 
