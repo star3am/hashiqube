@@ -1,8 +1,18 @@
 # Jenkins
 
+https://www.jenkins.io/
+
+Jenkins is an open source automation server. It helps automate the parts of software development related to building, testing, and deploying, facilitating continuous integration, and continuous delivery. It is a server-based system that runs in servlet containers such as Apache Tomcat.
+
 ## About
 
-This will help you start the Jenkins container, login with the initial admin token and create a user and password for subsequent logins.
+This DevOps Jenkins Lab will help you with a practicle example of a Jenkinsfile pipeline to do the following: 
+
+- Retrieve Secrets from Vault in Hashiqube
+- Retrieve Secrets from HCP Vault Secrets (Hashicorp Cloud Platform)
+- Use the CLI Integration with Terraform Cloud to run a plan on a Workspace
+
+This provisioner will help you start the Jenkins container, login with the initial admin token and create a user and password for subsequent logins.
 
 ![Jenkins Logo](images/jenkins-logo.png?raw=true "Jenkins Logo")
 
@@ -255,6 +265,21 @@ Before we continue let's make sure Vault is running and it is unsealed. In a ter
 
 ## Vault
 
+:bulb: This step was automatically done for you in the Provisioning step, with this command in our provisioning step `jenkins/jenkins.sh`
+
+```
+echo -e '\e[38;5;198m'"++++ "
+echo -e '\e[38;5;198m'"++++ Check if Hashicorp Vault is running"
+echo -e '\e[38;5;198m'"++++ "
+if pgrep -x "vault" >/dev/null
+then
+echo "Vault is running"
+else
+echo -e '\e[38;5;198m'"++++ Ensure Vault is running.."
+sudo bash /vagrant/vault/vault.sh
+fi
+```
+
 `vagrant up --provision-with vault`
 ```log
 Bringing machine 'user.local.dev' up with 'virtualbox' provider...
@@ -289,6 +314,8 @@ Bringing machine 'user.local.dev' up with 'virtualbox' provider...
    user.local.dev: existing unseal keys shares. See "vault operator rekey" for more information.
 ```
 
+:bulb: This step was automatically done for you in the Provisioning step, with this command in our provisioning step `jenkins/jenkins.sh`
+
 Now open up `http://localhost:8200`
 Vault will start up sealed. We need unseal Vault to use it.
 
@@ -296,6 +323,8 @@ Enter 3 of the 5 Unseal keys printed above, lastly, enter the `Initial Root Toke
 You need to be logged into Vault and should see the screen below.
 
 ![Vault](images/vault_unsealed_and_logged_in.png?raw=true "Vault")
+
+:bulb: This step was automatically done for you in the Provisioning step, with this command in our provisioning step `jenkins/jenkins.sh`
 
 Now let's enable KV secret engines V1 and V2 and add some data for Jenkins to use.
 
@@ -320,6 +349,8 @@ def secrets = [
   [envVar: 'testing_again', vaultKey: 'value_two']]]
 ]
 ```
+
+:bulb: This step was automatically done for you in the Provisioning step, with this command in our provisioning step `jenkins/jenkins.sh`
 
 Add as the path `secret/another_test` and as the key `another_test` with some data of your choice.
 
@@ -352,6 +383,44 @@ Click `Skip SSL Validation` for this demo.
 Now we need to add the Vault root token for Jenkins to communicate with Vault
 
 ![Jenkins](images/jenkins_manage_jenkins_configure_system_vault_initial_root_token.png?raw=true "Jenkins")
+
+## HCP VAult Secrets
+
+https://portal.cloud.hashicorp.com/
+
+HCP Vault Secrets is a secrets management service that allows you keep secrets centralized while syncing secrets to platforms and tools such as CSPs, Github, and Vercel.
+
+Register an organisation on Hashicorp Cloud Portal https://portal.cloud.hashicorp.com/
+
+Now you can navigate to __Vault Secrets__
+
+![Hashicorp Cloud Portal](images/hashicorp-cloud-platform-vault-secrets-application-secret.png?raw=true "Hashicorp Cloud Portal")
+
+And create your first secret
+
+![Hashicorp Cloud Portal](images/hashicorp-cloud-platform-vault-secrets.png?raw=true "Hashicorp Cloud Portal")
+
+You can now create a Project
+
+![Hashicorp Cloud Portal](images/hashicorp-cloud-platform-dashboard.png?raw=true "Hashicorp Cloud Portal")
+
+You will need to capture the following details from the Hashicorp Cloud Portal and Vault Secrets
+
+`YOUR_HCP_CLIENT_ID`
+
+`YOUR_HCP_CLIENT_SECRET`
+
+`YOUR_HCP_ORGANIZATION_NAME`
+
+`YOUR_HCP_PROJECT_NAME` 
+
+`YOUR_HCP_APP_NAME`
+
+![Hashicorp Cloud Portal](images/jenkins-global-credentials.png?raw=true "Hashicorp Cloud Portal")
+
+When you run the pipeline, you will see in your stage the following output, notice that the secret from HCP Vault Secrets are masked.
+
+![Hashicorp Cloud Portal](images/hashicorp-cloud-platform-vault-secrets-jenkins-stage.png?raw=true "Hashicorp Cloud Portal")
 
 ## Terraform Cloud
 
@@ -427,6 +496,9 @@ node {
   properties([disableConcurrentBuilds()])
 
   stage('Checkout https://github.com/star3am/terraform-hashicorp-hashiqube') {
+    sh """
+      git config --global --add safe.directory "${env.WORKSPACE}"
+    """
     git(
       url: "https://github.com/star3am/terraform-hashicorp-hashiqube.git",
       branch: "master",
@@ -498,13 +570,17 @@ EOF
     }
     sh """
       curl -s "https://releases.hashicorp.com/terraform/1.5.7/terraform_1.5.7_linux_${env.arch}.zip" --output bin/terraform.zip
-      (cd bin && unzip -o terraform.zip)
+      (cd bin && unzip -o terraform.zip && cd ${env.WORKSPACE})
       curl -Lso bin/tfsec "https://github.com/aquasecurity/tfsec/releases/download/v1.28.4/tfsec-linux-${env.arch}"
       chmod +x bin/tfsec
+      curl -s "https://releases.hashicorp.com/vlt/1.0.0/vlt_1.0.0_linux_${env.arch}.zip" --output bin/vlt.zip
+      (cd bin && unzip -o vlt.zip && cd ${env.WORKSPACE})
       pwd
       ls -la
       ls -la bin/
       terraform -v
+      tfsec -v
+      vlt -v
       echo "${env.arch}"
       echo "${env.PATH}"
     """
@@ -520,6 +596,18 @@ EOF
 
   stage('Run Terraform plan on Terraform Cloud') {
     sh('terraform plan')
+  }
+
+  // https://developer.hashicorp.com/hcp/docs/vault-secrets/commands/config
+  // https://developer.hashicorp.com/vault/tutorials/hcp-vault-secrets-get-started/hcp-vault-secrets-retrieve-secret
+  stage('Get Secret from HCP Vault Secrets') {
+    withCredentials([usernamePassword(credentialsId: 'YOUR_CREDENTIALS_ID', usernameVariable: 'HCP_CLIENT_ID', passwordVariable: 'HCP_CLIENT_SECRET')]) {
+      sh """
+        HCP_CLIENT_ID=${HCP_CLIENT_ID} HCP_CLIENT_SECRET=${HCP_CLIENT_SECRET} vlt login
+        vlt secrets list --organization YOUR_HCP_ORGANIZATION_NAME --project YOUR_HCP_PROJECT_NAME --app-name YOUR_HCP_APP_NAME
+        vlt secrets get --organization YOUR_HCP_ORGANIZATION_NAME --project YOUR_HCP_PROJECT_NAME --app-name YOUR_HCP_APP_NAME Password
+      """
+    }
   }
 
   stage('Get ENV vars from Vault') {
@@ -581,7 +669,9 @@ Running on Jenkins in /var/jenkins_home/workspace/test
 [Pipeline] {
 [Pipeline] properties
 [Pipeline] stage
-[Pipeline] { (Checkout https://github.com/star3am/terraform-hashicorp-hashiqube) (Checkout https://github.com/star3am/terraform-hashicorp-hashiqube)
+[Pipeline] { (Checkout https://github.com/star3am/terraform-hashicorp-hashiqube)
+[Pipeline] sh
++ git config --global --add safe.directory /var/jenkins_home/workspace/test
 [Pipeline] git
 The recommended git tool is: NONE
 No credentials specified
@@ -593,14 +683,14 @@ Fetching upstream changes from https://github.com/star3am/terraform-hashicorp-ha
  > git --version # 'git version 2.39.2'
  > git fetch --tags --force --progress -- https://github.com/star3am/terraform-hashicorp-hashiqube.git +refs/heads/*:refs/remotes/origin/* # timeout=10
  > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
-Checking out Revision f349e85ae20b5b8a4728257ada983081a2fae122 (refs/remotes/origin/master)
+Checking out Revision 944fd66ea406fffd5f3ebe98dfd88f4b598848bd (refs/remotes/origin/master)
  > git config core.sparsecheckout # timeout=10
- > git checkout -f f349e85ae20b5b8a4728257ada983081a2fae122 # timeout=10
+ > git checkout -f 944fd66ea406fffd5f3ebe98dfd88f4b598848bd # timeout=10
  > git branch -a -v --no-abbrev # timeout=10
  > git branch -D master # timeout=10
- > git checkout -b master f349e85ae20b5b8a4728257ada983081a2fae122 # timeout=10
-Commit message: "Merge pull request #20 from star3am/feature/run-dot-sh-without-make"
- > git rev-list --no-walk f349e85ae20b5b8a4728257ada983081a2fae122 # timeout=10
+ > git checkout -b master 944fd66ea406fffd5f3ebe98dfd88f4b598848bd # timeout=10
+Commit message: "Merge pull request #21 from star3am/feature/extend-github-pipeline"
+ > git rev-list --no-walk 944fd66ea406fffd5f3ebe98dfd88f4b598848bd # timeout=10
 [Pipeline] }
 [Pipeline] // stage
 [Pipeline] stage
@@ -608,21 +698,21 @@ Commit message: "Merge pull request #20 from star3am/feature/run-dot-sh-without-
 [Pipeline] echo
 JOB_NAME: test
 [Pipeline] echo
-BUILD_ID: 109
+BUILD_ID: 144
 [Pipeline] echo
-BUILD_NUMBER: 109
+BUILD_NUMBER: 144
 [Pipeline] echo
 BRANCH_NAME: null
 [Pipeline] echo
 PULL_REQUEST: null
 [Pipeline] echo
-BUILD_NUMBER: 109
+BUILD_NUMBER: 144
 [Pipeline] echo
-BUILD_URL: http://localhost:8088/job/test/109/
+BUILD_URL: http://localhost:8088/job/test/144/
 [Pipeline] echo
 NODE_NAME: built-in
 [Pipeline] echo
-BUILD_TAG: jenkins-test-109
+BUILD_TAG: jenkins-test-144
 [Pipeline] echo
 JENKINS_URL: http://localhost:8088/
 [Pipeline] echo
@@ -638,45 +728,45 @@ GIT_BRANCH: null
 [Pipeline] sh
 + git log -n 1 --pretty=format:%s
 [Pipeline] echo
-LAST_COMMIT_MSG: Merge pull request #20 from star3am/feature/run-dot-sh-without-make
+LAST_COMMIT_MSG: Merge pull request #21 from star3am/feature/extend-github-pipeline
 [Pipeline] sh
-+ + + + + lscpu
-grep Architecturetr -scut -dtr -d
++ + + + + grep Architecturetr -scut -dtr -dlscpu
+
   
    -f [:space:]
  2
 [Pipeline] echo
 ARCH: aarch64
 [Pipeline] sh
-+ + env
++ env+ 
 sort
 [Pipeline] echo
 ARCH=aarch64
-BUILD_DISPLAY_NAME=#109
-BUILD_ID=109
-BUILD_NUMBER=109
-BUILD_TAG=jenkins-test-109
-BUILD_URL=http://localhost:8088/job/test/109/
+BUILD_DISPLAY_NAME=#144
+BUILD_ID=144
+BUILD_NUMBER=144
+BUILD_TAG=jenkins-test-144
+BUILD_URL=http://localhost:8088/job/test/144/
 CI=true
 COPY_REFERENCE_FILE_LOG=/var/jenkins_home/copy_reference_file.log
 EXECUTOR_NUMBER=1
 HOME=/var/jenkins_home
-HOSTNAME=921e86e94bf7
-HUDSON_COOKIE=e24d28a6-833a-4910-9c31-8aac5da09de3
+HOSTNAME=73eab9fb25d2
+HUDSON_COOKIE=880860c4-149c-4007-b9c7-ddbeb3e68d8a
 HUDSON_HOME=/var/jenkins_home
 HUDSON_SERVER_COOKIE=79aead07081a8d8a
 HUDSON_URL=http://localhost:8088/
 JAVA_HOME=/opt/java/openjdk
 JENKINS_HOME=/var/jenkins_home
 JENKINS_INCREMENTALS_REPO_MIRROR=https://repo.jenkins-ci.org/incrementals
-JENKINS_NODE_COOKIE=0bb2b8ee-e9b8-4ce0-b282-2fecbd036465
+JENKINS_NODE_COOKIE=5c753579-4031-433b-b096-deb652bd6a04
 JENKINS_OPTS=--httpPort=8088
 JENKINS_SERVER_COOKIE=durable-7190c2fadc48570bd1d6b9ff3df70884d6b72f619c1a447143f9aae059f70e9f
 JENKINS_SLAVE_AGENT_PORT=50000
 JENKINS_UC=https://updates.jenkins.io
 JENKINS_UC_EXPERIMENTAL=https://updates.jenkins.io/experimental
 JENKINS_URL=http://localhost:8088/
-JENKINS_VERSION=2.414.1
+JENKINS_VERSION=2.414.2
 JOB_BASE_NAME=test
 JOB_DISPLAY_URL=http://localhost:8088/job/test/display/redirect
 JOB_NAME=test
@@ -687,10 +777,10 @@ NODE_NAME=built-in
 PATH=/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/var/jenkins_home/workspace/test/bin
 PWD=/var/jenkins_home/workspace/test
 REF=/usr/share/jenkins/ref
-RUN_ARTIFACTS_DISPLAY_URL=http://localhost:8088/job/test/109/display/redirect?page=artifacts
-RUN_CHANGES_DISPLAY_URL=http://localhost:8088/job/test/109/display/redirect?page=changes
-RUN_DISPLAY_URL=http://localhost:8088/job/test/109/display/redirect
-RUN_TESTS_DISPLAY_URL=http://localhost:8088/job/test/109/display/redirect?page=tests
+RUN_ARTIFACTS_DISPLAY_URL=http://localhost:8088/job/test/144/display/redirect?page=artifacts
+RUN_CHANGES_DISPLAY_URL=http://localhost:8088/job/test/144/display/redirect?page=changes
+RUN_DISPLAY_URL=http://localhost:8088/job/test/144/display/redirect
+RUN_TESTS_DISPLAY_URL=http://localhost:8088/job/test/144/display/redirect?page=tests
 SHLVL=0
 STAGE_NAME=Echo Variables
 TF_CLI_ARGS=-no-color
@@ -699,8 +789,8 @@ WORKSPACE_TMP=/var/jenkins_home/workspace/test@tmp
 
 [Pipeline] sh
 + hostname
-+ echo 921e86e94bf7
-921e86e94bf7
++ echo 73eab9fb25d2
+73eab9fb25d2
 [Pipeline] }
 [Pipeline] // stage
 [Pipeline] stage
@@ -712,8 +802,8 @@ Masking supported pattern matches of $SECRET
 Warning: A secret was passed to "sh" using Groovy String interpolation, which is insecure.
 		 Affected argument(s) used the following variable(s): [SECRET]
 		 See https://jenkins.io/redirect/groovy-string-interpolation for details.
-+ + teecat
- backend.tf
++ + cat
+tee backend.tf
 terraform {
   cloud {
     organization = "nolan"
@@ -745,61 +835,88 @@ arm64
 + unzip -o terraform.zip
 Archive:  terraform.zip
   inflating: terraform               
++ cd /var/jenkins_home/workspace/test
 + curl -Lso bin/tfsec https://github.com/aquasecurity/tfsec/releases/download/v1.28.4/tfsec-linux-arm64
 + chmod +x bin/tfsec
++ curl -s https://releases.hashicorp.com/vlt/1.0.0/vlt_1.0.0_linux_arm64.zip --output bin/vlt.zip
++ cd bin
++ unzip -o vlt.zip
+Archive:  vlt.zip
+  inflating: vlt                     
++ cd /var/jenkins_home/workspace/test
 + pwd
 /var/jenkins_home/workspace/test
 + ls -la
 total 204
-drwxr-xr-x 33 jenkins jenkins  1056 Sep 20 00:19 .
-drwxr-xr-x  7 jenkins jenkins   224 Sep 19 23:07 ..
-drwxr-xr-x  3 jenkins jenkins    96 Sep 19 05:07 .devcontainer
--rw-r--r--  1 jenkins jenkins   246 Sep 19 05:07 .dockerignore
-drwxr-xr-x 14 jenkins jenkins   448 Sep 20 01:16 .git
+drwxr-xr-x 33 jenkins jenkins  1056 Oct 16 02:33 .
+drwxr-xr-x  7 root    root      224 Sep 19 23:07 ..
+drwxr-xr-x  3 jenkins jenkins    96 Oct 16 02:31 .devcontainer
+-rw-r--r--  1 jenkins jenkins   246 Oct 16 02:33 .dockerignore
+drwxr-xr-x 14 jenkins jenkins   448 Oct 16 06:09 .git
 drwxr-xr-x  3 jenkins jenkins    96 Sep 19 05:07 .github
--rw-r--r--  1 jenkins jenkins  1036 Sep 19 05:07 .gitignore
--rw-r--r--  1 jenkins jenkins  3214 Sep 19 05:07 .gitlab-ci.yml
--rw-r--r--  1 jenkins jenkins  2319 Sep 19 05:07 .pre-commit-config.yaml
-drwxr-xr-x  6 jenkins jenkins   192 Sep 20 00:22 .terraform
--rw-r--r--  1 jenkins jenkins     6 Sep 19 05:07 .terraform-version
--rw-r--r--  1 jenkins jenkins  6798 Sep 19 05:07 .terraform.lock.hcl
--rw-r--r--  1 jenkins jenkins     7 Sep 19 05:07 .terragrunt-version
--rw-r--r--  1 jenkins jenkins   970 Sep 19 05:07 .tflint.hcl
--rw-r--r--  1 jenkins jenkins  2539 Sep 19 05:07 .yamllint
--rw-r--r--  1 jenkins jenkins  7406 Sep 19 07:36 Dockerfile
--rw-r--r--  1 jenkins jenkins  1063 Sep 19 05:07 LICENSE
--rw-r--r--  1 jenkins jenkins  4189 Sep 19 05:07 Makefile
--rw-r--r--  1 jenkins jenkins 85703 Sep 19 05:07 README.md
+-rw-r--r--  1 jenkins jenkins  1036 Oct 16 02:33 .gitignore
+-rw-r--r--  1 jenkins jenkins  3214 Oct 16 02:33 .gitlab-ci.yml
+-rw-r--r--  1 jenkins jenkins  2319 Oct 16 02:33 .pre-commit-config.yaml
+drwxr-xr-x  6 root    root      192 Sep 20 00:22 .terraform
+-rw-r--r--  1 jenkins jenkins     6 Oct 16 02:33 .terraform-version
+-rw-r--r--  1 jenkins jenkins  6798 Sep 25 22:08 .terraform.lock.hcl
+-rw-r--r--  1 jenkins jenkins     7 Oct 16 02:28 .terragrunt-version
+-rw-r--r--  1 jenkins jenkins   970 Oct 16 02:33 .tflint.hcl
+-rw-r--r--  1 jenkins jenkins  2539 Oct 16 02:33 .yamllint
+-rw-r--r--  1 jenkins jenkins  7391 Oct 16 02:28 Dockerfile
+-rw-r--r--  1 jenkins jenkins  1063 Oct 16 02:33 LICENSE
+-rw-r--r--  1 jenkins jenkins  4189 Oct 16 02:33 Makefile
+-rw-r--r--  1 jenkins jenkins 85703 Oct 16 02:33 README.md
 -rw-r--r--  1 jenkins jenkins   226 Sep 20 00:13 backend.hcl
--rw-r--r--  1 jenkins jenkins   228 Sep 20 01:16 backend.tf
-drwxr-xr-x  5 jenkins jenkins   160 Sep 20 01:16 bin
--rw-r--r--  1 jenkins jenkins  1274 Sep 19 05:07 docker-compose.yml
-drwxr-xr-x  5 jenkins jenkins   160 Sep 19 05:07 examples
-drwxr-xr-x 16 jenkins jenkins   512 Sep 19 05:07 images
--rw-r--r--  1 jenkins jenkins  8401 Sep 19 05:07 main.tf
+-rw-r--r--  1 jenkins jenkins   228 Oct 16 06:09 backend.tf
+drwxr-xr-x  7 jenkins jenkins   224 Oct 16 06:09 bin
+-rw-r--r--  1 jenkins jenkins  1274 Oct 16 02:33 docker-compose.yml
+drwxr-xr-x  5 jenkins jenkins   160 Oct 16 02:31 examples
+drwxr-xr-x 16 jenkins jenkins   512 Oct 16 02:31 images
+-rw-r--r--  1 jenkins jenkins  8401 Oct 16 02:33 main.tf
 drwxr-xr-x  6 jenkins jenkins   192 Sep 19 05:07 modules
--rw-r--r--  1 jenkins jenkins  8490 Sep 19 05:07 outputs.tf
--rwxr-xr-x  1 jenkins jenkins   593 Sep 19 23:27 run-without-make.sh
--rwxr-xr-x  1 jenkins jenkins   373 Sep 19 05:07 run.sh
--rw-r--r--  1 jenkins jenkins   210 Sep 19 05:07 terraform.auto.tfvars.example
--rw-r--r--  1 jenkins jenkins   241 Sep 19 05:07 terragrunt.hcl
--rw-r--r--  1 jenkins jenkins  4175 Sep 19 05:07 variables.tf
+-rw-r--r--  1 jenkins jenkins  8490 Oct 16 02:33 outputs.tf
+-rwxr-xr-x  1 jenkins jenkins   593 Oct 16 02:33 run-without-make.sh
+-rwxr-xr-x  1 jenkins jenkins   373 Oct 16 02:33 run.sh
+-rw-r--r--  1 jenkins jenkins   210 Oct 16 02:33 terraform.auto.tfvars.example
+-rw-r--r--  1 jenkins jenkins   241 Oct 16 02:33 terragrunt.hcl
+-rw-r--r--  1 jenkins jenkins  4175 Oct 16 02:33 variables.tf
 + ls -la bin/
-total 124800
-drwxr-xr-x  5 jenkins jenkins      160 Sep 20 01:16 .
-drwxr-xr-x 33 jenkins jenkins     1056 Sep 20 00:19 ..
+total 154436
+drwxr-xr-x  7 jenkins jenkins      224 Oct 16 06:09 .
+drwxr-xr-x 33 jenkins jenkins     1056 Oct 16 02:33 ..
 -rwxr-xr-x  1 jenkins jenkins 61931520 Sep  7 18:19 terraform
--rw-r--r--  1 jenkins jenkins 19074897 Sep 20 01:16 terraform.zip
--rwxr-xr-x  1 jenkins jenkins 44892160 Sep 20 01:16 tfsec
+-rw-r--r--  1 jenkins jenkins 19074897 Oct 16 06:09 terraform.zip
+-rwxr-xr-x  1 jenkins jenkins 44892160 Oct 16 06:09 tfsec
+-rwxr-xr-x  1 jenkins jenkins 20056441 Oct 11 14:55 vlt
+-rw-r--r--  1 jenkins jenkins  9656806 Oct 16 06:09 vlt.zip
 + terraform -v
 Terraform v1.5.7
 on linux_arm64
 + provider registry.terraform.io/hashicorp/aws v4.67.0
 + provider registry.terraform.io/hashicorp/azurerm v3.57.0
 + provider registry.terraform.io/hashicorp/external v2.3.1
-+ provider registry.terraform.io/hashicorp/google v4.79.0
++ provider registry.terraform.io/hashicorp/google v4.83.0
 + provider registry.terraform.io/hashicorp/http v3.4.0
 + provider registry.terraform.io/hashicorp/null v3.2.1
+
+Your version of Terraform is out of date! The latest version
+is 1.6.1. You can update by downloading from https://www.terraform.io/downloads.html
++ tfsec -v
+
+======================================================
+tfsec is joining the Trivy family
+
+tfsec will continue to remain available 
+for the time being, although our engineering 
+attention will be directed at Trivy going forward.
+
+You can read more here: 
+https://github.com/aquasecurity/tfsec/discussions/1994
+======================================================
+v1.28.4
++ vlt -v
+1.0.0, git sha (5ab2abb9865c79586d7a8daf0cb00716866afc2c), go1.20.8 arm64
 + echo arm64
 arm64
 + echo /opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/var/jenkins_home/workspace/test/bin
@@ -891,11 +1008,11 @@ Result #3 HIGH Root block device is not encrypted.
 
   timings
   ──────────────────────────────────────────
-  disk i/o             8.962499ms
-  parsing              6.287458ms
-  adaptation           164.298793ms
-  checks               548.342043ms
-  total                727.890793ms
+  disk i/o             6.100702ms
+  parsing              12.671341ms
+  adaptation           128.308301ms
+  checks               533.215568ms
+  total                680.295912ms
 
   counts
   ──────────────────────────────────────────
@@ -926,18 +1043,18 @@ Initializing Terraform Cloud...
 Initializing modules...
 
 Initializing provider plugins...
-- Reusing previous version of hashicorp/null from the dependency lock file
 - Reusing previous version of hashicorp/external from the dependency lock file
 - Reusing previous version of hashicorp/http from the dependency lock file
 - Reusing previous version of hashicorp/aws from the dependency lock file
 - Reusing previous version of hashicorp/azurerm from the dependency lock file
 - Reusing previous version of hashicorp/google from the dependency lock file
+- Reusing previous version of hashicorp/null from the dependency lock file
+- Using previously-installed hashicorp/aws v4.67.0
+- Using previously-installed hashicorp/azurerm v3.57.0
+- Using previously-installed hashicorp/google v4.83.0
 - Using previously-installed hashicorp/null v3.2.1
 - Using previously-installed hashicorp/external v2.3.1
 - Using previously-installed hashicorp/http v3.4.0
-- Using previously-installed hashicorp/aws v4.67.0
-- Using previously-installed hashicorp/azurerm v3.57.0
-- Using previously-installed hashicorp/google v4.79.0
 
 Terraform Cloud has been successfully initialized!
 
@@ -958,7 +1075,7 @@ will stop streaming the logs, but will not stop the plan running remotely.
 Preparing the remote plan...
 
 To view this run in a browser, visit:
-https://app.terraform.io/app/nolan/terraform-hashicorp-hashiqube/runs/run-i3YuH5z92kdbqETW
+https://app.terraform.io/app/nolan/terraform-hashicorp-hashiqube/runs/run-vZTaXM7AxyWnHe6i
 
 Waiting for the plan to start...
 
@@ -970,9 +1087,9 @@ data.http.terraform_cloud_ip_ranges: Reading...
 data.http.terraform_cloud_ip_ranges: Read complete after 0s [id=https://app.terraform.io/api/meta/ip-ranges]
 module.gcp_hashiqube[0].data.google_compute_subnetwork.hashiqube: Reading...
 data.external.myipaddress: Read complete after 0s [id=-]
+module.gcp_hashiqube[0].data.google_compute_subnetwork.hashiqube: Read complete after 1s [id=projects/riaan-nolan-368709/regions/australia-southeast1/subnetworks/default]
 module.aws_hashiqube[0].data.aws_ami.ubuntu: Reading...
-module.gcp_hashiqube[0].data.google_compute_subnetwork.hashiqube: Read complete after 2s [id=projects/riaan-nolan-368709/regions/australia-southeast1/subnetworks/default]
-module.aws_hashiqube[0].data.aws_ami.ubuntu: Read complete after 1s [id=ami-0a9fb81cc3289919c]
+module.aws_hashiqube[0].data.aws_ami.ubuntu: Read complete after 1s [id=ami-08939177c401ce8f9]
 
 Terraform used the selected providers to generate the following execution
 plan. Resource actions are indicated with the following symbols:
@@ -988,7 +1105,7 @@ Terraform will perform the following actions:
           + "deploy_to_aws"        = "true"
           + "deploy_to_azure"      = "true"
           + "deploy_to_gcp"        = "true"
-          + "my_ipaddress"         = "3.235.124.156"
+          + "my_ipaddress"         = "52.87.229.19"
           + "vagrant_provisioners" = "basetools,docker,consul,vault,nomad,boundary,waypoint"
         }
     }
@@ -1090,7 +1207,7 @@ Terraform will perform the following actions:
 
   # module.aws_hashiqube[0].aws_instance.hashiqube will be created
   + resource "aws_instance" "hashiqube" {
-      + ami                                  = "ami-0a9fb81cc3289919c"
+      + ami                                  = "ami-08939177c401ce8f9"
       + arn                                  = (known after apply)
       + associate_public_ip_address          = (known after apply)
       + availability_zone                    = (known after apply)
@@ -1182,7 +1299,7 @@ Terraform will perform the following actions:
       + ingress                = [
           + {
               + cidr_blocks      = [
-                  + "3.235.124.156/32",
+                  + "52.87.229.19/32",
                 ]
               + description      = "Allow Your Public IP address"
               + from_port        = 0
@@ -1195,7 +1312,7 @@ Terraform will perform the following actions:
             },
           + {
               + cidr_blocks      = [
-                  + "3.235.124.156/32",
+                  + "52.87.229.19/32",
                 ]
               + description      = "Allow Your Public IP address"
               + from_port        = 0
@@ -1334,7 +1451,7 @@ Terraform will perform the following actions:
           + "deploy_to_azure"      = "true"
           + "deploy_to_gcp"        = "true"
           + "gcp_hashiqube_ip"     = (known after apply)
-          + "my_ipaddress"         = "3.235.124.156"
+          + "my_ipaddress"         = "52.87.229.19"
           + "region"               = "ap-southeast-2"
           + "ssh_public_key"       = (sensitive value)
           + "vagrant_provisioners" = "basetools,docker,consul,vault,nomad,boundary,waypoint"
@@ -1538,7 +1655,7 @@ Terraform will perform the following actions:
               + protocol                                   = "Tcp"
               + source_address_prefix                      = ""
               + source_address_prefixes                    = [
-                  + "3.235.124.156/32",
+                  + "52.87.229.19/32",
                 ]
               + source_application_security_group_ids      = []
               + source_port_range                          = "*"
@@ -1735,7 +1852,7 @@ Terraform will perform the following actions:
           + "deploy_to_azure"      = "true"
           + "deploy_to_gcp"        = "true"
           + "gcp_hashiqube_ip"     = (known after apply)
-          + "my_ipaddress"         = "3.235.124.156"
+          + "my_ipaddress"         = "52.87.229.19"
           + "ssh_public_key"       = (sensitive value)
           + "vagrant_provisioners" = "basetools,docker,consul,vault,nomad,boundary,waypoint"
           + "whitelist_cidr"       = "20.191.210.171/32"
@@ -1856,7 +1973,7 @@ Terraform will perform the following actions:
       + project            = (sensitive value)
       + self_link          = (known after apply)
       + source_ranges      = [
-          + "3.235.124.156/32",
+          + "52.87.229.19/32",
         ]
 
       + allow {
@@ -1994,12 +2111,14 @@ Terraform will perform the following actions:
         }
 
       + network_interface {
-          + ipv6_access_type   = (known after apply)
-          + name               = (known after apply)
-          + network            = (known after apply)
-          + stack_type         = (known after apply)
-          + subnetwork         = "https://www.googleapis.com/compute/v1/projects/riaan-nolan-368709/regions/australia-southeast1/subnetworks/default"
-          + subnetwork_project = (known after apply)
+          + internal_ipv6_prefix_length = (known after apply)
+          + ipv6_access_type            = (known after apply)
+          + ipv6_address                = (known after apply)
+          + name                        = (known after apply)
+          + network                     = (known after apply)
+          + stack_type                  = (known after apply)
+          + subnetwork                  = "https://www.googleapis.com/compute/v1/projects/riaan-nolan-368709/regions/australia-southeast1/subnetworks/default"
+          + subnetwork_project          = (known after apply)
 
           + access_config {
               + nat_ip                 = (known after apply)
@@ -2101,7 +2220,7 @@ Terraform will perform the following actions:
           + "deploy_to_gcp"        = "true"
           + "gcp_credentials"      = "~/.gcp/credentials.json"
           + "gcp_project"          = (sensitive value)
-          + "my_ipaddress"         = "3.235.124.156"
+          + "my_ipaddress"         = "52.87.229.19"
           + "ssh_public_key"       = (sensitive value)
           + "vagrant_provisioners" = "basetools,docker,consul,vault,nomad,boundary,waypoint"
           + "whitelist_cidr"       = "20.191.210.171/32"
@@ -2182,14 +2301,14 @@ Changes to Outputs:
       + "54.185.161.84/32",
       + "44.238.78.236/32",
     ]
-  + your_ipaddress                          = "3.235.124.156"
+  + your_ipaddress                          = "52.87.229.19"
 
 ------------------------------------------------------------------------
 
 Cost Estimation:
 
 Resources: 2 of 14 estimated
-           $93.888/mo +$93.888
+           $97.0176/mo +$97.0176
 
 ------------------------------------------------------------------------
 
@@ -2213,7 +2332,7 @@ Description:
 
 Print messages:
 
-Proposed monthly cost 93.888 of workspace terraform-hashicorp-hashiqube is over the limit: $ 50
+Proposed monthly cost 97.0176 of workspace terraform-hashicorp-hashiqube is over the limit: $ 50
 
 ./limit-costs.sentinel:70:1 - Rule "main"
   Description:
@@ -2223,6 +2342,27 @@ Proposed monthly cost 93.888 of workspace terraform-hashicorp-hashiqube is over 
     false
 
 
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Get Secret from HCP Vault Secrets)
+[Pipeline] withCredentials
+Masking supported pattern matches of $HCP_CLIENT_ID or $HCP_CLIENT_SECRET
+[Pipeline] {
+[Pipeline] sh
+Warning: A secret was passed to "sh" using Groovy String interpolation, which is insecure.
+		 Affected argument(s) used the following variable(s): [HCP_CLIENT_SECRET, HCP_CLIENT_ID]
+		 See https://jenkins.io/redirect/groovy-string-interpolation for details.
++ HCP_CLIENT_ID=**** HCP_CLIENT_SECRET=**** vlt login
+Successfully logged in
++ vlt secrets list --organization nolan --project star3am-project --app-name Hashiqube
+Name      Latest Version  Created At                
+Password  1               2023-10-03T03:50:26.105Z  
++ vlt secrets get --organization nolan --project star3am-project --app-name Hashiqube Password
+Name      Value             Latest Version  Created At                
+Password  ****************  1               2023-10-03T03:50:26.105Z  
+[Pipeline] }
+[Pipeline] // withCredentials
 [Pipeline] }
 [Pipeline] // stage
 [Pipeline] stage
@@ -2259,35 +2399,35 @@ ADDR=****
 [Pipeline] }
 [Pipeline] // withCredentials
 [Pipeline] sh
-+ + env
-sort
++ env
++ sort
 [Pipeline] echo
 ARCH=arm64
-BUILD_DISPLAY_NAME=#109
-BUILD_ID=109
-BUILD_NUMBER=109
-BUILD_TAG=jenkins-test-109
-BUILD_URL=http://localhost:8088/job/test/109/
+BUILD_DISPLAY_NAME=#144
+BUILD_ID=144
+BUILD_NUMBER=144
+BUILD_TAG=jenkins-test-144
+BUILD_URL=http://localhost:8088/job/test/144/
 CI=true
 COPY_REFERENCE_FILE_LOG=/var/jenkins_home/copy_reference_file.log
 EXECUTOR_NUMBER=1
 HOME=/var/jenkins_home
-HOSTNAME=921e86e94bf7
-HUDSON_COOKIE=15cfba41-7d81-4d48-97f9-60d42a5c58e7
+HOSTNAME=73eab9fb25d2
+HUDSON_COOKIE=4fe62fad-e3f4-4f3b-8cd0-326bb2219990
 HUDSON_HOME=/var/jenkins_home
 HUDSON_SERVER_COOKIE=79aead07081a8d8a
 HUDSON_URL=http://localhost:8088/
 JAVA_HOME=/opt/java/openjdk
 JENKINS_HOME=/var/jenkins_home
 JENKINS_INCREMENTALS_REPO_MIRROR=https://repo.jenkins-ci.org/incrementals
-JENKINS_NODE_COOKIE=0bb2b8ee-e9b8-4ce0-b282-2fecbd036465
+JENKINS_NODE_COOKIE=5c753579-4031-433b-b096-deb652bd6a04
 JENKINS_OPTS=--httpPort=8088
 JENKINS_SERVER_COOKIE=durable-7190c2fadc48570bd1d6b9ff3df70884d6b72f619c1a447143f9aae059f70e9f
 JENKINS_SLAVE_AGENT_PORT=50000
 JENKINS_UC=https://updates.jenkins.io
 JENKINS_UC_EXPERIMENTAL=https://updates.jenkins.io/experimental
 JENKINS_URL=http://localhost:8088/
-JENKINS_VERSION=2.414.1
+JENKINS_VERSION=2.414.2
 JOB_BASE_NAME=test
 JOB_DISPLAY_URL=http://localhost:8088/job/test/display/redirect
 JOB_NAME=test
@@ -2298,10 +2438,10 @@ NODE_NAME=built-in
 PATH=/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/var/jenkins_home/workspace/test/bin
 PWD=/var/jenkins_home/workspace/test
 REF=/usr/share/jenkins/ref
-RUN_ARTIFACTS_DISPLAY_URL=http://localhost:8088/job/test/109/display/redirect?page=artifacts
-RUN_CHANGES_DISPLAY_URL=http://localhost:8088/job/test/109/display/redirect?page=changes
-RUN_DISPLAY_URL=http://localhost:8088/job/test/109/display/redirect
-RUN_TESTS_DISPLAY_URL=http://localhost:8088/job/test/109/display/redirect?page=tests
+RUN_ARTIFACTS_DISPLAY_URL=http://localhost:8088/job/test/144/display/redirect?page=artifacts
+RUN_CHANGES_DISPLAY_URL=http://localhost:8088/job/test/144/display/redirect?page=changes
+RUN_DISPLAY_URL=http://localhost:8088/job/test/144/display/redirect
+RUN_TESTS_DISPLAY_URL=http://localhost:8088/job/test/144/display/redirect?page=tests
 SHLVL=0
 STAGE_NAME=Echo some ENV vars
 TF_CLI_ARGS=-no-color

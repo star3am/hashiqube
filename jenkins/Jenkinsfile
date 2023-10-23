@@ -108,6 +108,18 @@ EOF
     sh('terraform plan')
   }
 
+  // https://developer.hashicorp.com/hcp/docs/vault-secrets/commands/config
+  // https://developer.hashicorp.com/vault/tutorials/hcp-vault-secrets-get-started/hcp-vault-secrets-retrieve-secret
+  stage('Get Secret from HCP Vault Secrets') {
+    withCredentials([usernamePassword(credentialsId: 'YOUR_CREDENTIALS_ID', usernameVariable: 'HCP_CLIENT_ID', passwordVariable: 'HCP_CLIENT_SECRET')]) {
+      sh """
+        HCP_CLIENT_ID=${HCP_CLIENT_ID} HCP_CLIENT_SECRET=${HCP_CLIENT_SECRET} vlt login
+        vlt secrets list --organization YOUR_HCP_ORGANIZATION_NAME --project YOUR_HCP_PROJECT_NAME --app-name YOUR_HCP_APP_NAME
+        vlt secrets get --organization YOUR_HCP_ORGANIZATION_NAME --project YOUR_HCP_PROJECT_NAME --app-name YOUR_HCP_APP_NAME Password
+      """
+    }
+  }
+
   stage('Get ENV vars from Vault') {
     // define the secrets and the env variables
     // engine version can be defined on secret, job, folder or global.

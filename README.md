@@ -1,10 +1,10 @@
-# HashiQube - A Development Lab Using All the HashiCorp Products
+# HashiQube - A DevOps Development Lab Using All the HashiCorp Products
 
 ![HashiQube](images/hashiqube-banner.png?raw=true "HashiQube ")
 
 ## Overview
 
-Hashiqube is a Docker Container (Default) or a Virtual Machine VM (Virtualbox). Hashiqube has a Docker daemon inside. It runs all Hashicorp products: [Vault](/vault/?id=vault), [Terraform](/terraform/?id=terraform), [Nomad](/nomad/?id=nomad), [Consul](/consul/?id=consul), [Waypoint](/waypoint/?id=waypoint), [Boundary](/boundary/?id=boundary), [Vagrant](/vagrant/?id=vagrant), [Packer](/packer/?id=packer) and [Sentinel](/sentinel/?id=sentinel).
+Hashiqube is a DevOps Lab in a Docker Container. Hashiqube has a Docker daemon inside meaning, we can run containers inside Hashiqube using Kubernetes (Minikube) or Nomad or Docker run. It runs all Hashicorp products. [Vault](/vault/?id=vault), [Terraform](/terraform/?id=terraform), [Nomad](/nomad/?id=nomad), [Consul](/consul/?id=consul), [Waypoint](/waypoint/?id=waypoint), [Boundary](/boundary/?id=boundary), [Vagrant](/vagrant/?id=vagrant), [Packer](/packer/?id=packer) and [Sentinel](/sentinel/?id=sentinel).
 
 It also runs a host of other popular Open Source DevOps/DevSecOps applications (Minikube, Ansible AWX Tower, Traefik etc.) showcasing how simple integration with Hashicorp products can result in tangible learnings and benefits for all its users.
 
@@ -16,11 +16,9 @@ Please connect with me on [LinkedIn (Riaan Nolan)](https://www.linkedin.com/in/r
 <br />
 
 ## Pre-requisites
-* 10GB of disk space and 4G Ram (Minimum) `vagrant up --provision` 8G Ram Recommended
-* Admin rights / sudo
-* Docker (Default) or Virtualbox
+* 10GB of disk space and 4G RAM (Minimum) - 8G RAM Recommended
+* Docker
 * Vagrant
-* `vagrant up --provision`
 
 :bulb: If you want to run Minikube and a workload like AWX Ansible Tower, or Airflow you need at least 8G RAM - If you want to run Gitlab as well, you need to give Docker resources at least 12G RAM
 
@@ -30,7 +28,6 @@ Please connect with me on [LinkedIn (Riaan Nolan)](https://www.linkedin.com/in/r
 
 * Docker - Download Docker from the [Docker desktop installer](https://www.docker.com/products/docker-desktop) and install
 * Vagrant - Download Vagrant from the [Vagrant installer](https://www.vagrantup.com/downloads.html) and install
-* Virtualbox (Optional) - Download Virtualbox from the [Virtualbox installer](https://www.virtualbox.org/wiki/Downloads) and install
 * Using `git` - clone this repo `git clone s://github.com/star3am/hashiqube.git` - [What is Git?](git/#git)
 * Inside the local repo folder, do `vagrant up --provision` - This will set up, Vault, Nomad, Consul, Terraform, Localstack and Docker
 * Documentation locally available at http://localhost:3333
@@ -299,8 +296,8 @@ config.vm.network :forwarded_port, guest: 9200, host: 1234
 
 Sometimes, Vagrant will attempt to auto-correct this for you. In this case, Vagrant was unable to. This is usually because the guest machine is in a state which doesn't allow modifying port forwarding. You could try 'vagrant reload' (the equivalent of running a halt followed by an up) so vagrant can attempt to auto-correct this upon booting. Be warned that any unsaved work might be lost. <br />
 __Command__ `vagrant up --provision` <br />
-__Info__ When I run `vagrant up` I get an error about a port collision, in this case, it is port `9200` - The reason is that I have an Elasticsearch container running on my local laptop, and since HashiQube also run Elasticsearch this port is taken. <br />
-__Solution__ I stop the Elasticsearch docker container and run `vagrant up` again, or I hash the line out in the Vagrantfile like the example below <br />
+__Info__ When I run `vagrant up` I get an error about a port collision, in this case it is port `9200` - The reason is that I have an Elasticsearch container running on my local laptop, and since HashiQube also run Elasticsearch this port is taken. <br />
+__Solution__ I stop the Elasticsearch docker container and I run `vagrant up` again, or I hash the line out in the Vagrantfile like the example below <br />
 
 ```
 # config.vm.network "forwarded_port", guest: 9200, host: 9200 # elasticsearch
@@ -351,7 +348,7 @@ A Very special mention to HashiQube's contributors, Thank You All for your help,
  - Rajesh Cholleti
  - Nel-Marie Nolan
  - Adriana Villela
- - [Charle Van Der Walt](https://nz.linkedin.com/in/charle-van-der-walt-b9ba2628)
+ - [Charle Van Der Walt](https://linkedin.com/in/charle-van-der-walt-b9ba2628/)
  - [JJ Badenhorst](https://github.com/badj)
 
 ## Videos
