@@ -336,20 +336,21 @@ Please connect with me on [LinkedIn](https://www.linkedin.com/in/riaannolan/) or
 
 ## Contributors and Special mentions
 A Very special mention to HashiQube's contributors, Thank You All for your help, suggestions and contributions no matter how small <3
- - Thomas Cockin
- - Konstantin Vanyushov
- - Tristan Morgan
- - Ringo Chan
- - Ehsan Mirzaei
- - Greg Luxford
- - Byron Tuckett
- - Lane Birmingham
- - Devang Dhameliya
- - Rajesh Cholleti
- - Nel-Marie Nolan
- - Adriana Villela
+ - [Thomas Cockin](https://www.aslantechnology.com.au/)
+ - [Konstantin Vanyushov](https://www.linkedin.com/in/konstantin-vanyushov/)
+ - [Tristan Morgan](https://www.linkedin.com/in/tristanmorgan/)
+ - [Ringo Chan](https://www.linkedin.com/in/ringochan/)
+ - [Ehsan Mirzaei](https://www.linkedin.com/in/ehsan-mirzaei-54305181/)
+ - [Greg Luxford](https://www.linkedin.com/in/greg-luxford/)
+ - [Byron Tuckett](https://www.linkedin.com/in/byrontuckett/)
+ - [Lane Birmingham](https://www.linkedin.com/in/lane-birmingham-93261b151/)
+ - [Devang Dhameliya](https://www.linkedin.com/in/devangdhameliya/)
+ - [Rajesh Cholleti](https://www.linkedin.com/in/rajesh-cholleti-2b25a1116/)
+ - [Nel-Marie Nolan](https://www.linkedin.com/in/nelmarie/)
+ - [Adriana Villela](https://www.linkedin.com/in/adrianavillela/)
  - [Charle Van Der Walt](https://linkedin.com/in/charle-van-der-walt-b9ba2628/)
  - [JJ Badenhorst](https://github.com/badj)
+ - [Jan Laubscher](https://howdypress.com/)
 
 ## Videos
 Videos were made with [asciinema](https://asciinema.org/)
