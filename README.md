@@ -28,7 +28,7 @@ Please connect with me on [LinkedIn (Riaan Nolan)](https://www.linkedin.com/in/r
 
 * Docker - Download Docker from the [Docker desktop installer](https://www.docker.com/products/docker-desktop) and install
 * Vagrant - Download Vagrant from the [Vagrant installer](https://www.vagrantup.com/downloads.html) and install
-* Using `git` - clone this repo `git clone s://github.com/star3am/hashiqube.git` - [What is Git?](git/#git)
+* Using `git` - clone this repo `git clone https://github.com/star3am/hashiqube.git` - [What is Git?](git/#git)
 * Inside the local repo folder, do `vagrant up --provision` - This will set up, Vault, Nomad, Consul, Terraform, Localstack and Docker
 * Documentation locally available at http://localhost:3333
 
