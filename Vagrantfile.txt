@@ -60,7 +60,7 @@ Vagrant::configure("2") do |config|
 
   machines.each_with_index do |machine, index|
 
-    config.vm.box = "generic/ubuntu2004"
+    config.vm.box = "generic/ubuntu2204"
     config.vm.define machine[:name] do |config|
 
       # config.disksize.size = machine[:disksize] # deprecated
@@ -365,6 +365,7 @@ Vagrant::configure("2") do |config|
         echo -e '\e[38;5;198m'"Vault http://localhost:8200 with $(cat /etc/vault/init.file | grep Root)"
         echo -e '\e[38;5;198m'"Consul http://localhost:8500"
         echo -e '\e[38;5;198m'"Nomad http://localhost:4646"
+        echo -e '\e[33;1;93m'"Like HashiQube? Say thanks with a Star on GitHub: https://github.com/star3am/hashiqube"
       SHELL
 
     end
