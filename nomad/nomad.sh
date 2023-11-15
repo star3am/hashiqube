@@ -18,7 +18,7 @@ function nomad-install() {
   fi
   echo -e '\e[38;5;198m'"CPU is $ARCH"
 
-  sudo DEBIAN_FRONTEND=noninteractive apt-get --assume-yes install -qq curl unzip jq < /dev/null > /dev/null
+  sudo DEBIAN_FRONTEND=noninteractive apt-get --assume-yes install -qq iproute2 curl unzip jq < /dev/null > /dev/null
   yes | sudo docker system prune -a
   yes | sudo docker system prune --volumes
   mkdir -p /etc/nomad
@@ -132,7 +132,7 @@ EOF
     if [ -f /opt/cni/bin/bridge ]; then
       echo -e '\e[38;5;198m'"++++ cni-plugins already installed"
     else
-      wget -q https://github.com/containernetworking/plugins/releases/download/v1.1.1/cni-plugins-linux-$ARCH-v1.1.1.tgz -O /tmp/cni-plugins.tgz
+      wget -q https://github.com/containernetworking/plugins/releases/download/v1.3.0/cni-plugins-linux-$ARCH-v1.3.0.tgz -O /tmp/cni-plugins.tgz
       mkdir -p /opt/cni/bin
       tar -C /opt/cni/bin -xzf /tmp/cni-plugins.tgz
       echo 1 > /proc/sys/net/bridge/bridge-nf-call-arptables
@@ -156,7 +156,7 @@ EOF
     mkdir -p /usr/local/bin
     (cd /usr/local/bin && unzip /tmp/nomad.zip)
     echo -e '\e[38;5;198m'"++++ Installed `/usr/local/bin/nomad version`"
-    wget -q https://github.com/containernetworking/plugins/releases/download/v1.1.1/cni-plugins-linux-$ARCH-v1.1.1.tgz -O /tmp/cni-plugins.tgz
+    wget -q https://github.com/containernetworking/plugins/releases/download/v1.3.0/cni-plugins-linux-$ARCH-v1.3.0.tgz -O /tmp/cni-plugins.tgz
     mkdir -p /opt/cni/bin
     tar -C /opt/cni/bin -xzf /tmp/cni-plugins.tgz
     echo 1 > /proc/sys/net/bridge/bridge-nf-call-arptables
