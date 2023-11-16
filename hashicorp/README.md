@@ -13,17 +13,17 @@ HashiCorp was founded by Mitchell Hashimoto and Armon Dadgar in 2012 with the go
 - [HashiCorp blog posts](https://www.hashicorp.com/blog/all)
 
 ## HashiStack
-* [Terraform](/terraform/?id=terraform)
-* [Terraform Cloud](/terraform/README?id=terraform-cloud)
-* [Vault](/vault/)
-* [Consul](/consul/)
-* [Nomad](/nomad/)
-* [Boundary](/boundary/)
-* [Waypoint](/waypoint/)
-* [Vagrant](/vagrant/)
-* [Packer](/packer/)
-* [Brand Logo's](https://www.hashicorp.com/brand)
-* [Cloud Operating Model](https://www.hashicorp.com/resources/deriving-business-value-from-the-cloud-operating-model-in-the-public-sector)
+- [Terraform](/terraform/?id=terraform)
+- [Terraform Cloud](/terraform/README?id=terraform-cloud)
+- [Vault](/vault/)
+- [Consul](/consul/)
+- [Nomad](/nomad/)
+- [Boundary](/boundary/)
+- [Waypoint](/waypoint/)
+- [Vagrant](/vagrant/)
+- [Packer](/packer/)
+- [Brand Logo's](https://www.hashicorp.com/brand)
+- [Cloud Operating Model](https://www.hashicorp.com/resources/deriving-business-value-from-the-cloud-operating-model-in-the-public-sector)
 
 | Dimension | Products | | | 
 |------|--------|------------|------------|
