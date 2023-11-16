@@ -11,7 +11,7 @@ HashiCorp co-founder and CTO Armon Dadgar gives a whiteboard overview of HashiCo
 ## Latest News
 
 - [Consul 1.17 GA adds locality-aware routing and multi-port support](https://www.hashicorp.com/blog/consul-1-17-ga-adds-locality-aware-routing-and-multi-port-support)
-- [Announcing Consul 1.17 beta and HCP Consul Central](https://www.hashicorp.com/blog/announcing-consul-1-17-beta-and-hcp-consul-central)
+- [Consul 1.17 beta and HCP Consul Central](https://www.hashicorp.com/blog/announcing-consul-1-17-beta-and-hcp-consul-central)
 - [Consul 1.16 enhances service mesh reliability, user experience, and security](https://www.hashicorp.com/blog/consul-1-16-enhances-service-mesh-reliability-user-experience-and-security)
 - [Consul 1.15 adds Envoy extensions and enhances Envoy access logging](https://www.hashicorp.com/blog/consul-1-15-adds-envoy-extensions-and-enhances-access-logging)
 - [Consul 1.14 GA: Announcing Simplified Service Mesh Deployments](https://www.hashicorp.com/blog/consul-1-14-ga-announcing-simplified-service-mesh-deployments)

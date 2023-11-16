@@ -8,6 +8,10 @@ http://www.hashicorp.com
 HashiCorp delivers consistent workflows to provision, secure, connect, and run any infrastructure for any application.
 HashiCorp was founded by Mitchell Hashimoto and Armon Dadgar in 2012 with the goal of revolutionizing datacenter management: application development, delivery, and maintenance. ... IaaS, PaaS, SaaS. ... Our tools manage both physical machines and virtual machines, Windows, and Linux, SaaS ...
 
+## Latest News 
+
+- [HashiCorp blog posts](https://www.hashicorp.com/blog/all)
+
 ## HashiStack
 * [Terraform](/terraform/?id=terraform)
 * [Terraform Cloud](/terraform/README?id=terraform-cloud)
