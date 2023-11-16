@@ -249,7 +249,7 @@ echo -e '\e[38;5;198m'"++++ Add credentials ansible"
 echo -e '\e[38;5;198m'"++++ "
 sudo --preserve-env=PATH -u vagrant /home/vagrant/.local/bin/awx credentials create --credential_type 'Machine' --organization 'Default' --name 'ansible' --inputs '{"username": "vagrant", "password": "vagrant"}' $AWX_COMMON
 
-# # https://docs.ansible.com/ansible-tower/latest/html/towercli/reference.html#awx-job-templates
+# https://docs.ansible.com/ansible-tower/latest/html/towercli/reference.html#awx-job-templates
 # echo -e '\e[38;5;198m'"++++ "
 # echo -e '\e[38;5;198m'"++++ Associate credential with job_templates Demo Job Template"
 # echo -e '\e[38;5;198m'"++++ "
@@ -262,13 +262,13 @@ echo -e '\e[38;5;198m'"++++ Associate credential with job_templates ansible-role
 echo -e '\e[38;5;198m'"++++ "
 sudo --preserve-env=PATH -u vagrant /home/vagrant/.local/bin/awx job_templates associate --credential "ansible" --name "ansible-role-example-role" $AWX_COMMON
 
-# # https://docs.ansible.com/ansible-tower/latest/html/towercli/reference.html#awx-projects-update
+# https://docs.ansible.com/ansible-tower/latest/html/towercli/reference.html#awx-projects-update
 # echo -e '\e[38;5;198m'"++++ "
 # echo -e '\e[38;5;198m'"++++ Update the project"
 # echo -e '\e[38;5;198m'"++++ "
 # sudo --preserve-env=PATH -u vagrant /home/vagrant/.local/bin/awx projects update "Demo Project" --wait $AWX_COMMON
 
-# # https://docs.ansible.com/ansible-tower/latest/html/towercli/reference.html#awx-projects-modify
+# https://docs.ansible.com/ansible-tower/latest/html/towercli/reference.html#awx-projects-modify
 # echo -e '\e[38;5;198m'"++++ "
 # echo -e '\e[38;5;198m'"++++ Disable project update"
 # echo -e '\e[38;5;198m'"++++ "
@@ -304,10 +304,10 @@ sudo --preserve-env=PATH -u vagrant /home/vagrant/.local/bin/awx job_templates l
   --extra_vars "{\"vm_name\":\"$(hostname)\", \"vm_ip\":\"10.9.99.10\"}"
 
 # https://docs.ansible.com/ansible-tower/latest/html/towercli/reference.html#awx-hosts-delete
-echo -e '\e[38;5;198m'"++++ "
-echo -e '\e[38;5;198m'"++++ Remove VM host from Ansible Tower inventory"
-echo -e '\e[38;5;198m'"++++ "
-sudo --preserve-env=PATH -u vagrant /home/vagrant/.local/bin/awx hosts delete --id "$(sudo --preserve-env=PATH -u vagrant /home/vagrant/.local/bin/awx hosts list $AWX_COMMON | grep "10.9.99.10" | cut -d ' ' -f1)" $AWX_COMMON
+# echo -e '\e[38;5;198m'"++++ "
+# echo -e '\e[38;5;198m'"++++ Remove VM host from Ansible Tower inventory"
+# echo -e '\e[38;5;198m'"++++ "
+# sudo --preserve-env=PATH -u vagrant /home/vagrant/.local/bin/awx hosts delete --id "$(sudo --preserve-env=PATH -u vagrant /home/vagrant/.local/bin/awx hosts list $AWX_COMMON | grep "10.9.99.10" | cut -d ' ' -f1)" $AWX_COMMON
 
 # echo -e '\e[38;5;198m'"++++ "
 # echo -e '\e[38;5;198m'"++++ DEBUG with kubectl logs -f deployments/awx-operator-controller-manager -c awx-manager -n awx"
