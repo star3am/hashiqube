@@ -9,6 +9,17 @@ Secure, store and tightly control access to tokens, passwords, certificates, enc
 
 In this whiteboard video, Armon Dadgar, HashiCorp's co-founder and CTO, explains Vault, a tool for securely accessing secrets. A secret is anything that you want to tightly control access to, such as API keys, passwords, or certificates.
 
+## Latest News
+
+- [HashiCorp Vault 1.15 adopts Microsoft Workload Identity Federation](https://www.hashicorp.com/blog/hashicorp-vault-1-15-adopts-microsoft-workload-identity-federation)
+- [Vault 1.14 brings ACME for PKI, AWS roles, and more improvements](https://www.hashicorp.com/blog/vault-1-14-brings-acme-for-pki-aws-roles-and-more-improvements)
+- [Vault 1.13 adds Kubernetes Operator, MFA improvements, and more](https://www.hashicorp.com/blog/vault-1-13-adds-kubernetes-operator-mfa-improvements-and-more)
+- [HashiCorp Vault 1.12 Adds New Secrets Engines, ADP Updates, and More](https://www.hashicorp.com/blog/vault-1-12)
+- [HashiCorp Vault 1.11 Adds Kubernetes Secrets Engine, PKI Updates, and More](https://www.hashicorp.com/blog/vault-1-11)
+- [HashiCorp Vault 1.10 Achieves FIPS 140-2 Compliance](https://www.hashicorp.com/blog/hashicorp-vault-1-10-achieves-fips-140-2-compliance)
+
+## Introduction
+
 [![Armon Dadgar: Introduction to HashiCorp Vault](images/maxresdefault.jpeg)](https://www.youtube.com/watch?v=VYfl-DpZ5wM)
 
 `vagrant up --provision-with basetools,docsify,vault`

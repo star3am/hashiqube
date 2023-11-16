@@ -18,6 +18,14 @@ Waypoint supports
 - nomad
 - pack
 
+## Latest News
+
+- [Waypoint 0.11 strengthens Terraform integrations and allows user API access](https://www.hashicorp.com/blog/waypoint-0-11-strengthens-terraform-integrations-and-allows-user-api-access)
+- [Waypoint 0.10 Brings Custom Pipelines and Nomad Plugin Updates](https://www.hashicorp.com/blog/waypoint-0-10-brings-custom-pipelines-and-nomad-plugin-updates)
+- [Waypoint 0.9 Adds New Runner Commands](https://www.hashicorp.com/blog/waypoint-0-9-adds-new-runner-commands)
+
+## Introduction
+
 In this whiteboard overview, HashiCorp Co-Founder and CTO, Armon Dadgar introduces HashiCorp Waypoint—a project that unifies workflows for build, deploy, and release across platforms. Learn what challenges it is designed to solve and see how it works.
 
 [![Introduction to HashiCorp Waypoint](images/maxresdefault.jpeg)](https://www.youtube.com/watch?v=JL0Qeq4A6So)

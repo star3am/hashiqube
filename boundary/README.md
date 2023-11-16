@@ -8,6 +8,14 @@ Boundary is designed to grant access to critical systems using the principle of 
 
 In this whiteboard overview, HashiCorp Co-Founder and CTO, Armon Dadgar introduces HashiCorp Boundary—a identity-based secure access management solution. Learn what challenges it is designed to solve and see how it works.
 
+## Latest News
+
+- [Boundary 0.12 introduces multi-hop sessions and SSH certificate injection](https://www.hashicorp.com/blog/boundary-0-12-introduces-multi-hop-sessions-and-ssh-certificate-injection)
+- [Boundary 0.10 Expands Credential Management and Admin UI IAM Workflows](https://www.hashicorp.com/blog/boundary-0-10-expands-credential-management-and-admin-ui-iam-workflows)
+- [HashiCorp Boundary 0.8 Expands Health and Events Observability](https://www.hashicorp.com/blog/hashicorp-boundary-0-8-expands-health-and-events-observability)
+
+## Introduction
+
 [![Introduction to HashiCorp Boundary](images/maxresdefault.jpeg)](https://www.youtube.com/watch?v=tUMe7EsXYBQ)
 
 ![Hashicorp Boundary](images/boundary-how-it-works.png?raw=true "Hashicorp Boundary")

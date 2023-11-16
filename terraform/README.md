@@ -6,6 +6,14 @@ https://www.terraform.io/
 
 Terraform is an open-source infrastructure as code software tool created by HashiCorp. It enables users to define and provision a datacenter infrastructure using a high-level configuration language known as Hashicorp Configuration Language, or optionally JSON.
 
+## Latest News
+
+- [Terraform 1.6 adds a test framework for enhanced code validation](https://www.hashicorp.com/blog/terraform-1-6-adds-a-test-framework-for-enhanced-code-validation)
+- [Terraform 1.5 brings config-driven import and checks](https://www.hashicorp.com/blog/terraform-1-5-brings-config-driven-import-and-checks)
+- [Terraform 1.4 improves the CLI experience for Terraform Cloud](https://www.hashicorp.com/blog/terraform-1-4-improves-the-cli-experience-for-terraform-cloud)
+- [Terraform 1.3 Improves Extensibility and Maintainability of Terraform Modules](https://www.hashicorp.com/blog/terraform-1-3-improves-extensibility-and-maintainability-of-terraform-modules)
+- [Terraform 1.2 Improves Exception Handling and Updates to the CLI-driven Workflow](https://www.hashicorp.com/blog/terraform-1-2-improves-exception-handling-and-updates-to-the-cli-driven-workflow)
+
 ### Why Terraform
 - Provides a high-level abstraction of infrastructure (IaC)
 - Allows for composition and combination
