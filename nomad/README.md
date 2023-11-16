@@ -8,6 +8,16 @@ Nomad is a highly available, distributed, data-center aware cluster and applicat
 
 Increasingly, teams want to move away from the traditional tight coupling of application and operating system. So they need an abstraction layer to help developers and operators work together, and save money with better hardware utilization. Introducing HashiCorp Nomad.
 
+## Latest News
+
+- [Nomad 1.7 beta improves Vault and Consul integrations, adds NUMA support](https://www.hashicorp.com/blog/nomad-1-7-improves-vault-and-consul-integrations-adds-numa-support)
+- [Nomad 1.6 adds node pools, UX updates, and more](https://www.hashicorp.com/blog/nomad-1-6-adds-node-pools-ux-updates-and-more)
+- [Nomad 1.5 adds single sign-on and dynamic node metadata](https://www.hashicorp.com/blog/nomad-1-5-adds-single-sign-on-and-dynamic-node-metadata)
+- [Nomad 1.4 Adds Nomad Variables and Updates Service Discovery](https://www.hashicorp.com/blog/nomad-1-4-adds-nomad-variables-and-updates-service-discovery)
+- [Nomad 1.3 Adds Native Service Discovery and Edge Workload Support](https://www.hashicorp.com/blog/nomad-1-3-adds-native-service-discovery-and-edge-workload-support)
+
+## Introduction
+
 [![Introduction to HashiCorp Nomad](images/maxresdefault.jpeg)](https://www.youtube.com/watch?v=s_Fm9UtL4YU)
 
 `vagrant up --provision-with basetools,docker,docsify,consul,nomad`
