@@ -35,7 +35,7 @@ Next lets provision Hashiqube with basetools and dbt:
 vagrant up --provision-with basetools,docsify,docker,postgresql,dbt
 ```
 
-## Next steps with practicle example from DBT Labs 
+## Practicle example from DBT Labs 
 https://github.com/dbt-labs/jaffle_shop#running-this-project
 
 1. Run `vagrant up --provision-with basetools,docsify,docker,postgresql,dbt`
