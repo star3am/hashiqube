@@ -38,7 +38,7 @@
 - name: Write Ansible hostvars to file
   copy:
     content: "{{ hostvars[inventory_hostname] }}"
-    dest: C:/soe-{{ version_number }}.json
+    dest: C:/build-{{ version_number }}.json
     mode: "0644"
 #
 - name: DEBUG - print hostvars

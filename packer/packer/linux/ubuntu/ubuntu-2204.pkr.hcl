@@ -96,17 +96,17 @@ build {
 
   provisioner "ansible" {
     command = "./scripts/ansible.sh"
-    user    = "${build.User}"
     extra_arguments = [
       "-vvv",
       "--tags", "always,day0",
-      "--extra-vars", "ansible_python_interpreter=/vagrant/ansible/ansible-venv/bin/python ansible_become=true version_number=${local.version_number}"
+      "--extra-vars", "ansible_become=true version_number=${local.version_number}"
     ]
     ansible_ssh_extra_args = [
       "-o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=+ssh-rsa"
     ]
     host_alias    = "none"
     playbook_file = "../../ansible/roles/ansible-role-example-role/site.yml"
+    only          = ["vagrant.ubuntu-2204", "azure-arm.ubuntu-2204", "googlecompute.ubuntu-2204"]
   }
 
   provisioner "ansible" {
@@ -114,7 +114,7 @@ build {
     user    = "${build.User}"
     extra_arguments = [
       #"-v",
-      "--extra-vars", "ansible_python_interpreter=/vagrant/ansible/ansible-venv/bin/python foo=bar"
+      "--extra-vars", "foo=bar"
     ]
     ansible_ssh_extra_args = [
       "-o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=+ssh-rsa"
@@ -129,7 +129,7 @@ build {
     user    = "${build.User}"
     extra_arguments = [
       #"-v",
-      "--extra-vars", "ansible_python_interpreter=/vagrant/ansible/ansible-venv/bin/python foo=bar"
+      "--extra-vars", "foo=bar"
     ]
     ansible_ssh_extra_args = [
       "-o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=+ssh-rsa"

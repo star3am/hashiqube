@@ -17,19 +17,25 @@
 - include: deb.yml
   when: >
     (ansible_facts['distribution'] == "Ubuntu"
-    and ansible_facts['distribution_major_version'] == "18")
+    and ansible_facts['distribution_major_version'] == "22")
     or
     (ansible_facts['distribution'] == "Ubuntu"
     and ansible_facts['distribution_major_version'] == "20")
     or
-    (ansible_facts['distribution'] == "Debian"
-    and ansible_facts['distribution_major_version'] == "9")
+    (ansible_facts['distribution'] == "Ubuntu"
+    and ansible_facts['distribution_major_version'] == "18")
     or
     (ansible_facts['distribution'] == "Debian"
     and ansible_facts['distribution_major_version'] == "10")
+    or
+    (ansible_facts['distribution'] == "Debian"
+    and ansible_facts['distribution_major_version'] == "9")
 
 - include: windows.yml
   when: >
+    (ansible_facts['distribution_major_version'] == "10"
+    and ansible_facts['distribution'] is match("Microsoft Windows Server 2022.*"))
+    or
     (ansible_facts['distribution_major_version'] == "10"
     and ansible_facts['distribution'] is match("Microsoft Windows Server 2019.*"))
     or
