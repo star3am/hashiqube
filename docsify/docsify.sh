@@ -4,6 +4,7 @@
 
 sudo apt-get update
 sudo apt-get install -y ca-certificates curl gnupg
+
 sudo mkdir -p /etc/apt/keyrings
 curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
 
@@ -30,5 +31,11 @@ sleep 3
 sudo sh -c "echo \"16384\" > /proc/sys/fs/inotify/max_user_watches"
 sudo touch /var/log/docsify.log
 sudo chmod 777 /var/log/docsify.log
+
+# increase file watchers
+sudo sysctl fs.inotify.max_user_watches=524288
+sudo sysctl -p
+sudo sysctl -a | grep max_user_watches
+
 sudo nohup docsify serve --port 3333 . > /var/log/docsify.log 2>&1 &
 echo -e '\e[38;5;198m'"++++ Docsify: http://localhost:3333/"
