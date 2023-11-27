@@ -300,7 +300,7 @@ sudo --preserve-env=PATH -u vagrant /home/vagrant/.local/bin/awx job_templates l
   --limit 10.9.99.10 \
   --monitor \
   --filter status $AWX_COMMON \
-  --job_tags "day1,always" \
+  --job_tags "day0,day1,always" \
   --extra_vars "{\"vm_name\":\"$(hostname)\", \"vm_ip\":\"10.9.99.10\"}"
 
 # https://docs.ansible.com/ansible-tower/latest/html/towercli/reference.html#awx-hosts-delete
