@@ -1,4 +1,4 @@
-# HashiQube - A Hands on DevOps Development Lab Using All the HashiCorp Products
+# HashiQube - A DevOps Development Lab Using All the HashiCorp Products
 
 ![HashiQube](images/hashiqube-banner.png?raw=true "HashiQube ")
 
