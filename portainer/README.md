@@ -1,7 +1,8 @@
 # Portainer
-https://www.portainer.io/
 
 ![Portainer Logo](images/portainer-logo.png?raw=true "Portainer Logo")
+
+In this HashiQube DevOps lab you will get hands on experience with Portainer.
 
 MAKING DOCKER MANAGEMENT EASY.
 Build and manage your Docker environments with ease today.
@@ -56,6 +57,10 @@ Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 
 ## Using Portainer  
 Please open http://localhost:9333
+
+## Links
+
+- https://www.portainer.io/
 
 ![Portainer](images/portainer.png?raw=true "Portainer")
 

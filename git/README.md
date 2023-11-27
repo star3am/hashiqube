@@ -1,8 +1,8 @@
 # Git
 
-https://git-scm.com/
-
 ![Git Logo](images/git-logo.png?raw=true "Git Logo")
+
+In this HashiQube DevOps lab you will get hands on experience with Git.
 
 Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.
 
@@ -20,3 +20,7 @@ Focus on what matters instead of fighting with Git. Whether you're new to Git or
 You can use this `Git Cheat Sheet Wallpaper` to help you quickly learn the most common commands of Git, it helped me ♥
 
 ![Git](images/git-cheatsheet-wallpaper.png?raw=true "Git")
+
+## Links 
+
+- https://git-scm.com/

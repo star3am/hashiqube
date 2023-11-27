@@ -1,8 +1,6 @@
 # Elasticsearch, Kibana and Cerebro
-https://www.elastic.co/products/elastic-stack <br />
-https://github.com/lmenezes/cerebro
 
-## About
+In this HashiQube DevOps lab you will get hands on experience with Elasticsearch, Kibana and Cerebro.
 
 ![Elasticsearch Logo](images/elasticsearch-logo.png?raw=true "Elasticsearch Logo")
 
@@ -240,6 +238,12 @@ __Elasticsearch__<br />
   "tagline" : "You Know, for Search"
 }
 ```
+
+## Links 
+
+- https://www.elastic.co/products/elastic-stack
+- https://github.com/lmenezes/cerebro
+
 __Kibana__ http://localhost:5601
 
 ![Kibana](images/kibana.png?raw=true "Kibana")

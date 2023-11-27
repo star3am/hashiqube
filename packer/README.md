@@ -1,8 +1,8 @@
 # Packer
 
-https://www.packer.io
-
 ![Packer Logo](images/packer-logo.png?raw=true "Packer Logo")
+
+In this HashiQube DevOps lab you will get hands on experience with HashiCorp Packer.
 
 Packer is an open source tool for creating identical machine images for multiple platforms from a single source configuration. Packer is lightweight, runs on every major operating system, and is highly performant, creating machine images for multiple platforms in parallel.
 
@@ -26,6 +26,10 @@ You can build local Windows and Ubuntu boxes with packer using these commands
 You must be in the directory `packer`
 
 Now you can run `./run.sh`
+
+## Links
+
+- https://www.packer.io
 
 ## Packer Templates
 

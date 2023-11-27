@@ -1,8 +1,8 @@
 # DBT
 
-[data build tool](https://www.getdbt.com/)
-
 ![DBT Logo](images/dbt-logo.png?raw=true "DBT Logo")
+
+In this HashiQube DevOps lab you will get hands on experience with DBT - The Data Build Tool.
 
 dbt is a data transformation tool that enables data analysts and engineers to transform, test and document data in the cloud data warehouse.
 
@@ -124,6 +124,10 @@ Use DBT RUN and DBT TEST with deferring parameters: $ dbt run --select [...] --d
 In this way, if we have already run the model, the next RUN and TEST will execute exclusively what is new on the code and reuse what has been run previously.
 
 This would open space as well to implement cool stuff, such as running the model over a pull request. 
+
+## Links 
+
+- https://www.getdbt.com/
 
 ## DBT Vagrant Provisioner
 

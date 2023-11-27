@@ -1,13 +1,16 @@
 # Ansible
-https://www.ansible.com/
 
 ![Ansible Logo](images/ansible-logo.png?raw=true "Ansible Logo")
 
 ## About
+
+In this HashiQube DevOps Lab you will learn about Ansible. What it is and how to use it. Further down below I provide you with an Example Ansible Role that runs on all operating systems, and has Molecule built in. 
+
+Ansible is a Configuration in Code system. It can do a lot of things for you. Enjoy this hands on DevOps Lab! 
+
 Ansible is an open-source software provisioning, configuration management, and application-deployment tool. It runs on many Unix-like systems, and can configure both Unix-like systems as well as Microsoft Windows. It includes its own declarative language to describe system configuration in YAML.
 
 ## Molecule 
-https://molecule.readthedocs.io/en/latest/
 
 Molecule project is designed to aid in the development and testing of Ansible roles and can speed up local development of Ansible roles and playbooks in magnetude!
 
@@ -121,6 +124,7 @@ You can then download them by using this command:
 ## Ansible Role Example Role 
 
 ## About
+
 This is an Ansible Example Role used for training and development
 
 ## Gotcha's (Sorry!!)
@@ -161,6 +165,7 @@ Close WSL and run `Restart-Service -Name "LxssManager"` as **Administrator in Po
 Set WSL Ubuntu Distro to version 1: run `wsl --set-version Ubuntu 1` in powershell, restart WSL and run `./run.sh` again
 
 ## Get Started!
+
 :bulb: __IMPORTANT__ Install these Tools first, before we start actually using Molecule to develop our Ansible Roles
 
 - Git - https://git-scm.com 
@@ -174,6 +179,7 @@ Set WSL Ubuntu Distro to version 1: run `wsl --set-version Ubuntu 1` in powershe
 - SSHPass - https://www.cyberciti.biz/faq/how-to-install-sshpass-on-macos-os-x/
 
 ## Supported OSs
+
 The Role supports the following Operating Systems and versions
 See: `molecule/default/molecule.yml`
 
@@ -192,9 +198,11 @@ See: `molecule/default/molecule.yml`
 | Debian 10 | ✘ | ✘ | ✘ | amd64 | Windows, Mac, Linux |
 
 ## Instructions 
+
 Here is how you can get up and running quickly, this section is devided into `Windows using Windows Subsystem for Linux WSL` and `Mac OSX` (Sorry Intel Mac's only at this stage) and Linux
 
 ### Linux (Ubuntu recommended)
+
 Install all the Tools you need in the [__Get Started Section__](#get-started-dependencies-the-tools-you-will-need) 
 
 Install Python
@@ -247,6 +255,7 @@ Allow all 3 types of network when set up Firewall for VirtualBox
 ![image-2.png](roles/ansible-role-example-role/image-2.png)
 
 ### Mac 
+
 Install all the Tools you need in the [__Get Started Section__](#get-started-dependencies-the-tools-you-will-need) 
 
 Install SSHPass
@@ -276,6 +285,7 @@ Succesful ouput should be as below:
 ![Ansible Molecule on Mac Intel](roles/ansible-role-example-role/images/molecule-run-on-mac-intel.png?raw=true "Ansible Moleculeon Mac Intel")
 
 ## Links
+
 - https://developer.hashicorp.com/vagrant/docs/other/wsl#path-modifications
 - https://stackoverflow.com/questions/45375933/vagrant-wsl-cant-access-virtualbox
 - https://learn.microsoft.com/en-us/windows/wsl/install
@@ -284,6 +294,8 @@ Succesful ouput should be as below:
 - https://www.jeffgeerling.com/blog/2018/testing-your-ansible-roles-molecule
 - https://app.vagrantup.com/jborean93
 - https://github.com/jborean93/packer-windoze
+- https://www.ansible.com/
+- https://molecule.readthedocs.io/en/latest/
 
 ## Common Errors 
 

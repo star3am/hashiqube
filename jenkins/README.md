@@ -1,6 +1,8 @@
 # Jenkins
 
-https://www.jenkins.io/
+![Jenkins Logo](images/jenkins-logo.png?raw=true "Jenkins Logo")
+
+In this HashiQube DevOps lab you will get hands on experience with Jenkins.
 
 Jenkins is an open source automation server. It helps automate the parts of software development related to building, testing, and deploying, facilitating continuous integration, and continuous delivery. It is a server-based system that runs in servlet containers such as Apache Tomcat.
 
@@ -13,8 +15,6 @@ This DevOps Jenkins Lab will help you with a practicle example of a Jenkinsfile 
 - Use the CLI Integration with Terraform Cloud to run a plan on a Workspace
 
 This provisioner will help you start the Jenkins container, login with the initial admin token and create a user and password for subsequent logins.
-
-![Jenkins Logo](images/jenkins-logo.png?raw=true "Jenkins Logo")
 
 We will also configure Jenkins to do the following for us: 
 
@@ -2458,6 +2458,10 @@ Finished: SUCCESS
 
 You can click on that job and view the console, for more output, you should see your secrets are totally hidden and provided by Vault.
 ![Jenkins](images/jenkins_job_vault-jenkins_build_console.png?raw=true "Jenkins")
+
+## Links 
+
+- https://www.jenkins.io/
 
 ## The Code
 

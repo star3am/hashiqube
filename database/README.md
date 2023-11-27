@@ -1,4 +1,7 @@
 # Databases
+
+In this HashiQube DevOps lab you will get hands on experience with HashiCorp Vault and how it can provision credentials for you in your databases.
+
 This section will help us integration 2 popular databases with HashiCorp Vault, namely Oracle MySQL and Microsoft MSSQL.
 
 Let's start with Oracle's MySQL

@@ -1,6 +1,9 @@
 # Prometheus and Grafana
 
+In this HashiQube DevOps lab you will get hands on experience with Grafana and Prometheus.
+
 We need a monitoring and alerting solution. For this we have chosen to use Prometheus and Grafana
+
 ## Grafana
 https://grafana.com/
 Grafana is a multi-platform open source analytics and interactive visualization web application. It provides charts, graphs, and alerts for the web when connected to supported data sources.

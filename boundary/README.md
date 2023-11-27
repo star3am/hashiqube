@@ -1,8 +1,8 @@
 # Boundary
 
-https://www.boundaryproject.io/
-
 ![Boundary Logo](images/boundary-logo.png?raw=true "Boundary Logo")
+
+In this HashiQube DevOps lab you will get hands on experience with HashiCorp Boundary.
 
 Boundary is designed to grant access to critical systems using the principle of least privilege, solving challenges organizations encounter when users need to securely access applications and machines. Traditional products that grant access to systems are cumbersome, painful to maintain, or are black boxes lacking extensible APIs. Boundary allows authenticated and authorized users to access secure systems in private networks without granting access to the larger network where those systems reside.
 
@@ -88,6 +88,10 @@ Bringing machine 'hashiqube0.service.consul' up with 'virtualbox' provider...
     hashiqube0.service.consul: ++++ Login with admin:password
     hashiqube0.service.consul: /tmp/vagrant-shell: line 5:  5093 Terminated              sh -c 'sudo tail -f /var/log/boundary.log | { sed "/worker successfully authed/ q" && kill $$ ;}'
 ```
+
+## Links 
+
+- https://www.boundaryproject.io/
 
 ## Boundary Vagrant Provisioner
 
