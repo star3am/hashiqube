@@ -1,10 +1,10 @@
 # Waypoint
 
-https://www.waypointproject.io/
+![Waypoint Logo](images/waypoint-logo.png?raw=true "Waypoint Logo")
+
+In this HashiQube DevOps lab you will get hands on experience with HashiCorp Waypoint.
 
 A consistent developer workflow to build, deploy, and release applications across any platform.
-
-![Waypoint Logo](images/waypoint-logo.png?raw=true "Waypoint Logo")
 
 Waypoint supports
 - aws-ec2
@@ -337,6 +337,10 @@ EXPOSE 6001
 
 CMD [ "node", "index.js" ]
 ```
+
+## Links
+
+- https://www.waypointproject.io/
 
 ## Waypoint Vagrant Provisioner
 

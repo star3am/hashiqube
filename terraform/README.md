@@ -1,8 +1,8 @@
 # Terraform
 
-https://www.terraform.io/
-
 ![Terraform Logo](images/terraform-logo.png?raw=true "Terraform Logo")
+
+In this HashiQube DevOps lab you will get hands on experience with HashiCorp Terraform.
 
 Terraform is an open-source infrastructure as code software tool created by HashiCorp. It enables users to define and provision a datacenter infrastructure using a high-level configuration language known as Hashicorp Configuration Language, or optionally JSON.
 
@@ -760,6 +760,7 @@ Many thanks goes to the team at Gruntwork https://gruntwork.io/ for their amazin
 
 ### Links
 
+- https://www.terraform.io/
 - https://github.com/actions/runner/issues/491#issuecomment-850884422
 - https://blog.mergify.com/running-github-actions-only-on-certain-pull-requests/
 - https://yonatankra.com/2-ways-to-use-your-docker-image-in-github-actions/

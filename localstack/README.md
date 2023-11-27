@@ -1,7 +1,8 @@
 # Localstack
-https://localstack.cloud/
 
 ![Localstack Logo](images/localstack-logo.png?raw=true "Localstack Logo")
+
+In this HashiQube DevOps lab you will get hands on experience with Localstack and Terraform.
 
 LocalStack provides an easy-to-use test/mocking framework for developing Cloud applications. It spins up a testing environment on your local machine that provides the same functionality and APIs as the real AWS cloud environment.
 
@@ -131,6 +132,10 @@ Now check the assets with aws local inside vagrant
 ```
 2006-02-04 03:45:09 localstack-s3-bucket
 ```
+
+## Links
+
+- https://localstack.cloud/
 
 ## Localstack Terraform Examples
 

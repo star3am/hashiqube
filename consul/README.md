@@ -1,8 +1,8 @@
 # Consul
 
-https://www.consul.io/
-
 ![Consul Logo](images/consul-logo.png?raw=true "Consul Logo")
+
+In this HashiQube DevOps lab you will get hands on experience with HashiCorp Consul.
 
 Consul is a service networking solution to connect and secure services across any runtime platform and public or private cloud
 
@@ -187,6 +187,10 @@ Bringing machine 'user.local.dev' up with 'virtualbox' provider...
     user.local.dev: ++++ Consul http://localhost:8500
 ```    
 ![Consul](images/consul.png?raw=true "Consul")
+
+## Links 
+
+- https://www.consul.io/
 
 ## Consul Vagrant Provisioner
 

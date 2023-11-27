@@ -1,11 +1,8 @@
 # Docker
 
-https://www.docker.com/ <br />
-https://docs.docker.com/ <br />
-https://docs.docker.com/compose/ <br />
-
 ![Docker Logo](images/docker-logo.png?raw=true "Docker Logo")
-## Information
+
+In this HashiQube DevOps lab you will get hands on experience with Docker. You will be able to practice building a Dockerfile and running a docker container. We will also configure a Docker Daemon with the Docker Registry with Authentication 
 
 https://docs.docker.com/install/linux/docker-ce/ubuntu/
 
@@ -556,6 +553,12 @@ Bringing machine 'user.local.dev' up with 'virtualbox' provider...
     user.local.dev: open http://localhost:8889 in your browser
     user.local.dev: vagrant ssh -c "docker exec -it apache2 /bin/bash -c "apache2 -t -v""
 ```
+
+## Links
+
+- https://www.docker.com/
+- https://docs.docker.com/
+- https://docs.docker.com/compose/
 
 ## Monitoring Docker
 

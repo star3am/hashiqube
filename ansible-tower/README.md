@@ -1,14 +1,13 @@
 # Ansible Tower
-## AWX Ansible Tower
-https://github.com/ansible/awx <br />
-https://www.ansible.com/blog/ansible-tower-feature-spotlight-custom-credentials <br />
-https://github.com/ybalt/ansible-tower <br />
-https://www.ansible.com/products/tower <br />
-https://www.ansible.com/ <br />
 
 ![Ansible AWX Tower Logo](images/ansible-awx-tower-logo.png?raw=true "Ansible AWX Tower Logo")
 
 ## About
+
+In this HashiQube DevOps Lab you will get hands on experience with Ansible AWX Tower. Ansible AWX Tower is a web interface for Ansible and it provides you with credentials, inventories, projects and playbooks. 
+
+In addition you will learn how to configure AWX Tower using the CLI and trigger an Ansible Run from the command line. 
+
 AWX provides a web-based user interface, REST API, and task engine built on top of Ansible. It is one of the upstream projects for Red Hat Ansible Automation Platform.
 
 To install AWX, please view the Install guide https://github.com/ansible/awx/blob/devel/INSTALL.md
@@ -929,6 +928,14 @@ null_resource.awx_cli: Creation complete after 36s [id=936123805330159798]
 
 Apply complete! Resources: 1 added, 0 changed, 1 destroyed.
 ```
+
+## Links 
+
+https://github.com/ansible/awx <br />
+https://www.ansible.com/blog/ansible-tower-feature-spotlight-custom-credentials <br />
+https://github.com/ybalt/ansible-tower <br />
+https://www.ansible.com/products/tower <br />
+https://www.ansible.com/ <br />
 
 ## Ansible AWX Tower Vagrant Provisioner
 

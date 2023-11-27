@@ -1,8 +1,12 @@
 # Apache Airflow
-https://airflow.apache.org/
+
+In this HashiQube DevOps lab you will get hands on experience with Apache Airflow. Mot only that but you will learn how to install Airflow with Helm charts and run it on Kubernetes using Minikube. 
+
+We will configure Airflow, and create a DAG in Python that runs DBT. That's incredible learnings! 
+
+Be sure to checkout the DBT section as well and have fun1 
 
 Airflow is a platform created by the community to programmatically author, schedule and monitor workflows
-
 
 ![Airflow](images/airflow-logo.png?raw=true "Airflow")
 
@@ -50,6 +54,8 @@ The `test-ssh.py` just ssh into hashiqube to test the connection
 ![Airflow](images/airflow_task_result.png?raw=true "Airflow")
 
 # Links and further reading
+
+- https://airflow.apache.org/
 - https://artifacthub.io/packages/helm/airflow-helm/airflow/8.3.1
 - https://airflow.apache.org/docs/helm-chart/stable/index.html
 - https://airflow.apache.org/docs/helm-chart/stable/adding-connections-and-variables.html

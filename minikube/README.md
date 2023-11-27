@@ -1,8 +1,8 @@
 # Minikube
 
-https://minikube.sigs.k8s.io/docs/start/
-
 ![Minikube Logo](images/minikube-logo.png?raw=true "Minikube Logo")
+
+In this HashiQube DevOps lab you will get hands on experience with Minikube, Helm, Helm Dashboard and Traefik.
 
 This page shows you how to install Minikube, a tool that runs a single-node Kubernetes cluster in a virtual machine on your personal computer.
 https://kubernetes.io/docs/tasks/tools/install-minikube/
@@ -344,6 +344,10 @@ Traefik Documentation: http://localhost:3333/#/minikube/README?id=traefik-on-min
 This guide explains how to use Traefik as an Ingress controller for a Kubernetes cluster.
 
 ![Traefik on Minikube](images/minikube-traefik-dashboard.png?raw=true "Traefik on Minikube")
+
+## Links 
+
+- https://minikube.sigs.k8s.io/docs/start/
 
 ## Minikube Vagrant Provisioner
 

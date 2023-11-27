@@ -1,7 +1,9 @@
 # Docsify
-https://docsify.js.org/
 
-## About
+![Docsify Logo](images/docsify-logo.png?raw=true "Docsify Logo")
+
+In this HashiQube DevOps lab you will get hands on experience with Docsify - The Magical Documentation Generator.
+
 Docsify is a magical documentation site generator. Docsify generates your documentation website on the fly. Unlike GitBook, it does not generate static html files. Instead, it smartly loads and parses your Markdown files and displays them as a website. To start using it, all you need to do is create an index.html and deploy it on GitHub Pages.
 
 ## Provision
@@ -70,6 +72,10 @@ Bringing machine 'user.local.dev' up with 'virtualbox' provider...
     user.local.dev: updated 1 package in 15.329s
     user.local.dev: ++++ Docsify: http://localhost:3333/
 ```
+
+## Links 
+
+- https://docsify.js.org/
 
 ## Summary
 After provision, you can access Docsify and HashiQube documentation at http://localhost:3333/

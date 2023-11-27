@@ -1,8 +1,8 @@
 # Nomad
 
-https://www.nomadproject.io/
-
 ![Nomad Logo](images/nomad-logo.png?raw=true "Nomad Logo")
+
+In this HashiQube DevOps lab you will get hands on experience with HashiCorp Nomad.
 
 Nomad is a highly available, distributed, data-center aware cluster and application scheduler designed to support the modern datacenter with support for
 
@@ -169,6 +169,10 @@ When you register a service in Consul all you need to add is a tag that announce
 Fabio runs as a Nomad job, see `nomad/nomad/jobs/fabio.nomad`
 
 Some routes are added via Consul, see `consul/consul.sh`
+
+## Links 
+
+- https://www.nomadproject.io/
 
 ## Fabio Nomad Job template
 [filename](nomad/jobs/fabio.nomad ':include :type=code hcl')

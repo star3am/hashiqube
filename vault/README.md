@@ -1,8 +1,8 @@
 # Vault
 
-https://www.vaultproject.io/
-
 ![Vault Logo](images/vault-logo.png?raw=true "Vault Logo")
+
+In this HashiQube DevOps lab you will get hands on experience with HashiCorp Vault.
 
 Manage Secrets and Protect Sensitive Data.
 Secure, store and tightly control access to tokens, passwords, certificates, encryption keys for protecting secrets and other sensitive data using a UI, CLI, or HTTP API.
@@ -483,6 +483,10 @@ path "kmip/*" {
 Vault Enterprise Namespaces allow Vault to support multi-tenant deployments in which different teams are isolated from each other and can self-manage their own secrets.
 
 Vault namespaces form a hierarchy with all namespaces living under the "root" namespace which is what we have been using all along. However, namespaces do much more than make the hierarchy of Vault paths deeper since each namespace can have its own secrets engines, auth methods, policies, identities, and tokens.
+
+## Links
+
+- https://www.vaultproject.io/
 
 ## Vault Vagrant Provisioner
 
