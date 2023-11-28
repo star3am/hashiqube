@@ -200,21 +200,23 @@ else
   else
     sed -i "s%VAULT_ADDR=.*%VAULT_ADDR=http://127.0.0.1:8200%g" /etc/environment
   fi
-  echo -e '\e[38;5;198m'"++++ "
-  echo -e '\e[38;5;198m'"++++ Vault already installed and running"
-  echo -e '\e[38;5;198m'"++++ Vault http://localhost:8200/ui and enter the following codes displayed below"
-  echo -e '\e[38;5;198m'"++++ "
-  # check vault status
-  # vault status
-  echo -e '\e[38;5;198m'"++++ "
-  echo -e '\e[38;5;198m'"++++ Auto unseal vault"
-  echo -e '\e[38;5;198m'"++++ "
-  for i in `cat /etc/vault/init.file | grep Unseal | cut -d " " -f4 | head -n 3`; do vault operator unseal $i; done
-  vault status
-  cat /etc/vault/init.file
-  echo -e '\e[38;5;198m'"++++ Vault http://localhost:8200/ui and enter the Root Token displayed above"
-  echo -e '\e[38;5;198m'"++++ Vault Documentation http://localhost:3333/#/vault/README?id=vault"
+
 fi
+
+echo -e '\e[38;5;198m'"++++ "
+echo -e '\e[38;5;198m'"++++ Vault status"
+echo -e '\e[38;5;198m'"++++ "
+vault status
+echo -e '\e[38;5;198m'"++++ "
+echo -e '\e[38;5;198m'"++++ Auto unseal vault"
+echo -e '\e[38;5;198m'"++++ "
+cat /etc/vault/init.file
+echo -e '\e[38;5;198m'"++++ "
+echo -e '\e[38;5;198m'"++++ Access vault"
+echo -e '\e[38;5;198m'"++++ "
+echo -e '\e[38;5;198m'"++++ Vault Initial Root Token: ${VAULT_TOKEN}"
+echo -e '\e[38;5;198m'"++++ Vault http://localhost:8200/ui and enter the Root Token displayed above"
+echo -e '\e[38;5;198m'"++++ Vault Documentation http://localhost:3333/#/vault/README?id=vault"
 
 # TODO: FIXME
 # https://www.vaultproject.io/docs/secrets/ssh/signed-ssh-certificates
