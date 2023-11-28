@@ -39,6 +39,9 @@ Please connect with me on [LinkedIn (Riaan Nolan)](https://www.linkedin.com/in/r
 :book: Documentation: http://localhost:3333 <br>
 :vertical_traffic_light: Status of Integrations: http://localhost:3001
 
+## HashiQube Overview 
+
+[![HashiQube: A Jedi DevOps Lab Using All the HashiCorp Products](/images/youtube-hashiqube-the-jedi-devops-lab.png)](https://www.youtube.com/watch?v=sFiWzKbpEpU)
 ## HashiQube Diagrams
 
 In essence, Hashiqube is a Docker Container (by default) or a Virtual Machine.
