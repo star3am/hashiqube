@@ -89,6 +89,15 @@ Bringing machine 'user.local.dev' up with 'virtualbox' provider...
     user.local.dev: It is possible to generate new unseal keys, provided you have a quorum of
     user.local.dev: existing unseal keys shares. See "vault operator rekey" for more information.
 ```
+
+Once the provisioner has run, you will be able to access vault on http://localhost:8200
+And you can login with the `Initial Root Token` displayed in the output of the privisioner. 
+
+:bulb: If you ever needed to feth the Initial Root Token again you can get this inside HashiQube by doing: 
+
+- vagrant ssh
+- cat /etc/vault/init.file
+
 ![Vault](images/vault.png?raw=true "Vault")
 
 ### Performance Replication
