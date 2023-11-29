@@ -1,6 +1,31 @@
 # Hashiqube
 
+Hashiqube is the Ultimate Hands on DevOps Lab in a Docker Container. Hashiqube has a Docker daemon inside meaning, 
+we can run containers inside Hashiqube using Kubernetes (Minikube) or Nomad or Docker run. It runs all Hashicorp products. [Vault](/vault/?id=vault), [Terraform](/terraform/?id=terraform), [Nomad](/nomad/?id=nomad), [Consul](/consul/?id=consul), [Waypoint](/waypoint/?id=waypoint), [Boundary](/boundary/?id=boundary), [Vagrant](/vagrant/?id=vagrant), [Packer](/packer/?id=packer) and [Sentinel](/sentinel/?id=sentinel).
+
+It also runs a host of other popular Open Source DevOps/DevSecOps applications (Minikube, Ansible AWX Tower, Traefik etc.) showcasing how simple integration with Hashicorp products can result in tangible learnings and benefits for all its users.
+
+Once Hashiqube is up an internet connection is no longer needed meaning sales pitches and demos for potential and existing customers are greatly aided.
+
+Hashiqube has been created to help Engineers, Developers and anyone who wants to practise, learn or demo HashiCorp products to get started quickly with a local lab. 
+
+Please connect with me on [LinkedIn (Riaan Nolan)](https://www.linkedin.com/in/riaannolan/) or check out [my Credly profile](https://www.credly.com/users/riaan-nolan.e657145c)
+
 ![Hashiqube Logo](../images/logo-qube.png?raw=true "Hashiqube Logo")
+
+You can find more information about Hashiqube on these different channels: 
+
+* [Hashicorp blog post](https://www.hashicorp.com/resources/hashiqube-a-development-lab-using-all-the-hashicorp-products) <br />
+* [Hashiqube Website](https://hashiqube.com) <br />
+* [Hashiqube Github](https://github.com/star3am/hashiqube) <br />
+* [Hashiqube Youtube](https://www.youtube.com/watch?v=6jGDAGWaFiw) <br />
+* [Hashiqube Medium](https://medium.com/search?q=hashiqube) <br />
+* [Hashiqube Terraform Registry module](https://registry.terraform.io/modules/star3am/hashiqube/hashicorp/latest) <br />
+* [Terraform Development Environment](https://medium.com/@riaan.nolan/top-gun-terraform-development-environment-60ac00d49577)
+
+You can also view a short introduction about HashiQube here, be sure to have hashiqube running, so you can follow along on your own laptop! 
+
+[![HashiQube: A Jedi DevOps Lab Using All the HashiCorp Products](/images/youtube-hashiqube-the-jedi-devops-lab.png)](https://www.youtube.com/watch?v=sFiWzKbpEpU)
 
 This Provider (Basetools) installs some essential tools that Hashiqube provisioners need, this is one of the first provisioners that has to be run. Amongst other it also installs Python and Pip and sets the Message of the Day MOTD. 
 
@@ -8,7 +33,7 @@ This Provider (Basetools) installs some essential tools that Hashiqube provision
 swapspace rkhunter jq curl unzip software-properties-common bzip2 git make python3.9 python3-pip python3-dev python3-venv python3-virtualenv golang-go apt-utils ntp update-motd toilet figlet nano iputils-ping dnsutils iptables telnet
 ```
 
-## Hashiqube (Basetools) Vagrant Provisioner
+## Basetools Vagrant Provisioner
 
 [filename](basetools.sh ':include :type=code')
 
