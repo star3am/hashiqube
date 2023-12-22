@@ -159,6 +159,8 @@ Bringing machine 'hashiqube0.service.consul' up with 'virtualbox' provider...
     hashiqube0.service.consul: ++++ AWX https://10.9.99.10:8043 and login with Username: admin and Password: password
 ```
 
+[google ads](googleads.html ':include :type=iframe width=100% height=300px')
+
 ## Summary
 After provision, you can access AWX Ansible Tower on http://localhost:8043 and login with User: __admin__ and the Password displayed at the end of the Provision operation.
 ![Ansible Tower](images/ansible-tower.png?raw=true "Ansible Tower")
@@ -363,6 +365,8 @@ ansible_connection: ssh
 ```
 
 ![Ansible Tower](images/ansible-tower-job-details-windows-temp-dir-error.png?raw=true "Ansible Tower")
+
+[google ads](googleads.html ':include :type=iframe width=100% height=300px')
 
 Let's use our Callback URL and the Host Config Key to trigger a run using Curl
            
@@ -944,3 +948,5 @@ https://www.ansible.com/ <br />
 ## Terraform calling Ansible AWX
 
 [filename](main.tf ':include :type=code hcl')
+
+[google ads](googleads.html ':include :type=iframe width=100% height=300px')
