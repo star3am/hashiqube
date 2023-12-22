@@ -367,4 +367,4 @@ HashiQube is available as open-source under the terms of the [MIT License](https
 
 ![Automate all the things](images/automate-all-the-things.png?raw=true "Automate all the things")
 
-[filename](googleads.html ':include :type=iframe')
+[google ads](googleads.html ':include :type=iframe width=100%')
