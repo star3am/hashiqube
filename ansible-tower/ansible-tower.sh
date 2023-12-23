@@ -295,6 +295,12 @@ sudo --preserve-env=PATH -u vagrant /home/vagrant/.local/bin/awx hosts create --
 # https://docs.ansible.com/ansible-tower/latest/html/towercli/reference.html#awx-job-templates-launch
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Run Ansible Tower job_template"
+echo -e '\e[38;5;198m'"++++ sudo --preserve-env=PATH -u vagrant /home/vagrant/.local/bin/awx job_templates launch ansible-role-example-role \
+  --limit 10.9.99.10 \
+  --monitor \
+  --filter status $AWX_COMMON \
+  --job_tags \"day0,day1,always\" \
+  --extra_vars \"{\"vm_name\":\"$(hostname)\", \"vm_ip\":\"10.9.99.10\"}\""
 echo -e '\e[38;5;198m'"++++ "
 sudo --preserve-env=PATH -u vagrant /home/vagrant/.local/bin/awx job_templates launch ansible-role-example-role \
   --limit 10.9.99.10 \
