@@ -20,7 +20,7 @@ body {
   line-height: 24px;
   color: var(--text);
   text-align: center;
-  background: url(/hashicorp-unlock-the-cloud-operating-model.png) no-repeat center center fixed; 
+  background: url(/hashicorp-unlock-the-cloud-operating-model-default.png) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
