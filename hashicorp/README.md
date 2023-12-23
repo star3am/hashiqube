@@ -52,3 +52,5 @@ Kelsey Hightower, Senior Developer Advocate at Google
 Five years ago the world was introduced to 12 Factor apps which provided the blueprint for building applications for the cloud. As we move beyond the cloud into Hyperscale computing applications must be designed to be globally available and always on. Building on the foundation of 12 Factor, this session will introduce key requirements for Hyperscale applications such as high performance low latency communication, and playing nice in a distributed system. Attendees will learn how to build Hyperscale applications from the ground up using the HashiStack (Nomad, Vault, and Consul).
 
 [![Kelsey Hightower: 12-Factor Apps and the HashiStack](images/maxresdefault.jpeg)](https://www.youtube.com/watch?v=NVl9cIiPF80)
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

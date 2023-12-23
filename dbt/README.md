@@ -97,6 +97,8 @@ Plugins:
   - bigquery:  1.2.0 - Up to date!
 ```
 
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+
 # DBT Jaffle-Shop
 For a practical example we are going to use https://github.com/dbt-labs/jaffle_shop 
 
@@ -134,3 +136,5 @@ This would open space as well to implement cool stuff, such as running the model
 [filename](common.sh ':include :type=code')
 
 [filename](dbt-global.sh ':include :type=code')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

@@ -19,8 +19,12 @@ In this whiteboard overview, HashiCorp Co-Founder and CTO, Armon Dadgar introduc
 [![Introduction to HashiCorp Boundary](images/maxresdefault.jpeg)](https://www.youtube.com/watch?v=tUMe7EsXYBQ)
 
 ![Hashicorp Boundary](images/boundary-how-it-works.png?raw=true "Hashicorp Boundary")
+
 ![Hashicorp Boundary](images/boundary-login-page.png?raw=true "Hashicorp Boundary")
+
 ![Hashicorp Boundary](images/boundary-logged-in-page.png?raw=true "Hashicorp Boundary")
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
 
 `vagrant up --provision-with basetools,docsify,boundary`
 
@@ -98,3 +102,5 @@ Bringing machine 'hashiqube0.service.consul' up with 'virtualbox' provider...
 `boundary.sh`
 
 [filename](boundary.sh ':include :type=code')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

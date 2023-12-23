@@ -215,6 +215,9 @@ mysql: [Warning] Using a password on the command line interface can be insecure.
 | root             | localhost |
 +------------------+-----------+
 ```
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+
 ## MySQL Vagrant Provisioner
 
 [filename](mysql.sh ':include :type=code')
@@ -367,6 +370,8 @@ NT AUTHORITY\SYSTEM                                                             
 (21 rows affected)
 ```
 
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+
 ## MSSQL Vagrant Provisioner
 
 [filename](mssql.sh ':include :type=code')
@@ -465,3 +470,5 @@ Bringing machine 'hashiqube0.service.consul' up with 'virtualbox' provider...
 ## PostgreSQL Vagrant Provisioner
 
 [filename](postgresql.sh ':include :type=code')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

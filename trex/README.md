@@ -16,6 +16,8 @@ Enjoy!
 
 `vagrant up --provision-with basetools,docker,docsify,trex`
 
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+
 ```log
 Bringing machine 'hashiqube0' up with 'docker' provider...
 ==> hashiqube0: Running provisioner: trex (shell)...
@@ -145,3 +147,5 @@ Bringing machine 'hashiqube0' up with 'docker' provider...
 ## Provisioner
 
 [filename](trex.sh ':include :type=code')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

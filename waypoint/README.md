@@ -24,6 +24,8 @@ Waypoint supports
 - [Waypoint 0.10 Brings Custom Pipelines and Nomad Plugin Updates](https://www.hashicorp.com/blog/waypoint-0-10-brings-custom-pipelines-and-nomad-plugin-updates)
 - [Waypoint 0.9 Adds New Runner Commands](https://www.hashicorp.com/blog/waypoint-0-9-adds-new-runner-commands)
 
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+
 ## Introduction
 
 In this whiteboard overview, HashiCorp Co-Founder and CTO, Armon Dadgar introduces HashiCorp Waypoint—a project that unifies workflows for build, deploy, and release across platforms. Learn what challenges it is designed to solve and see how it works.
@@ -62,6 +64,8 @@ vagrant up --provision-with docsify
 ```
 
 `vagrant up --provision-with basetools,docker,docsify,consul,nomad,waypoint`
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
 
 ```log
 Bringing machine 'hashiqube0.service.consul' up with 'virtualbox' provider...
@@ -302,6 +306,8 @@ c97d646ce0ef: Already exists :
     hashiqube0.service.consul: bM152PWkXxfoy4vA51JFhR7LmV9FA9RLbSpHoKrysFnwnRCAGzV2RExsyAmBrHu784d1WZRW6Cx4MkhvWzkDHvEn49c4wkSZYScfJ
 ```
 
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+
 ## Waypoint Nomad .hcl 
 
 The following Waypoint job file will deploy our Nomad T-Rex NodeJS Application to Nomad
@@ -347,3 +353,5 @@ CMD [ "node", "index.js" ]
 `waypoint.sh`
 
 [filename](waypoint.sh ':include :type=code')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

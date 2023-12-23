@@ -13,6 +13,10 @@ HashiCorp Vagrant provides the same, easy workflow regardless of your role as a 
 [filename](../Vagrantfile.txt ':include :type=code ruby')
 
 `vagrant up --provision`
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+
+
 ```log               
 Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 ==> user.local.dev: Checking if box 'ubuntu/xenial64' version '20190918.0.0' is up to date...
@@ -81,3 +85,5 @@ Bringing machine 'user.local.dev' up with 'virtualbox' provider...
     ...
     user.local.dev: ++++ Docsify: http://localhost:3333/
 ```
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

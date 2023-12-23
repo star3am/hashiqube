@@ -22,6 +22,8 @@ Increasingly, teams want to move away from the traditional tight coupling of app
 
 `vagrant up --provision-with basetools,docker,docsify,consul,nomad`
 
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+
 ```log    
 Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 ==> user.local.dev: Checking if box 'ubuntu/xenial64' version '20190918.0.0' is up to date...
@@ -174,8 +176,12 @@ Some routes are added via Consul, see `consul/consul.sh`
 
 - https://www.nomadproject.io/
 
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+
 ## Fabio Nomad Job template
 [filename](nomad/jobs/fabio.nomad ':include :type=code hcl')
 
 ## Fabio Properties file
 [filename](nomad/jobs/fabio.properties ':include :type=code config')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

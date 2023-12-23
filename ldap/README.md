@@ -70,6 +70,8 @@ Bringing machine 'user.local.dev' up with 'virtualbox' provider...
     user.local.dev: ++++ vault login -method=ldap username=hermes (password: hermes)
 ```
 
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+
 ## Enable LDAP Auth in Vault
 
 `vault auth enable ldap`

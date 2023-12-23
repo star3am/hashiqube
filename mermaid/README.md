@@ -208,3 +208,5 @@ More -.-> | A4 | a4[QA Test]
 a2[Packer] ==> | Azure | a6[SOE Image Repository]
 style a2 fill:#ccf,stroke:#f66,stroke-width:2px,stroke-dasharray: 5, 5
 ```
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

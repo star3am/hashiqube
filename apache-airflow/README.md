@@ -53,6 +53,8 @@ The `test-ssh.py` just ssh into hashiqube to test the connection
 # Airflow Task Instance Result
 ![Airflow](images/airflow_task_result.png?raw=true "Airflow")
 
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+
 # Links and further reading
 
 - https://airflow.apache.org/
@@ -67,3 +69,5 @@ The `test-ssh.py` just ssh into hashiqube to test the connection
 [filename](apache-airflow.sh ':include :type=code')
 
 [filename](dags/run-dbt.py ':include :type=code')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

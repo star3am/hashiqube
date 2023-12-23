@@ -24,3 +24,5 @@ You can use this `Git Cheat Sheet Wallpaper` to help you quickly learn the most 
 ## Links 
 
 - https://git-scm.com/
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

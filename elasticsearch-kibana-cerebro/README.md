@@ -214,6 +214,8 @@ Bringing machine 'user.local.dev' up with 'virtualbox' provider...
     user.local.dev: ++++ Cerebro: http://localhost:5602 and enter http://10.9.99.10:9200
 ```
 
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+
 ## Summary
 After provision you will have the latest Elasticsearch, Kibana and Cerebro running as Docker containers in your VM, with their ports exposed on your local machine.
 
@@ -251,3 +253,5 @@ __Kibana__ http://localhost:5601
 __Cerebro__ http://localhost:5602
 
 ![Cerebro](images/cerebro.png?raw=true "Cerebro")
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

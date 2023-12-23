@@ -39,6 +39,8 @@ The commands are executed within the Docker Container, making your dependency to
 
 [filename](gitlab-ci.yml ':include :type=code yaml')
 
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+
 ## The Dockerfile
 
 And the Dockerfile which installs all the tools needed such as Terraform, kubectl, AWS cli, Gcloud cli and Azure cli and more 
@@ -46,6 +48,8 @@ And the Dockerfile which installs all the tools needed such as Terraform, kubect
 `Dockerfile`
 
 [filename](Dockerfile.txt ':include :type=code docker')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
 
 ## Pre-Commit
 
@@ -165,3 +169,5 @@ Lint Dockerfiles.........................................................Passed
 
 ## Module Documentation
 - See [__docs folder__](/tools-container/docs/#providers)
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

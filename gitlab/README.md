@@ -449,6 +449,8 @@ Bringing machine 'hashiqube0' up with 'docker' provider...
     hashiqube0: ++++
 ```
 
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+
 The above Gitlab provision will look like this
 
 ![Gitlab provision](images/gitlab-provision.png?raw=true "Gitlab provision")
@@ -521,6 +523,8 @@ Now, to the right you will see a Clone Button, please click on that, and Copy th
 
 ![Gitlab Clone with SSH Test Repository](images/gitlab-copy-ssh-clone-url-test-project.png?raw=true "Gitlab Clone with SSH Test Repository")
 
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+
 I will clone this to my `~/workspace/personal/test` directory, and I will use this command `git clone ssh://git@localhost:32022/root/test.git` 
 
 The output is below
@@ -573,6 +577,8 @@ prd:
 Here is a screenshot of what I did, and the commands will be below that you can copy and past. 
 
 ![Gitlab add pipeline file to Test Repository](images/gitlab-add-pipeline-file-to-test-repository.png?raw=true "Gitlab add pipeline file to Test Repository")
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
 
 `cd test`
 
@@ -708,3 +714,5 @@ And that's it for now folks, thank you for taking the time to go through this tu
 ## Gitlab Vagrant Provisioner
 
 [filename](gitlab.sh ':include :type=code')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

@@ -221,6 +221,8 @@ Bringing machine 'hashiqube0' up with 'docker' provider...
     hashiqube0: ++++ Login with username: admin and password: 050fb849cef940cba7065f10d4d10a8c
 ```
 
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+
 ## Login
 
 Use the token in the output "Login with `4ed0dc30230c4310a58a22207414c3aa`" to login to Jenkins.
@@ -262,6 +264,8 @@ Click on `Available` and search for `HashiCorp Vault` and select it, next search
 Now click top Right `Enable Automatic Refresh` this will take you back to the Jenkins login page, now login with the credentials you created at `Create the first admin user for Jenkins.`
 
 Before we continue let's make sure Vault is running and it is unsealed. In a terminal please run
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
 
 ## Vault
 
@@ -445,6 +449,8 @@ And lastly we need to create a Terraform Cloud Token that Jenkins will use to Au
 Now we can add this Token as a `Secret Text` in Jenkins Credential Manager
 
 ![Jenkins Credential Secret Text Terraform Cloud Token](images/jenkins_credential-secret-text.png?raw=true "Jenkins Credential Secret Text Terraform Cloud Token")
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
 
 ## Jenkinsfile pipeline
 
@@ -647,6 +653,8 @@ EOF
   }
 }
 ```
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
 
 ![Jenkins](images/jenkins_new_item_pipeline_vault-jenkins_configure.png?raw=true "Jenkins")
 
@@ -2456,6 +2464,8 @@ WORKSPACE_TMP=/var/jenkins_home/workspace/test@tmp
 Finished: SUCCESS
 ```
 
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+
 You can click on that job and view the console, for more output, you should see your secrets are totally hidden and provided by Vault.
 ![Jenkins](images/jenkins_job_vault-jenkins_build_console.png?raw=true "Jenkins")
 
@@ -2466,3 +2476,5 @@ You can click on that job and view the console, for more output, you should see 
 ## The Code
 
 [filename](jenkins.sh ':include :type=code')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

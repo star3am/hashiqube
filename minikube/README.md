@@ -73,7 +73,10 @@ Bringing machine 'user.local.dev' up with 'virtualbox' provider...
     user.local.dev:                               READY   STATUS    RESTARTS   AGE
     user.local.dev: hello-minikube-797f975945-sr9gg   0/1     Pending   0          0s
     user.local.dev: minikube dashboard: http://10.9.99.10:10888/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/#/overview?namespace=default
-```    
+```
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+
 Let's verify that our Minikube is running, we can go to the Dashboard by visiting in your browser:
 http://localhost:10888/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/#/overview?namespace=kubernetes-dashboard
 
@@ -100,6 +103,8 @@ A Pod (as in a pod of whales or pea pod) is a group of one or more containers, w
 As well as application containers, a Pod can contain init containers that run during Pod startup. You can also inject ephemeral containers for debugging if your cluster offers this.
 
 ![Kubernetes Pods](images/minikube-dashboard-pods.png?raw=true "Kubernetes Pods")
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
 
 ## Kubernetes Services
 
@@ -266,6 +271,8 @@ ingress-nginx   job.batch/ingress-nginx-admission-create   1/1           10s    
 ingress-nginx   job.batch/ingress-nginx-admission-patch    1/1           10s        23h
 ```
 
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+
 `vagrant ssh -c "sudo kubectl get deployments"`
 
 ```log
@@ -315,6 +322,8 @@ http://localhost:11888/
 
 ![Helm Dashboard](images/helm-dashboard.png?raw=true "Helm Dashboard")
 
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+
 ## K9s CLI for Minikube
 k9s is a CLI tool for interacting with k8s clusters. It wraps kubectl functionality to provide a terminal interface for interaction with clusters in an intuitive way. 
 
@@ -352,3 +361,5 @@ This guide explains how to use Traefik as an Ingress controller for a Kubernetes
 ## Minikube Vagrant Provisioner
 
 [filename](minikube.sh ':include :type=code')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

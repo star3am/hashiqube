@@ -72,6 +72,8 @@ EXPOSE 80
 CMD /root/run_apache.sh
 ```
 
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+
 ## Running
 
 `vagrant up --provision-with docker`
@@ -554,6 +556,8 @@ Bringing machine 'user.local.dev' up with 'virtualbox' provider...
     user.local.dev: vagrant ssh -c "docker exec -it apache2 /bin/bash -c "apache2 -t -v""
 ```
 
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+
 ## Links
 
 - https://www.docker.com/
@@ -569,3 +573,5 @@ See: [__Monitoring Docker__](prometheus-grafana/README?id=monitoring-docker)
 ## Docker Vagrant Provisioner
 
 [filename](docker.sh ':include :type=code')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

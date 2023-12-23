@@ -27,6 +27,8 @@ You can also view a short introduction about HashiQube here, be sure to have has
 
 [![HashiQube: A Jedi DevOps Lab Using All the HashiCorp Products](/images/youtube-hashiqube-the-jedi-devops-lab.png)](https://www.youtube.com/watch?v=sFiWzKbpEpU)
 
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+
 This Provider (Basetools) installs some essential tools that Hashiqube provisioners need, this is one of the first provisioners that has to be run. Amongst other it also installs Python and Pip and sets the Message of the Day MOTD. 
 
 ```
@@ -213,3 +215,5 @@ These resources were destroyed for app "hashiqube":
 ✓ Deleted ECS task definition
 Destroy successful!
 ```
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

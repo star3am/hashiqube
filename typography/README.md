@@ -357,17 +357,7 @@ Default    | Left align | Center align | Right align
 |---|---|---|
 | 1 | 2 | 3 <br/> 4 <br/> 5 |
 
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5855657010614500"
-     crossorigin="anonymous"></script>
-<ins class="adsbygoogle"
-     style="display:block; text-align:center;"
-     data-ad-layout="in-article"
-     data-ad-format="fluid"
-     data-ad-client="ca-pub-5855657010614500"
-     data-ad-slot="7915895293"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
 
 ```
 <table>
@@ -451,6 +441,7 @@ console.log(fullName); // Dariana Trahan
 [1]: https://github.com/lifeparticle/The-Ultimate-Markdown-Cheat-Sheet
 [Markdown-Cheat-Sheet]: https://github.com/lifeparticle/The-Ultimate-Markdown-Cheat-Sheet
 
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
 
 ```
 [Example of a relative link](rl.md)
@@ -522,7 +513,7 @@ Visit https://github.com/
 3. First level
     1. Second level
     
-
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
 
 ```
 * 1
@@ -613,6 +604,8 @@ ___
 ***
 
 ___
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
 
 # Diagrams (19 July 2022)
 
@@ -1066,3 +1059,5 @@ Symbols
 | :large_blue_circle: `:large_blue_circle:` | :large_blue_diamond: `:large_blue_diamond:` | :large_orange_diamond: `:large_orange_diamond:` |
 | :small_blue_diamond: `:small_blue_diamond:` | :small_orange_diamond: `:small_orange_diamond:` | :small_red_triangle: `:small_red_triangle:` |
 | :small_red_triangle_down: `:small_red_triangle_down:` | :shipit: `:shipit:` |
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

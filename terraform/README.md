@@ -14,6 +14,8 @@ Terraform is an open-source infrastructure as code software tool created by Hash
 - [Terraform 1.3 Improves Extensibility and Maintainability of Terraform Modules](https://www.hashicorp.com/blog/terraform-1-3-improves-extensibility-and-maintainability-of-terraform-modules)
 - [Terraform 1.2 Improves Exception Handling and Updates to the CLI-driven Workflow](https://www.hashicorp.com/blog/terraform-1-2-improves-exception-handling-and-updates-to-the-cli-driven-workflow)
 
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+
 ### Why Terraform
 - Provides a high-level abstraction of infrastructure (IaC)
 - Allows for composition and combination
@@ -61,6 +63,8 @@ Modules build and extend on the resources defined by providers.
 |Consists of .tf and/or .tf.json files | Contains instructions for API interactions|
 |Re-usable Terraform configuration | Written in Go Lanaguage|
 |Built on top of providers | Foundation for modules|
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
 
 `terraform plan`
 
@@ -115,6 +119,8 @@ Note: You didn't specify an "-out" parameter to save this plan, so Terraform
 can't guarantee that exactly these actions will be performed if
 "terraform apply" is subsequently run.
 ```
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
 
 ## Terraform Vagrant Provisioner
 
@@ -190,6 +196,8 @@ https://registry.terraform.io/modules/star3am/hashiqube/hashicorp/latest
 ### Terraform Cloud run
 ![Hashiqube Multi-Cloud](images/hashiqube-multi-cloud-terraform-cloud-plan.png?raw=true "Hashiqube Multi-Cloud")
 
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+
 ## Terraform Enterprise
 https://www.terraform.io/docs/enterprise/index.html
 
@@ -230,6 +238,8 @@ Bringing machine 'user.local.dev' up with 'virtualbox' provider...
     user.local.dev:
     user.local.dev:   http://10.9.99.10:8800
 ```
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
 
 ## Terraform Development Environment
 
@@ -357,6 +367,8 @@ devcontainer docker build log")
 Now you can open a new Terminal. This will launch a new terminal inside the container, you will note that Terraform, Terragrunt and all the tools this project needs has already been installed for you.
 
 ![VSCode open repository folder open in devcontainer new Terminal](images/vscode-open-repository-folder-open-in-devcontainer-new-terminal.png?raw=true "VSCode open repository folder open in devcontainer new Terminal")
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
 
 Now you need to Authenticate to your Clouds, see: __Authenticating__ below.
 
@@ -717,6 +729,8 @@ Terraform docs...........................................................Passed
 Lint Dockerfiles.........................................................Passed
 ```
 
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+
 ### Contributing
 
 ### Adding/Changing a Module
@@ -767,3 +781,5 @@ Many thanks goes to the team at Gruntwork https://gruntwork.io/ for their amazin
 - https://docs.github.com/en/github-ae@latest/actions/learn-github-actions/variables
 - https://docs.github.com/en/actions/using-jobs/using-jobs-in-a-workflow
 - https://medium.com/@riaan.nolan/top-gun-terraform-development-environment-60ac00d49577
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

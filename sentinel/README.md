@@ -8,6 +8,8 @@ Sentinel is a language and framework for policy built to be embedded in existing
 
 `vagrant up --provision-with basetools,docsify,sentinel`
 
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+
 ```log
 Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 ==> user.local.dev: Checking if box 'ubuntu/bionic64' version '20191218.0.0' is up to date...
@@ -101,3 +103,5 @@ Bringing machine 'user.local.dev' up with 'virtualbox' provider...
     user.local.dev: ++++ sentinel apply -config ./test/aws-alb-redirect/pass.json aws-alb-redirect.sentinel
     user.local.dev: Pass
 ```
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

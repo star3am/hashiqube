@@ -112,6 +112,8 @@ The default password will be printed to console on start up. Else it can be obta
 vagrant ssh -c "< ~/.config/code-server/config.yaml head -n "3" | tail -n +"3""
 ```
 
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+
 ## Future plans
 
 In the future there is potential to add an option for starting different code-server instances. Currently it always launches with the default image. Custom images could be setup that have different things preinstalled (e.g. Image with python, usefull libaries and useful extentions pre installed).
@@ -119,3 +121,5 @@ In the future there is potential to add an option for starting different code-se
 ## The Code
 
 [filename](vscode-server.sh ':include :type=code')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

@@ -32,3 +32,5 @@ vagrant ssh -c "< ~/.config/code-server/config.yaml head -n "3" | tail -n +"3""
 ## Future plans
 
 In the future there is potential to add an option for starting different code-server instances. Currently it always launches with the default image. Custom images could be setup that have different things preinstalled (e.g. Image with python, usefull libaries and useful extentions pre installed). 
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

@@ -28,6 +28,9 @@ Alertmanager http://localhost:9093 <br />
 Grafana http://localhost:3000 and login with Username: admin Password: Password displayed in the Terminal
 
 Look at Minikube dashboard for progress update and the terminal output. 
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+
 ```
 ...
 hashiqube0.service.consul: ++++ Waiting for Prometheus to stabalize, sleep 30s
@@ -84,6 +87,8 @@ and you should be able to see some graphs.
 
 ![Grafana Dashboard Kubernetes Cluster (Prometheus)](images/grafana_dashboard_6417.png?raw=true "Grafana Dashboard Kubernetes Cluster (Prometheus)")
 
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+
 ## Monitoring Hashicorp Vault
 
 https://developer.hashicorp.com/vault/docs/configuration/telemetry#prometheus <br />
@@ -130,6 +135,8 @@ Enter `12904` and click on Load
 Navigating to Grafana -> Dashboards you should now be able to see the Hashicorp Vault Grafana Dashboard
 
 ![Grafana Hashicorp Vault Dashboard](images/grafana-hashicorp-vault-dashboard.png?raw=true "Grafana Hashicorp Vault Dashboard")
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
 
 ## Monitoring Hashicorp Nomad
 
@@ -182,6 +189,8 @@ Navigating to Grafana -> Dashboards you should now be able to see the Hashicorp 
 
 ![Grafana Hashicorp Nomad Dashboard](images/grafana-hashicorp-nomad-dashboard.png?raw=true "Grafana Hashicorp Nomad Dashboard")
 
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+
 ## Monitoring Hashicorp Consul
 
 https://lvinsf.medium.com/monitor-consul-using-prometheus-and-grafana-1f2354cc002f <br />
@@ -207,6 +216,8 @@ Enter `10642` and click on Load
 Navigating to Grafana -> Dashboards you should now be able to see the Hashicorp Consul Grafana Dashboard
 
 ![Grafana Hashicorp Consul Dashboard](images/grafana-hashicorp-consul-dashboard.png?raw=true "Grafana Hashicorp Consul Dashboard")
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
 
 ## Monitoring Docker
 
@@ -236,3 +247,5 @@ Navigating to Grafana -> Dashboards you should now be able to see the Docker Gra
 ## Prometheus Grafana Vagrant Provisioner 
 
 [filename](prometheus-grafana.sh ':include :type=code')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

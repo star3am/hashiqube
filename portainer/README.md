@@ -10,6 +10,8 @@ Build and manage your Docker environments with ease today.
 ## Provision
 `vagrant up --provision-with basetools,docker,docsify,portainer`
 
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+
 ```log
 Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 ==> user.local.dev: Checking if box 'ubuntu/xenial64' version '20190918.0.0' is up to date...
@@ -55,6 +57,8 @@ Bringing machine 'user.local.dev' up with 'virtualbox' provider...
     user.local.dev: ++++ Portainer: http://localhost:9333
 ```
 
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+
 ## Using Portainer  
 Please open http://localhost:9333
 
@@ -67,3 +71,5 @@ Please open http://localhost:9333
 ## Portainer Vagrant Provisioner
 
 [filename](portainer.sh ':include :type=code')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

@@ -10,6 +10,8 @@ To get Uptime Kuma running, please do:
 
 `vagrant up --provision-with basetools,docker,docsify,uptime-kuma`
 
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+
 ```log
 Bringing machine 'hashiqube0' up with 'docker' provider...
 ==> hashiqube0: Running provisioner: basetools (shell)...
@@ -110,3 +112,5 @@ And you can also view the Check history
 `uptime-kuma.sh`
 
 [filename](uptime-kuma.sh ':include :type=code')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

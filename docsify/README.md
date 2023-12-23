@@ -73,6 +73,8 @@ Bringing machine 'user.local.dev' up with 'virtualbox' provider...
     user.local.dev: ++++ Docsify: http://localhost:3333/
 ```
 
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+
 ## Links 
 
 - https://docsify.js.org/
@@ -84,3 +86,5 @@ After provision, you can access Docsify and HashiQube documentation at http://lo
 ## Docsify Vagrant Provisioner
 
 [filename](docsify.sh ':include :type=code')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

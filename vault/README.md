@@ -100,6 +100,8 @@ And you can login with the `Initial Root Token` displayed in the output of the p
 
 ![Vault](images/vault.png?raw=true "Vault")
 
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+
 ### Performance Replication
 
 Vault supports two types of replication:
@@ -169,6 +171,8 @@ The list of capabilities include the following:
 - delete (DELETE) - Allows deleting the data at the given path.
 
 - list (LIST) - Allows listing values at the given path. Note that the keys returned by a list operation are not filtered by policies. Do not encode sensitive information in key names. Not all backends support listing.
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
 
 ## Vault Policy Example
 
@@ -487,6 +491,8 @@ path "kmip/*" {
 }
 ```
 
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+
 ## Vault Namespaces
 
 Vault Enterprise Namespaces allow Vault to support multi-tenant deployments in which different teams are isolated from each other and can self-manage their own secrets.
@@ -508,3 +514,5 @@ Vault namespaces form a hierarchy with all namespaces living under the "root" na
 We use Prometheus and Grafana to Monitor Vault
 
 See: [__Monitoring Hashicorp Vault__](prometheus-grafana/README?id=monitoring-hashicorp-vault)
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

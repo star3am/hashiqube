@@ -18,6 +18,8 @@ HashiCorp co-founder and CTO Armon Dadgar gives a whiteboard overview of HashiCo
 - [Consul 1.13 Introduces Cluster Peering](https://www.hashicorp.com/blog/consul-1-13-introduces-cluster-peering)
 - [Consul 1.12 Hardens Security on Kubernetes with Vault](https://www.hashicorp.com/blog/consul-1-12-hardens-security-on-kubernetes-with-vault)
 
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+
 ## Introduction
 
 [![Introduction to HashiCorp Consul](images/maxresdefault.jpeg)](https://www.youtube.com/watch?v=mxeMdl0KvBI)
@@ -188,6 +190,8 @@ Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 ```    
 ![Consul](images/consul.png?raw=true "Consul")
 
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+
 ## Links 
 
 - https://www.consul.io/
@@ -203,3 +207,5 @@ Bringing machine 'user.local.dev' up with 'virtualbox' provider...
 We use Prometheus and Grafana to Monitor Consul
 
 See: [__Monitoring Hashicorp Consul__](prometheus-grafana/README?id=monitoring-hashicorp-consul)
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

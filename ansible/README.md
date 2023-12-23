@@ -56,6 +56,8 @@ In our Ansible Role Example Role which supports Redhat, Centos, Ubuntu, Debian a
 
 [filename](roles/ansible-role-example-role/molecule/default/molecule.yml ':include :type=code')
 
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+
 ## Practicle example
 Molecule use providers such as docker or virtualbox to create the target instances to run the playbook against. 
 
@@ -152,6 +154,8 @@ https://learn.microsoft.com/en-us/windows/wsl/install-manual#step-4---download-t
 Note : Run ``` wsl --install -d Ubuntu ``` in **non administrative** mode in powershell
 
 ![wsl.png](roles/ansible-role-example-role/wsl.PNG)
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
 
 ```
 PS C:\Users\User> wsl --shutdown
@@ -254,6 +258,8 @@ and do
 Allow all 3 types of network when set up Firewall for VirtualBox
 ![image-2.png](roles/ansible-role-example-role/image-2.png)
 
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+
 ### Mac 
 
 Install all the Tools you need in the [__Get Started Section__](#get-started-dependencies-the-tools-you-will-need) 
@@ -303,3 +309,5 @@ Succesful ouput should be as below:
 fatal: [ansible-role-example-role-ubuntu-2204]: FAILED! => {"msg": "to use the 'ssh' connection type with passwords or pkcs11_provider, you must install the sshpass program"}
 ```
 Did you install the SSHPass application? See [__Get Started Section__](#get-started-dependencies-the-tools-you-will-need) 
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

@@ -161,3 +161,5 @@ FAILED to authenticate with Pixie cloud.
 ```
 
 ![Newrelic Kuberneter Integration Clusters](images/07-newrelic-pixie.png?raw=true "Newrelic Kuberneter Integration Clusters")
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

@@ -29,6 +29,8 @@ Give it a try and most of all have fun with this module, your feedback is always
 
 ![Hashiqube Integrations](images/logo-qube.png?raw=true "Hashiqube Integrations")
 
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+
 ## Basic concept
 The basic concept is, we spin up a cloud instance, we install `docker` and `vagrant` and we clone https://github.com/star3am/hashiqube into /home/ubuntu/hashiqube
 
@@ -136,6 +138,8 @@ gcp_hashiqube-waypoint = "https://35.244.86.xxx:9702"
 gcp_hashiqube_ip = "35.244.86.xxx"
 your_ipaddress = "101.189.211.xxx"
 ```
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
 
 ## Access Hashiqube, First Login
 After your Hashiqube instances has been launched you can access them by using the SSH commands in the Terraform Apply Output, and you will see something like this
@@ -260,6 +264,8 @@ aws_hashiqube-waypoint = "https://13.55.129.xxx:9702"
 ```
 
 ![Hashicorp Waypoint on Hashiqube](images/hashiqube-waypoint.png?raw=true "Hashicorp Waypoint on Hashiqube")
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
 
 Access Hashicorp Boundary on Hashiqube on the address in the Output of Terraform Apply in your browser
 ```
@@ -1631,6 +1637,8 @@ gcp_hashiqube_ip = "34.87.247.xxx"
 your_ipaddress = "101.189.211.xxx"
 ```
 
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+
 ## SSH into the Cloud Instances
 Your IP will be whitelisted and you will be able to access the cloud instance with the commands in the Terraform Output, for example: 
 
@@ -1743,3 +1751,5 @@ You are welcome to connect with me on Linkedin https://www.linkedin.com/in/riaan
 Credly profile: https://www.credly.com/users/riaan-nolan.e657145c
 
 ![My Hashicorp Badges](images/hashicorp-badges.png?raw=true "My Hashicorp Badges")
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

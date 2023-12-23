@@ -13,3 +13,5 @@ It is a tool to generate quizzes from Markdown files. This means that you can st
 ### Sample Quiz
 
 [filename](generated-quizzes/sample-quiz.html ':include height=800px')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

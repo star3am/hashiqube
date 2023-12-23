@@ -35,11 +35,15 @@ Now you can run `./run.sh`
 
 Packer uses the HashiCorp Configuration Language - HCL - designed to allow concise descriptions of the required steps to get to a build file.
 
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+
 ### Ubuntu 22.04 Packer Template
 
 `packer/linux/ubuntu/ubuntu-2204.pkr.hcl`
 
 [filename](packer/linux/ubuntu/ubuntu-2204.pkr.hcl ':include :type=code')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
 
 ### Windows 2019 Packer Template
 
@@ -51,3 +55,5 @@ Packer uses the HashiCorp Configuration Language - HCL - designed to allow conci
 `packer.sh`
 
 [filename](packer.sh ':include :type=code')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

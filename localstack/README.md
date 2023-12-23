@@ -133,6 +133,8 @@ Now check the assets with aws local inside vagrant
 2006-02-04 03:45:09 localstack-s3-bucket
 ```
 
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+
 ## Links
 
 - https://localstack.cloud/
@@ -144,3 +146,5 @@ Now check the assets with aws local inside vagrant
 [filename](main.tf ':include :type=code hcl')
 
 [filename](outputs.tf ':include :type=code hcl')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
