@@ -33,20 +33,28 @@ As you can see below we are using Ansible Facts to direct the different Operatin
 
 [filename](roles/ansible-role-example-role/tasks/main.yml ':include :type=code')
 
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+
 ## Enterprise Linux
 Let's have a look at Enterprise Linux (RPM YUM based) el.yml
 
 [filename](roles/ansible-role-example-role/tasks/el.yml ':include :type=code')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
 
 ## Debian/Ubuntu Linux
 Let's have a look at Debian/Ubuntu Linux (DEB based) deb.yml
 
 [filename](roles/ansible-role-example-role/tasks/deb.yml ':include :type=code')
 
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+
 ## Windows
 Let's have a look at Windows windows.yml
 
 [filename](roles/ansible-role-example-role/tasks/windows.yml ':include :type=code')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
 
 ## Molecule example
 
@@ -122,6 +130,8 @@ To download community roles and playbooks from remote repositories you need a re
 
 You can then download them by using this command: 
 `ansible-galaxy install -f -r ansible/galaxy/requirements.yml -p ansible/galaxy/roles/`
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
 
 ## Ansible Role Example Role 
 
