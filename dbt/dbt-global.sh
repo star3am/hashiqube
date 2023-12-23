@@ -163,8 +163,20 @@ echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Ensure postgresql-client is installed"
 echo -e '\e[38;5;198m'"++++ "
-sudo apt-get install -y postgresql-client libpq-dev python3.9-dev
-python3.9 -m pip install --force-reinstall psycopg2==2.9.4
+sudo apt-get install -y postgresql-client libpq-dev python3.10-dev
+python3 -m pip install --force-reinstall psycopg2==2.9.4
+
+if pgrep -x "postgres" >/dev/null
+then
+  echo -e '\e[38;5;198m'"++++ "
+  echo -e '\e[38;5;198m'"++++ Postgresql is running"
+  echo -e '\e[38;5;198m'"++++ "
+else
+  echo -e '\e[38;5;198m'"++++ "
+  echo -e '\e[38;5;198m'"++++ Ensure Postgres is running.."
+  echo -e '\e[38;5;198m'"++++ "
+  sudo bash /vagrant/database/postgresql.sh
+fi
 
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Create database jaffle_shop"

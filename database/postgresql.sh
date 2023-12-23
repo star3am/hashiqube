@@ -34,7 +34,7 @@ sleep 15;
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Ensure postgresql-client is installed"
 echo -e '\e[38;5;198m'"++++ "
-sudo apt-get install -y postgresql-client libpq-dev python3.9-dev
+sudo apt-get install -y postgresql-client libpq-dev python3.10-dev
 
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Source /etc/environment"
