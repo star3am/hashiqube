@@ -45,8 +45,13 @@ client {
   enabled       = true
   # https://github.com/hashicorp/nomad/issues/1282
   network_speed = 100
+  # https://developer.hashicorp.com/nomad/docs/configuration/client#cpu_total_compute
+  # BUG: CPU fingerprint with Docker Desktop on Apple Silicon never really worked because the CPU speed is not made available anywhere, so its impossible for Nomad to detect it
+  # If you run previous versions of Nomad you will notice that the fingerprinted capacity is always 1000MHz. This is a value we used to hardcode as a fallback but we dont anymore on 1.7.x (https://github.com/hashicorp/nomad/blob/release/1.6.x/client/fingerprint/cpu.go#L23) because its just wrong.
+  # The only option for now is to pass their own hardcoded value using client.cpu_total_compute (https://developer.hashicorp.com/nomad/docs/configuration/client#cpu_total_compute)
+  cpu_total_compute = 8000
   servers = ["10.9.99.10:4647"]
-  #network_interface = "enp0s8"
+  # network_interface = "enp0s8"
   # https://www.nomadproject.io/docs/drivers/docker.html#volumes
   # https://github.com/hashicorp/nomad/issues/5562
   options = {
