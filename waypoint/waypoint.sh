@@ -231,7 +231,14 @@ function waypoint-nomad() {
   sudo rm -rf /opt/nomad/data/volume/waypoint/*
   echo -e '\e[38;5;198m'"++++ Waypoint Install on Platform Hashicorp Nomad"
   export NOMAD_ADDR='http://localhost:4646'
-  sudo --preserve-env=PATH -u vagrant waypoint install -platform=nomad -nomad-dc=dc1 -accept-tos -nomad-host-volume=waypoint -nomad-consul-service=false -context-create=nomad -runner=false
+  # INFO: 
+  # To further customize the server installation, you may pass advanced flag options
+  # specified in the documentation for the 'server run' command. To set these values,
+  # include a '--' after the full argument list for 'install', followed by these
+  # advanced flag options. As an example, to set the server log level to trace
+  # and disable the UI, the command would be:
+  # Example:  waypoint install -platform=docker -accept-tos -- -vvv -disable-ui
+  sudo --preserve-env=PATH -u vagrant waypoint install -platform=nomad -nomad-dc=dc1 -accept-tos -nomad-host-volume=waypoint -nomad-consul-service=true -context-create=nomad -nomad-runner-host-volume=waypoint -runner=true -- -vvv -url-enabled=true -url-auto-app-hostname=true -advertise-addr=waypoint-server.service.dc1.consul:9701 -advertise-tls-skip-verify=true
   sleep 60;
   nomad job status
   nomad status
@@ -241,6 +248,8 @@ function waypoint-nomad() {
   echo -e '\e[38;5;198m'"++++ Waypoint Server https://localhost:9702 and enter the following Token displayed below"
   echo $WAYPOINT_TOKEN_NOMAD > /home/vagrant/.waypoint-nomad-token
   echo $WAYPOINT_TOKEN_NOMAD
+  # echo -e '\e[38;5;198m'"++++ Waypoint Server Config-set Advertise Address"
+  # sudo --preserve-env=PATH -u vagrant waypoint server config-set -advertise-addr=waypoint-server.service.dc1.consul:9701 -advertise-tls-skip-verify=true
   echo -e '\e[38;5;198m'"++++ Waypoint Context"
   sudo --preserve-env=PATH -u vagrant waypoint context list
   sudo --preserve-env=PATH -u vagrant waypoint context verify
@@ -255,6 +264,9 @@ function waypoint-nomad() {
   sudo --preserve-env=PATH -u vagrant waypoint up
   echo -e '\e[38;5;198m'"++++ Waypoint Deploy"
   sudo --preserve-env=PATH -u vagrant waypoint deploy
+  echo -e '\e[38;5;198m'"++++ Waypoint URL Service"
+  sudo --preserve-env=PATH -u vagrant waypoint hostname register
+  sudo --preserve-env=PATH -u vagrant waypoint hostname list
   echo -e '\e[38;5;198m'"++++ Waypoint Server https://localhost:9702 and enter the following Token displayed below"
   echo $WAYPOINT_TOKEN_NOMAD
   echo -e '\e[38;5;198m'"++++ Waypoint Documentation http://localhost:3333/#/waypoint/README?id=waypoint"

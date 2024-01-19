@@ -28,4 +28,8 @@ app "nomad-trex-nodejs" {
     }
   }
 
+  url {
+    auto_hostname = true
+  }
+
 }
