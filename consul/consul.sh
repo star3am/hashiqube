@@ -1,6 +1,8 @@
 #!/bin/bash
 # https://www.nomadproject.io/guides/integrations/consul-connect/index.html
 
+VERSION=1.17.3
+
 function consul-install() {
 
 arch=$(lscpu | grep "Architecture" | awk '{print $NF}')
@@ -134,6 +136,7 @@ OOMScoreAdjust=-1000
 WantedBy=multi-user.target
 EOF
   # check if consul is installed, start and exit
+  sudo rm -rf /usr/local/bin/consul
   if [ -f /usr/local/bin/consul ]; then
     echo -e '\e[38;5;198m'"++++ Consul already installed at /usr/local/bin/consul"
     echo -e '\e[38;5;198m'"++++ `/usr/local/bin/consul version`"
@@ -151,7 +154,13 @@ EOF
   else
   # if consul is not installed, download and install
     echo -e '\e[38;5;198m'"++++ Consul not installed, installing.."
-    LATEST_URL=$(curl -sL https://releases.hashicorp.com/consul/index.json | jq -r '.versions[].builds[].url' | sort -t. -k 1,1n -k 2,2n -k 3,3n -k 4,4n | egrep -v 'rc|ent|beta' | egrep "linux.*$ARCH" | sort -V | tail -1)
+    if [[ $VERSION == "latest" ]]; then
+      echo "Installing version: $VERSION"
+      LATEST_URL=$(curl -sL https://releases.hashicorp.com/consul/index.json | jq -r '.versions[].builds[].url' | sort -t. -k 1,1n -k 2,2n -k 3,3n -k 4,4n | egrep -v 'rc|ent|beta' | egrep "linux.*$ARCH" | sort -V | tail -1)
+    else
+      echo "Installing version: $VERSION"
+      LATEST_URL=$(curl -sL https://releases.hashicorp.com/consul/index.json | jq -r '.versions[].builds[].url' | sort -t. -k 1,1n -k 2,2n -k 3,3n -k 4,4n | egrep -v 'rc|ent|beta' | egrep "linux.*$ARCH" | sort -V | grep $VERSION | tail -1)
+    fi
     wget -q $LATEST_URL -O /tmp/consul.zip
     mkdir -p /usr/local/bin
     (cd /usr/local/bin && unzip /tmp/consul.zip)

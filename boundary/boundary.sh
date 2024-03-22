@@ -2,6 +2,8 @@
 # https://learn.hashicorp.com/tutorials/boundary/getting-started-install
 # https://learn.hashicorp.com/tutorials/boundary/getting-started-dev
 
+VERSION=latest
+
 function boundary-install() {
   sudo DEBIAN_FRONTEND=noninteractive apt-get --assume-yes install -qq curl unzip jq < /dev/null > /dev/null
   yes | sudo docker system prune -a
@@ -16,13 +18,20 @@ function boundary-install() {
   echo -e '\e[38;5;198m'"CPU is $ARCH"
 
   # check if waypoint is installed, start and exit
+  sudo rm -rf /usr/local/bin/boundary
   if [ -f /usr/local/bin/boundary ]; then
     echo -e '\e[38;5;198m'"++++ Bundary already installed at /usr/local/bin/boundary"
     echo -e '\e[38;5;198m'"++++ `/usr/local/bin/boundary version`"
   else
   # if boundary is not installed, download and install
     echo -e '\e[38;5;198m'"++++ Boundary not installed, installing.."
-    LATEST_URL=$(curl -sL https://releases.hashicorp.com/boundary/index.json | jq -r '.versions[].builds[].url' | sort -t. -k 1,1n -k 2,2n -k 3,3n -k 4,4n | egrep -v 'rc|ent|beta' | egrep "linux.*$ARCH" | sort -V | tail -n 1)
+    if [[ $VERSION == "latest" ]]; then
+      echo "Installing version: $VERSION"
+      LATEST_URL=$(curl -sL https://releases.hashicorp.com/boundary/index.json | jq -r '.versions[].builds[].url' | sort -t. -k 1,1n -k 2,2n -k 3,3n -k 4,4n | egrep -v 'rc|ent|beta' | egrep "linux.*$ARCH" | sort -V | tail -n 1)
+    else
+      echo "Installing version: $VERSION"
+      LATEST_URL=$(curl -sL https://releases.hashicorp.com/boundary/index.json | jq -r '.versions[].builds[].url' | sort -t. -k 1,1n -k 2,2n -k 3,3n -k 4,4n | egrep -v 'rc|ent|beta' | egrep "linux.*$ARCH" | sort -V | grep $VERSION | tail -1)
+    fi
     wget -q $LATEST_URL -O /tmp/boundary.zip
     mkdir -p /usr/local/bin
     (cd /usr/local/bin && unzip /tmp/boundary.zip)

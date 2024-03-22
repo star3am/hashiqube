@@ -1,5 +1,7 @@
 #!/bin/bash
 
+VERSION=latest
+
 function nomad-install() {
 
   if pgrep -x "consul" >/dev/null
@@ -131,6 +133,7 @@ EOF
   sudo mkdir -p /opt/nomad/data/volume/waypoint
   sudo chmod -R 777 /opt/nomad
   # check if nomad is installed, start and exit
+  sudo rm -rf /usr/local/bin/nomad
   if [ -f /usr/local/bin/nomad ]; then
     echo -e '\e[38;5;198m'"++++ Nomad already installed at /usr/local/bin/nomad"
     echo -e '\e[38;5;198m'"++++ `/usr/local/bin/nomad version`"
@@ -156,7 +159,13 @@ EOF
   else
   # if nomad is not installed, download and install
     echo -e '\e[38;5;198m'"++++ Nomad not installed, installing.."
-    LATEST_URL=$(curl -sL https://releases.hashicorp.com/nomad/index.json | jq -r '.versions[].builds[].url' | sort -t. -k 1,1n -k 2,2n -k 3,3n -k 4,4n | egrep -v 'rc|beta' | egrep "linux.*$ARCH" | sort -V | tail -n1)
+    if [[ $VERSION == "latest" ]]; then
+      echo "Installing version: $VERSION"
+      LATEST_URL=$(curl -sL https://releases.hashicorp.com/nomad/index.json | jq -r '.versions[].builds[].url' | sort -t. -k 1,1n -k 2,2n -k 3,3n -k 4,4n | egrep -v 'rc|beta' | egrep "linux.*$ARCH" | sort -V | tail -n1)
+    else
+      echo "Installing version: $VERSION"
+      LATEST_URL=$(curl -sL https://releases.hashicorp.com/nomad/index.json | jq -r '.versions[].builds[].url' | sort -t. -k 1,1n -k 2,2n -k 3,3n -k 4,4n | egrep -v 'rc|beta' | egrep "linux.*$ARCH" | sort -V | grep $VERSION | tail -1)
+    fi
     wget -q $LATEST_URL -O /tmp/nomad.zip
     mkdir -p /usr/local/bin
     (cd /usr/local/bin && unzip /tmp/nomad.zip)
