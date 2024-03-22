@@ -3,6 +3,8 @@
 # https://computingforgeeks.com/install-and-configure-vault-server-linux/
 # https://www.vaultproject.io/
 
+VERSION=latest
+
 # Terraform Enterprise should not be running, creates conflict since it has it's own vault
 ps aux | grep -q "replicated" | grep -v grep
 if [ $? -eq 0 ]; then
@@ -29,13 +31,20 @@ echo -e '\e[38;5;198m'"CPU is $ARCH"
 # rm -rf /var/lib/replicated* /etc/replicated* /etc/init/replicated* /etc/init.d/replicated* /etc/default/replicated* /var/log/upstart/replicated* /etc/systemd/system/replicated*
 sudo DEBIAN_FRONTEND=noninteractive apt-get --assume-yes install -qq curl unzip jq < /dev/null > /dev/null
 # only do if vault is not found
+sudo rm -rf /usr/local/bin/vault
 if [ ! -f /usr/local/bin/vault ]; then
   
   echo -e '\e[38;5;198m'"++++ "
   echo -e '\e[38;5;198m'"++++ Vault not installed, installing.."
   echo -e '\e[38;5;198m'"++++ "
 
-  LATEST_URL=$(curl -sL https://releases.hashicorp.com/vault/index.json | jq -r '.versions[].builds[].url' | sort -t. -k 1,1n -k 2,2n -k 3,3n -k 4,4n | egrep -v 'rc|ent|beta' | egrep "linux.*$ARCH" | sort -V | tail -n 1)
+  if [[ $VERSION == "latest" ]]; then
+    echo "Installing version: $VERSION"
+    LATEST_URL=$(curl -sL https://releases.hashicorp.com/vault/index.json | jq -r '.versions[].builds[].url' | sort -t. -k 1,1n -k 2,2n -k 3,3n -k 4,4n | egrep -v 'rc|ent|beta' | egrep "linux.*$ARCH" | sort -V | tail -n 1)
+  else
+    echo "Installing version: $VERSION"
+    LATEST_URL=$(curl -sL https://releases.hashicorp.com/vault/index.json | jq -r '.versions[].builds[].url' | sort -t. -k 1,1n -k 2,2n -k 3,3n -k 4,4n | egrep -v 'rc|ent|beta' | egrep "linux.*$ARCH" | sort -V | grep $VERSION | tail -1)
+  fi
   wget -q $LATEST_URL -O /tmp/vault.zip
 
   mkdir -p /usr/local/bin

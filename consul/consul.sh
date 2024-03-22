@@ -1,7 +1,7 @@
 #!/bin/bash
 # https://www.nomadproject.io/guides/integrations/consul-connect/index.html
 
-VERSION=latest # 1.17.3
+VERSION=1.17.3
 
 function consul-install() {
 
