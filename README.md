@@ -137,7 +137,9 @@ Thanks to the flexibility of the Hashicorp products there is no need to wonder h
 
 By default Hashiqube installs community editions of Hashicorp products, but you can also test and demo Enterprise versions. You can request a trial license from here https://developer.hashicorp.com/vault/tutorials/enterprise/hashicorp-enterprise-license#request-a-trial-license
 
-When you get the license file, simply copy the license.hclic into the vault or corresponding product folder in the hashiqube directory and `vagrant up --provision`
+When you get the license file, simply copy the license.hclic into the vault or corresponding product folder in the hashiqube directory and run:
+
+`vagrant up --provision-with basetools,vault,consul,nomad,boundary`
 
 | Name | Community | Enterprise |
 |------|--------|------------|
@@ -146,6 +148,31 @@ When you get the license file, simply copy the license.hclic into the vault or c
 | Nomad | ✓ | ✓ |
 | Boundary | ✓ | ✓ |
 | Terraform | ✓ | ✘ |
+
+`tree -L 1 boundary consul nomad vault`
+```bash
+boundary
+├── README.md
+├── boundary.sh
+├── images
+└── license.hclic
+consul
+├── README.md
+├── consul.sh
+├── images
+└── license.hclic
+nomad
+├── README.md
+├── images
+├── license.hclic
+├── nomad
+└── nomad.sh
+vault
+├── README.md
+├── images
+├── license.hclic
+└── vault.sh
+```
 
 ## Components
 Hashiqube is made up of a number of components and some rely on each other like building blocks.

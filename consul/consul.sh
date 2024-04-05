@@ -235,6 +235,12 @@ nameserver 10.9.99.10
 nameserver 8.8.8.8
 EOF
 
+if [ -f /vagrant/consul/license.hclic ]; then
+  echo -e '\e[38;5;198m'"++++ "
+  echo -e '\e[38;5;198m'"++++ Consul License Inspect"
+  echo -e '\e[38;5;198m'"++++ "
+  consul license inspect /vagrant/consul/license.hclic
+fi
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Access Consul"
 echo -e '\e[38;5;198m'"++++ "

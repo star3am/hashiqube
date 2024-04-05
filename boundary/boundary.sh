@@ -172,6 +172,12 @@ sudo systemctl daemon-reload
 sudo service boundary start
 sh -c 'sudo tail -f /var/log/boundary.log | { sed "/Boundary server started/ q" && kill $$ ;}'
 
+if [ -f /vagrant/boundary/license.hclic ]; then
+  echo -e '\e[38;5;198m'"++++ "
+  echo -e '\e[38;5;198m'"++++ Boundary License Inspect"
+  echo -e '\e[38;5;198m'"++++ "
+  boundary -version
+fi
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Access Boundary"
 echo -e '\e[38;5;198m'"++++ "
