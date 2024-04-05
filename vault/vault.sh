@@ -5,71 +5,77 @@
 
 VERSION=latest
 
-# Terraform Enterprise should not be running, creates conflict since it has it's own vault
-ps aux | grep -q "replicated" | grep -v grep
-if [ $? -eq 0 ]; then
-  service replicated stop
-  service replicated-ui stop
-  service replicated-operator stop
-  docker stop replicated-premkit
-  docker stop replicated-statsd
-  docker rm -f replicated replicated-ui replicated-operator replicated-premkit replicated-statsd retraced-api retraced-processor retraced-cron retraced-nsqd retraced-postgres
-  docker images | grep "quay\.io/replicated" | awk '{print $3}' | xargs sudo docker rmi -f
-  docker images | grep "registry\.replicated\.com/library/retraced" | awk '{print $3}' | xargs sudo docker rmi -f
-fi
-
 arch=$(lscpu | grep "Architecture" | awk '{print $NF}')
 if [[ $arch == x86_64* ]]; then
-    ARCH="amd64"
+  ARCH="amd64"
 elif  [[ $arch == aarch64 ]]; then
-    ARCH="arm64"
+  ARCH="arm64"
 fi
 echo -e '\e[38;5;198m'"CPU is $ARCH"
 
-# apt-get remove -y replicated replicated-ui replicated-operator
-# apt-get purge -y replicated replicated-ui replicated-operator
-# rm -rf /var/lib/replicated* /etc/replicated* /etc/init/replicated* /etc/init.d/replicated* /etc/default/replicated* /var/log/upstart/replicated* /etc/systemd/system/replicated*
 sudo DEBIAN_FRONTEND=noninteractive apt-get --assume-yes install -qq curl unzip jq < /dev/null > /dev/null
-# only do if vault is not found
-sudo rm -rf /usr/local/bin/vault
-if [ ! -f /usr/local/bin/vault ]; then
-  
-  echo -e '\e[38;5;198m'"++++ "
-  echo -e '\e[38;5;198m'"++++ Vault not installed, installing.."
-  echo -e '\e[38;5;198m'"++++ "
 
+echo -e '\e[38;5;198m'"++++ "
+echo -e '\e[38;5;198m'"++++ Cleanup any Vault if found"
+echo -e '\e[38;5;198m'"++++ "
+sudo systemctl stop vault
+sudo rm -rf /usr/local/bin/vault
+sudo rm -rf /etc/vault
+sudo rm -rf /var/lib/vault
+sudo rm -rf /tmp/vault.zip
+
+if [ -f /vagrant/vault/license.hclic ]; then
+  # https://developer.hashicorp.com/vault/tutorials/enterprise/hashicorp-enterprise-license
+  echo -e '\e[38;5;198m'"++++ "
+  echo -e '\e[38;5;198m'"++++ Found license.hclic Installing Enterprise Edition version: $VERSION"
+  echo -e '\e[38;5;198m'"++++ "
+  export VAULT_LICENSE_PATH=/vagrant/vault/license.hclic
+  export VAULT_LICENSE=$(cat /vagrant/vault/license.hclic)
   if [[ $VERSION == "latest" ]]; then
-    echo "Installing version: $VERSION"
+    LATEST_URL=$(curl -sL https://releases.hashicorp.com/vault/index.json | jq -r '.versions[].builds[].url' | sort -t. -k 1,1n -k 2,2n -k 3,3n -k 4,4n | egrep 'ent' | egrep "linux.*$ARCH" | sort -V | tail -n 1)
+  else
+    LATEST_URL=$(curl -sL https://releases.hashicorp.com/vault/index.json | jq -r '.versions[].builds[].url' | sort -t. -k 1,1n -k 2,2n -k 3,3n -k 4,4n | egrep 'ent' | egrep "linux.*$ARCH" | sort -V | grep $VERSION | tail -1)
+  fi
+else
+  echo -e '\e[38;5;198m'"++++ "
+  echo -e '\e[38;5;198m'"++++ Installing Community Edition version: $VERSION"
+  echo -e '\e[38;5;198m'"++++ "
+  if [[ $VERSION == "latest" ]]; then
     LATEST_URL=$(curl -sL https://releases.hashicorp.com/vault/index.json | jq -r '.versions[].builds[].url' | sort -t. -k 1,1n -k 2,2n -k 3,3n -k 4,4n | egrep -v 'rc|ent|beta' | egrep "linux.*$ARCH" | sort -V | tail -n 1)
   else
-    echo "Installing version: $VERSION"
     LATEST_URL=$(curl -sL https://releases.hashicorp.com/vault/index.json | jq -r '.versions[].builds[].url' | sort -t. -k 1,1n -k 2,2n -k 3,3n -k 4,4n | egrep -v 'rc|ent|beta' | egrep "linux.*$ARCH" | sort -V | grep $VERSION | tail -1)
   fi
-  wget -q $LATEST_URL -O /tmp/vault.zip
+fi
+wget -q $LATEST_URL -O /tmp/vault.zip
 
-  mkdir -p /usr/local/bin
-  (cd /usr/local/bin && unzip /tmp/vault.zip)
-  echo -e '\e[38;5;198m'"++++ "
-  echo -e '\e[38;5;198m'"++++ Installed `/usr/local/bin/vault --version`"
-  echo -e '\e[38;5;198m'"++++ "
+mkdir -p /usr/local/bin
+(cd /usr/local/bin && unzip -o /tmp/vault.zip)
+echo -e '\e[38;5;198m'"++++ "
+echo -e '\e[38;5;198m'"++++ Installed `/usr/local/bin/vault --version`"
+echo -e '\e[38;5;198m'"++++ "
 
-  # create /var/log/nomad.log
-  sudo touch /var/log/nomad.log
+# create /var/log/vault.log
+sudo touch /var/log/vault.log
 
-  # enable command autocompletion
-  vault -autocomplete-install
-  complete -C /usr/local/bin/vault vault
+echo -e '\e[38;5;198m'"++++ "
+echo -e '\e[38;5;198m'"++++ Enable Vault command autocompletion"
+echo -e '\e[38;5;198m'"++++ "
+vault -autocomplete-install
+complete -C /usr/local/bin/vault vault
 
-  # create Vault data directories
-  sudo mkdir /etc/vault
-  sudo mkdir -p /var/lib/vault/data
+# create Vault data directories
+sudo mkdir -p /etc/vault
+sudo mkdir -p /var/lib/vault/data
 
-  # create user named vault
-  sudo useradd --system --home /etc/vault --shell /bin/false vault
-  sudo chown -R vault:vault /etc/vault /var/lib/vault/
+# create user named vault
+sudo useradd --system --home /etc/vault --shell /bin/false vault
+sudo chown -R vault:vault /etc/vault /var/lib/vault/
 
-  # create a Vault service file at /etc/systemd/system/vault.service
-  cat <<EOF | sudo tee /etc/systemd/system/vault.service
+# create a Vault service file at /etc/systemd/system/vault.service
+echo -e '\e[38;5;198m'"++++ "
+echo -e '\e[38;5;198m'"++++ Create Vault Systemd service file"
+echo -e '\e[38;5;198m'"++++ "
+cat <<EOF | sudo tee /etc/systemd/system/vault.service
 [Unit]
 Description="HashiCorp Vault - A tool for managing secrets"
 Documentation=https://www.vaultproject.io/docs/
@@ -104,17 +110,20 @@ LimitNOFILE=65536
 WantedBy=multi-user.target
 EOF
 
-  # create Vault /etc/vault/config.hcl file
-  touch /etc/vault/config.hcl
+echo -e '\e[38;5;198m'"++++ "
+echo -e '\e[38;5;198m'"++++ Create Vault config file /etc/vault/config.hcl"
+echo -e '\e[38;5;198m'"++++ "
+# create Vault /etc/vault/config.hcl file
+touch /etc/vault/config.hcl
 
-  # add basic configuration settings for Vault to /etc/vault/config.hcl file
-  # https://developer.hashicorp.com/vault/tutorials/raft/raft-storage#create-an-ha-cluster
-  cat <<EOF | sudo tee /etc/vault/config.hcl
+# add basic configuration settings for Vault to /etc/vault/config.hcl file
+# https://developer.hashicorp.com/vault/tutorials/raft/raft-storage#create-an-ha-cluster
+cat <<EOF | sudo tee /etc/vault/config.hcl
 ui = true
 listener "tcp" {
-   address         = "0.0.0.0:8200"
-   cluster_address = "0.0.0.0:8201"
-   tls_disable     = true
+  address         = "0.0.0.0:8200"
+  cluster_address = "0.0.0.0:8201"
+  tls_disable     = true
 }
 # https://developer.hashicorp.com/vault/tutorials/raft/raft-storage#create-an-ha-cluster
 # seal "transit" {
@@ -126,8 +135,8 @@ listener "tcp" {
 #   mount_path         = "transit/"
 # }
 storage "raft" {
-   path    = "/var/lib/vault/data"
-   node_id = "hashiqube0"
+  path    = "/var/lib/vault/data"
+  node_id = "hashiqube0"
 }
 # use a file path as storage backend
 # storage "file" {
@@ -155,61 +164,51 @@ disable_mlock        = true
 disable_sealwrap     = true
 disable_printable_check = true
 EOF
+if [ -f /vagrant/vault/license.hclic ]; then
+  echo "license_path = \"/vagrant/vault/license.hclic\"" >> /etc/vault/config.hcl
+fi
 
-  # start and enable vault service to start on system boot
-  sudo systemctl daemon-reload
-  sudo systemctl enable --now vault
+# start and enable vault service to start on system boot
+sudo systemctl daemon-reload
+sudo systemctl enable --now vault
+sleep 20
 
-  # check vault status
-  sudo systemctl status vault
+# check vault status
+echo -e '\e[38;5;198m'"++++ "
+echo -e '\e[38;5;198m'"++++ Check Vault Status"
+echo -e '\e[38;5;198m'"++++ "
+sudo systemctl status vault
 
-  # initialize vault server
-  export VAULT_ADDR=http://127.0.0.1:8200
-  echo "export VAULT_ADDR=http://127.0.0.1:8200" >> ~/.bashrc
+# initialize vault server
+export VAULT_ADDR=http://127.0.0.1:8200
+echo "export VAULT_ADDR=http://127.0.0.1:8200" >> ~/.bashrc
 
-  # start initialization with the default options by running the command below
-  sudo rm -rf /var/lib/vault/data/*
-  sleep 20
-  vault operator init > /etc/vault/init.file
+# start initialization with the default options by running the command below
+echo -e '\e[38;5;198m'"++++ "
+echo -e '\e[38;5;198m'"++++ Initialize Vault"
+echo -e '\e[38;5;198m'"++++ "
+sudo rm -rf /etc/vault/init.file
+vault operator init > /etc/vault/init.file
 
-  echo -e '\e[38;5;198m'"++++ "
-  echo -e '\e[38;5;198m'"++++ Vault http://localhost:8200/ui and enter the following codes displayed below"
-  echo -e '\e[38;5;198m'"++++ "
-  echo -e '\e[38;5;198m'"++++ Auto unseal vault"
-  echo -e '\e[38;5;198m'"++++ "
-  for i in $(cat /etc/vault/init.file | grep Unseal | cut -d " " -f4 | head -n 3); do vault operator unseal $i; done
-  vault status
-  cat /etc/vault/init.file
-  # add vault ENV variables
-  VAULT_TOKEN=$(grep 'Initial Root Token' /etc/vault/init.file | cut -d ':' -f2 | tr -d ' ')
-  grep -q "${VAULT_TOKEN}" /etc/environment
-  if [ $? -eq 1 ]; then
-    echo "VAULT_TOKEN=${VAULT_TOKEN}" >> /etc/environment
-  else
-    sed -i "s/VAULT_TOKEN=.*/VAULT_TOKEN=${VAULT_TOKEN}/g" /etc/environment
-  fi
-  grep -q "VAULT_ADDR=http://127.0.0.1:8200" /etc/environment
-  if [ $? -eq 1 ]; then
-    echo "VAULT_ADDR=http://127.0.0.1:8200" >> /etc/environment
-  else
-    sed -i "s%VAULT_ADDR=.*%VAULT_ADDR=http://127.0.0.1:8200%g" /etc/environment
-  fi
-
+echo -e '\e[38;5;198m'"++++ "
+echo -e '\e[38;5;198m'"++++ Auto unseal vault"
+echo -e '\e[38;5;198m'"++++ "
+for i in $(cat /etc/vault/init.file | grep Unseal | cut -d " " -f4 | head -n 3); do vault operator unseal $i; done
+vault status
+cat /etc/vault/init.file
+# add vault ENV variables
+VAULT_TOKEN=$(grep 'Initial Root Token' /etc/vault/init.file | cut -d ':' -f2 | tr -d ' ')
+grep -q "${VAULT_TOKEN}" /etc/environment
+if [ $? -eq 1 ]; then
+  echo "VAULT_TOKEN=${VAULT_TOKEN}" >> /etc/environment
 else
-
-  grep -q "VAULT_TOKEN=${VAULT_TOKEN}" /etc/environment
-  if [ $? -eq 1 ]; then
-    echo "VAULT_TOKEN=${VAULT_TOKEN}" >> /etc/environment
-  else
-    sed -i "s/VAULT_TOKEN=.*/VAULT_TOKEN=${VAULT_TOKEN}/g" /etc/environment
-  fi
-  grep -q "VAULT_ADDR=http://127.0.0.1:8200" /etc/environment
-  if [ $? -eq 1 ]; then
-    echo "VAULT_ADDR=http://127.0.0.1:8200" >> /etc/environment
-  else
-    sed -i "s%VAULT_ADDR=.*%VAULT_ADDR=http://127.0.0.1:8200%g" /etc/environment
-  fi
-
+  sed -i "s/VAULT_TOKEN=.*/VAULT_TOKEN=${VAULT_TOKEN}/g" /etc/environment
+fi
+grep -q "VAULT_ADDR=http://127.0.0.1:8200" /etc/environment
+if [ $? -eq 1 ]; then
+  echo "VAULT_ADDR=http://127.0.0.1:8200" >> /etc/environment
+else
+  sed -i "s%VAULT_ADDR=.*%VAULT_ADDR=http://127.0.0.1:8200%g" /etc/environment
 fi
 
 echo -e '\e[38;5;198m'"++++ "
@@ -217,11 +216,11 @@ echo -e '\e[38;5;198m'"++++ Vault status"
 echo -e '\e[38;5;198m'"++++ "
 vault status
 echo -e '\e[38;5;198m'"++++ "
-echo -e '\e[38;5;198m'"++++ Auto unseal vault"
+echo -e '\e[38;5;198m'"++++ Cat Vault Credentials"
 echo -e '\e[38;5;198m'"++++ "
 cat /etc/vault/init.file
 echo -e '\e[38;5;198m'"++++ "
-echo -e '\e[38;5;198m'"++++ Access vault"
+echo -e '\e[38;5;198m'"++++ Access Vault"
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Vault Initial Root Token: ${VAULT_TOKEN}"
 echo -e '\e[38;5;198m'"++++ Vault http://localhost:8200/ui and enter the Root Token displayed above"

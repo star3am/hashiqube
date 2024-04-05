@@ -133,8 +133,22 @@ Thanks to the flexibility of the Hashicorp products there is no need to wonder h
 | mac intel | ✓ | ✓ | ✘ |
 | mac apple | ✓ | ✘ | ✘ |
 
+## Supported HashiCorp product Versions
+
+By default Hashiqube installs community editions of Hashicorp products, but you can also test and demo Enterprise versions. You can request a trial license from here https://developer.hashicorp.com/vault/tutorials/enterprise/hashicorp-enterprise-license#request-a-trial-license
+
+When you get the license file, simply copy the license.hclic into the vault or corresponding product folder in the hashiqube directory and `vagrant up --provision`
+
+| Name | Community | Enterprise |
+|------|--------|------------|
+| Vault | ✓ | ✓ |
+| Consul | ✓ | ✓ |
+| Nomad | ✓ | ✓ |
+| Boundary | ✓ | ✓ |
+| Terraform | ✓ | ✘ |
+
 ## Components
-Hashiqube is made up of a number of components and some rely on each other. 
+Hashiqube is made up of a number of components and some rely on each other like building blocks.
 
 For example, you can run components separately as demonstrated below.
 ```bash
@@ -142,6 +156,7 @@ vagrant up --provision-with basetools
 vagrant up --provision-with docker
 vagrant up --provision-with docsify
 vagrant up --provision-with vault
+vagrant up --provision-with consul
 vagrant up --provision-with nomad
 vagrant up --provision-with minikube
 ```
@@ -356,6 +371,7 @@ A Very special mention to HashiQube's contributors, Thank You All for your help,
  - [Charle Van Der Walt](https://linkedin.com/in/charle-van-der-walt-b9ba2628/)
  - [JJ Badenhorst](https://github.com/badj)
  - [Jan Laubscher](https://howdypress.com/)
+ - [Nalini Dayma](https://www.linkedin.com/in/nalinidayma/)
 
 ## Videos
 Videos were made with [asciinema](https://asciinema.org/)
