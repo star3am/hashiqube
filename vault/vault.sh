@@ -219,6 +219,12 @@ echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Cat Vault Credentials"
 echo -e '\e[38;5;198m'"++++ "
 cat /etc/vault/init.file
+if [ -f /vagrant/vault/license.hclic ]; then
+  echo -e '\e[38;5;198m'"++++ "
+  echo -e '\e[38;5;198m'"++++ Vault License Inspect"
+  echo -e '\e[38;5;198m'"++++ "
+  vault license inspect /vagrant/vault/license.hclic
+fi
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Access Vault"
 echo -e '\e[38;5;198m'"++++ "

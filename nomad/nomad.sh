@@ -252,6 +252,12 @@ nomad run --address=http://localhost:4646 traefik.nomad
 nomad plan --address=http://localhost:4646 traefik-whoami.nomad
 nomad run --address=http://localhost:4646 traefik-whoami.nomad
 
+if [ -f /vagrant/nomad/license.hclic ]; then
+  echo -e '\e[38;5;198m'"++++ "
+  echo -e '\e[38;5;198m'"++++ Nomad License Inspect"
+  echo -e '\e[38;5;198m'"++++ "
+  nomad license inspect /vagrant/nomad/license.hclic
+fi
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Access Nomad"
 echo -e '\e[38;5;198m'"++++ "
