@@ -151,6 +151,16 @@ server {
   bootstrap_expect = 1
 }
 
+autopilot {
+  cleanup_dead_servers      = true
+  last_contact_threshold    = "400ms"
+  max_trailing_logs         = 250
+  server_stabilization_time = "30s"
+  enable_redundancy_zones   = false
+  disable_upgrade_migration = false
+  enable_custom_upgrades    = false
+}
+
 client {
   enabled       = true
   # https://github.com/hashicorp/nomad/issues/1282
