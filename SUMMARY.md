@@ -3,6 +3,7 @@
   * [Ansible](ansible/README.md)
   * [Ansible-tower](ansible-tower/README.md)
   * [Apache-airflow](apache-airflow/README.md)
+  * [Argocd](argocd/README.md)
   * [Boundary](boundary/README.md)
   * [Code-server](code-server/README.md)
   * [Consul](consul/README.md)

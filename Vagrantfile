@@ -130,6 +130,7 @@ Vagrant::configure("2") do |config|
         config.vm.network "forwarded_port", guest: 8000, host: 8000 # markdown-quiz-generator
         config.vm.network "forwarded_port", guest: 3001, host: 3001 # uptime-kuma
         config.vm.network "forwarded_port", guest: 6001, host: 6001 # trex
+        config.vm.network "forwarded_port", guest: 18043, host: 18043 # argocd
       end
 
       config.vm.hostname = "#{machine[:name]}"
@@ -354,6 +355,10 @@ Vagrant::configure("2") do |config|
       # trex
       # vagrant up --provision-with basetools,docker,trex to only run this on vagrant up
       config.vm.provision "trex", run: "never", type: "shell", preserve_order: false, privileged: true, path: "trex/trex.sh"
+
+      # argocd
+      # vagrant up --provision-with basetools,docker,minikube,argocd to only run this on vagrant up
+      config.vm.provision "argocd", run: "never", type: "shell", preserve_order: false, privileged: true, path: "argocd/argocd.sh"
 
       # vagrant up --provision-with welcome to only run this on vagrant up
       config.vm.provision "welcome", preserve_order: true, type: "shell", privileged: true, inline: <<-SHELL
