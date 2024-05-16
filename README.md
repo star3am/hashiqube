@@ -108,6 +108,7 @@ Hashiqube can be visualized with the diagrams below.
 * [Visual-Studio-Code](visual-studio-code/#visual-studio-code) - Visual Studio Code is a code editor redefined and optimized for building and debugging modern web and cloud applications `vagrant up --provision-with basetools,docker,vscode-server`
 * [Portainer](portainer/#portainer) - A lightweight service delivery platform for containerized applications that can be used to manage Docker, Swarm, Kubernetes and ACI environments. It is designed to be as simple to deploy as it is to use `vagrant up --provision-with basetools,docker,docsify,portainer`
 * [Gitlab](gitlab/#gitlab) - GitLab is a complete DevOps platform, delivered as a single application `vagrant up --provision-with basetools,docker,docsify,minikube,gitlab`
+* [Argocd](argocd/#argocd) - Argo CD is a declarative, GitOps continuous delivery tool for Kubernetes. `vagrant up --provision-with basetools,docker,docsify,minikube,argocd`
 
 Once the stack is up you will have a large number of services running and available on `localhost` <br />
 For Documentation please open http://localhost:3333 in your browser
