@@ -1,0 +1,5 @@
+FROM ubuntu:jammy
+
+COPY ./ /opt/build
+
+RUN /opt/build/docker.sh
