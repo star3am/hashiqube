@@ -176,11 +176,372 @@ Now check the assets with aws local inside vagrant
 2024-06-25 17:42:18 my-bucket
 ```
 
+## Further learning 
+
+Thanks to the folks at Localstack for publishing some more examples for us to use and learn Terraform. You can go to this repository on Github, https://github.com/localstack-samples/localstack-terraform-samples/tree/master 
+
+We can then clone it down locally into our `localstack` folder
+
+`git clone git@github.com:localstack-samples/localstack-terraform-samples.git`
+
+Now let's go into this directory, 
+
+`cd localstack-terraform-samples`
+
+There are many examples you can browse, but for now, let's just cd into `demo-deploy`
+
+`cd demo-deploy`
+
+Let's copy our provider.tf to this directory with 
+
+`cp ../../provider.tf .`
+
+Now as always let's do Terraform Init
+
+`terraform init`
+```
+Initializing the backend...
+Initializing modules...
+- apigateway in modules/apigateway
+- cognito_authorizer in modules/cognito
+- dynamo in modules/dynamodb
+- lambda_authorizer in modules/lambda
+- s3 in modules/s3
+- sqs in modules/sqs
+
+Initializing provider plugins...
+- Finding latest version of hashicorp/aws...
+- Installing hashicorp/aws v5.55.0...
+- Installed hashicorp/aws v5.55.0 (signed by HashiCorp)
+
+Terraform has created a lock file .terraform.lock.hcl to record the provider
+selections it made above. Include this file in your version control repository
+so that Terraform can guarantee to make the same selections by default when
+you run "terraform init" in the future.
+
+Terraform has been successfully initialized!
+
+You may now begin working with Terraform. Try running "terraform plan" to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+
+If you ever set or change modules or backend configuration for Terraform,
+rerun this command to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to do so if necessary.
+```
+
+Now we can do Terraform Plan
+
+`terraform plan`
+```
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following
+symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # module.apigateway[0].aws_api_gateway_integration.apigw-integration-api will be created
+  + resource "aws_api_gateway_integration" "apigw-integration-api" {
+      + cache_namespace         = (known after apply)
+      + connection_type         = "INTERNET"
+      + http_method             = "ANY"
+      + id                      = (known after apply)
+      + integration_http_method = "ANY"
+      + passthrough_behavior    = "WHEN_NO_MATCH"
+      + request_parameters      = {
+          + "integration.request.path.proxy" = "method.request.path.proxy"
+        }
+      + resource_id             = (known after apply)
+      + rest_api_id             = (known after apply)
+      + timeout_milliseconds    = 29000
+      + type                    = "HTTP_PROXY"
+      + uri                     = "https://httpbin.org/anything/{proxy}"
+    }
+
+  # module.apigateway[0].aws_api_gateway_integration.apigw-integration-api-proxy will be created
+  + resource "aws_api_gateway_integration" "apigw-integration-api-proxy" {
+      + cache_namespace         = (known after apply)
+      + connection_type         = "INTERNET"
+      + http_method             = "ANY"
+      + id                      = (known after apply)
+      + integration_http_method = "ANY"
+      + passthrough_behavior    = "WHEN_NO_MATCH"
+      + request_parameters      = {
+          + "integration.request.path.proxy" = "method.request.path.proxy"
+        }
+      + resource_id             = (known after apply)
+      + rest_api_id             = (known after apply)
+      + timeout_milliseconds    = 29000
+      + type                    = "HTTP_PROXY"
+      + uri                     = "https://httpbin.org/anything/{proxy}"
+    }
+
+  # module.apigateway[0].aws_api_gateway_integration.apigw-integration-proxy will be created
+  + resource "aws_api_gateway_integration" "apigw-integration-proxy" {
+      + cache_namespace         = (known after apply)
+      + connection_type         = "INTERNET"
+      + http_method             = "ANY"
+      + id                      = (known after apply)
+      + integration_http_method = "ANY"
+      + passthrough_behavior    = "WHEN_NO_MATCH"
+      + request_parameters      = {
+          + "integration.request.path.proxy" = "method.request.path.proxy"
+        }
+      + resource_id             = (known after apply)
+      + rest_api_id             = (known after apply)
+      + timeout_milliseconds    = 29000
+      + type                    = "HTTP_PROXY"
+      + uri                     = "https://httpbin.org/anything/{proxy}"
+    }
+
+  # module.apigateway[0].aws_api_gateway_method.apigw-method_api will be created
+  + resource "aws_api_gateway_method" "apigw-method_api" {
+      + api_key_required   = false
+      + authorization      = "NONE"
+      + http_method        = "ANY"
+      + id                 = (known after apply)
+      + request_parameters = {
+          + "method.request.path.proxy" = true
+        }
+      + resource_id        = (known after apply)
+      + rest_api_id        = (known after apply)
+    }
+
+  # module.apigateway[0].aws_api_gateway_method.apigw-method_api_proxy will be created
+  + resource "aws_api_gateway_method" "apigw-method_api_proxy" {
+      + api_key_required   = false
+      + authorization      = "NONE"
+      + http_method        = "ANY"
+      + id                 = (known after apply)
+      + request_parameters = {
+          + "method.request.path.proxy" = true
+        }
+      + resource_id        = (known after apply)
+      + rest_api_id        = (known after apply)
+    }
+
+  # module.apigateway[0].aws_api_gateway_method.apigw-method_proxy will be created
+  + resource "aws_api_gateway_method" "apigw-method_proxy" {
+      + api_key_required   = false
+      + authorization      = "NONE"
+      + http_method        = "ANY"
+      + id                 = (known after apply)
+      + request_parameters = {
+          + "method.request.path.proxy" = true
+        }
+      + resource_id        = (known after apply)
+      + rest_api_id        = (known after apply)
+    }
+
+  # module.apigateway[0].aws_api_gateway_resource.apigw-resource_api_proxy will be created
+  + resource "aws_api_gateway_resource" "apigw-resource_api_proxy" {
+      + id          = (known after apply)
+      + parent_id   = (known after apply)
+      + path        = (known after apply)
+      + path_part   = "{proxy+}"
+      + rest_api_id = (known after apply)
+    }
+
+  # module.apigateway[0].aws_api_gateway_resource.apigw-resource_proxy will be created
+  + resource "aws_api_gateway_resource" "apigw-resource_proxy" {
+      + id          = (known after apply)
+      + parent_id   = (known after apply)
+      + path        = (known after apply)
+      + path_part   = "{proxy+}"
+      + rest_api_id = (known after apply)
+    }
+
+  # module.apigateway[0].aws_api_gateway_resource.apigw_resource_api will be created
+  + resource "aws_api_gateway_resource" "apigw_resource_api" {
+      + id          = (known after apply)
+      + parent_id   = (known after apply)
+      + path        = (known after apply)
+      + path_part   = "api"
+      + rest_api_id = (known after apply)
+    }
+
+  # module.apigateway[0].aws_api_gateway_rest_api.apigw will be created
+  + resource "aws_api_gateway_rest_api" "apigw" {
+      + api_key_source               = (known after apply)
+      + arn                          = (known after apply)
+      + binary_media_types           = (known after apply)
+      + created_date                 = (known after apply)
+      + description                  = (known after apply)
+      + disable_execute_api_endpoint = (known after apply)
+      + execution_arn                = (known after apply)
+      + id                           = (known after apply)
+      + minimum_compression_size     = (known after apply)
+      + name                         = "apigwv1-demo"
+      + policy                       = (known after apply)
+      + root_resource_id             = (known after apply)
+      + tags_all                     = {
+          + "Environment" = "Local"
+          + "Service"     = "LocalStack"
+        }
+    }
+
+Plan: 10 to add, 0 to change, 0 to destroy.
+```
+
+And finally, we can do Terraform Apply
+
+`terraform apply`
+```
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following
+symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # module.apigateway[0].aws_api_gateway_integration.apigw-integration-api will be created
+  + resource "aws_api_gateway_integration" "apigw-integration-api" {
+      + cache_namespace         = (known after apply)
+      + connection_type         = "INTERNET"
+      + http_method             = "ANY"
+      + id                      = (known after apply)
+      + integration_http_method = "ANY"
+      + passthrough_behavior    = "WHEN_NO_MATCH"
+      + request_parameters      = {
+          + "integration.request.path.proxy" = "method.request.path.proxy"
+        }
+      + resource_id             = (known after apply)
+      + rest_api_id             = (known after apply)
+      + timeout_milliseconds    = 29000
+      + type                    = "HTTP_PROXY"
+      + uri                     = "https://httpbin.org/anything/{proxy}"
+    }
+
+  # module.apigateway[0].aws_api_gateway_integration.apigw-integration-api-proxy will be created
+  + resource "aws_api_gateway_integration" "apigw-integration-api-proxy" {
+      + cache_namespace         = (known after apply)
+      + connection_type         = "INTERNET"
+      + http_method             = "ANY"
+      + id                      = (known after apply)
+      + integration_http_method = "ANY"
+      + passthrough_behavior    = "WHEN_NO_MATCH"
+      + request_parameters      = {
+          + "integration.request.path.proxy" = "method.request.path.proxy"
+        }
+      + resource_id             = (known after apply)
+      + rest_api_id             = (known after apply)
+      + timeout_milliseconds    = 29000
+      + type                    = "HTTP_PROXY"
+      + uri                     = "https://httpbin.org/anything/{proxy}"
+    }
+
+  # module.apigateway[0].aws_api_gateway_integration.apigw-integration-proxy will be created
+  + resource "aws_api_gateway_integration" "apigw-integration-proxy" {
+      + cache_namespace         = (known after apply)
+      + connection_type         = "INTERNET"
+      + http_method             = "ANY"
+      + id                      = (known after apply)
+      + integration_http_method = "ANY"
+      + passthrough_behavior    = "WHEN_NO_MATCH"
+      + request_parameters      = {
+          + "integration.request.path.proxy" = "method.request.path.proxy"
+        }
+      + resource_id             = (known after apply)
+      + rest_api_id             = (known after apply)
+      + timeout_milliseconds    = 29000
+      + type                    = "HTTP_PROXY"
+      + uri                     = "https://httpbin.org/anything/{proxy}"
+    }
+
+  # module.apigateway[0].aws_api_gateway_method.apigw-method_api will be created
+  + resource "aws_api_gateway_method" "apigw-method_api" {
+      + api_key_required   = false
+      + authorization      = "NONE"
+      + http_method        = "ANY"
+      + id                 = (known after apply)
+      + request_parameters = {
+          + "method.request.path.proxy" = true
+        }
+      + resource_id        = (known after apply)
+      + rest_api_id        = (known after apply)
+    }
+
+  # module.apigateway[0].aws_api_gateway_method.apigw-method_api_proxy will be created
+  + resource "aws_api_gateway_method" "apigw-method_api_proxy" {
+      + api_key_required   = false
+      + authorization      = "NONE"
+      + http_method        = "ANY"
+      + id                 = (known after apply)
+      + request_parameters = {
+          + "method.request.path.proxy" = true
+        }
+      + resource_id        = (known after apply)
+      + rest_api_id        = (known after apply)
+    }
+
+  # module.apigateway[0].aws_api_gateway_method.apigw-method_proxy will be created
+  + resource "aws_api_gateway_method" "apigw-method_proxy" {
+      + api_key_required   = false
+      + authorization      = "NONE"
+      + http_method        = "ANY"
+      + id                 = (known after apply)
+      + request_parameters = {
+          + "method.request.path.proxy" = true
+        }
+      + resource_id        = (known after apply)
+      + rest_api_id        = (known after apply)
+    }
+
+  # module.apigateway[0].aws_api_gateway_resource.apigw-resource_api_proxy will be created
+  + resource "aws_api_gateway_resource" "apigw-resource_api_proxy" {
+      + id          = (known after apply)
+      + parent_id   = (known after apply)
+      + path        = (known after apply)
+      + path_part   = "{proxy+}"
+      + rest_api_id = (known after apply)
+    }
+
+  # module.apigateway[0].aws_api_gateway_resource.apigw-resource_proxy will be created
+  + resource "aws_api_gateway_resource" "apigw-resource_proxy" {
+      + id          = (known after apply)
+      + parent_id   = (known after apply)
+      + path        = (known after apply)
+      + path_part   = "{proxy+}"
+      + rest_api_id = (known after apply)
+    }
+
+  # module.apigateway[0].aws_api_gateway_resource.apigw_resource_api will be created
+  + resource "aws_api_gateway_resource" "apigw_resource_api" {
+      + id          = (known after apply)
+      + parent_id   = (known after apply)
+      + path        = (known after apply)
+      + path_part   = "api"
+      + rest_api_id = (known after apply)
+    }
+
+  # module.apigateway[0].aws_api_gateway_rest_api.apigw will be created
+  + resource "aws_api_gateway_rest_api" "apigw" {
+      + api_key_source               = (known after apply)
+      + arn                          = (known after apply)
+      + binary_media_types           = (known after apply)
+      + created_date                 = (known after apply)
+      + description                  = (known after apply)
+      + disable_execute_api_endpoint = (known after apply)
+      + execution_arn                = (known after apply)
+      + id                           = (known after apply)
+      + minimum_compression_size     = (known after apply)
+      + name                         = "apigwv1-demo"
+      + policy                       = (known after apply)
+      + root_resource_id             = (known after apply)
+      + tags_all                     = {
+          + "Environment" = "Local"
+          + "Service"     = "LocalStack"
+        }
+    }
+
+Plan: 10 to add, 0 to change, 0 to destroy.
+```
+
 [google ads](../googleads.html ':include :type=iframe width=100% height=300px')
 
 ## Links
 
 - https://localstack.cloud/
+- https://github.com/localstack-samples/localstack-terraform-samples
 - https://github.com/localstack/localstack-pro-samples/blob/master/terraform-resources/test.tf
 - https://www.terraform.io/docs/providers/aws/guides/custom-service-endpoints.html
 - https://www.terraform.io
