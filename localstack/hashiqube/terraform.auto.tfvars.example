@@ -1,0 +1,6 @@
+ssh_public_key       = "ssh-rsa AAAA... PASTE YOUR SSH PUBLIC KEY IN HERE"
+ssh_private_key      = <<EOF
+-----BEGIN OPENSSH PRIVATE KEY-----
+PASTE YOUR SSH PRTIVATE KEY IN HERE
+-----END OPENSSH PRIVATE KEY-----
+EOF
