@@ -6,31 +6,68 @@ In this HashiQube DevOps lab you will get hands on experience with Localstack an
 
 LocalStack provides an easy-to-use test/mocking framework for developing Cloud applications. It spins up a testing environment on your local machine that provides the same functionality and APIs as the real AWS cloud environment.
 
-## Terraform and Localstack
-https://github.com/localstack/localstack-pro-samples/blob/master/terraform-resources/test.tf<br />
-https://www.terraform.io/docs/providers/aws/guides/custom-service-endpoints.html<br />
-https://www.terraform.io<br />
-https://localstack.cloud<br />
-https://github.com/localstack/localstack<br />
-https://github.com/localstack/awscli-local
-
-## Instructions
-* Install localstack on your laptop, I just installed it in Vagrant
-* Install `awslocal` utility
-
 ## Localstack
 
-`vagrant up --provision-with basetools,docker,docsify,localstack`
+To get Localstack installed and running in Hashiqube, you can use the following command
 
-## Localstack usage
+`vagrant up --provision-with basetools,localstack`
 
-You should be in the localstack directory
+## Localstack Web Interface
+
+After you ran this provisioner above you will see that it also ran some Terraform for you, we will shortly access Hashiqube and run Terraform again, but before we do, let's create a login at https://www.localstack.cloud/
+
+So head over to https://www.localstack.cloud/ and Register yourself a user or click here https://app.localstack.cloud/sign-up
+
+I Registered with SSO using my github Credentials. 
+
+Once you have logged in you will see the Localstack Dashboard like below.
+
+![Localstack Dashboard](images/localstack-dashboard.png?raw=true "Localstack Dashboard")
+
+## Localstack Instances 
+
+If you scroll down a bit, you will see in the left hand menu, your running instances. 
+
+![Localstack Instances](images/localstack-dashboard.png?raw=true "Localstack Instances")
+
+If you click on S3 you will see that we have just created a bucket with our Terraform Code. 
+
+![Localstack S3](images/localstack-instances-click-on-s3.png?raw=true "Localstack S3")
+
+![Localstack S3](images/localstack-instances-my-bucket.png?raw=true "Localstack S3")
+
+## Run Terraform
+
+Go ahead and Install Terraform on your Laptop
+
+https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli 
+
+Let's make sure Terraform is installed by typing in our terminal `terraform -version` You should see output similar to mine below.
+
+`terraform -version`
+```
+Terraform v1.5.7
+on darwin_arm64
++ provider registry.terraform.io/hashicorp/aws v5.55.0
++ provider registry.terraform.io/hashicorp/null v3.2.2
++ provider registry.terraform.io/hashicorp/random v3.6.2
+
+Your version of Terraform is out of date! The latest version
+is 1.8.5. You can update by downloading from https://www.terraform.io/downloads.html
+```
+
+Now let's make sure we are in the localstack directory, by doing `cd localstack`
+
+After I did that, I can check with the command `pwd`
+
 `pwd`
 ```
-/Users/user/workspace/vagrant/localstack
+/Users/riaan/workspace/personal/hashiqube/localstack
 ```
 
 ### terraform init
+
+Now we can run `terraform init` 
 
 ```log
 Initializing the backend...
@@ -54,6 +91,8 @@ commands will detect it and remind you to do so if necessary.
 ```
 
 ### terraform plan
+
+Now we can run `terraform plan` 
 
 ```log
 Refreshing Terraform state in-memory prior to plan...
@@ -93,6 +132,8 @@ can't guarantee that exactly these actions will be performed if
 
 ### terraform apply
 
+Now we can run `terraform apply` 
+
 ```log
 An execution plan has been generated and is shown below.
 Resource actions are indicated with the following symbols:
@@ -127,10 +168,12 @@ aws_s3_bucket.localstack-s3-bucket: Creating...
 aws_s3_bucket.localstack-s3-bucket: Creation complete after 0s [id=localstack-s3-bucket]
 Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
 ```
+
 Now check the assets with aws local inside vagrant
-`awslocal s3 ls`
+
+`vagrant ssh -c "awslocal s3 ls"`
 ```
-2006-02-04 03:45:09 localstack-s3-bucket
+2024-06-25 17:42:18 my-bucket
 ```
 
 [google ads](../googleads.html ':include :type=iframe width=100% height=300px')
@@ -138,6 +181,12 @@ Now check the assets with aws local inside vagrant
 ## Links
 
 - https://localstack.cloud/
+- https://github.com/localstack/localstack-pro-samples/blob/master/terraform-resources/test.tf
+- https://www.terraform.io/docs/providers/aws/guides/custom-service-endpoints.html
+- https://www.terraform.io
+- https://localstack.cloud
+- https://github.com/localstack/localstack
+= https://github.com/localstack/awscli-local
 
 ## Localstack Terraform Examples
 
