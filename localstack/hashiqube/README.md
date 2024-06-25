@@ -34,11 +34,15 @@ You should already have Terraform installed, if you don't see this link: https:/
 
 Now you can run: 
 
-- terraform init
-- terraform plan
-- terraform apply
+- `terraform init`
+- `terraform plan`
+- `terraform apply`
 
 You will see HashiQube launching and it will stream the User Data debug output, 
+
+## IMPORTANT 
+
+Don't forget to clean up and run `terraform destroy` after you are done to avoid Cloud costs!
 
 For further reading see: 
 
