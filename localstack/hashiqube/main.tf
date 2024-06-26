@@ -28,15 +28,15 @@ module "hashiqube" {
   source  = "star3am/hashiqube/hashicorp//modules/aws-hashiqube"
   version = "1.1.6"
 
-  deploy_to_aws              = true
-  aws_instance_type          = "t2.large"
-  use_packer_image           = false
-  deploy_to_azure            = false
-  deploy_to_gcp              = false
-  debug_user_data            = true
-  ssh_private_key            = var.ssh_private_key
-  ssh_public_key             = var.ssh_public_key
-  docker_version             = "5:24.0.8-1~ubuntu.22.04~jammy"
-  whitelist_cidrs            = ["${data.external.myipaddress.result.ip}/32"]
-  vagrant_provisioners       = "basetools,docker,minikube,ansible-tower"
+  deploy_to_aws        = true
+  aws_instance_type    = "t2.large"
+  use_packer_image     = false
+  deploy_to_azure      = false
+  deploy_to_gcp        = false
+  debug_user_data      = true
+  ssh_private_key      = var.ssh_private_key
+  ssh_public_key       = var.ssh_public_key
+  docker_version       = "5:24.0.8-1~ubuntu.22.04~jammy"
+  whitelist_cidrs      = ["${data.external.myipaddress.result.ip}/32"]
+  vagrant_provisioners = "basetools,docker,minikube,ansible-tower"
 }
