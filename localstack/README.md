@@ -536,6 +536,16 @@ Terraform will perform the following actions:
 Plan: 10 to add, 0 to change, 0 to destroy.
 ```
 
+## Provision HashiQube on AWS, GCP or Azure
+
+HashiQube is a DevOps lab that runs all the HashiCorp products and some popular Open Source Integrations. 
+
+HashiQube can also help us lear Terraform! 
+
+So let's head over to HashiQube and follow the rest of the tutorial. 
+
+- [HashiQube Cloud Tutorial](/localstack/hashiqube/README)
+
 [google ads](../googleads.html ':include :type=iframe width=100% height=300px')
 
 ## Links
