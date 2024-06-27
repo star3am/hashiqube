@@ -28,7 +28,7 @@ Once you have logged in you will see the Localstack Dashboard like below.
 
 If you scroll down a bit, you will see in the left hand menu, your running instances. 
 
-![Localstack Instances](images/localstack-dashboard.png?raw=true "Localstack Instances")
+![Localstack Instances](images/localstack-instances.png?raw=true "Localstack Instances")
 
 If you click on S3 you will see that we have just created a bucket with our Terraform Code. 
 
