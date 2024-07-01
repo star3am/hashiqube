@@ -182,6 +182,16 @@ Vagrant::configure("2") do |config|
         docker.env             = { "PROVIDER": "docker", "NAME": "hashiqube" }
       end
 
+      config.vm.provider "podman" do |podman, override|
+        override.vm.box        = nil
+        podman.build_dir       = "."
+        podman.remains_running = true
+        podman.has_ssh         = true
+        podman.privileged      = true
+        podman.create_args     = ['-v', '/sys/fs/cgroup:/sys/fs/cgroup:rw', '--cgroupns=host', '--tmpfs=/tmp:exec,dev', '--tmpfs=/var/lib/docker:mode=0777,dev,size=15g,suid,exec', '--tmpfs=/run', '--tmpfs=/run/lock'] # '--memory=10g', '--memory-swap=14g', '--oom-kill-disable'
+        podman.env             = { "PROVIDER": "podman", "NAME": "hashiqube" }
+      end
+
       # mount the shared folder inside the VM
       unless machine[:synced_folders].nil?
         machine[:synced_folders].each do |folder|
