@@ -185,40 +185,41 @@ function minikube-install() {
   echo -e '\e[38;5;198m'"++++ "
   sudo --preserve-env=PATH -u vagrant minikube tunnel > /dev/null 2>&1 &
 
-  # https://kubernetes.io/docs/tutorials/hello-minikube/
-  echo -e '\e[38;5;198m'"++++ "
-  echo -e '\e[38;5;198m'"++++ Deploy hello-minikube application"
-  echo -e '\e[38;5;198m'"++++ Create a sample deployment and expose it on port 3000:"
-  echo -e '\e[38;5;198m'"++++ kubectl create deployment hello-minikube --image=$HELLO_MINIKUBE_IMAGE"
-  echo -e '\e[38;5;198m'"++++ kubectl expose deployment hello-minikube --type=NodePort --port=3000"
-  echo -e '\e[38;5;198m'"++++ "
-  sudo --preserve-env=PATH -u vagrant kubectl create deployment hello-minikube --image=$HELLO_MINIKUBE_IMAGE
-  sudo --preserve-env=PATH -u vagrant kubectl expose deployment hello-minikube --type=NodePort --port=3000
-  echo -e '\e[38;5;198m'"++++ "
-  echo -e '\e[38;5;198m'"++++ It may take a moment, but your deployment will soon show up when you run:"
-  echo -e '\e[38;5;198m'"++++ kubectl get services hello-minikube"
-  echo -e '\e[38;5;198m'"++++ "
-  sleep 15;
-  sudo --preserve-env=PATH -u vagrant kubectl get services hello-minikube
+  # Disable hello-minikube workload, has trouble starting up
+  # # https://kubernetes.io/docs/tutorials/hello-minikube/
+  # echo -e '\e[38;5;198m'"++++ "
+  # echo -e '\e[38;5;198m'"++++ Deploy hello-minikube application"
+  # echo -e '\e[38;5;198m'"++++ Create a sample deployment and expose it on port 3000:"
+  # echo -e '\e[38;5;198m'"++++ kubectl create deployment hello-minikube --image=$HELLO_MINIKUBE_IMAGE"
+  # echo -e '\e[38;5;198m'"++++ kubectl expose deployment hello-minikube --type=NodePort --port=3000"
+  # echo -e '\e[38;5;198m'"++++ "
+  # sudo --preserve-env=PATH -u vagrant kubectl create deployment hello-minikube --image=$HELLO_MINIKUBE_IMAGE
+  # sudo --preserve-env=PATH -u vagrant kubectl expose deployment hello-minikube --type=NodePort --port=3000
+  # echo -e '\e[38;5;198m'"++++ "
+  # echo -e '\e[38;5;198m'"++++ It may take a moment, but your deployment will soon show up when you run:"
+  # echo -e '\e[38;5;198m'"++++ kubectl get services hello-minikube"
+  # echo -e '\e[38;5;198m'"++++ "
+  # sleep 15;
+  # sudo --preserve-env=PATH -u vagrant kubectl get services hello-minikube
   
-  echo -e '\e[38;5;198m'"++++ "
-  echo -e '\e[38;5;198m'"++++ The easiest way to access this service is to let kubectl to forward the port:"
-  echo -e '\e[38;5;198m'"++++ kubectl port-forward service/hello-minikube 18888:3000"
-  echo -e '\e[38;5;198m'"++++ "
-  sleep 25;
+  # echo -e '\e[38;5;198m'"++++ "
+  # echo -e '\e[38;5;198m'"++++ The easiest way to access this service is to let kubectl to forward the port:"
+  # echo -e '\e[38;5;198m'"++++ kubectl port-forward service/hello-minikube 18888:3000"
+  # echo -e '\e[38;5;198m'"++++ "
+  # sleep 25;
 
-  attempts=0
-  max_attempts=15
-  while ! ( sudo netstat -nlp | grep 18888 ) && (( $attempts < $max_attempts )); do
-    attempts=$((attempts+1))
-    sleep 10;
-    echo -e '\e[38;5;198m'"++++ "
-    echo -e '\e[38;5;198m'"++++ kubectl port-forward -n default service/hello-minikube 18888:3000 --address=\"0.0.0.0\", (${attempts}/${max_attempts}) sleep 10s"
-    echo -e '\e[38;5;198m'"++++ "
-    sudo --preserve-env=PATH -u vagrant kubectl port-forward -n default service/hello-minikube 18888:3000 --address="0.0.0.0" > /dev/null 2>&1 &
-  done
+  # attempts=0
+  # max_attempts=15
+  # while ! ( sudo netstat -nlp | grep 18888 ) && (( $attempts < $max_attempts )); do
+  #   attempts=$((attempts+1))
+  #   sleep 10;
+  #   echo -e '\e[38;5;198m'"++++ "
+  #   echo -e '\e[38;5;198m'"++++ kubectl port-forward -n default service/hello-minikube 18888:3000 --address=\"0.0.0.0\", (${attempts}/${max_attempts}) sleep 10s"
+  #   echo -e '\e[38;5;198m'"++++ "
+  #   sudo --preserve-env=PATH -u vagrant kubectl port-forward -n default service/hello-minikube 18888:3000 --address="0.0.0.0" > /dev/null 2>&1 &
+  # done
+
   echo -e '\e[38;5;198m'"++++ "
-  echo -e '\e[38;5;198m'"++++ Tada! Your application is now available at http://localhost:18888/"
   echo -e '\e[38;5;198m'"++++ Browse the catalog of easily installed Kubernetes services:"
   echo -e '\e[38;5;198m'"++++ minikube addons list"
   echo -e '\e[38;5;198m'"++++ "
@@ -307,7 +308,6 @@ function minikube-install() {
   echo -e '\e[38;5;198m'"++++ Minikube Documentation: http://localhost:3333/#/minikube/README"
   echo -e '\e[38;5;198m'"++++ Helm Dashboard: http://localhost:11888"
   echo -e '\e[38;5;198m'"++++ Helm Dashboard Documentation: http://localhost:3333/#/minikube/README?id=helm-dashboard-by-komodor"
-  echo -e '\e[38;5;198m'"++++ Hello Minikube application: http://localhost:18888"
   echo -e '\e[38;5;198m'"++++ Traefik Dashboard: http://localhost:18181/dashboard/"
   echo -e '\e[38;5;198m'"++++ Traefik Loadbalancer: http://localhost:18080"
   echo -e '\e[38;5;198m'"++++ Traefik Documentation: http://localhost:3333/#/minikube/README?id=traefik-on-minikube"
