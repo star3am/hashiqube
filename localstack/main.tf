@@ -67,6 +67,12 @@ resource "null_resource" "debug" {
   }
 }
 
+resource "null_resource" "random_pet" {
+  triggers = {
+    random_pet = random_pet.random.id
+  }
+}
+
 resource "random_string" "random" {
   length           = 16
   special          = true
@@ -75,6 +81,8 @@ resource "random_string" "random" {
   min_special      = 2
   min_upper        = 3
 }
+
+resource "random_pet" "random" {}
 
 resource "aws_s3_bucket" "my-bucket" {
   bucket = "my-bucket"
