@@ -26,8 +26,7 @@ provider "aws" {}
 
 module "hashiqube" {
   source  = "star3am/hashiqube/hashicorp//modules/aws-hashiqube"
-  version = "1.1.6"
-  # source  = "github.com/star3am/terraform-hashicorp-hashiqube//modules/aws-hashiqube?ref=feature/raa"
+  version = "1.1.7"
 
   deploy_to_aws        = true
   aws_instance_type    = "t2.large"
