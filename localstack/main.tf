@@ -82,7 +82,9 @@ resource "random_string" "random" {
   min_upper        = 3
 }
 
-resource "random_pet" "random" {}
+resource "random_pet" "random" {
+  length = 1
+}
 
 resource "aws_s3_bucket" "my-bucket" {
   bucket = "my-bucket"
