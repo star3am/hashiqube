@@ -9,7 +9,6 @@ services:
     - /var/lib/docker:mode=0777,dev,size=15g,suid,exec
     - /tmp:exec,dev
     - /run
-    - /run/lock
     ports:
       - "3000:3000" # grafana
       - "9090:9090" # prometheus
