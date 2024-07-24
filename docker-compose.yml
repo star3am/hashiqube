@@ -7,7 +7,7 @@ services:
     cgroup: host
     tmpfs:
     - /var/lib/docker:mode=0777,dev,size=15g,suid,exec
-    - /tmp:exec,dev
+    # - /tmp:exec,dev
     - /run
     ports:
       - "3000:3000" # grafana
