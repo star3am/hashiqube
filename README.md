@@ -36,13 +36,15 @@ Please connect with me on [LinkedIn (Riaan Nolan)](https://www.linkedin.com/in/r
 ## Docker Compose
 Docker compose is also supported! To bring up Hashiqube with Docker Compose do the following 
 
+* Docker - Download Docker from the [Docker desktop installer](https://www.docker.com/products/docker-desktop) and install
 * Using `git` - clone this repo `git clone https://github.com/star3am/hashiqube.git` - [What is Git?](git/#git)
-* Inside the local repo folder, do
-`docker-compose up -d` This will bring up Hashiqube
-`docker compose exec hashiqube /bin/bash` This will drop you into Hashiqube as root, now you can bring up the individual services, start with Basetools
-`bash hashiqube/basetools.sh` This will install a bunch of dependencies
-`bash docker/docker.sh` This will install the Docker Daemon inside Hashiqube
-`bash vault/vault.sh` This will bring up HashiCorp Vault
+* Inside the local repo folder, do `docker-compose up -d` This will bring up Hashiqube
+
+Now run the following commands:
+`docker compose exec hashiqube /bin/bash` This will drop you into Hashiqube as root, now you can bring up the individual services, start with Basetools <br />
+`bash hashiqube/basetools.sh` This will install a bunch of dependencies<br />
+`bash docker/docker.sh` This will install the Docker Daemon inside <br />Hashiqube
+`bash vault/vault.sh` This will bring up HashiCorp Vault<br />
 
 And so on, you get the idea..
 

@@ -19,15 +19,18 @@ function minikube-install() {
   echo -e '\e[38;5;198m'"++++ CPU is $ARCH"
   echo -e '\e[38;5;198m'"++++ "
   
+  echo -e '\e[38;5;198m'"++++ "
+  echo -e '\e[38;5;198m'"++++ Installing Minikube"
+  echo -e '\e[38;5;198m'"++++ "
   if [ -f /usr/local/bin/minikube ]; then
     echo -e '\e[38;5;198m'"++++ "
     echo -e '\e[38;5;198m'"++++ Minikube found at /usr/local/bin/minikube"
     echo -e '\e[38;5;198m'"++++ "
   else
-    curl -sLo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-$ARCH
-    sudo chmod +x minikube
+    wget -q https://storage.googleapis.com/minikube/releases/latest/minikube-linux-$ARCH -O /tmp/minikube
+    sudo chmod +x /tmp/minikube
     sudo mkdir -p /usr/local/bin/
-    sudo install minikube /usr/local/bin/
+    sudo install /tmp/minikube /usr/local/bin/
   fi
 
   echo -e '\e[38;5;198m'"++++ "
