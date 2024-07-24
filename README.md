@@ -33,6 +33,26 @@ Please connect with me on [LinkedIn (Riaan Nolan)](https://www.linkedin.com/in/r
 * Inside the local repo folder, do `vagrant up --provision` - This will set up, Vault, Nomad, Consul, Terraform, Localstack and Docker
 * Documentation locally available at http://localhost:3333
 
+## Docker Compose
+Docker compose is also supported! To bring up Hashiqube with Docker Compose do the following 
+
+* Using `git` - clone this repo `git clone https://github.com/star3am/hashiqube.git` - [What is Git?](git/#git)
+* Inside the local repo folder, do
+`docker-compose up -d` This will bring up Hashiqube
+`docker compose exec hashiqube /bin/bash` This will drop you into Hashiqube as root, now you can bring up the individual services, start with Basetools
+`bash hashiqube/basetools.sh` This will install a bunch of dependencies
+`bash docker/docker.sh` This will install the Docker Daemon inside Hashiqube
+`bash vault/vault.sh` This will bring up HashiCorp Vault
+
+And so on, you get the idea..
+
+See: 
+`docker compose ls`
+```
+NAME                STATUS              CONFIG FILES
+hashiqube           running(1)          /Users/riaan/workspace/personal/hashiqube/docker-compose.yml
+```
+
 ## Documentation and Status
 :loudspeaker: For Hashiqube Local Documentation and Status after you complete the steps above in [Installation Instructions](/?id=installation-instructions)
 

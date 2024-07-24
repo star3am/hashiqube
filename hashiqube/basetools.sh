@@ -1,6 +1,13 @@
 #!/bin/bash
 
 echo -e '\e[38;5;198m'"++++ "
+echo -e '\e[38;5;198m'"++++ Set 8.8.8.8 in /etc/resolv.conf"
+echo -e '\e[38;5;198m'"++++ "
+cat <<EOF | sudo tee /etc/resolv.conf
+nameserver 8.8.8.8
+EOF
+
+echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Installing Base packages"
 echo -e '\e[38;5;198m'"++++ "
 
