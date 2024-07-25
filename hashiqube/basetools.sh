@@ -41,7 +41,7 @@ sudo mkdir -p /etc/update-motd.d
 
 cat <<EOF | sudo tee /etc/update-motd.d/00-header
 #!/bin/bash
-/usr/bin/toilet --gay -f standard hashiqube -w 170
+/usr/bin/toilet --gay -f standard hashiqube0 -w 170
 printf "%s"
 EOF
 
