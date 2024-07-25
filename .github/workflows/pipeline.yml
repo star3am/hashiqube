@@ -38,7 +38,7 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           context: .
-          platforms: linux/amd64,linux/arm64,linux/arm64/v7,linux/arm64/v8 
+          platforms: linux/amd64,linux/arm64
           push: true
           tags: |
             ghcr.io/${{ github.repository_owner }}/hashiqube:latest
