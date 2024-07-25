@@ -15,6 +15,11 @@ RUN apt-get -y install -qq \
         curl \
         wget \
         vim-tiny < /dev/null > /dev/null
+
+COPY ./hashiqube/basetools.sh .
+RUN bash ./basetools.sh; \
+    rm ./basetools.sh;
+
 RUN apt-get -qq clean < /dev/null > /dev/null
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 

@@ -83,20 +83,20 @@ echo -e '\e[38;5;198m'"++++ "
 sleep 10;
 sudo --preserve-env=PATH -u vagrant docker login -u="admin" -p="password" http://10.9.99.10:5002
 
-echo -e '\e[38;5;198m'"++++ "
-echo -e '\e[38;5;198m'"++++ Docker build -t apache2 ."
-echo -e '\e[38;5;198m'"++++ "
-docker build -t apache2 .
+# echo -e '\e[38;5;198m'"++++ "
+# echo -e '\e[38;5;198m'"++++ Docker build -t apache2 ."
+# echo -e '\e[38;5;198m'"++++ "
+# docker build -t apache2 .
 
-echo -e '\e[38;5;198m'"++++ "
-echo -e '\e[38;5;198m'"++++ Docker images --filter reference=apache2"
-echo -e '\e[38;5;198m'"++++ "
-docker images --filter reference=apache2
+# echo -e '\e[38;5;198m'"++++ "
+# echo -e '\e[38;5;198m'"++++ Docker images --filter reference=apache2"
+# echo -e '\e[38;5;198m'"++++ "
+# docker images --filter reference=apache2
 
-echo -e '\e[38;5;198m'"++++ "
-echo -e '\e[38;5;198m'"++++ Docker run -t -d -i -p 8889:80 --name apache2 --rm apache2"
-echo -e '\e[38;5;198m'"++++ "
-docker run -t -d -i -p 8889:80 --name apache2 --memory 16M --rm apache2
+# echo -e '\e[38;5;198m'"++++ "
+# echo -e '\e[38;5;198m'"++++ Docker run -t -d -i -p 8889:80 --name apache2 --rm apache2"
+# echo -e '\e[38;5;198m'"++++ "
+# docker run -t -d -i -p 8889:80 --name apache2 --memory 16M --rm apache2
 
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Docker ps"
@@ -108,6 +108,9 @@ echo -e '\e[38;5;198m'"++++ Docker stats"
 echo -e '\e[38;5;198m'"++++ "
 docker stats --no-stream -a
 
-echo -e '\e[38;5;198m'"++++ open http://localhost:8889 in your browser"
-echo -e '\e[38;5;198m'"++++ you can also run below to get apache2 version from the docker container"
-echo -e '\e[38;5;198m'"++++ vagrant ssh -c \"docker ps; docker exec -it apache2 /bin/bash -c 'apache2 -t -v; ps aux'\""
+echo -e '\e[38;5;198m'"++++ "
+echo -e '\e[38;5;198m'"++++ Docker Daemon installed"
+echo -e '\e[38;5;198m'"++++ "
+# echo -e '\e[38;5;198m'"++++ open http://localhost:8889 in your browser"
+# echo -e '\e[38;5;198m'"++++ you can also run below to get apache2 version from the docker container"
+# echo -e '\e[38;5;198m'"++++ vagrant ssh -c \"docker ps; docker exec -it apache2 /bin/bash -c 'apache2 -t -v; ps aux'\""
