@@ -1,6 +1,18 @@
 #!/bin/bash
 # https://hub.docker.com/_/microsoft-mssql-server
 # https://www.vaultproject.io/docs/secrets/databases/mssql.html
+
+echo -e '\e[38;5;198m'"++++ "
+echo -e '\e[38;5;198m'"++++ Ensure Docker Daemon is running (Dependency)"
+echo -e '\e[38;5;198m'"++++ "
+if pgrep -x "dockerd" >/dev/null
+then
+  echo -e '\e[38;5;198m'"++++ Docker is running"
+else
+  echo -e '\e[38;5;198m'"++++ Ensure Docker is running.."
+  sudo bash /vagrant/docker/docker.sh
+fi
+
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Cleanup"
 echo -e '\e[38;5;198m'"++++ "
@@ -8,6 +20,7 @@ sudo docker stop mssql
 sudo docker rm mssql
 yes | sudo docker system prune -a
 yes | sudo docker system prune --volumes
+
 if pgrep -x "vault" >/dev/null
 then
   echo -e '\e[38;5;198m'"++++ "

@@ -161,6 +161,17 @@ echo -e '\e[38;5;198m'"++++ Now let's use a practical example from DBT Labs - ht
 echo -e '\e[38;5;198m'"++++ "
 
 echo -e '\e[38;5;198m'"++++ "
+echo -e '\e[38;5;198m'"++++ Ensure Docker Daemon is running (Dependency)"
+echo -e '\e[38;5;198m'"++++ "
+if pgrep -x "dockerd" >/dev/null
+then
+  echo -e '\e[38;5;198m'"++++ Docker is running"
+else
+  echo -e '\e[38;5;198m'"++++ Ensure Docker is running.."
+  sudo bash /vagrant/docker/docker.sh
+fi
+
+echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Ensure postgresql-client is installed"
 echo -e '\e[38;5;198m'"++++ "
 sudo apt-get install -y postgresql-client libpq-dev python3.10-dev
@@ -205,6 +216,7 @@ echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ creating /vagrant/dbt/jaffle_shop/profiles.yml for user $(whoami)"
 echo -e '\e[38;5;198m'"++++ "
 
+mkdir -p /home/vagrant/.dbt
 cat <<EOF | tee /home/vagrant/.dbt/profiles.yml
 # example profiles.yml file
 # credentials comes from database/postgresql.sh
@@ -227,27 +239,27 @@ cat /home/vagrant/.dbt/profiles.yml
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ dbt debug"
 echo -e '\e[38;5;198m'"++++ "
-dbt debug
+sudo -u vagrant dbt debug
 
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ dbt seed"
 echo -e '\e[38;5;198m'"++++ "
-dbt seed
+sudo -u vagrant dbt seed
 
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ dbt run"
 echo -e '\e[38;5;198m'"++++ "
-dbt run
+sudo -u vagrant dbt run
 
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ dbt test"
 echo -e '\e[38;5;198m'"++++ "
-dbt test
+sudo -u vagrant dbt test
 
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ dbt docs generate"
 echo -e '\e[38;5;198m'"++++ "
-dbt docs generate
+sudo -u vagrant dbt docs generate
 
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ dbt docs serve"
@@ -256,7 +268,7 @@ if pgrep -x "dbt" >/dev/null
 then
   sudo kill -9 $(pgrep dbt)
 fi
-nohup dbt docs serve --port 28080 > /vagrant/dbt/jaffle_shop/logs/dbt-docs-serve.log 2>&1 &
+sudo -u vagrant nohup dbt docs serve --port 28080 > /vagrant/dbt/jaffle_shop/logs/dbt-docs-serve.log 2>&1 &
 sh -c 'sudo tail -f /vagrant/dbt/jaffle_shop/logs/dbt-docs-serve.log | { sed "/Press Ctrl+C to exit/ q" && kill $$ ;}' || true
 
 echo -e '\e[38;5;198m'"++++ "
