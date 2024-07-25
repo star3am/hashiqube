@@ -20,8 +20,6 @@ jobs:
       # https://blog.thesparktree.com/docker-multi-arch-github-actions
       - name: Setup QEMU
         uses: docker/setup-qemu-action@v3
-        with:
-          platforms: 'amd64,arm64,arm,linux/arm64/v7,linux/arm64/v8'
 
       # https://github.com/docker/setup-buildx-action
       - name: Set up Docker Buildx
@@ -34,18 +32,15 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
-        with:
-          images: ghcr.io/${{ github.repository }}
-
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
           context: .
+          platforms: linux/amd64,linux/arm64,linux/arm64/v7,linux/arm64/v8 
           push: true
-          # https://github.com/docker/metadata-action#tags-input
-          # tags: ${{ steps.meta.outputs.tags }}
-          tags: ghcr.io/${{ github.repository_owner }}/hashiqube:latest # INFO: Hardcoding latest tag
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/hashiqube:latest
+            # ghcr.io/${{ github.repository_owner }}/hashiqube:1.0.0
+

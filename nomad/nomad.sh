@@ -246,21 +246,21 @@ sleep 10
 nomad server members
 nomad node status
 
-cd /vagrant/nomad/nomad/jobs;
-echo -e '\e[38;5;198m'"++++ "
-echo -e '\e[38;5;198m'"++++ Start Nomad Fabio job"
-echo -e '\e[38;5;198m'"++++ "
-nomad plan --address=http://localhost:4646 fabio.nomad
-nomad run --address=http://localhost:4646 fabio.nomad
-# curl -v -H 'Host: fabio.service.consul' http://${VAGRANT_IP}:9999/
+# cd /vagrant/nomad/nomad/jobs;
+# echo -e '\e[38;5;198m'"++++ "
+# echo -e '\e[38;5;198m'"++++ Start Nomad Fabio job"
+# echo -e '\e[38;5;198m'"++++ "
+# nomad plan --address=http://localhost:4646 fabio.nomad
+# nomad run --address=http://localhost:4646 fabio.nomad
+# # curl -v -H 'Host: fabio.service.consul' http://${VAGRANT_IP}:9999/
 
-echo -e '\e[38;5;198m'"++++ "
-echo -e '\e[38;5;198m'"++++ Start Nomad Traefik job"
-echo -e '\e[38;5;198m'"++++ "
-nomad plan --address=http://localhost:4646 traefik.nomad
-nomad run --address=http://localhost:4646 traefik.nomad
-nomad plan --address=http://localhost:4646 traefik-whoami.nomad
-nomad run --address=http://localhost:4646 traefik-whoami.nomad
+# echo -e '\e[38;5;198m'"++++ "
+# echo -e '\e[38;5;198m'"++++ Start Nomad Traefik job"
+# echo -e '\e[38;5;198m'"++++ "
+# nomad plan --address=http://localhost:4646 traefik.nomad
+# nomad run --address=http://localhost:4646 traefik.nomad
+# nomad plan --address=http://localhost:4646 traefik-whoami.nomad
+# nomad run --address=http://localhost:4646 traefik-whoami.nomad
 
 if [ -f /vagrant/nomad/license.hclic ]; then
   echo -e '\e[38;5;198m'"++++ "
