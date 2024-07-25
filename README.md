@@ -429,7 +429,7 @@ Videos were made with [asciinema](https://asciinema.org/)
 - asciicast2gif -S 1 -s 2 tmpd1zpq13n-ascii.cast tmpd1zpq13n-ascii.gif
 
 ## License
-HashiQube is available as open-source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+HashiQube is free and available for personal use under the terms of the [BSL License](https://en.wikipedia.org/wiki/Business_Source_License).
 
 ![Automate all the things](images/automate-all-the-things.png?raw=true "Automate all the things")
 
