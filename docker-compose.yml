@@ -2,7 +2,7 @@
 version: "3.8"
 services:
   hashiqube:
-    image: ghcr.io/star3am/hashiqube:latest
+    # image: ghcr.io/star3am/hashiqube:latest
     privileged: true
     tty: true
     cgroup: host
@@ -71,9 +71,9 @@ services:
       - "6001:6001" # trex
       - "18043:18043" # argocd
     # Build the container from the Dockerfile before we run it
-    # build:
-      # context: .
-      # dockerfile: ./Dockerfile
+    build:
+      context: .
+      dockerfile: ./Dockerfile
     network_mode: "bridge"
     volumes:
       # Mounts the project folder into the container
