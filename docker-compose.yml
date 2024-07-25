@@ -2,12 +2,12 @@
 version: "3.8"
 services:
   hashiqube:
+    # image: ghcr.io/star3am/hashiqube:latest
     privileged: true
     tty: true
     cgroup: host
     tmpfs:
     - /var/lib/docker:mode=0777,dev,size=15g,suid,exec
-    # - /tmp:exec,dev
     - /run
     ports:
       - "3000:3000" # grafana
@@ -74,8 +74,6 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
-    # If you have build and pushed this container to a registry you can use it below and disable build above
-    # image: YOUR_CONTAINER_REGISTRY/hashiqube:latest
     network_mode: "bridge"
     volumes:
       # Mounts the project folder into the container

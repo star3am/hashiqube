@@ -177,7 +177,7 @@ sleep 20
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Check Vault Status"
 echo -e '\e[38;5;198m'"++++ "
-sudo systemctl status vault
+sudo systemctl status vault | cat
 
 # initialize vault server
 export VAULT_ADDR=http://127.0.0.1:8200
