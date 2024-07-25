@@ -42,5 +42,3 @@ jobs:
           push: true
           tags: |
             ghcr.io/${{ github.repository_owner }}/hashiqube:latest
-            # ghcr.io/${{ github.repository_owner }}/hashiqube:1.0.0
-
