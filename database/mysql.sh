@@ -3,6 +3,11 @@
 # https://www.vaultproject.io/docs/secrets/mysql/index.html
 
 echo -e '\e[38;5;198m'"++++ "
+echo -e '\e[38;5;198m'"++++ Ensure Environment Variables from /etc/environment"
+echo -e '\e[38;5;198m'"++++ "
+set -a; source /etc/environment; set +a;
+
+echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Ensure Docker Daemon is running (Dependency)"
 echo -e '\e[38;5;198m'"++++ "
 if pgrep -x "dockerd" >/dev/null
