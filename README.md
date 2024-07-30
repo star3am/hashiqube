@@ -16,14 +16,32 @@ Hashiqube has been created to help Engineers, Developers and anyone who wants to
 Please connect with me on [LinkedIn (Riaan Nolan)](https://www.linkedin.com/in/riaannolan/) or check out [my Credly profile](https://www.credly.com/users/riaan-nolan.e657145c)
 <br />
 
-## Pre-requisites
+# Running Hashiqube
+There are a few ways of running Hashiqube depending on your needs
+* Hashiqube on Github Codespaces (You only need a Github account and can have Hashiqube up in 1 minute) __Preferred__
+* Hashiqube locally using Vagrant or Docker Compose (You need Docker and Vagrant (Optional) or Virtualbox (Optional))
+* Hashiqube on VM in a Hyperscaler (AWS, GCP or Azure)
+
+## Hashiqube on Github Codespaces
+
+* Head over to https://github.com/star3am/hashiqube
+* Now Fork the Hashiqube repository
+* Now in the forked Hashiqube reposiroty in your Github account, launch a new Codespace to get started
+* Watch thhe video below for follow-along instructions 
+
+[![HashiQube on Github's Codespaces](images/images/hashiqube-on-github-codespace.png)](https://www.youtube.com/watch?v=8uDfDnQZZoA)
+
+## Hashiqube Locally
+Follow the instructions below to run Hashiqube locally on your laptop or PC. 
+
+### Pre-requisites
 * 10GB of disk space and 4G RAM (Minimum) - 8G RAM Recommended
 * Docker
 * Vagrant
 
 :bulb: If you want to run Minikube and a workload like AWX Ansible Tower, or Airflow you need at least 8G RAM - If you want to run Gitlab as well, you need to give Docker resources at least 12G RAM
 
-## Installation Instructions
+### Installation Instructions
 :clock3: Duration 15 - 30 minutes <br>
 :bulb: Docker is the Default and preferred way to run Hashiqube
 
@@ -33,7 +51,7 @@ Please connect with me on [LinkedIn (Riaan Nolan)](https://www.linkedin.com/in/r
 * Inside the local repo folder, do `vagrant up --provision` - This will set up, Vault, Nomad, Consul, Terraform, Localstack and Docker
 * Documentation locally available at http://localhost:3333
 
-## Docker Compose
+### Docker Compose
 Docker compose is also supported! To bring up Hashiqube with Docker Compose do the following 
 
 * Docker - Download Docker from the [Docker desktop installer](https://www.docker.com/products/docker-desktop) and install
