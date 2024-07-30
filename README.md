@@ -29,7 +29,7 @@ There are a few ways of running Hashiqube depending on your needs
 * Now in the forked Hashiqube reposiroty in your Github account, launch a new Codespace to get started
 * Watch thhe video below for follow-along instructions 
 
-[![HashiQube on Github's Codespaces](images/images/hashiqube-on-github-codespace.png)](https://www.youtube.com/watch?v=8uDfDnQZZoA)
+[![HashiQube on Github's Codespaces](images/hashiqube-on-github-codespace.png)](https://www.youtube.com/watch?v=8uDfDnQZZoA)
 
 ## Hashiqube Locally
 Follow the instructions below to run Hashiqube locally on your laptop or PC. 
