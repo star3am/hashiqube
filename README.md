@@ -99,7 +99,9 @@ Hashiqube is a Training / Development Lab for you to practise, learn or demo POC
 
 Hashiqube can be visualized with the diagrams below.
 
-![HashiQube Diagram](images/hashiqube-diagram.png?raw=true "HashiQube Diagram")
+### Draw.io Diagram
+
+[filename](images/hashiqube.drawio ':include :type=code')
 
 ## Links
 * [Hashicorp blog post](https://www.hashicorp.com/resources/hashiqube-a-development-lab-using-all-the-hashicorp-products) <br />
