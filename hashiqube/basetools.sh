@@ -52,7 +52,7 @@ if [[ \$CODESPACES == true ]]; then
   printf '\e[33;1;93m'" * Hashiqube Documentation: \e[38;5;198m https://hashiqube.com\n"
   printf '\e[33;1;93m'" * Start Vault:             \e[38;5;198m bash vault/vault.sh\n"
   printf '\e[33;1;93m'" * Access Vault Web UI:     \e[38;5;198m Click on the Globe in the Ports Tab in port 8200\n"
-  printf '\e[33;1;93m'" * Get Vault Root token:    \e[38;5;198m cat /etc/vault/init.file'\n"
+  printf '\e[33;1;93m'" * Get Vault Root token:    \e[38;5;198m cat /etc/vault/init.file\n"
   printf '\e[33;1;93m'" * Get Vault Status:        \e[38;5;198m vault status\n"
   printf '\e[33;1;93m'" * Start Nomad:             \e[38;5;198m bash nomad/nomad.sh\n"
   printf '\e[33;1;93m'" * Access Nomad Web UI:     \e[38;5;198m Click on the Globe in the Ports Tab in port 4646\n"
