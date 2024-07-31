@@ -7,7 +7,7 @@
     "set-git-config-line-endings": "git config --global core.autocrlf input",
     "set-git-config-gpg-program": "git config --global --add gpg.program /usr/bin/gpg"
   },
-  "postCreateCommand": {
+  "postAttachCommand": {
     "print-message-of-the-day": "bash /etc/update-motd.d/00-header"
   },
   "customizations": {
