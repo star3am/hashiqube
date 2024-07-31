@@ -44,7 +44,7 @@ cat <<EOF | sudo tee /etc/update-motd.d/00-header
 /usr/bin/toilet --gay -f standard hashiqube0 -w 170
 printf "%s"
 
-if [[ $CODESPACES == true ]]; then
+if [[ \$CODESPACES == true ]]; then
   printf "\n"
   printf '\e[33;0;36m'"Welcome! You are running HashiQube in a Github Codespace. The information below will help you get started!\n"
   printf '\e[33;0;36m'"You are in the /vagrant folder because this lab also runs in Vagrant, and many of the scripts depends on this path.\n"
