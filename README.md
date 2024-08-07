@@ -445,6 +445,7 @@ A Very special mention to HashiQube's contributors, Thank You All for your help,
  - [JJ Badenhorst](https://github.com/badj)
  - [Jan Laubscher](https://howdypress.com/)
  - [Nalini Dayma](https://www.linkedin.com/in/nalinidayma/)
+ - [Nesar Uddin Rahid](https://dribbble.com/rahiddesigner)
 
 ## Videos
 Videos were made with [asciinema](https://asciinema.org/)
