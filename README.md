@@ -451,6 +451,9 @@ Videos were made with [asciinema](https://asciinema.org/)
 ## License
 HashiQube is free and available for personal use under the terms of the [BSL License](https://en.wikipedia.org/wiki/Business_Source_License).
 
+![Hashiqube Logo](images/hashiqube-logo-small.png?raw=true "Hashiqube Logo")
 ![Automate all the things](images/automate-all-the-things.png?raw=true "Automate all the things")
+![DevOps Lab Logo](images/devops-lab-logo-small.png?raw=true "DevOps Lab Logo")
+
 
 [google ads](googleads.html ':include :type=iframe width=100% height=300px')

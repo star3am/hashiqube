@@ -16,6 +16,7 @@
   * [Gitlab](gitlab/README.md)
   * [Hashicorp](hashicorp/README.md)
   * [Hashiqube](hashiqube/README.md)
+  * [Helm](helm/README.md)
   * [Jenkins](jenkins/README.md)
   * [Ldap](ldap/README.md)
   * [Localstack](localstack/README.md)
