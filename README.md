@@ -4,7 +4,10 @@
 
 ## Overview
 
-Hashiqube is the Ultimate Hands on DevOps Lab in a Docker Container. Hashiqube has a Docker daemon inside meaning, 
+Hashiqube is the Ultimate Hands on DevOps Lab in a Docker Container.
+It can run in a Github Codespace, Locally using Vagrant or Docker Compose, or as a Virtual Machine VM on AWS, GCP and Azure.
+
+Hashiqube has a Docker daemon inside meaning, 
 we can run containers inside Hashiqube using Kubernetes (Minikube) or Nomad or Docker run. It runs all Hashicorp products. [Vault](/vault/?id=vault), [Terraform](/terraform/?id=terraform), [Nomad](/nomad/?id=nomad), [Consul](/consul/?id=consul), [Waypoint](/waypoint/?id=waypoint), [Boundary](/boundary/?id=boundary), [Vagrant](/vagrant/?id=vagrant), [Packer](/packer/?id=packer) and [Sentinel](/sentinel/?id=sentinel).
 
 It also runs a host of other popular Open Source DevOps/DevSecOps applications (Minikube, Ansible AWX Tower, Traefik etc.) showcasing how simple integration with Hashicorp products can result in tangible learnings and benefits for all its users.
@@ -18,9 +21,9 @@ Please connect with me on [LinkedIn (Riaan Nolan)](https://www.linkedin.com/in/r
 
 # Running Hashiqube
 There are a few ways of running Hashiqube depending on your needs
-* Hashiqube on Github Codespaces (You only need a Github account and can have Hashiqube up in 1 minute) __Preferred__
-* Hashiqube locally using Vagrant or Docker Compose (You need Docker and Vagrant (Optional) or Virtualbox (Optional))
-* Hashiqube on VM in a Hyperscaler (AWS, GCP or Azure)
+* [Hashiqube on Github Codespaces](/?id=hashiqube-on-github-codespaces) (You only need a Github account and can have Hashiqube up in 1 minute) __Preferred__
+* [Hashiqube locally using Vagrant or Docker](/?id=hashiqube-locally) Compose (You need Docker and Vagrant (Optional) or Virtualbox (Optional))
+* [Hashiqube on VM in a Hyperscaler](/multi-cloud/README) (AWS, GCP or Azure)
 
 ## Hashiqube on Github Codespaces
 
@@ -451,6 +454,9 @@ Videos were made with [asciinema](https://asciinema.org/)
 ## License
 HashiQube is free and available for personal use under the terms of the [BSL License](https://en.wikipedia.org/wiki/Business_Source_License).
 
+![Hashiqube Logo](images/hashiqube-logo-small.png?raw=true "Hashiqube Logo")
 ![Automate all the things](images/automate-all-the-things.png?raw=true "Automate all the things")
+![DevOps Lab Logo](images/devops-lab-logo-small.png?raw=true "DevOps Lab Logo")
+
 
 [google ads](googleads.html ':include :type=iframe width=100% height=300px')
