@@ -30,7 +30,7 @@ There are a few ways of running Hashiqube depending on your needs
 * Head over to https://github.com/star3am/hashiqube
 * Now Fork the Hashiqube repository
 * Now in the forked Hashiqube reposiroty in your Github account, launch a new Codespace to get started
-* Watch thhe video below for follow-along instructions 
+* Watch the video below for follow-along instructions 
 
 [![HashiQube on Github's Codespaces](images/hashiqube-on-github-codespace.png)](https://www.youtube.com/watch?v=8uDfDnQZZoA)
 
