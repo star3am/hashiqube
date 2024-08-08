@@ -63,7 +63,7 @@ if [[ \$CODESPACES == true ]]; then
   printf '\e[33;1;93m'" * Get Consul Info:         \e[38;5;198m consul info\n"
   printf '\e[33;1;93m'" * Get Consul Members:      \e[38;5;198m consul members -wan\n"
   printf '\e[33;1;93m'" * Start Terraform:         \e[38;5;198m bash localstack/localstack.sh\n"
-  printf '\e[33;1;93m'" * Terraform Plan/Apply:    \e[38;5;198m cd localstack; terraform plan; terraform apply;\n"
+  printf '\e[33;1;93m'" * Terraform Plan/Apply:    \e[38;5;198m bash localstack/localstack.sh; cd localstack; terraform plan; terraform apply;\n"
   printf "\n"
 else
   printf "\n"
@@ -84,7 +84,7 @@ else
   printf '\e[33;1;93m'" * Get Consul Info:         \e[38;5;198m consul info\n"
   printf '\e[33;1;93m'" * Get Consul Members:      \e[38;5;198m consul members -wan\n"
   printf '\e[33;1;93m'" * Start Terraform:         \e[38;5;198m bash localstack/localstack.sh\n"
-  printf '\e[33;1;93m'" * Terraform Plan/Apply:    \e[38;5;198m cd localstack; terraform plan; terraform apply;\n"
+  printf '\e[33;1;93m'" * Terraform Plan/Apply:    \e[38;5;198m bash localstack/localstack.sh; cd localstack; terraform plan; terraform apply;\n"
   printf "\n"
 fi
 EOF
