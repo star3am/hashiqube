@@ -8,7 +8,7 @@ yes | sudo docker system prune --volumes
 
 echo -e '\e[38;5;198m'"++++ Installing Visual Studio Code Server from codercom's container https://hub.docker.com/r/codercom/code-server"
 mkdir -p ~/.config
-docker run -d --name code-server -p 0.0.0.0:7777:8080 \
+sudo --preserve-env=PATH -u vagrant docker run -d --name code-server -p 0.0.0.0:7777:8080 \
   -v "$HOME/.config:/home/coder/.config" \
   -v "$PWD:/home/coder/project" \
   -v "/:/home/coder/vagrant_root"\
