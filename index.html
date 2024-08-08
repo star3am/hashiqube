@@ -197,6 +197,11 @@
       border: 0px solid #eee;
     }
 
+    .markdown-section pre>code,
+    .markdown-section code {
+      font-size: 1rem;
+    }
+
     .footer {
       position: relative;
       /* display: none; */
@@ -299,6 +304,7 @@
       alias: {
         '/.*/SUMMARY.md': '/SUMMARY.md'
       },
+      topMargin: 80,
       logo: '/images/logo-bright.png',
       name: 'HashiQube',
       repo: 'https://github.com/star3am/hashiqube',
@@ -351,28 +357,28 @@
           toggleBackground: '#f8f8f2',
           background: '#240129',
           textColor: '#f8f8f2',
-          codeTextColor: '#8be9fd',
+          codeTextColor: '#5cdeff',
           codeBackgroundColor: '#000524',
           borderColor: '#0d2538',
-          blockQuoteColor: '#8be9fd',
-          highlightColor: '#ff79c6',
-          sidebarSublink: '#f1fa8c',
-          codeTypeColor: '#8be9fd',
+          blockQuoteColor: '#5cdeff',
+          highlightColor: '#fefb00',
+          sidebarSublink: '#61e190',
+          codeTypeColor: '#5cdeff',
           coverBackground: 'linear-gradient(to left bottom, hsl(118, 100%, 85%) 0%,hsl(181, 100%, 85%) 100%)',
           toggleImage: 'url(https://cdn.jsdelivr.net/npm/docsify-darklight-theme@latest/icons/sun.svg)'
         },
         light: {
-          accent: '#bd93f9',
+          accent: '#ed2f74',
           toggleBackground : '#091a28',
           background: '#ffffff',
-          textColor: '#34495e',
-          codeTextColor : '#525252',
+          textColor: '#444444',
+          codeTextColor : '#370960',
           codeBackgroundColor : '#f8f8f8',
           borderColor : 'rgba(0, 0, 0, 0.07)',
           blockQuoteColor : '#858585',
           highlightColor : '#d22778',
           sidebarSublink : '#34495e',
-          codeTypeColor : '#091a28',
+          codeTypeColor : '#370960',
           coverBackground: 'linear-gradient(to left bottom, hsl(118, 100%, 85%) 0%,hsl(181, 100%, 85%) 100%)',
           toggleImage: 'url(https://cdn.jsdelivr.net/npm/docsify-darklight-theme@latest/icons/moon.svg)'
         }
