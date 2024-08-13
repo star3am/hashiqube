@@ -60,7 +60,7 @@ Vagrant::configure("2") do |config|
 
   machines.each_with_index do |machine, index|
 
-    config.vm.box = "generic/ubuntu2204"
+    config.vm.box = "generic/ubuntu2404"
     config.vm.define machine[:name] do |config|
 
       # config.disksize.size = machine[:disksize] # deprecated
@@ -176,7 +176,9 @@ Vagrant::configure("2") do |config|
         # BUG: https://github.com/hashicorp/vagrant/issues/12602
         # moved to create_args
         # docker.volumes         = ['/sys/fs/cgroup:/sys/fs/cgroup:rw']
-        docker.create_args     = ['-v', '/sys/fs/cgroup:/sys/fs/cgroup:rw', '--cgroupns=host', '--tmpfs=/tmp:exec,dev', '--tmpfs=/var/lib/docker:mode=0777,dev,size=15g,suid,exec', '--tmpfs=/run', '--tmpfs=/run/lock'] # '--memory=10g', '--memory-swap=14g', '--oom-kill-disable'
+        # BUG: https://github.com/hashicorp/nomad/issues/19343 dmidecode
+        #      https://stackoverflow.com/questions/54068234/cant-run-dmidecode-on-docker-container
+        docker.create_args     = ['-v', '/sys/fs/cgroup:/sys/fs/cgroup:rw', '--cap-add=SYS_RAWIO', '--cgroupns=host', '--tmpfs=/tmp:exec,dev', '--tmpfs=/var/lib/docker:mode=0777,dev,size=15g,suid,exec', '--tmpfs=/run', '--tmpfs=/run/lock'] # '--memory=10g', '--memory-swap=14g', '--oom-kill-disable'
         # Uncomment to force arm64 for testing images on Intel
         # docker.create_args = ["--platform=linux/arm64"]
         docker.env             = { "PROVIDER": "docker", "NAME": "hashiqube" }
