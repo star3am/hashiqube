@@ -142,9 +142,9 @@ datacenter = "dc1"
 
 advertise {
   # Defaults to the first private IP address.
-  http = "${attr.unique.network.ip-address}"
-  rpc  = "${attr.unique.network.ip-address}"
-  serf = "${attr.unique.network.ip-address}:5648" # non-default ports may be specified
+  http = "\${attr.unique.network.ip-address}"
+  rpc  = "{{ GetInterfaceIP \"eth0\" }}"
+  serf = "{{ GetInterfaceIP \"eth0\" }}:5648" # non-default ports may be specified
 }
 
 server {
@@ -171,7 +171,7 @@ client {
   # If you run previous versions of Nomad you will notice that the fingerprinted capacity is always 1000MHz. This is a value we used to hardcode as a fallback but we dont anymore on 1.7.x (https://github.com/hashicorp/nomad/blob/release/1.6.x/client/fingerprint/cpu.go#L23) because its just wrong.
   # The only option for now is to pass their own hardcoded value using client.cpu_total_compute (https://developer.hashicorp.com/nomad/docs/configuration/client#cpu_total_compute)
   cpu_total_compute = 8000
-  servers = ["${attr.unique.network.ip-address}:4647"]
+  servers = ["\${attr.unique.network.ip-address}:4647"]
   # network_interface = "enp0s8"
   # https://www.nomadproject.io/docs/drivers/docker.html#volumes
   # https://github.com/hashicorp/nomad/issues/5562
@@ -217,7 +217,7 @@ telemetry {
 }
 
 consul {
-  address = "${attr.unique.network.ip-address}:8500"
+  address = "\${attr.unique.network.ip-address}:8500"
 }
 EOF
 if [ -f /vagrant/nomad/license.hclic ]; then
