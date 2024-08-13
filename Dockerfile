@@ -1,7 +1,7 @@
 # https://betterprogramming.pub/managing-virtual-machines-under-vagrant-on-a-mac-m1-aebc650bc12c
 # https://github.com/rofrano/vagrant-docker-provider
 
-FROM ubuntu:jammy
+FROM ubuntu:noble
 
 ENV DEBIAN_FRONTEND noninteractive
 

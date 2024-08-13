@@ -10,7 +10,8 @@ elif  [[ $arch == aarch64 ]]; then
 fi
 echo -e '\e[38;5;198m'"CPU is $ARCH"
 
-sudo DEBIAN_FRONTEND=noninteractive apt-get --assume-yes install -qq curl unzip jq < /dev/null > /dev/null
+# https://github.com/hashicorp/nomad/issues/19343 nomad needs dmidecode
+sudo DEBIAN_FRONTEND=noninteractive apt-get --assume-yes install -qq dmidecode curl unzip jq < /dev/null > /dev/null
 
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Cleanup any Nomad if found"
@@ -181,6 +182,20 @@ client {
   host_volume "waypoint" {
     path      = "/opt/nomad/data/volume/waypoint"
     read_only = false
+  }
+}
+
+plugin "docker" {
+  config {
+    endpoint = "unix:///var/run/docker.sock"
+
+    volumes {
+      enabled      = true
+      selinuxlabel = "z"
+    }
+
+    allow_privileged = true
+    allow_caps       = ["chown", "net_raw"]
   }
 }
 
