@@ -1,7 +1,7 @@
 #!/bin/bash
 # https://www.nomadproject.io/guides/integrations/consul-connect/index.html
 
-VERSION=1.17.3
+VERSION=latest
 
 arch=$(lscpu | grep "Architecture" | awk '{print $NF}')
 if [[ $arch == x86_64* ]]; then
