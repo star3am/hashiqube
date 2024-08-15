@@ -33,7 +33,7 @@ job "traefik" {
           "--entrypoints.web.address=0.0.0.0:${NOMAD_PORT_http}",
           "--entrypoints.traefik.address=0.0.0.0:${NOMAD_PORT_admin}",
           "--providers.nomad=true",
-          "--providers.nomad.endpoint.address=http://10.9.99.10:4646" ### IP to your nomad server 
+          "--providers.nomad.endpoint.address=http://${attr.unique.network.ip-address}:4646" ### IP to your nomad server
         ]
       }
     }
