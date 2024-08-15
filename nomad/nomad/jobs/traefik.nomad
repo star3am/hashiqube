@@ -25,13 +25,13 @@ job "traefik" {
     task "server" {
       driver = "docker"
       config {
-        image = "traefik:v2.8.0-rc1"
+        image = "traefik:latest"
         ports = ["admin", "http"]
         args = [
           "--api.dashboard=true",
           "--api.insecure=true", ### For Test only, please do not use that in production
-          "--entrypoints.web.address=:${NOMAD_PORT_http}",
-          "--entrypoints.traefik.address=:${NOMAD_PORT_admin}",
+          "--entrypoints.web.address=0.0.0.0:${NOMAD_PORT_http}",
+          "--entrypoints.traefik.address=0.0.0.0:${NOMAD_PORT_admin}",
           "--providers.nomad=true",
           "--providers.nomad.endpoint.address=http://10.9.99.10:4646" ### IP to your nomad server 
         ]
