@@ -18,8 +18,8 @@ services:
       - "4646:4646" # nomad
       - "4647:4647" # nomad
       - "4648:4648" # nomad
-      - "8080:8080" # nomad-traefik
-      - "8081:8081" # nomad-traefik-admin
+      - "38080:38080" # nomad-traefik
+      - "38081:38081" # nomad-traefik-admin
       - "19702:19702" # waypoint-kubernetes-minikube
       - "19701:19701" # waypoint-api-kubernetes-minikube
       - "9702:9702" # waypoint-nomad

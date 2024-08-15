@@ -10,7 +10,7 @@ job "traefik-whoami" {
 
     network {
        port "http" {
-         to = 8080
+         to = 38080
        }
     }
 

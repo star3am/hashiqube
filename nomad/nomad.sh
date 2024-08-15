@@ -291,6 +291,6 @@ echo -e '\e[38;5;198m'"++++ Nomad Documentation http://localhost:3333/#/nomad/RE
 echo -e '\e[38;5;198m'"++++ Fabio Dashboard http://localhost:9998"
 echo -e '\e[38;5;198m'"++++ Fabio Loadbalancer http://localhost:9998"
 echo -e '\e[38;5;198m'"++++ Fabio Documentation http://localhost:3333/#/nomad/README?id=fabio-load-balancer-for-nomad"
-echo -e '\e[38;5;198m'"++++ Treafik Dashboard http://localhost:8081"
-echo -e '\e[38;5;198m'"++++ Traefik Loadbalancer: http://localhost:8080"
+echo -e '\e[38;5;198m'"++++ Treafik Dashboard http://localhost:38081"
+echo -e '\e[38;5;198m'"++++ Traefik Loadbalancer: http://localhost:38080"
 echo -e '\e[38;5;198m'"++++ Traefik Documentation: http://localhost:3333/#/nomad/README?id=traefik-load-balancer-for-nomad"
