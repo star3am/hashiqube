@@ -79,8 +79,8 @@ Vagrant::configure("2") do |config|
         config.vm.network "forwarded_port", guest: 4646, host: 4646 # nomad
         config.vm.network "forwarded_port", guest: 4647, host: 4647 # nomad
         config.vm.network "forwarded_port", guest: 4648, host: 4648 # nomad
-        config.vm.network "forwarded_port", guest: 8080, host: 8080 # nomad-traefik
-        config.vm.network "forwarded_port", guest: 8081, host: 8081 # nomad-traefik-admin
+        config.vm.network "forwarded_port", guest: 38080, host: 38080 # nomad-traefik
+        config.vm.network "forwarded_port", guest: 38081, host: 38081 # nomad-traefik-admin
         config.vm.network "forwarded_port", guest: 19702, host: 19702 # waypoint-kubernetes-minikube
         config.vm.network "forwarded_port", guest: 19701, host: 19701 # waypoint-api-kubernetes-minikube
         config.vm.network "forwarded_port", guest: 9702, host: 9702 # waypoint-nomad
