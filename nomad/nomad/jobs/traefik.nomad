@@ -18,7 +18,7 @@ job "traefik" {
 
     service {
       name = "traefik"
-      provider = "nomad"
+      provider = "consul"
       port = "admin"
       tags = ["urlprefix-traefik.service.consul/", "urlprefix-/"]
       check {
