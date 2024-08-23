@@ -122,3 +122,8 @@ variable "tunnels" {
     }
   ]
 }
+
+variable "vault_enabled" {
+  type    = bool
+  default = false
+}
