@@ -132,3 +132,13 @@ variable "consul_enabled" {
   type    = bool
   default = false
 }
+
+variable "nomad_enabled" {
+  type    = bool
+  default = false
+}
+
+variable "boundary_enabled" {
+  type    = bool
+  default = false
+}

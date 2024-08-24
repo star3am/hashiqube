@@ -20,6 +20,14 @@ terraform {
       source = "hashicorp/consul"
       version = "~> 2.0"
     }
+    nomad = {
+      source = "hashicorp/nomad"
+      version = "~> 2.0"
+    }
+    boundary = {
+      source = "hashicorp/boundary"
+      version = "~> 1.0"
+    }
   }
 }
 
@@ -142,4 +150,17 @@ provider "vault" {
 provider "consul" {
   address    = "http://127.0.0.1:8500"
   datacenter = "dc1"
+}
+
+# https://registry.terraform.io/providers/hashicorp/nomad/latest/docs
+provider "nomad" {
+  address = "http://127.0.0.1:4646"
+  region  = ""
+}
+
+# https://registry.terraform.io/providers/hashicorp/boundary/latest/docs
+provider "boundary" {
+  addr                            = "http://127.0.0.1:19200"
+  password_auth_method_login_name = "admin"
+  password_auth_method_password   = "password"
 }
