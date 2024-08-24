@@ -16,6 +16,10 @@ terraform {
       source = "hashicorp/vault"
       version = "~> 4.0"
     }
+    consul = {
+      source = "hashicorp/consul"
+      version = "~> 2.0"
+    }
   }
 }
 
@@ -121,6 +125,7 @@ provider "aws" {
   }
 }
 
+# https://registry.terraform.io/providers/hashicorp/vault/latest/docs
 provider "vault" {
   address = "http://127.0.0.1:8200"
   # # https://registry.terraform.io/providers/hashicorp/vault/latest/docs#example-auth_login-usage
@@ -131,4 +136,10 @@ provider "vault" {
   #     role = "dev-role-iam"
   #   }
   # }
+}
+
+# https://registry.terraform.io/providers/hashicorp/consul/latest/docs
+provider "consul" {
+  address    = "http://127.0.0.1:8500"
+  datacenter = "dc1"
 }

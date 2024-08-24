@@ -87,10 +87,3 @@ resource "aws_security_group" "default-sec-group" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
-
-# modules - see modules folder for integrations
-
-module "hashicorp-vault" {
-  count  = var.vault_enabled ? 1 : 0
-  source = "./modules/hashicorp/vault"
-}

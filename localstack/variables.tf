@@ -127,3 +127,8 @@ variable "vault_enabled" {
   type    = bool
   default = false
 }
+
+variable "consul_enabled" {
+  type    = bool
+  default = false
+}
