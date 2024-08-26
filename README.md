@@ -444,7 +444,6 @@ A Very special mention to HashiQube's contributors, Thank You All for your help,
  - [Charle Van Der Walt](https://linkedin.com/in/charle-van-der-walt-b9ba2628/)
  - [JJ Badenhorst](https://github.com/badj)
  - [Jan Laubscher](https://howdypress.com/)
- - [Nalini Dayma](https://www.linkedin.com/in/nalinidayma/)
  - [Nesar Uddin Rahid](https://dribbble.com/rahiddesigner)
 
 ## Videos
