@@ -14,7 +14,7 @@ yes | sudo docker system prune --volumes
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Start Jenkins"
 echo -e '\e[38;5;198m'"++++ "
-sudo docker run -d -p 8088:8088 -e JENKINS_OPTS="--httpPort=8088" --memory 1024M --restart always --name jenkins -v /var/jenkins_home:/var/jenkins_home jenkins/jenkins:lts
+sudo docker run -d -p 8088:8088 -e JENKINS_OPTS="--httpPort=8088" --memory 1024M --restart always --name jenkins -v /vagrant/jenkins/jenkins_home:/var/jenkins_home jenkins/jenkins:lts
 sleep 20
 
 echo -e '\e[38;5;198m'"++++ "
@@ -29,10 +29,9 @@ sudo bash /vagrant/vault/vault.sh
 fi
 
 echo -e '\e[38;5;198m'"++++ "
-echo -e '\e[38;5;198m'"++++ Using the root Vault token, add a Secret in Vault which Jenkins will retrieve"
+echo -e '\e[38;5;198m'"++++ Ensure Environment Variables from /etc/environment"
 echo -e '\e[38;5;198m'"++++ "
-# add vault ENV variables
-VAULT_TOKEN=$(grep 'Initial Root Token' /etc/vault/init.file | cut -d ':' -f2 | tr -d ' ')
+set -a; source /etc/environment; set +a;
 
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ vault secrets enable -path=kv1 kv1"
@@ -69,4 +68,4 @@ vault kv get kv1/secret/testing/value_two
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ To use Jenkins please open in your browser"
 echo -e '\e[38;5;198m'"++++ http://localhost:8088"
-echo -e '\e[38;5;198m'"++++ Login with username: admin and password: `sudo cat /var/jenkins_home/secrets/initialAdminPassword`"
+echo -e '\e[38;5;198m'"++++ Login with username: admin and password: `sudo cat /vagrant/jenkins/jenkins_home/secrets/initialAdminPassword`"
