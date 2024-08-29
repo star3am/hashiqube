@@ -8,6 +8,9 @@
 # https://blog.palark.com/ready-to-use-commands-and-tips-for-kubectl/
 # https://techfrontier.me.uk/post/finally-my-own-awx-server/
 
+# DEBUG: kubectl -n awx logs -f deployment/awx-demo -c awx-demo-web
+# https://github.com/kurokobo/awx-on-k3s/blob/main/tips/troubleshooting.md#investigate-logs-of-the-containers-inside-the-podsgit
+
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Add ~/.local/bin to PATH"
 echo -e '\e[38;5;198m'"++++ "
@@ -21,7 +24,7 @@ echo -e '\e[38;5;198m'"++++ "
 sudo rm -rf /opt/awx
 sudo mkdir -p /opt/awx
 sudo chown -R vagrant:vagrant /opt/awx
-sudo --preserve-env=PATH -u vagrant git clone https://github.com/ansible/awx.git /opt/awx --depth 1 --branch 21.7.0
+sudo --preserve-env=PATH -u vagrant git clone https://github.com/ansible/awx.git /opt/awx --depth 1 --branch 21.7.0 # 24.6.1
 
 cd /opt/awx
 
@@ -49,7 +52,7 @@ echo -e '\e[38;5;198m'"++++ Pull quay.io/ansible/awx-ee:latest to avoid Back-off
 echo -e '\e[38;5;198m'"++++ "
 sudo --preserve-env=PATH -u vagrant minikube ssh docker pull quay.io/ansible/awx-ee:latest
 
-# https://github.com/ansible/awx-operator#basic-install
+# 
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Create kustomization.yaml"
 echo -e '\e[38;5;198m'"++++ "
@@ -58,12 +61,12 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   # Find the latest tag here: https://github.com/ansible/awx-operator/releases
-  - github.com/ansible/awx-operator/config/default?ref=1.1.4
+  - github.com/ansible/awx-operator/config/default?ref=1.1.4 # 2.19.1
 
 # Set the image tags to match the git version from above
 images:
   - name: quay.io/ansible/awx-operator
-    newTag: 1.1.4
+    newTag: 1.1.4 # 2.19.1
 
 # Specify a custom namespace in which to install AWX
 namespace: awx
@@ -128,25 +131,25 @@ echo -e '\e[38;5;198m'"++++ DEBUG: cat awx-demo.yaml"
 echo -e '\e[38;5;198m'"++++ "
 cat ./awx-demo.yaml
 
-# echo -e '\e[38;5;198m'"++++ "
-# echo -e '\e[38;5;198m'"++++ Add awx-demo.yaml to kustomization.yaml"
-# echo -e '\e[38;5;198m'"++++ "
-# cat <<EOF | sudo --preserve-env=PATH -u vagrant tee ./kustomization.yaml
-# apiVersion: kustomize.config.k8s.io/v1beta1
-# kind: Kustomization
-# resources:
-#   # Find the latest tag here: https://github.com/ansible/awx-operator/releases
-#   - github.com/ansible/awx-operator/config/default?ref=1.1.4
-#   - awx-demo.yaml
+echo -e '\e[38;5;198m'"++++ "
+echo -e '\e[38;5;198m'"++++ Add awx-demo.yaml to kustomization.yaml"
+echo -e '\e[38;5;198m'"++++ "
+cat <<EOF | sudo --preserve-env=PATH -u vagrant tee ./kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  # Find the latest tag here: https://github.com/ansible/awx-operator/releases
+  - github.com/ansible/awx-operator/config/default?ref=1.1.4 # 2.19.1
+  - awx-demo.yaml
 
-# # Set the image tags to match the git version from above
-# images:
-#   - name: quay.io/ansible/awx-operator
-#     newTag: 1.1.4
+# Set the image tags to match the git version from above
+images:
+  - name: quay.io/ansible/awx-operator
+    newTag: 1.1.4 # 2.19.1
 
-# # Specify a custom namespace in which to install AWX
-# namespace: awx
-# EOF
+# Specify a custom namespace in which to install AWX
+namespace: awx
+EOF
 
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Create awx.yaml with kubectl kustomize > awx.yaml"
@@ -342,4 +345,5 @@ echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ You can now access the AWX Ansible Web Interface at http://localhost:8043"
 echo -e '\e[38;5;198m'"++++ Login with Username: admin and Password: $AWX_ADMIN_PASSWORD"
 echo -e '\e[38;5;198m'"++++ Documentation can be found at http://localhost:3333/#/ansible-tower/README"
+echo -e '\e[38;5;198m'"++++ DEBUG: kubectl -n awx logs -f deployment/awx-demo -c awx-demo-web"
 echo -e '\e[38;5;198m'"++++ "

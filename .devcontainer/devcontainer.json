@@ -5,13 +5,18 @@
   "postStartCommand": {
     "set-git-config-safe-directory": "git config --global --add safe.directory ${containerWorkspaceFolder}",
     "set-git-config-line-endings": "git config --global core.autocrlf input",
-    "set-git-config-gpg-program": "git config --global --add gpg.program /usr/bin/gpg"
+    "set-git-config-gpg-program": "git config --global --add gpg.program /usr/bin/gpg",
+    "service-swapspace-start": "service swapspace start"
   },
   "postAttachCommand": {
     "print-message-of-the-day": "bash /etc/update-motd.d/00-header"
   },
   "customizations": {
     "vscode": {
+      "settings": {
+        "editor.fontSize": 16,
+        "terminal.integrated.fontSize": 16
+      },
       "extensions": [
         "dbaeumer.vscode-eslint",
         "hashicorp.terraform",
