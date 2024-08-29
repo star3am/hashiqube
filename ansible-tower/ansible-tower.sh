@@ -111,25 +111,42 @@ spec:
   nodeport_port: 30080
 EOF
 
+if [[ $CODESPACES == true ]]; then
 echo -e '\e[38;5;198m'"++++ "
-echo -e '\e[38;5;198m'"++++ Add awx-demo.yaml to kustomization.yaml"
+echo -e '\e[38;5;198m'"++++ Adding Github Codespace Name in CSRF_TRUSTED_ORIGINS awx-demo.yaml"
 echo -e '\e[38;5;198m'"++++ "
-cat <<EOF | sudo --preserve-env=PATH -u vagrant tee ./kustomization.yaml
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-resources:
-  # Find the latest tag here: https://github.com/ansible/awx-operator/releases
-  - github.com/ansible/awx-operator/config/default?ref=1.1.4
-  - awx-demo.yaml
-
-# Set the image tags to match the git version from above
-images:
-  - name: quay.io/ansible/awx-operator
-    newTag: 1.1.4
-
-# Specify a custom namespace in which to install AWX
-namespace: awx
+cat <<EOF | sudo --preserve-env=PATH -u vagrant tee -a ./awx-demo.yaml
+  extra_settings:
+  - setting: CSRF_TRUSTED_ORIGINS
+    value:
+      - https://$CODESPACE_NAME.github.dev
 EOF
+fi
+
+echo -e '\e[38;5;198m'"++++ "
+echo -e '\e[38;5;198m'"++++ DEBUG: cat awx-demo.yaml"
+echo -e '\e[38;5;198m'"++++ "
+cat ./awx-demo.yaml
+
+# echo -e '\e[38;5;198m'"++++ "
+# echo -e '\e[38;5;198m'"++++ Add awx-demo.yaml to kustomization.yaml"
+# echo -e '\e[38;5;198m'"++++ "
+# cat <<EOF | sudo --preserve-env=PATH -u vagrant tee ./kustomization.yaml
+# apiVersion: kustomize.config.k8s.io/v1beta1
+# kind: Kustomization
+# resources:
+#   # Find the latest tag here: https://github.com/ansible/awx-operator/releases
+#   - github.com/ansible/awx-operator/config/default?ref=1.1.4
+#   - awx-demo.yaml
+
+# # Set the image tags to match the git version from above
+# images:
+#   - name: quay.io/ansible/awx-operator
+#     newTag: 1.1.4
+
+# # Specify a custom namespace in which to install AWX
+# namespace: awx
+# EOF
 
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Create awx.yaml with kubectl kustomize > awx.yaml"
@@ -212,10 +229,10 @@ EOF
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Check if Default organisation exists"
 echo -e '\e[38;5;198m'"++++ "
-sudo --preserve-env=PATH -u vagrant awx organizations list --wait $AWX_COMMON | grep -q "Default"
+sudo --preserve-env=PATH -u vagrant /home/vagrant/.local/bin/awx organizations list --wait $AWX_COMMON | grep -q "Default"
 if [ $? -eq 1 ]; then
   echo -e '\e[38;5;198m'"++++ Organization 'Default' doesn't exist, creating"
-  sudo --preserve-env=PATH -u vagrant awx organizations create --name "Default" --description "Default" --wait $AWX_COMMON
+  sudo --preserve-env=PATH -u vagrant /home/vagrant/.local/bin/awx organizations create --name "Default" --description "Default" --wait $AWX_COMMON
 else
   echo -e '\e[38;5;198m'"++++ Organization 'Default' exists"
 fi
@@ -224,10 +241,10 @@ fi
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Check if 'Demo Inventory' exists"
 echo -e '\e[38;5;198m'"++++ "
-sudo --preserve-env=PATH -u vagrant awx inventory list --wait $AWX_COMMON | grep -q 'Demo Inventory'
+sudo --preserve-env=PATH -u vagrant /home/vagrant/.local/bin/awx inventory list --wait $AWX_COMMON | grep -q 'Demo Inventory'
 if [ $? -eq 1 ]; then
   echo -e '\e[38;5;198m'"++++ 'Demo Inventory' doesn't exist, creating"
-  sudo --preserve-env=PATH -u vagrant awx inventory create --name 'Demo Inventory' --description 'Demo Inventory' --organization 'Default' --wait $AWX_COMMON
+  sudo --preserve-env=PATH -u vagrant /home/vagrant/.local/bin/awx inventory create --name 'Demo Inventory' --description 'Demo Inventory' --organization 'Default' --wait $AWX_COMMON
 else
   echo -e '\e[38;5;198m'"++++ 'Demo Inventory' exists"
 fi
@@ -236,50 +253,50 @@ fi
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Create projects ansible-role-example-role"
 echo -e '\e[38;5;198m'"++++ "
-sudo --preserve-env=PATH -u vagrant awx projects create --organization 'Default' --scm_update_on_launch true --scm_url https://github.com/star3am/ansible-role-example-role --scm_type git --name ansible-role-example-role --description ansible-role-example-role --wait $AWX_COMMON
+sudo --preserve-env=PATH -u vagrant /home/vagrant/.local/bin/awx projects create --organization 'Default' --scm_update_on_launch true --scm_url https://github.com/star3am/ansible-role-example-role --scm_type git --name ansible-role-example-role --description ansible-role-example-role --wait $AWX_COMMON
 
 # https://docs.ansible.com/ansible-tower/latest/html/towercli/reference.html#awx-job-templates-create
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Create job_templates ansible-role-example-role"
 echo -e '\e[38;5;198m'"++++ "
-sudo --preserve-env=PATH -u vagrant awx job_templates create --name ansible-role-example-role --description ansible-role-example-role --job_type run --inventory 'Demo Inventory' --project 'ansible-role-example-role' --become_enabled true --ask_limit_on_launch true --ask_tags_on_launch true --playbook site.yml --ask_limit_on_launch true --ask_tags_on_launch true --ask_variables_on_launch true --wait $AWX_COMMON
+sudo --preserve-env=PATH -u vagrant /home/vagrant/.local/bin/awx job_templates create --name ansible-role-example-role --description ansible-role-example-role --job_type run --inventory 'Demo Inventory' --project 'ansible-role-example-role' --become_enabled true --ask_limit_on_launch true --ask_tags_on_launch true --playbook site.yml --ask_limit_on_launch true --ask_tags_on_launch true --ask_variables_on_launch true --wait $AWX_COMMON
 
 # https://docs.ansible.com/ansible-tower/latest/html/towercli/reference.html#awx-credentials-create
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Add credentials ansible"
 echo -e '\e[38;5;198m'"++++ "
-sudo --preserve-env=PATH -u vagrant awx credentials create --credential_type 'Machine' --organization 'Default' --name 'ansible' --inputs '{"username": "vagrant", "password": "vagrant"}' $AWX_COMMON
+sudo --preserve-env=PATH -u vagrant /home/vagrant/.local/bin/awx credentials create --credential_type 'Machine' --organization 'Default' --name 'ansible' --inputs '{"username": "vagrant", "password": "vagrant"}' $AWX_COMMON
 
 # https://docs.ansible.com/ansible-tower/latest/html/towercli/reference.html#awx-job-templates
 # echo -e '\e[38;5;198m'"++++ "
 # echo -e '\e[38;5;198m'"++++ Associate credential with job_templates Demo Job Template"
 # echo -e '\e[38;5;198m'"++++ "
-# sudo --preserve-env=PATH -u vagrant awx job_templates disassociate --credential "Demo Credential" --name "Demo Job Template" --wait $AWX_COMMON || true
-# sudo --preserve-env=PATH -u vagrant awx job_templates associate --credential "ansible" --name "Demo Job Template" --wait $AWX_COMMON || true
+# sudo --preserve-env=PATH -u vagrant /home/vagrant/.local/bin/awx job_templates disassociate --credential "Demo Credential" --name "Demo Job Template" --wait $AWX_COMMON || true
+# sudo --preserve-env=PATH -u vagrant /home/vagrant/.local/bin/awx job_templates associate --credential "ansible" --name "Demo Job Template" --wait $AWX_COMMON || true
 
 # https://docs.ansible.com/ansible-tower/latest/html/towercli/reference.html#awx-job-templates
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Associate credential with job_templates ansible-role-example-role"
 echo -e '\e[38;5;198m'"++++ "
-sudo --preserve-env=PATH -u vagrant awx job_templates associate --credential "ansible" --name "ansible-role-example-role" $AWX_COMMON
+sudo --preserve-env=PATH -u vagrant /home/vagrant/.local/bin/awx job_templates associate --credential "ansible" --name "ansible-role-example-role" $AWX_COMMON
 
 # https://docs.ansible.com/ansible-tower/latest/html/towercli/reference.html#awx-projects-update
 # echo -e '\e[38;5;198m'"++++ "
 # echo -e '\e[38;5;198m'"++++ Update the project"
 # echo -e '\e[38;5;198m'"++++ "
-# sudo --preserve-env=PATH -u vagrant awx projects update "Demo Project" --wait $AWX_COMMON
+# sudo --preserve-env=PATH -u vagrant /home/vagrant/.local/bin/awx projects update "Demo Project" --wait $AWX_COMMON
 
 # https://docs.ansible.com/ansible-tower/latest/html/towercli/reference.html#awx-projects-modify
 # echo -e '\e[38;5;198m'"++++ "
 # echo -e '\e[38;5;198m'"++++ Disable project update"
 # echo -e '\e[38;5;198m'"++++ "
-# sudo --preserve-env=PATH -u vagrant awx projects modify 'Demo Project' --scm_update_on_launch false --wait $AWX_COMMON
+# sudo --preserve-env=PATH -u vagrant /home/vagrant/.local/bin/awx projects modify 'Demo Project' --scm_update_on_launch false --wait $AWX_COMMON
 
 # https://docs.ansible.com/ansible-tower/latest/html/towercli/reference.html#awx-workflow-job-templates-modify
 # echo -e '\e[38;5;198m'"++++ "
 # echo -e '\e[38;5;198m'"++++ Modify job_templates Demo Job Template"
 # echo -e '\e[38;5;198m'"++++ "
-# sudo --preserve-env=PATH -u vagrant awx job_templates modify "Demo Job Template" --name "Demo Job Template" --ask_limit_on_launch true --ask_tags_on_launch true $AWX_COMMON
+# sudo --preserve-env=PATH -u vagrant /home/vagrant/.local/bin/awx job_templates modify "Demo Job Template" --name "Demo Job Template" --ask_limit_on_launch true --ask_tags_on_launch true $AWX_COMMON
 
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Configure SSH to allow login with password"
@@ -291,19 +308,19 @@ sudo systemctl reload ssh
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Add VM host to Ansible Tower inventory"
 echo -e '\e[38;5;198m'"++++ "
-sudo --preserve-env=PATH -u vagrant awx hosts create --id 10.9.99.10 --description $(hostname) --inventory 1 --enabled true --name 10.9.99.10 $AWX_COMMON
+sudo --preserve-env=PATH -u vagrant /home/vagrant/.local/bin/awx hosts create --id 10.9.99.10 --description $(hostname) --inventory 1 --enabled true --name 10.9.99.10 $AWX_COMMON
 
 # https://docs.ansible.com/ansible-tower/latest/html/towercli/reference.html#awx-job-templates-launch
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Run Ansible Tower job_template"
-echo -e '\e[38;5;198m'"++++ sudo --preserve-env=PATH -u vagrant awx job_templates launch ansible-role-example-role \
+echo -e '\e[38;5;198m'"++++ sudo --preserve-env=PATH -u vagrant /home/vagrant/.local/bin/awx job_templates launch ansible-role-example-role \
   --limit 10.9.99.10 \
   --monitor \
   --filter status $AWX_COMMON \
   --job_tags \"day0,day1,always\" \
   --extra_vars \"{\"vm_name\":\"$(hostname)\", \"vm_ip\":\"10.9.99.10\"}\""
 echo -e '\e[38;5;198m'"++++ "
-sudo --preserve-env=PATH -u vagrant awx job_templates launch ansible-role-example-role \
+sudo --preserve-env=PATH -u vagrant /home/vagrant/.local/bin/awx job_templates launch ansible-role-example-role \
   --limit 10.9.99.10 \
   --monitor \
   --filter status $AWX_COMMON \
@@ -314,7 +331,7 @@ sudo --preserve-env=PATH -u vagrant awx job_templates launch ansible-role-exampl
 # echo -e '\e[38;5;198m'"++++ "
 # echo -e '\e[38;5;198m'"++++ Remove VM host from Ansible Tower inventory"
 # echo -e '\e[38;5;198m'"++++ "
-# sudo --preserve-env=PATH -u vagrant awx hosts delete --id "$(sudo --preserve-env=PATH -u vagrant awx hosts list $AWX_COMMON | grep "10.9.99.10" | cut -d ' ' -f1)" $AWX_COMMON
+# sudo --preserve-env=PATH -u vagrant /home/vagrant/.local/bin/awx hosts delete --id "$(sudo --preserve-env=PATH -u vagrant /home/vagrant/.local/bin/awx hosts list $AWX_COMMON | grep "10.9.99.10" | cut -d ' ' -f1)" $AWX_COMMON
 
 # echo -e '\e[38;5;198m'"++++ "
 # echo -e '\e[38;5;198m'"++++ DEBUG with kubectl logs -f deployments/awx-operator-controller-manager -c awx-manager -n awx"
