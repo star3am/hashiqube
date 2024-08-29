@@ -8,6 +8,9 @@
 # https://blog.palark.com/ready-to-use-commands-and-tips-for-kubectl/
 # https://techfrontier.me.uk/post/finally-my-own-awx-server/
 
+# DEBUG: kubectl -n awx logs -f deployment/awx-demo -c awx-demo-web
+# https://github.com/kurokobo/awx-on-k3s/blob/main/tips/troubleshooting.md#investigate-logs-of-the-containers-inside-the-podsgit
+
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Add ~/.local/bin to PATH"
 echo -e '\e[38;5;198m'"++++ "
@@ -21,7 +24,7 @@ echo -e '\e[38;5;198m'"++++ "
 sudo rm -rf /opt/awx
 sudo mkdir -p /opt/awx
 sudo chown -R vagrant:vagrant /opt/awx
-sudo --preserve-env=PATH -u vagrant git clone https://github.com/ansible/awx.git /opt/awx --depth 1 --branch 21.7.0
+sudo --preserve-env=PATH -u vagrant git clone https://github.com/ansible/awx.git /opt/awx --depth 1 --branch 21.7.0 # 24.6.1
 
 cd /opt/awx
 
@@ -29,17 +32,17 @@ cd /opt/awx
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Install Ansible and AWX dependencies with pip"
 echo -e '\e[38;5;198m'"++++ "
-sudo --preserve-env=PATH -u vagrant python -m pip install docker --quiet
-sudo --preserve-env=PATH -u vagrant python -m pip install docker-compose --quiet
-sudo --preserve-env=PATH -u vagrant python -m pip install ansible --quiet
-sudo --preserve-env=PATH -u vagrant python -m pip install ansible-lint --quiet
-sudo --preserve-env=PATH -u vagrant python -m pip install wheel --quiet
-sudo --preserve-env=PATH -u vagrant python -m pip install pywinrm --quiet
-sudo --preserve-env=PATH -u vagrant python -m pip install requests --quiet
-sudo --preserve-env=PATH -u vagrant python -m pip install docker --quiet
-sudo --preserve-env=PATH -u vagrant python -m pip install molecule --quiet
-sudo --preserve-env=PATH -u vagrant python -m pip install junit_xml --quiet
-sudo --preserve-env=PATH -u vagrant python -m pip install awxkit --quiet
+sudo --preserve-env=PATH -u vagrant python -m pip install docker --break-system-packages --quiet
+sudo --preserve-env=PATH -u vagrant python -m pip install docker-compose --break-system-packages --quiet
+sudo --preserve-env=PATH -u vagrant python -m pip install ansible --break-system-packages --quiet
+sudo --preserve-env=PATH -u vagrant python -m pip install ansible-lint --break-system-packages --quiet
+sudo --preserve-env=PATH -u vagrant python -m pip install wheel --break-system-packages --quiet
+sudo --preserve-env=PATH -u vagrant python -m pip install pywinrm --break-system-packages --quiet
+sudo --preserve-env=PATH -u vagrant python -m pip install requests --break-system-packages --quiet
+sudo --preserve-env=PATH -u vagrant python -m pip install docker --break-system-packages --quiet
+sudo --preserve-env=PATH -u vagrant python -m pip install molecule --break-system-packages --quiet
+sudo --preserve-env=PATH -u vagrant python -m pip install junit_xml --break-system-packages --quiet
+sudo --preserve-env=PATH -u vagrant python -m pip install awxkit --break-system-packages --quiet
 
 # BUG: https://techfrontier.me.uk/post/finally-my-own-awx-server/
 # Back-off pulling image "quay.io/ansible/awx-ee:latest"
@@ -49,7 +52,7 @@ echo -e '\e[38;5;198m'"++++ Pull quay.io/ansible/awx-ee:latest to avoid Back-off
 echo -e '\e[38;5;198m'"++++ "
 sudo --preserve-env=PATH -u vagrant minikube ssh docker pull quay.io/ansible/awx-ee:latest
 
-# https://github.com/ansible/awx-operator#basic-install
+# 
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Create kustomization.yaml"
 echo -e '\e[38;5;198m'"++++ "
@@ -58,12 +61,12 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   # Find the latest tag here: https://github.com/ansible/awx-operator/releases
-  - github.com/ansible/awx-operator/config/default?ref=1.1.4
+  - github.com/ansible/awx-operator/config/default?ref=1.1.4 # 2.19.1
 
 # Set the image tags to match the git version from above
 images:
   - name: quay.io/ansible/awx-operator
-    newTag: 1.1.4
+    newTag: 1.1.4 # 2.19.1
 
 # Specify a custom namespace in which to install AWX
 namespace: awx
@@ -111,6 +114,23 @@ spec:
   nodeport_port: 30080
 EOF
 
+if [[ $CODESPACES == true ]]; then
+echo -e '\e[38;5;198m'"++++ "
+echo -e '\e[38;5;198m'"++++ Adding Github Codespace Name in CSRF_TRUSTED_ORIGINS awx-demo.yaml"
+echo -e '\e[38;5;198m'"++++ "
+cat <<EOF | sudo --preserve-env=PATH -u vagrant tee -a ./awx-demo.yaml
+  extra_settings:
+  - setting: CSRF_TRUSTED_ORIGINS
+    value:
+      - https://$CODESPACE_NAME.github.dev
+EOF
+fi
+
+echo -e '\e[38;5;198m'"++++ "
+echo -e '\e[38;5;198m'"++++ DEBUG: cat awx-demo.yaml"
+echo -e '\e[38;5;198m'"++++ "
+cat ./awx-demo.yaml
+
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Add awx-demo.yaml to kustomization.yaml"
 echo -e '\e[38;5;198m'"++++ "
@@ -119,13 +139,13 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   # Find the latest tag here: https://github.com/ansible/awx-operator/releases
-  - github.com/ansible/awx-operator/config/default?ref=1.1.4
+  - github.com/ansible/awx-operator/config/default?ref=1.1.4 # 2.19.1
   - awx-demo.yaml
 
 # Set the image tags to match the git version from above
 images:
   - name: quay.io/ansible/awx-operator
-    newTag: 1.1.4
+    newTag: 1.1.4 # 2.19.1
 
 # Specify a custom namespace in which to install AWX
 namespace: awx
@@ -142,7 +162,7 @@ echo -e '\e[38;5;198m'"++++ "
 sudo --preserve-env=PATH -u vagrant kubectl apply -f awx.yaml
 
 attempts=0
-max_attempts=20
+max_attempts=30
 while ! ( sudo --preserve-env=PATH -u vagrant kubectl get pods --namespace awx | grep demo | grep -v postgres | tr -s " " | cut -d " " -f3 | grep Running ) && (( $attempts < $max_attempts )); do
   attempts=$((attempts+1))
   sleep 60;
@@ -152,11 +172,12 @@ while ! ( sudo --preserve-env=PATH -u vagrant kubectl get pods --namespace awx |
   sudo --preserve-env=PATH -u vagrant kubectl get po --namespace awx
   sudo --preserve-env=PATH -u vagrant kubectl get events | grep -e Memory -e OOM
 done
+sleep 30;
 
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Get the AWX password"
 echo -e '\e[38;5;198m'"++++ "
-AWX_ADMIN_PASSWORD=$(kubectl get secret awx-demo-admin-password -n awx -o jsonpath="{.data.password}" | base64 --decode)
+AWX_ADMIN_PASSWORD=$(sudo --preserve-env=PATH -u vagrant kubectl get secret awx-demo-admin-password -n awx -o jsonpath="{.data.password}" | base64 --decode)
 echo "AWX Admin Password: $AWX_ADMIN_PASSWORD"
 
 echo -e '\e[38;5;198m'"++++ "
@@ -164,11 +185,11 @@ echo -e '\e[38;5;198m'"++++ Check that AWX Ansible Tower web interface is availa
 echo -e '\e[38;5;198m'"++++ "
 attempts=0
 max_attempts=30
-while ! ( kubectl exec $(kubectl get po -n awx | grep -v operator | grep -v postgres | grep awx | tr -s " " | cut -d " " -f1) --container="redis" -n awx -- /bin/bash -c "apt-get -qqq update && apt-get -qqq install -y procps curl net-tools && netstat -nlp | grep 8052" ) && (( $attempts < $max_attempts )); do
+while ! ( sudo --preserve-env=PATH -u vagrant kubectl exec $(sudo --preserve-env=PATH -u vagrant kubectl get po -n awx | grep -v operator | grep -v postgres | grep awx | tr -s " " | cut -d " " -f1) --container="redis" -n awx -- /bin/bash -c "apt-get -qqq update && apt-get -qqq install -y procps curl net-tools && netstat -nlp | grep 8052" ) && (( $attempts < $max_attempts )); do
   attempts=$((attempts+1))
   sleep 60;
   echo -e '\e[38;5;198m'"++++ Waiting for AWX Ansible Tower web interface to become ready, (${attempts}/${max_attempts}) sleep 60s"
-  kubectl exec $(kubectl get po -n awx | grep -v operator | grep -v postgres | grep awx | tr -s " " | cut -d " " -f1) --container="redis" -n awx -- /bin/bash -c "ps aux; netstat -nlp"
+  sudo --preserve-env=PATH -u vagrant kubectl exec $(sudo --preserve-env=PATH -u vagrant kubectl get po -n awx | grep -v operator | grep -v postgres | grep awx | tr -s " " | cut -d " " -f1) --container="redis" -n awx -- /bin/bash -c "ps aux; netstat -nlp"
 done
 
 attempts=0
@@ -324,4 +345,5 @@ echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ You can now access the AWX Ansible Web Interface at http://localhost:8043"
 echo -e '\e[38;5;198m'"++++ Login with Username: admin and Password: $AWX_ADMIN_PASSWORD"
 echo -e '\e[38;5;198m'"++++ Documentation can be found at http://localhost:3333/#/ansible-tower/README"
+echo -e '\e[38;5;198m'"++++ DEBUG: kubectl -n awx logs -f deployment/awx-demo -c awx-demo-web"
 echo -e '\e[38;5;198m'"++++ "
