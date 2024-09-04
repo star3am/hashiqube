@@ -39,7 +39,7 @@ fi
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Bring up Localstack"
 echo -e '\e[38;5;198m'"++++ "
-pip3 install --upgrade awscli-local
+pip3 install --upgrade awscli-local --break-system-packages
 sudo rm -rf awscliv2.zip
 # https://aws.amazon.com/blogs/developer/aws-cli-v2-now-available-for-linux-arm/ aarch64
 curl -s "https://awscli.amazonaws.com/awscli-exe-linux-${arch}.zip" -o "awscliv2.zip"
@@ -48,8 +48,8 @@ sudo unzip -q awscliv2.zip
 yes | sudo ./aws/install --update
 echo -e '\e[38;5;198m'"aws --version"
 aws --version
-python3 -m pip install awscli-local --quiet
-python3 -m pip install flask-cors --quiet
+python3 -m pip install awscli-local --break-system-packages --quiet
+python3 -m pip install flask-cors --break-system-packages --quiet
 sudo -E docker stop localstack_main
 yes | sudo docker system prune --volumes
 sudo docker run --rm -it -d -p 4566:4566 -p 4571:4571 --rm --privileged --name localstack_main localstack/localstack
