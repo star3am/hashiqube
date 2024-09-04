@@ -50,8 +50,12 @@ function packer-install() {
     echo -e '\e[38;5;198m'"++++ Installed: `/usr/local/bin/packer version`"
     echo -e '\e[38;5;198m'"++++ "
   fi
-  VAULT_ADDR=http://127.0.0.1:8200
-  VAULT_TOKEN=$(grep VAULT_TOKEN /etc/environment | cut -d "=" -f2)
+
+  echo -e '\e[38;5;198m'"++++ "
+  echo -e '\e[38;5;198m'"++++ Ensure Environment Variables from /etc/environment"
+  echo -e '\e[38;5;198m'"++++ "
+  set -a; source /etc/environment; set +a;
+
   # Packer will build a Docker container, use the Shell and Ansible provisioners, Ansible will also connect to Vault to retrieve secrets using a Token.
   # https://learn.hashicorp.com/vault/getting-started/secrets-engines
   # https://docs.ansible.com/ansible/latest/plugins/lookup/hashi_vault.html
@@ -127,15 +131,11 @@ EOF
   # sed -i "s:token=[^ ]*:token=${ANSIBLE_TOKEN}:" /vagrant/packer/packer/linux/ubuntu/playbook.yml
   echo -e '\e[38;5;198m'"++++ Install Ansible to configure Containers/VMs/AMIs/Whatever"
   echo -e '\e[38;5;198m'"++++ "
-  sudo DEBIAN_FRONTEND=noninteractive apt-get update
-  sudo DEBIAN_FRONTEND=noninteractive apt-get install -y python3-pip
-  sudo pip3 install ansible
+  sudo pip3 install ansible --break-system-packages --quiet
   if [ -f /usr/local/bin/ansible ]; then
     echo -e '\e[38;5;198m'"++++ `/usr/local/bin/ansible --version | head -n 1` already installed at /usr/local/bin/ansible"
   else
-    sudo DEBIAN_FRONTEND=noninteractive apt-get update
-    sudo DEBIAN_FRONTEND=noninteractive apt-get install -y python3-pip
-    sudo pip3 install ansible
+    sudo pip3 install ansible --break-system-packages --quiet
   fi
   echo -e '\e[38;5;198m'"++++ "
   echo -e '\e[38;5;198m'"++++ Install Docker so we can build Docker Images"
