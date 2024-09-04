@@ -44,7 +44,15 @@ else
   echo -e '\e[38;5;198m'"++++ "
   sudo bash /vagrant/vault/vault.sh
 fi
-export VAULT_ADDR=http://127.0.0.1:8200
+
+echo -e '\e[38;5;198m'"++++ "
+echo -e '\e[38;5;198m'"++++ Ensure Environment Variables from /etc/environment"
+echo -e '\e[38;5;198m'"++++ "
+set -a; source /etc/environment; set +a;
+
+echo -e '\e[38;5;198m'"++++ "
+echo -e '\e[38;5;198m'"++++ Vault Status"
+echo -e '\e[38;5;198m'"++++ "
 vault status
 
 echo -e '\e[38;5;198m'"++++ "
