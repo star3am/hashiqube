@@ -13,19 +13,19 @@ terraform {
       version = "~> 5.0"
     }
     vault = {
-      source = "hashicorp/vault"
+      source  = "hashicorp/vault"
       version = "~> 4.0"
     }
     consul = {
-      source = "hashicorp/consul"
+      source  = "hashicorp/consul"
       version = "~> 2.0"
     }
     nomad = {
-      source = "hashicorp/nomad"
+      source  = "hashicorp/nomad"
       version = "~> 2.0"
     }
     boundary = {
-      source = "hashicorp/boundary"
+      source  = "hashicorp/boundary"
       version = "~> 1.0"
     }
   }
