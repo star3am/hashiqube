@@ -20,7 +20,7 @@ function terraform-install() {
     (cd /usr/local/bin && unzip /tmp/terraform.zip)
     echo -e '\e[38;5;198m'"++++ Installed: `/usr/local/bin/terraform version`"
   fi
-  pip3 install --upgrade awscli-local
+  pip3 install --upgrade awscli-local --break-system-packages --quiet
   export PATH=$HOME/.local/bin:$PATH
   sudo rm -rf awscliv2.zip
   # https://aws.amazon.com/blogs/developer/aws-cli-v2-now-available-for-linux-arm/ aarch64
