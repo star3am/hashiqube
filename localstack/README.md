@@ -10,7 +10,106 @@ LocalStack provides an easy-to-use test/mocking framework for developing Cloud a
 
 To get Localstack installed and running in Hashiqube, you can use the following command
 
-`vagrant up --provision-with basetools,localstack`
+Github Codespace: `bash localstack/localstack.sh` <br />
+Vagrant: `vagrant up --provision-with basetools,localstack`
+
+## Terraform plan
+
+To do a terraform plan, you can simply do the following:
+
+Change Directory into /vagrant/localstack
+`cd /vagrant/localstack`
+
+And then to a `terraform init` and `terraform plan`
+
+## Terraform apply
+
+To do a terraform apply, you can simply do the following:
+
+Change Directory into /vagrant/localstack
+`cd /vagrant/localstack`
+
+And then to a `terraform init` and `terraform plan` and lastly `terraform apply`
+
+## Terraform and Vault
+
+Terraform has many providers, and you can use Terraform to create many resources of many providers, such as Github, AWS, Azure, Cloudfalre and many others. Of course you can also manage HashiCorp Vault with Terraform. 
+
+To do that, you can follow these simple staps.
+
+1. Get Terraform and Localstack running <br />
+Github Codespace: `bash localstack/localstack.sh` <br />
+Vagrant: `vagrant up --provision-with basetools,localstack`
+
+2. Bring Vault up <br />
+Github Codespace: `bash vault/vault.sh` <br />
+Vagrant: `vagrant up --provision-with basetools,vault`
+
+3. Run Terraform plan with the vault module enabled <br />
+Github Codespace: `VAULT_TOKEN="YOUR_VAULT_TOKEN" TF_VAR_vault_enabled=true terraform plan` <br />
+Vagrant: To be determined
+
+```
+  # module.hashicorp-vault[0].vault_kv_secret_v2.example will be created
+  + resource "vault_kv_secret_v2" "example" {
+      + cas                 = 1
+      + data                = (sensitive value)
+      + data_json           = (sensitive value)
+      + delete_all_versions = true
+      + disable_read        = false
+      + id                  = (known after apply)
+      + metadata            = (known after apply)
+      + mount               = "kvv2"
+      + name                = "secret"
+      + path                = (known after apply)
+
+      + custom_metadata {
+          + data         = {
+              + "bar" = "12345"
+              + "foo" = "vault@example.com"
+            }
+          + max_versions = 5
+        }
+    }
+
+  # module.hashicorp-vault[0].vault_mount.kvv2 will be created
+  + resource "vault_mount" "kvv2" {
+      + accessor                     = (known after apply)
+      + audit_non_hmac_request_keys  = (known after apply)
+      + audit_non_hmac_response_keys = (known after apply)
+      + default_lease_ttl_seconds    = (known after apply)
+      + description                  = "KV Version 2 secret engine mount"
+      + external_entropy_access      = false
+      + id                           = (known after apply)
+      + max_lease_ttl_seconds        = (known after apply)
+      + options                      = {
+          + "version" = "2"
+        }
+      + path                         = "kvv2"
+      + seal_wrap                    = (known after apply)
+      + type                         = "kv"
+    }
+```
+
+4. Run Terraform apply with the vault module enabled <br />
+Github Codespace: `VAULT_TOKEN="YOUR_VAULT_TOKEN" TF_VAR_vault_enabled=true terraform apply` <br />
+Vagrant: To be determined
+
+```
+module.hashicorp-vault[0].vault_mount.kvv2: Creation complete after 1s [id=kvv2]
+module.hashicorp-vault[0].vault_kv_secret_v2.example: Creating...
+module.hashicorp-vault[0].vault_kv_secret_v2.example: Creation complete after 0s [id=kvv2/data/secret]
+```
+
+5. Aaccess Vault to see the Secret engine enabled <br />
+
+![Vault Secrets Egine KV2](images/localstack-terraform-vault-secret-engine-kv2.png?raw=true "Vault Secrets Egine KV2")
+
+![Vault Secrets Egine KV2 Secrets](images/localstack-terraform-vault-secret-engine-kv2-secrets.png?raw=true "Vault Secrets Egine KV2 Secrets")
+
+For further details, look at the code in `/vagrant/localstack`
+
+[filename](modules.tf ':include :type=code hcl')
 
 ## Localstack Web Interface
 

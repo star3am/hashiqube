@@ -10,7 +10,7 @@ source /vagrant/dbt/common.sh
 install-dbt-mssql () {
 
   echo "Installing dbt core.  Version: ${dbt_sqlserver}"
-  python -m pip install --no-cache "git+https://github.com/dbt-labs/dbt-core@v${dbt_sqlserver}#egg=dbt-postgres&subdirectory=plugins/postgres"
+  python -m pip install --break-system-packages --no-cache "git+https://github.com/dbt-labs/dbt-core@v${dbt_sqlserver}#egg=dbt-postgres&subdirectory=plugins/postgres"
 
   # Install ODBC headers for MSSQL support
   if ! [[ "18.04 20.04 22.04" == *"$(lsb_release -rs)"* ]];
@@ -34,8 +34,8 @@ install-dbt-mssql () {
   # optional: for unixODBC development headers
   sudo apt-get install -y unixodbc-dev postgresql-client
 
-  pip install -U dbt-sqlserver==$dbt_sqlserver
-  pip install -U dbt-synapse==$dbt_synapse
+  pip install -U dbt-sqlserver==$dbt_sqlserver --break-system-packages
+  pip install -U dbt-synapse==$dbt_synapse --break-system-packages
 
 }
 
@@ -45,37 +45,37 @@ install-dbt-mssql () {
 function install-dbt () {
 
   echo -e '\e[38;5;198m'"++++ installing postgres adapter"
-  python -m pip install --no-cache "git+https://github.com/dbt-labs/${dbt_postgres_ref}#egg=dbt-postgres&subdirectory=plugins/postgres"
+  python -m pip install --break-system-packages --no-cache dbt-postgres
 }
 
 #####################################
 function install-dbt-redshift () {
   echo -e '\e[38;5;198m'"++++ installing redshift adapater"
-  python -m pip install --no-cache "git+https://github.com/dbt-labs/${dbt_redshift_ref}#egg=dbt-redshift"
+  python -m pip install --break-system-packages --no-cache dbt-redshift
 }
 
 #####################################
 function install-dbt-bigquery () {
   echo -e '\e[38;5;198m'"++++ installing bigquery adapater"
-  python -m pip install --no-cache "git+https://github.com/dbt-labs/${dbt_bigquery_ref}#egg=dbt-bigquery"
+  python -m pip install --break-system-packages --no-cache dbt-bigquery
 }
 
 #####################################
 function install-dbt-snowflake () {
   echo -e '\e[38;5;198m'"++++ installing snowflake adapater"
-  python -m pip install --no-cache "git+https://github.com/dbt-labs/${dbt_snowflake_ref}#egg=dbt-snowflake"
+  python -m pip install --break-system-packages --no-cache dbt-snowflake
 }
 
 #####################################
 function install-dbt-spark () {
   echo -e '\e[38;5;198m'"++++ installing spark adapter"
-  python -m pip install --no-cache "git+https://github.com/dbt-labs/${dbt_spark_ref}#egg=dbt-spark[${dbt_spark_version}]"
+  python -m pip install --break-system-packages --no-cache dbt-spark
 }
 
 #####################################
 function install-dbt-databricks () {
   echo -e '\e[38;5;198m'"++++ installing databricks adapter"
-  python -m pip install --no-cache "dbt_databricks==${dbt_databricks}"
+  python -m pip install --break-system-packages --no-cache dbt-databricks
 }
 
 ############################
@@ -88,14 +88,9 @@ else
 fi
 
 ############################
-# Python stuff
-python --version
-# Ensure pip is upgraded and Print pip version 
-python -m pip install --upgrade pip
-pip --version
 
 # Cleanup any existing dbt packages.
-[ $(pip list | grep dbt | wc -l) -gt 0 ] && pip list | grep dbt | xargs pip uninstall -y
+[ $(pip list | grep dbt | wc -l) -gt 0 ] && pip list | grep dbt | xargs pip uninstall -y --break-system-packages
 
 echo $DBT_WITH
 DBT_WITH="${DBT_WITH:=postgres}"; echo $DBT_WITH
@@ -174,8 +169,8 @@ fi
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Ensure postgresql-client is installed"
 echo -e '\e[38;5;198m'"++++ "
-sudo apt-get install -y postgresql-client libpq-dev python3.10-dev
-python3 -m pip install --force-reinstall psycopg2==2.9.4
+sudo apt-get install -y postgresql-client libpq-dev
+python3 -m pip install --break-system-packages --force-reinstall psycopg2==2.9.4
 
 if pgrep -x "postgres" >/dev/null
 then
