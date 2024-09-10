@@ -178,12 +178,33 @@ if [ -f /vagrant/boundary/license.hclic ]; then
   echo -e '\e[38;5;198m'"++++ "
   boundary -version
 fi
+
+# https://developer.hashicorp.com/boundary/docs/commands
+echo -e '\e[38;5;198m'"++++ "
+echo -e '\e[38;5;198m'"++++ Set Boundary Environment Variables"
+echo -e '\e[38;5;198m'"++++ "
+export BOUNDARY_PASSWORD=password
+export BOUNDARY_ADDR=http://localhost:19200
+
+# https://developer.hashicorp.com/boundary/tutorials/community-administration/community-manage-targets
+echo -e '\e[38;5;198m'"++++ "
+echo -e '\e[38;5;198m'"++++ Athenticating Boundary client"
+echo -e '\e[38;5;198m'"++++ "
+boundary authenticate password -addr=http://127.0.0.1:19200 -login-name=admin -password=env://BOUNDARY_PASSWORD -keyring-type=none > /etc/boundary/auth.info
+
+echo -e '\e[38;5;198m'"++++ "
+echo -e '\e[38;5;198m'"++++ Set Boundary Token ENV variable"
+echo -e '\e[38;5;198m'"++++ "
+export BOUNDARY_TOKEN=$(cat /etc/boundary/auth.info | tail -n 1)
+
+echo -e '\e[38;5;198m'"++++ "
+echo -e '\e[38;5;198m'"++++ Print Boundary ENV variables"
+echo -e '\e[38;5;198m'"++++ "
+env | grep BOUNDARY
+
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Access Boundary"
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Boundary Server started at http://localhost:19200"
 echo -e '\e[38;5;198m'"++++ Login with admin:password"
 echo -e '\e[38;5;198m'"++++ Boundary Documentation http://localhost:3333/#/hashicorp/README?id=boundary"
-
-# TODO: read token and test login
-# boundary authenticate password -login-name=admin -password password -auth-method-id=ampw_1234567890 -addr=http://127.0.0.1:19200
