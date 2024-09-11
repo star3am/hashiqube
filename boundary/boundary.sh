@@ -1,6 +1,7 @@
 #!/bin/bash
 # https://learn.hashicorp.com/tutorials/boundary/getting-started-install
 # https://learn.hashicorp.com/tutorials/boundary/getting-started-dev
+# https://developer.hashicorp.com/boundary/docs/commands/dev
 
 VERSION=latest
 
@@ -98,7 +99,7 @@ After=network-online.target
 [Service]
 EnvironmentFile=/etc/boundary/boundary.env
 ExecReload=/bin/kill -HUP $MAINPID
-ExecStart=/usr/local/bin/boundary dev -api-listen-address 0.0.0.0:19200
+ExecStart=/usr/local/bin/boundary dev -api-listen-address 0.0.0.0:19200 -proxy-listen-address 0.0.0.0 -worker-public-address 0.0.0.0
 KillMode=process
 KillSignal=SIGINT
 LimitNOFILE=65536
@@ -198,9 +199,19 @@ echo -e '\e[38;5;198m'"++++ "
 export BOUNDARY_TOKEN=$(cat /etc/boundary/auth.info | tail -n 1)
 
 echo -e '\e[38;5;198m'"++++ "
+echo -e '\e[38;5;198m'"++++ List Boundary targets"
+echo -e '\e[38;5;198m'"++++ "
+boundary targets list -recursive -token env://BOUNDARY_TOKEN
+
+echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Print Boundary ENV variables"
 echo -e '\e[38;5;198m'"++++ "
-env | grep BOUNDARY
+for i in $(env | grep BOUNDARY); do echo "export $i"; done
+
+# echo -e '\e[38;5;198m'"++++ "
+# echo -e '\e[38;5;198m'"++++ DEBUG: Test Boundary target"
+# echo -e '\e[38;5;198m'"++++ "
+# boundary connect ssh -target-id ttcp_g4twnnFCNk -token env://BOUNDARY_TOKEN -username vagrant
 
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Access Boundary"
