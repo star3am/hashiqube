@@ -99,7 +99,7 @@ After=network-online.target
 [Service]
 EnvironmentFile=/etc/boundary/boundary.env
 ExecReload=/bin/kill -HUP $MAINPID
-ExecStart=/usr/local/bin/boundary dev -api-listen-address 0.0.0.0:19200 -proxy-listen-address 0.0.0.0 -worker-public-address 0.0.0.0
+ExecStart=/usr/local/bin/boundary dev -api-listen-address 0.0.0.0:19200 -proxy-listen-address 0.0.0.0 -worker-public-address 0.0.0.0 -log-level debug
 KillMode=process
 KillSignal=SIGINT
 LimitNOFILE=65536
