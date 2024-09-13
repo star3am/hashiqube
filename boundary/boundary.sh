@@ -99,12 +99,13 @@ After=network-online.target
 [Service]
 EnvironmentFile=/etc/boundary/boundary.env
 ExecReload=/bin/kill -HUP $MAINPID
-ExecStart=/usr/local/bin/boundary dev -api-listen-address 0.0.0.0:19200 -proxy-listen-address 0.0.0.0 -worker-public-address 0.0.0.0
+# https://developer.hashicorp.com/boundary/docs/commands/dev
+ExecStart=/usr/local/bin/boundary dev -api-listen-address 0.0.0.0:19200 -ops-listen-address 0.0.0.0 -controller-public-cluster-address 0.0.0.0 -proxy-listen-address 0.0.0.0:9202 -cluster-listen-address 0.0.0.0:9201 -worker-public-address 0.0.0.0 -log-level debug
 KillMode=process
 KillSignal=SIGINT
 LimitNOFILE=65536
-User=boundary
-Group=boundary
+# User=boundary
+# Group=boundary
 LimitMEMLOCK=infinity
 Restart=on-failure
 RestartSec=2
