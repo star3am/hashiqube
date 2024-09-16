@@ -24,7 +24,7 @@ echo -e '\e[38;5;198m'"++++ "
 sudo rm -rf /opt/awx
 sudo mkdir -p /opt/awx
 sudo chown -R vagrant:vagrant /opt/awx
-sudo --preserve-env=PATH -u vagrant git clone https://github.com/ansible/awx.git /opt/awx --depth 1 --branch 21.7.0 # 24.6.1
+sudo --preserve-env=PATH -u vagrant git clone https://github.com/ansible/awx.git /opt/awx --depth 1 --branch 22.5.0 # 21.7.0 # 24.6.1
 
 cd /opt/awx
 
