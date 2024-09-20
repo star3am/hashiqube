@@ -78,14 +78,14 @@ services:
     volumes:
       # Mounts the project folder into the container
       - ".:/vagrant"
+      - "/sys/fs/cgroup:/sys/fs/cgroup:rw"
       # Mount your ~/.ssh folder into the container
       # for Authenticating to Github
-      - "~/.ssh:/home/ubuntu/.ssh"
-      # For GPG Auth to Github
-      - "~/.gnupg:/home/ubuntu/.gnupg"
+      # - "~/.ssh:/home/ubuntu/.ssh"
+      # # For GPG Auth to Github
+      # - "~/.gnupg:/home/ubuntu/.gnupg"
       # Add your .aws or .azure or .kube directories here
       # - "$AZURE_CONFIG_DIR:/home/ubuntu/.azure"
-      - "/sys/fs/cgroup:/sys/fs/cgroup:rw"
     working_dir: "/vagrant"
     environment:
       - ARCH
