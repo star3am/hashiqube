@@ -7,7 +7,7 @@ services:
     tty: true
     cgroup: host
     tmpfs:
-    # - /var/lib/docker:mode=0777,dev,size=15g,suid,exec
+    - /var/lib/docker:mode=0777,dev,size=15g,suid,exec
     - /run
     ports:
       - "3000:3000" # grafana
@@ -78,6 +78,7 @@ services:
     volumes:
       # Mounts the project folder into the container
       - ".:/vagrant"
+      - "/sys/fs/cgroup:/sys/fs/cgroup:rw"
       # Mount your ~/.ssh folder into the container
       # for Authenticating to Github
       # - "~/.ssh:/home/ubuntu/.ssh"
@@ -85,7 +86,6 @@ services:
       # - "~/.gnupg:/home/ubuntu/.gnupg"
       # Add your .aws or .azure or .kube directories here
       # - "$AZURE_CONFIG_DIR:/home/ubuntu/.azure"
-      - "/sys/fs/cgroup:/sys/fs/cgroup:rw"
     working_dir: "/vagrant"
     environment:
       - ARCH
