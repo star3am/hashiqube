@@ -7,7 +7,7 @@ services:
     tty: true
     cgroup: host
     tmpfs:
-    - /var/lib/docker:mode=0777,dev,size=15g,suid,exec
+    - /var/lib/dockerdir:mode=0777,dev,size=15g,suid,exec
     - /run
     ports:
       - "3000:3000" # grafana
