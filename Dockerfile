@@ -3,7 +3,7 @@
 
 FROM ubuntu:noble
 
-ENV DEBIAN_FRONTEND noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 
 # Install packages needed for SSH and interactive OS
 RUN apt-get update -qq < /dev/null > /dev/null

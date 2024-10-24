@@ -213,6 +213,8 @@ for i in $(env | grep BOUNDARY); do echo "export $i"; done
 # echo -e '\e[38;5;198m'"++++ DEBUG: Test Boundary target"
 # echo -e '\e[38;5;198m'"++++ "
 # boundary connect ssh -target-id ttcp_g4twnnFCNk -token env://BOUNDARY_TOKEN -username vagrant
+# boundary connect postgres -target-id=ttcp_Rr9ldMaR3x -dbname=boundary
+# boundary connect ssh -target-id ttcp_ldXJYelrjQ -token env://BOUNDARY_TOKEN -username vagrant -addr=https://glorious-halibut-xq6pr6pvphv94j-19200.app.github.dev/
 
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Access Boundary"
