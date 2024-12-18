@@ -23,3 +23,5 @@ packer/packer/windows/ansible/connection_plugins/__pycache__**
 **.box
 **.iso
 **__pycache__
+**.out
+**kubectl

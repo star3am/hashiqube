@@ -341,6 +341,14 @@ sudo --preserve-env=PATH -u vagrant /home/vagrant/.local/bin/awx job_templates l
 # echo -e '\e[38;5;198m'"++++ "
 # sudo --preserve-env=PATH -u vagrant kubectl logs -f deployments/awx-operator-controller-manager -c awx-manager -n awx
 
+# echo -e '\e[38;5;198m'"++++ "
+# echo -e '\e[38;5;198m'"++++ DEBUG CSRF Login issues"
+# echo -e '\e[38;5;198m'"++++ "
+# https://ansible.readthedocs.io/projects/awx-operator/en/latest/user-guide/advanced-configuration/csrf-cookie-secure-setting.html
+# https://github.com/ansible/awx-operator#extra-settings
+# https://github.com/ansible/awx/issues/14024#issuecomment-1557919352
+# sudo --preserve-env=PATH -u vagrant kubectl exec -it awx-demo-5d9dc64cc7-xkssb -c awx-demo-web -n awx -- grep CSRF_TRUSTED_ORIGINS /etc/tower/settings.py
+
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ You can now access the AWX Ansible Web Interface at http://localhost:8043"
 echo -e '\e[38;5;198m'"++++ Login with Username: admin and Password: $AWX_ADMIN_PASSWORD"
