@@ -28,6 +28,16 @@ sudo --preserve-env=PATH -u vagrant git clone https://github.com/ansible/awx.git
 
 cd /opt/awx
 
+if [[ $CODESPACES == true ]]; then
+  echo -e '\e[38;5;198m'"++++ "
+  echo -e '\e[38;5;198m'"++++ Adding Github Codespace Name in CSRF_TRUSTED_ORIGINS in /opt/awx/awx/settings/local_overrides.py"
+  echo -e '\e[38;5;198m'"++++ "
+  cat <<EOF | sudo tee awx/settings/local_overrides.py
+CSRF_TRUSTED_ORIGINS = ['https://$CODESPACE_NAME-8043.app.github.dev']
+EOF
+  cat awx/settings/local_overrides.py
+fi
+
 # https://github.com/ansible/awx/blob/17.0.1/INSTALL.md#prerequisites
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Install Ansible and AWX dependencies with pip"
@@ -122,7 +132,7 @@ cat <<EOF | sudo --preserve-env=PATH -u vagrant tee -a ./awx-demo.yaml
   extra_settings:
   - setting: CSRF_TRUSTED_ORIGINS
     value:
-      - https://$CODESPACE_NAME.github.dev
+      - https://$CODESPACE_NAME-8043.app.github.dev
 EOF
 fi
 
@@ -347,7 +357,8 @@ sudo --preserve-env=PATH -u vagrant /home/vagrant/.local/bin/awx job_templates l
 # https://ansible.readthedocs.io/projects/awx-operator/en/latest/user-guide/advanced-configuration/csrf-cookie-secure-setting.html
 # https://github.com/ansible/awx-operator#extra-settings
 # https://github.com/ansible/awx/issues/14024#issuecomment-1557919352
-# sudo --preserve-env=PATH -u vagrant kubectl exec -it awx-demo-5d9dc64cc7-xkssb -c awx-demo-web -n awx -- grep CSRF_TRUSTED_ORIGINS /etc/tower/settings.py
+# sudo --preserve-env=PATH -u vagrant kubectl exec -it awx-demo-5d9dc64cc7-kbhws -c awx-demo-web -n awx -- grep CSRF_TRUSTED_ORIGINS /etc/tower/settings.py
+# sudo --preserve-env=PATH -u vagrant kubectl logs -f awx-demo-5d9dc64cc7-kbhws -c awx-demo-web -n awx
 
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ You can now access the AWX Ansible Web Interface at http://localhost:8043"
