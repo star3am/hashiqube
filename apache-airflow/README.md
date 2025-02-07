@@ -12,9 +12,37 @@ Airflow is a platform created by the community to programmatically author, sched
 
 ## Provision
 
-In order to provision apache airflow you need bastetools, docker, minikube as dependencies. 
+<!-- tabs:start -->
+#### **Github Codespaces**
 
-`vagrant up --provision-with basetools,docker,docsify,postgresql,minikube,dbt,apache-airflow`
+```
+bash hashiqube/basetools.sh
+bash docker/docker.sh
+bash database/postgresql.sh
+bash minikube/minikube.sh
+bash dbt/dbt.sh
+bash apache-airflow/apache-airflow.sh
+```
+
+#### **Vagrant**
+
+```
+vagrant up --provision-with basetools,docker,docsify,postgresql,minikube,dbt,apache-airflow
+```
+
+#### **Docker Compose**
+
+```
+docker compose exec hashiqube /bin/bash
+bash bashiqube/basetools.sh
+bash docker/docker.sh
+bash docsify/docsify.sh
+bash database/postgresql.sh
+bash minikube/minikube.sh
+bash dbt/dbt.sh
+bash apache-airflow/apache-airflow.sh
+```
+<!-- tabs:end -->
 
 ## Web UI Access
 
@@ -47,15 +75,15 @@ The `test-ssh.py` just ssh into hashiqube to test the connection
 # Airflow DAG run
 ![Airflow](images/airflow_dag_run_dbt.png?raw=true "Airflow")
 
-# Airflow Task Instance
+# Airflow Task
 ![Airflow](images/airflow_task_instance.png?raw=true "Airflow")
 
-# Airflow Task Instance Result
+# Airflow Task Result
 ![Airflow](images/airflow_task_result.png?raw=true "Airflow")
 
 [google ads](../googleads.html ':include :type=iframe width=100% height=300px')
 
-# Links and further reading
+# Links
 
 - https://airflow.apache.org/
 - https://artifacthub.io/packages/helm/airflow-helm/airflow/8.3.1
@@ -64,9 +92,11 @@ The `test-ssh.py` just ssh into hashiqube to test the connection
 - https://airflow.readthedocs.io/_/downloads/en/1.10.2/pdf/
 - https://airflow.apache.org/docs/helm-chart/stable/parameters-ref.html
 
-## Apache Airflow Vagrant Provisioner
+## Provisioner
 
 [filename](apache-airflow.sh ':include :type=code')
+
+## DAG
 
 [filename](dags/run-dbt.py ':include :type=code')
 

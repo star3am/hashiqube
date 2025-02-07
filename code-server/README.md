@@ -9,13 +9,31 @@ VSCode is a free, open source IDE. Code-server runs an instance of VS code that 
 
 ## Provision
 
-In order to provision apache airflow you need bastetools, docker as dependencies. 
+<!-- tabs:start -->
+#### **Github Codespaces**
 
 ```
-vagrant up --provision-with basetools --provider docker
-vagrant up --provision-with docker --provider docker
-vagrant up --provision-with code-server --provider docker
+bash hashiqube/basetools.sh
+bash docker/docker.sh
+bash code-server/code-server.sh
 ```
+
+#### **Vagrant**
+
+```
+vagrant up --provision-with basetools,docsify,docker,code-server
+```
+
+#### **Docker Compose**
+
+```
+docker compose exec hashiqube /bin/bash
+bash hashiqube/basetools.sh
+bash docker/docker.sh
+bash docsify/docsify.sh
+bash code-server/code-server.sh
+```
+<!-- tabs:end -->
 
 ## Web UI Access
 

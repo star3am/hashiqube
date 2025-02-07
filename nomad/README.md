@@ -20,76 +20,50 @@ Increasingly, teams want to move away from the traditional tight coupling of app
 
 [![Introduction to HashiCorp Nomad](images/maxresdefault.jpeg)](https://www.youtube.com/watch?v=s_Fm9UtL4YU)
 
-`vagrant up --provision-with basetools,docker,docsify,consul,nomad`
+## Provision
 
-[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+<!-- tabs:start -->
+#### **Github Codespaces**
 
-```log    
-Bringing machine 'user.local.dev' up with 'virtualbox' provider...
-==> user.local.dev: Checking if box 'ubuntu/xenial64' version '20190918.0.0' is up to date...
-==> user.local.dev: A newer version of the box 'ubuntu/xenial64' for provider 'virtualbox' is
-==> user.local.dev: available! You currently have version '20190918.0.0'. The latest is version
-==> user.local.dev: '20200108.0.0'. Run `vagrant box update` to update.
-==> user.local.dev: [vagrant-hostsupdater] Checking for host entries
-==> user.local.dev: [vagrant-hostsupdater]   found entry for: 10.9.99.10 user.local.dev
-==> user.local.dev: [vagrant-hostsupdater]   found entry for: 10.9.99.10 user.local.dev
-==> user.local.dev: Running provisioner: nomad (shell)...
-    user.local.dev: Running: /var/folders/7j/gsrjvmds05n53ddg28krf4_80001p9/T/vagrant-shell20200110-35617-1o32nkl.sh
-    ...
-    user.local.dev: ++++ Nomad already installed at /usr/local/bin/nomad
-    user.local.dev: ++++ Nomad v0.10.2 (0d2d6e3dc5a171c21f8f31fa117c8a765eb4fc02)
-    user.local.dev: ++++ cni-plugins already installed
-    user.local.dev: ==> Loaded configuration from /etc/nomad/server.conf
-    user.local.dev: ==> Starting Nomad agent...
-    user.local.dev: ==> Nomad agent configuration:
-    user.local.dev:
-    user.local.dev:        Advertise Addrs: HTTP: 10.9.99.10:4646; RPC: 10.9.99.10:4647; Serf: 10.9.99.10:5648
-    user.local.dev:             Bind Addrs: HTTP: 0.0.0.0:4646; RPC: 0.0.0.0:4647; Serf: 0.0.0.0:4648
-    user.local.dev:                 Client: true
-    user.local.dev:              Log Level: DEBUG
-    user.local.dev:                 Region: global (DC: dc1)
-    user.local.dev:                 Server: true
-    user.local.dev:                Version: 0.10.2
-    user.local.dev:
-    user.local.dev: ==> Nomad agent started! Log data will stream in below:
-    ...
-    user.local.dev: ==> Evaluation "8d2f35bc" finished with status "complete"
-    user.local.dev: + Job: "fabio"
-    user.local.dev: + Task Group: "fabio" (1 create)
-    user.local.dev:   + Task: "fabio" (forces create)
-    user.local.dev: Scheduler dry-run:
-    user.local.dev: - All tasks successfully allocated.
-    user.local.dev: Job Modify Index: 0
-    user.local.dev: To submit the job with version verification run:
-    user.local.dev:
-    user.local.dev: nomad job run -check-index 0 fabio.nomad
-    user.local.dev:
-    user.local.dev: When running the job with the check-index flag, the job will only be run if the
-    user.local.dev: server side version matches the job modify index returned. If the index has
-    user.local.dev: changed, another user has modified the job and the plan's results are
-    user.local.dev: potentially invalid.
-    user.local.dev: ==> Monitoring evaluation "4f53b332"
-    user.local.dev:     Evaluation triggered by job "fabio"
-    user.local.dev:     Allocation "636be5f5" created: node "63efd16b", group "fabio"
-    user.local.dev:     Evaluation status changed: "pending" -> "complete"
-    user.local.dev: ==> Evaluation "4f53b332" finished with status "complete"
-    user.local.dev: ++++ Nomad http://localhost:4646
 ```
+bash hashiqube/basetools.sh
+bash docker/docker.sh
+bash consul/consul.sh
+bash nomad/nomad.sh
+```
+
+#### **Vagrant**
+
+```
+vagrant up --provision-with basetools,docker,docsify,consul,nomad
+```
+
+#### **Docker Compose**
+
+```
+docker compose exec hashiqube /bin/bash
+bash hashiqube/basetools.sh
+bash docker/docker.sh
+bash consul/consul.sh
+bash nomad/nomad.sh
+```
+<!-- tabs:end -->
+
 ![Nomad](images/nomad.png?raw=true "Nomad")
 
-## Nomad Vagrant Provisioner
+## Nomad Provisioner
 
 `nomad.sh`
 
 [filename](nomad.sh ':include :type=code')
 
-## Monitoring Hashicorp Nomad
+## Monitoring Nomad
 
 We use Prometheus and Grafana to Monitor Nomad
 
 See: [__Monitoring Hashicorp Nomad__](prometheus-grafana/README?id=monitoring-hashicorp-nomad)
 
-## Traefik Load Balancer for Nomad
+## Traefik on Nomad
 https://traefik.io/blog/traefik-proxy-fully-integrates-with-hashicorp-nomad/ <br />
 https://doc.traefik.io/traefik/v2.8/providers/nomad/
 
@@ -105,7 +79,7 @@ In early May, Hashicorp announced Nomad Version 1.3. Among other updates, it als
 
 ![Traefik Load Balancer](images/traefik-proxy.png?raw=true "Traefik Load Balancer")
 
-## Traefik Nomad Job template
+## Traefik Nomad Job
 [filename](nomad/jobs/traefik.nomad ':include :type=code hcl')
 
 `vagrant up --provision-with basetools,docker,docsify,consul,nomad`
@@ -147,10 +121,10 @@ X-Real-Ip: 172.17.0.1
 * Connection #0 to host localhost left intact
 ```
 
-## Traefik Whoami Nomad Job template
+## Traefik Whoami
 [filename](nomad/jobs/traefik-whoami.nomad ':include :type=code hcl')
 
-## Fabio Load Balancer for Nomad
+## Fabio on Nomad
 https://github.com/fabiolb/fabio <br />
 https://fabiolb.net
 
@@ -178,10 +152,10 @@ Some routes are added via Consul, see `consul/consul.sh`
 
 [google ads](../googleads.html ':include :type=iframe width=100% height=300px')
 
-## Fabio Nomad Job template
+## Fabio Nomad Job
 [filename](nomad/jobs/fabio.nomad ':include :type=code hcl')
 
-## Fabio Properties file
+## Fabio Properties
 [filename](nomad/jobs/fabio.properties ':include :type=code config')
 
 [google ads](../googleads.html ':include :type=iframe width=100% height=300px')

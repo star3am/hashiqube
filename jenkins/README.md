@@ -30,198 +30,33 @@ Let's start Jenkins
 
 ## Provision
 
-`vagrant up --provision-with basetools,docker,docsify,vault,jenkins`
+<!-- tabs:start -->
+#### **Github Codespaces**
 
-```log
-Bringing machine 'hashiqube0' up with 'docker' provider...
-==> hashiqube0: Running provisioner: jenkins (shell)...
-    hashiqube0: Running: /var/folders/24/42plvkmn3313qkrvqjr3nqph0000gn/T/vagrant-shell20230919-34426-3boz8s.sh
-    hashiqube0: ++++
-    hashiqube0: ++++ Cleanup
-    hashiqube0: ++++
-    hashiqube0: jenkins
-    hashiqube0: jenkins
-    hashiqube0: WARNING! This will remove:
-    hashiqube0:   - all stopped containers
-    hashiqube0:   - all networks not used by at least one container
-    hashiqube0:   - all images without at least one container associated to them
-    hashiqube0:   - all build cache
-    hashiqube0:
-    hashiqube0: Are you sure you want to continue? [y/N] Deleted Images:
-    hashiqube0: untagged: jenkins/jenkins:lts
-    hashiqube0: untagged: jenkins/jenkins@sha256:645d55b80126b67dd23b6ba65d455ebc13689d057f498fbecd7bdb9165f0dd64
-    hashiqube0: deleted: sha256:153dc2842febbaaf7ec355b2e1aed81fb86d6f729e8cd2988abb31c0119e12a6
-    hashiqube0: deleted: sha256:67b3bec8f3b0048fc45b686bd817dc5afc9d3d320cbccdd9eb6c7c1a7a34b9fe
-    hashiqube0: deleted: sha256:e0003b10c4fba110263335365bce4178383b4e17d1ce8d238fc79501913e799c
-    hashiqube0: deleted: sha256:d8c0828c2b02e62f9bc89cd7144eb817f8fa79d349bad6c9ac279c55ce9e37c3
-    hashiqube0: deleted: sha256:a77637500b11fd6f14b99fb8dd34247185495013784c014610d8ff688ade040a
-    hashiqube0: deleted: sha256:ef9cc025116423c5ce63bb10ec1809c0bfd06d9b3ac6a7ef00cbabf25dabacaa
-    hashiqube0: deleted: sha256:c38e766106bf9642c3654d4e64392c995877de80f5710fdf9d33200f27deb186
-    hashiqube0: deleted: sha256:068bc0715e3a8a5a180bc5d855113d9f80b1b1d8a55c233574416f4b246e9dd8
-    hashiqube0: deleted: sha256:b424abd7e08081708484151eeefcf03061c7394efa326ad614fcd74d437241dd
-    hashiqube0: deleted: sha256:1062a8844ad0a70c4327b0e5cb010ba6641fa7f058d43d6afda201aa46b0ca50
-    hashiqube0: deleted: sha256:0f39a3172f8422bab2f1ac65c3eca191fd88562b050c4e1bb84aa2c02e3a1a0c
-    hashiqube0: deleted: sha256:14fc155ad2ba67722262e57454da2af35f870d1be9ad7f3abd74598b1e63ce88
-    hashiqube0: deleted: sha256:21e3513de08f544772a01396a63e7e4c31c76c5a837078e11fd6c96a0fdee36e
-    hashiqube0: deleted: sha256:7806df21f4c455687a53386a856fd9d6164a221c71ce420b7676ed17a6ee4e73
-    hashiqube0:
-    hashiqube0: Total reclaimed space: 501.6MB
-    hashiqube0: WARNING! This will remove:
-    hashiqube0:   - all stopped containers
-    hashiqube0:   - all networks not used by at least one container
-    hashiqube0:   - all anonymous volumes not used by at least one container
-    hashiqube0:   - all dangling images
-    hashiqube0:   - all dangling build cache
-    hashiqube0:
-    hashiqube0: Are you sure you want to continue? [y/N] Total reclaimed space: 0B
-    hashiqube0: ++++
-    hashiqube0: ++++ Start Jenkins
-    hashiqube0: ++++
-    hashiqube0: Unable to find image 'jenkins/jenkins:lts' locally
-    hashiqube0: lts: Pulling from jenkins/jenkins
-    hashiqube0: a014e5e7d08c: Pulling fs layer
-    hashiqube0: dc791314fcb2: Pulling fs layer
-    hashiqube0: 8489857877ae: Pulling fs layer
-    hashiqube0: 0351dc37900d: Pulling fs layer
-    hashiqube0: f5bd758265a1: Pulling fs layer
-    hashiqube0: 9fd567247530: Pulling fs layer
-    hashiqube0: 8957e4a59162: Pulling fs layer
-    hashiqube0: d0b134b27363: Pulling fs layer
-    hashiqube0: a47feec8e894: Pulling fs layer
-    hashiqube0: 3e0bbffbb194: Pulling fs layer
-    hashiqube0: 6d87c5a3d9ad: Pulling fs layer
-    hashiqube0: 239833f8a719: Pulling fs layer
-    hashiqube0: fa0ef23b7d19: Pulling fs layer
-    hashiqube0: 0351dc37900d: Waiting
-    hashiqube0: f5bd758265a1: Waiting
-    hashiqube0: 3e0bbffbb194: Waiting
-    hashiqube0: 8957e4a59162: Waiting
-    hashiqube0: 6d87c5a3d9ad: Waiting
-    hashiqube0: fa0ef23b7d19: Waiting
-    hashiqube0: d0b134b27363: Waiting
-    hashiqube0: a47feec8e894: Waiting
-    hashiqube0: 9fd567247530: Waiting
-    hashiqube0: 239833f8a719: Waiting
-    hashiqube0: 8489857877ae: Verifying Checksum
-    hashiqube0: 8489857877ae: Download complete
-    hashiqube0: 0351dc37900d: Verifying Checksum
-    hashiqube0: 0351dc37900d: Download complete
-    hashiqube0: f5bd758265a1: Verifying Checksum
-    hashiqube0: f5bd758265a1: Download complete
-    hashiqube0: dc791314fcb2: Verifying Checksum
-    hashiqube0: dc791314fcb2: Download complete
-    hashiqube0: 8957e4a59162: Download complete
-    hashiqube0: d0b134b27363: Verifying Checksum
-    hashiqube0: d0b134b27363: Download complete
-    hashiqube0: a47feec8e894: Verifying Checksum
-    hashiqube0: a47feec8e894: Download complete
-    hashiqube0: 3e0bbffbb194: Verifying Checksum
-    hashiqube0: 3e0bbffbb194: Download complete
-    hashiqube0: 9fd567247530: Download complete
-    hashiqube0: 6d87c5a3d9ad: Verifying Checksum
-    hashiqube0: 6d87c5a3d9ad: Download complete
-    hashiqube0: 239833f8a719: Verifying Checksum
-    hashiqube0: 239833f8a719: Download complete
-    hashiqube0: fa0ef23b7d19: Verifying Checksum
-    hashiqube0: fa0ef23b7d19: Download complete
-    hashiqube0: a014e5e7d08c: Download complete
-    hashiqube0: a014e5e7d08c: Pull complete
-    hashiqube0: dc791314fcb2: Pull complete
-    hashiqube0: 8489857877ae: Pull complete
-    hashiqube0: 0351dc37900d: Pull complete
-    hashiqube0: f5bd758265a1: Pull complete
-    hashiqube0: 9fd567247530: Pull complete
-    hashiqube0: 8957e4a59162: Pull complete
-    hashiqube0: d0b134b27363: Pull complete
-    hashiqube0: a47feec8e894: Pull complete
-    hashiqube0: 3e0bbffbb194: Pull complete
-    hashiqube0: 6d87c5a3d9ad: Pull complete
-    hashiqube0: 239833f8a719: Pull complete
-    hashiqube0: fa0ef23b7d19: Pull complete
-    hashiqube0: Digest: sha256:645d55b80126b67dd23b6ba65d455ebc13689d057f498fbecd7bdb9165f0dd64
-    hashiqube0: Status: Downloaded newer image for jenkins/jenkins:lts
-    hashiqube0: 921e86e94bf7eb1076916cfb67a9a3674e2aee4a6bd82e1d93ecdcf9f8942a9a
-    hashiqube0: ++++
-    hashiqube0: ++++ Check if Hashicorp Vault is running
-    hashiqube0: ++++
-    hashiqube0: Vault is running
-    hashiqube0: ++++
-    hashiqube0: ++++ Using the root Vault token, add a Secret in Vault which Jenkins will retrieve
-    hashiqube0: ++++
-    hashiqube0: ++++
-    hashiqube0: ++++ vault secrets enable -path=kv1 kv1
-    hashiqube0: ++++
-    hashiqube0: Error enabling: Error making API request.
-    hashiqube0:
-    hashiqube0: URL: POST http://127.0.0.1:8200/v1/sys/mounts/kv1
-    hashiqube0: Code: 400. Errors:
-    hashiqube0:
-    hashiqube0: * path is already in use at kv1/
-    hashiqube0: ++++
-    hashiqube0: ++++ vault secrets enable -path=kv2 kv2
-    hashiqube0: ++++
-    hashiqube0: Error enabling: Error making API request.
-    hashiqube0:
-    hashiqube0: URL: POST http://127.0.0.1:8200/v1/sys/mounts/kv2
-    hashiqube0: Code: 400. Errors:
-    hashiqube0:
-    hashiqube0: * path is already in use at kv2/
-    hashiqube0: ++++
-    hashiqube0: ++++ lets add some secrets in kv2/secret using kv put
-    hashiqube0: ++++
-    hashiqube0: ======== Secret Path ========
-    hashiqube0: kv2/data/secret/another_test
-    hashiqube0:
-    hashiqube0: ======= Metadata =======
-    hashiqube0: Key                Value
-    hashiqube0: ---                -----
-    hashiqube0: created_time       2023-09-19T05:27:33.452862672Z
-    hashiqube0: custom_metadata    <nil>
-    hashiqube0: deletion_time      n/a
-    hashiqube0: destroyed          false
-    hashiqube0: version            2
-    hashiqube0: ++++
-    hashiqube0: ++++ lets list the secrets in kv2/secret using kv get
-    hashiqube0: ++++
-    hashiqube0: ======== Secret Path ========
-    hashiqube0: kv2/data/secret/another_test
-    hashiqube0:
-    hashiqube0: ======= Metadata =======
-    hashiqube0: Key                Value
-    hashiqube0: ---                -----
-    hashiqube0: created_time       2023-09-19T05:27:33.452862672Z
-    hashiqube0: custom_metadata    <nil>
-    hashiqube0: deletion_time      n/a
-    hashiqube0: destroyed          false
-    hashiqube0: version            2
-    hashiqube0:
-    hashiqube0: ======== Data ========
-    hashiqube0: Key             Value
-    hashiqube0: ---             -----
-    hashiqube0: another_test    another_test_VALUE
-    hashiqube0: ++++
-    hashiqube0: ++++ lets add some secrets in kv1/secret using kv put
-    hashiqube0: ++++
-    hashiqube0: Success! Data written to: kv1/secret/testing/value_one
-    hashiqube0: Success! Data written to: kv1/secret/testing/value_two
-    hashiqube0: ++++
-    hashiqube0: ++++ lets list the secrets in kv1/secret/testing using kv get
-    hashiqube0: ++++
-    hashiqube0: ====== Data ======
-    hashiqube0: Key          Value
-    hashiqube0: ---          -----
-    hashiqube0: value_one    ONE
-    hashiqube0: ====== Data ======
-    hashiqube0: Key          Value
-    hashiqube0: ---          -----
-    hashiqube0: value_two    TWO
-    hashiqube0: ++++
-    hashiqube0: ++++ To use Jenkins please open in your browser
-    hashiqube0: ++++ http://localhost:8088
-    hashiqube0: ++++ Login with username: admin and password: 050fb849cef940cba7065f10d4d10a8c
+```
+bash hashiqube/basetools.sh
+bash docker/docker.sh
+bash vault/vault.sh
+bash jenkins/jenkins.sh
 ```
 
-[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+#### **Vagrant**
+
+```
+vagrant up --provision-with basetools,docker,docsify,vault,jenkins
+```
+
+#### **Docker Compose**
+
+```
+docker compose exec hashiqube /bin/bash
+bash hashiqube/basetools.sh
+bash docker/docker.sh
+bash docsify/docsify.sh
+bash vault/vault.sh
+bash jenkins/jenkins.sh
+```
+<!-- tabs:end -->
 
 ## Login
 
@@ -282,40 +117,6 @@ else
 echo -e '\e[38;5;198m'"++++ Ensure Vault is running.."
 sudo bash /vagrant/vault/vault.sh
 fi
-```
-
-`vagrant up --provision-with vault`
-```log
-Bringing machine 'user.local.dev' up with 'virtualbox' provider...
-==> user.local.dev: Checking if box 'ubuntu/xenial64' version '20190918.0.0' is up to date...
-==> user.local.dev: [vagrant-hostsupdater] Checking for host entries
-==> user.local.dev: [vagrant-hostsupdater]   found entry for: 10.9.99.10 user.local.dev
-==> user.local.dev: [vagrant-hostsupdater]   found entry for: 10.9.99.10 user.local.dev
-==> user.local.dev: [vagrant-hostsupdater]   found entry for: 10.9.99.10 consul-user.local.dev
-==> user.local.dev: [vagrant-hostsupdater]   found entry for: 10.9.99.10 vault-user.local.dev
-==> user.local.dev: [vagrant-hostsupdater]   found entry for: 10.9.99.10 nomad-user.local.dev
-==> user.local.dev: Running provisioner: vault (shell)...
-   user.local.dev: Running: /var/folders/7j/gsrjvmds05n53ddg28krf4_80001p9/T/vagrant-shell20191024-26402-1ms4n4s.sh
-   user.local.dev: Vault already installed and running
-   user.local.dev: Vault http://localhost:8200/ui and enter the following codes displayed below
-   user.local.dev: Unseal Key 1: aRBITqqWe57Tl38J9avHZVoow2oC6C2qjEgWFqQAV4Z1
-   user.local.dev: Unseal Key 2: +Z0RHNn1lBkKas5WIiuXYha5LTA/7i+ncLBdJafBpNs8
-   user.local.dev: Unseal Key 3: 0Wg9qT6rNeB1fm5CDUdEuM8nWtI6Jt5PTAT6z0HkZRBY
-   user.local.dev: Unseal Key 4: ysw0/LJPGy4jfhoPG6Lvm+ARBzkT8Q70cXgvPRZRd5Pi
-   user.local.dev: Unseal Key 5: g6el6P2RAtwymn8tHE38ltdyiOeEf1Wfn8+8kShxIdZP
-   user.local.dev:
-   user.local.dev: Initial Root Token: s.XmyUDCIJkHMA4QgeDO6oykz6
-   user.local.dev:
-   user.local.dev: Vault initialized with 5 key shares and a key threshold of 3. Please securely
-   user.local.dev: distribute the key shares printed above. When the Vault is re-sealed,
-   user.local.dev: restarted, or stopped, you must supply at least 3 of these keys to unseal it
-   user.local.dev: before it can start servicing requests.
-   user.local.dev:
-   user.local.dev: Vault does not store the generated master key. Without at least 3 key to
-   user.local.dev: reconstruct the master key, Vault will remain permanently sealed!
-   user.local.dev:
-   user.local.dev: It is possible to generate new unseal keys, provided you have a quorum of
-   user.local.dev: existing unseal keys shares. See "vault operator rekey" for more information.
 ```
 
 :bulb: This step was automatically done for you in the Provisioning step, with this command in our provisioning step `jenkins/jenkins.sh`

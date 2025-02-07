@@ -21,7 +21,41 @@ In order to provision Prometheus and Grafana, you need bastetools, docker, minik
 
 :bulb: We enable Vault, Consul and Nomad, because we monitor these with Prometheus and we enable Minikube because we host Grafana and Prometheus on Minikkube and deploy it using Helm
 
-`vagrant up --provision-with basetools,docker,docsify,vault,consul,nomad,minikube,prometheus-grafana`
+## Provision
+
+<!-- tabs:start -->
+#### **Github Codespaces**
+
+```
+bash hashiqube/basetools.sh
+bash docker/docker.sh
+bash vault/vault.sh
+bash consul/consul.sh
+bash nomad/nomad.sh
+bash minikube/minikube.sh
+bash prometheus-grafana/prometheus-grafana.sh
+```
+
+#### **Vagrant**
+
+```
+vagrant up --provision-with basetools,docker,docsify,vault,consul,nomad,minikube,prometheus-grafana
+```
+
+#### **Docker Compose**
+
+```
+docker compose exec hashiqube /bin/bash
+bash hashiqube/basetools.sh
+bash docker/docker.sh
+bash docsify/docsify.sh
+bash vault/vault.sh
+bash consul/consul.sh
+bash nomad/nomad.sh
+bash minikube/minikube.sh
+bash prometheus-grafana/prometheus-grafana.sh
+```
+<!-- tabs:end -->
 
 Prometheus http://localhost:9090 <br />
 Alertmanager http://localhost:9093 <br />
@@ -62,7 +96,7 @@ You can also open Prometheus web interface and look at Status -> Targets
 
 ![Prometheus Targets](images/prometheus.png?raw=true "Prometheus Targets")
 
-## Grafana Datasource Prometheus
+## Grafana Datasource
 
 :bulb: We have done this automatically during the provisioning step, in the grafana-values.yaml file see below
 
@@ -89,7 +123,7 @@ and you should be able to see some graphs.
 
 [google ads](../googleads.html ':include :type=iframe width=100% height=300px')
 
-## Monitoring Hashicorp Vault
+## Monitoring Vault
 
 https://developer.hashicorp.com/vault/docs/configuration/telemetry#prometheus <br />
 https://developer.hashicorp.com/vault/docs/configuration/telemetry
@@ -115,7 +149,7 @@ You should now see the Vault target in Prometheus web interface at http://localh
 
 ![Prometheus Vault Target](images/prometheus-targets-vault.png?raw=true "Prometheus Vault Target")
 
-## Grafana Datasource Prometheus
+## Grafana Datasource
 
 :bulb: We have done this automatically during the provisioning step, in the grafana-values.yaml file see below
 
@@ -138,7 +172,7 @@ Navigating to Grafana -> Dashboards you should now be able to see the Hashicorp 
 
 [google ads](../googleads.html ':include :type=iframe width=100% height=300px')
 
-## Monitoring Hashicorp Nomad
+## Monitoring Nomad
 
 https://developer.hashicorp.com/nomad/docs/configuration/telemetry <br />
 https://developer.hashicorp.com/nomad/docs/configuration/telemetry#prometheus <br />
@@ -191,7 +225,7 @@ Navigating to Grafana -> Dashboards you should now be able to see the Hashicorp 
 
 [google ads](../googleads.html ':include :type=iframe width=100% height=300px')
 
-## Monitoring Hashicorp Consul
+## Monitoring Consul
 
 https://lvinsf.medium.com/monitor-consul-using-prometheus-and-grafana-1f2354cc002f <br />
 https://grafana.com/grafana/dashboards/13396-consul-server-monitoring/ <br />
@@ -244,7 +278,7 @@ Navigating to Grafana -> Dashboards you should now be able to see the Docker Gra
 
 ![Grafana Docker Dashboard](images/grafana-docker-dashboard.png?raw=true "Grafana Docker Dashboard")
 
-## Prometheus Grafana Vagrant Provisioner 
+## Prometheus Grafana Provisioner 
 
 [filename](prometheus-grafana.sh ':include :type=code')
 

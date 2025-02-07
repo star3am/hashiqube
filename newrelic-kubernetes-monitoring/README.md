@@ -10,15 +10,33 @@ https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
 
 ![Newrelic Kubernetes Monitoring](images/newrelic-kubernetes-monitoring.png?raw=true "Newrelic Kubernetes Monitoring")
 
-## Usage
+## Provision
 
-First we need to bring up Hashiqube and ensure that Minikube is running. Please run the following commands inside the Hashiqube folder
+<!-- tabs:start -->
+#### **Github Codespaces**
 
-```shell
-vagrant up --provision-with basetools
-vagrant up --provision-with docker
-vagrant up --provision-with minikube
 ```
+bash hashiqube/basetools.sh
+bash docker/docker.sh
+bash minikube/minikube.sh
+```
+
+#### **Vagrant**
+
+```
+vagrant up --provision-with basetools,docker,docsify,minikube
+```
+
+#### **Docker Compose**
+
+```
+docker compose exec hashiqube /bin/bash
+bash hashiqube/basetools.sh
+bash docker/docker.sh
+bash docsify/docsify.sh
+bash minikube/minikube.sh
+```
+<!-- tabs:end -->
 
 You should now be able to open Minikube dashboard: http://localhost:10888
 

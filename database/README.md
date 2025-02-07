@@ -10,39 +10,36 @@ Let's start with Oracle's MySQL
 
 ![MySQL Logo](images/mysql-logo.png?raw=true "MySQL Logo")
 
-`vagrant up --provision-with basetools,docker,docsify,vault,mysql`
-```log
-Bringing machine 'user.local.dev' up with 'virtualbox' provider...
-==> user.local.dev: Checking if box 'ubuntu/xenial64' version '20190918.0.0' is up to date...
-==> user.local.dev: [vagrant-hostsupdater] Checking for host entries
-==> user.local.dev: [vagrant-hostsupdater]   found entry for: 10.9.99.10 user.local.dev
-==> user.local.dev: [vagrant-hostsupdater]   found entry for: 10.9.99.10 user.local.dev
-==> user.local.dev: [vagrant-hostsupdater]   found entry for: 10.9.99.10 hashicorp.local.dev
-==> user.local.dev: Running provisioner: mysql (shell)...
-    user.local.dev: Running: /var/folders/7j/gsrjvmds05n53ddg28krf4_80001p9/T/vagrant-shell20191114-11217-1i13id.sh
-    user.local.dev: mysql
-    user.local.dev: mysql
-    user.local.dev: WARNING! This will remove:
-    user.local.dev:   - all stopped containers
-    user.local.dev:   - all networks not used by at least one container
-    user.local.dev:   - all volumes not used by at least one container
-    user.local.dev:   - all dangling images
-    user.local.dev:   - all dangling build cache
-    user.local.dev:
-    user.local.dev: Are you sure you want to continue? [y/N]
-    user.local.dev: Deleted Volumes:
-    user.local.dev: aa92e07b88059445d76f25571d5a7c819888abb261f20b81a156c97076624cc9
-    user.local.dev: Total reclaimed space: 171.2MB
-    user.local.dev: Reading package lists...
-    user.local.dev: Building dependency tree...
-    user.local.dev:
-    user.local.dev: Reading state information...
-    user.local.dev: mysql-client is already the newest version (5.7.27-0ubuntu0.16.04.1).
-    user.local.dev: 0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
-    user.local.dev: 6e63bb00598d3eb6e1a86a8ebf70575fe086339608c9b0274facc6e591a1e32b
-    user.local.dev: Instructions
-    user.local.dev: mysql -h 127.0.0.1 -u root -ppassword
-```    
+## Provision
+
+<!-- tabs:start -->
+#### **Github Codespaces**
+
+```
+bash hashiqube/basetools.sh
+bash docker/docker.sh
+bash vault/vault.sh
+bash database/mysql.sh
+```
+
+#### **Vagrant**
+
+```
+vagrant up --provision-with basetools,docker,docsify,vault,mysql
+```
+
+#### **Docker Compose**
+
+```
+docker compose exec hashiqube /bin/bash
+bash hashiqube/basetools.sh
+bash docker/docker.sh
+bash docsify/docsify.sh
+bash vault/vault.sh
+bash database/mysql.sh
+```
+<!-- tabs:end -->
+
 Let's verify that our mysql container is up and accepting connections
 
 `vagrant ssh -c "mysql -h 127.0.0.1 -u root -ppassword -e \"show databases;\""`
@@ -218,52 +215,43 @@ mysql: [Warning] Using a password on the command line interface can be insecure.
 
 [google ads](../googleads.html ':include :type=iframe width=100% height=300px')
 
-## MySQL Vagrant Provisioner
+## Oracle MySQL Provisioner
 
 [filename](mysql.sh ':include :type=code')
 
-## Microsoft SQL (Mssql Express)
+## Microsoft SQL
 
 ![Microsoft SQL Logo](images/mssql-logo.png?raw=true "Microsoft SQL Logo")
 
-`vagrant up --provision-with basetools,docker,docsify,vault,mssql`
+## Provision
 
-```log
-Bringing machine 'user.local.dev' up with 'virtualbox' provider...
-==> user.local.dev: Checking if box 'ubuntu/xenial64' version '20190918.0.0' is up to date...
-==> user.local.dev: A newer version of the box 'ubuntu/xenial64' for provider 'virtualbox' is
-==> user.local.dev: available! You currently have version '20190918.0.0'. The latest is version
-==> user.local.dev: '20191114.0.0'. Run `vagrant box update` to update.
-==> user.local.dev: [vagrant-hostsupdater] Checking for host entries
-==> user.local.dev: [vagrant-hostsupdater]   found entry for: 10.9.99.10 user.local.dev
-==> user.local.dev: [vagrant-hostsupdater]   found entry for: 10.9.99.10 user.local.dev
-==> user.local.dev: [vagrant-hostsupdater]   found entry for: 10.9.99.10 hashicorp.local.dev
-==> user.local.dev: Running provisioner: mssql (shell)...
-    user.local.dev: Running: /var/folders/7j/gsrjvmds05n53ddg28krf4_80001p9/T/vagrant-shell20191120-4643-g6u6tj.sh
-    user.local.dev: mssql
-    user.local.dev: mssql
-    user.local.dev: 3ae09d27c879acb4a8c328f42805754070584a96b188dc3277b4b3653c232df8
-    user.local.dev: Instructions
-    user.local.dev: vagrant ssh
-    user.local.dev: docker exec -it mssql /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P P@ssw0rd -Q "CREATE DATABASE mssql"
-    user.local.dev: docker exec -it mssql /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P P@ssw0rd -Q "SELECT name, database_id, create_date FROM sys.databases"
-    user.local.dev: vault secrets enable database
-    user.local.dev: vault write database/config/mssql \
-    user.local.dev:   plugin_name=mssql-database-plugin \
-    user.local.dev:   connection_url='sqlserver://{{username}}:{{password}}@localhost:1433' \
-    user.local.dev:   allowed_roles="mssql" \
-    user.local.dev:   username="sa" \
-    user.local.dev:   password="P@ssw0rd"
-    user.local.dev: vault write database/roles/mssql \
-    user.local.dev:   db_name=mssql \
-    user.local.dev:   creation_statements="CREATE LOGIN [{{name}}] WITH PASSWORD = '{{password}}'; \
-    user.local.dev:   CREATE USER [{{name}}] FOR LOGIN [{{name}}]; \
-    user.local.dev:   GRANT SELECT ON SCHEMA::dbo TO [{{name}}];" \
-    user.local.dev:   default_ttl="1h" \
-    user.local.dev:   max_ttl="24h"
-    user.local.dev: vault read database/creds/mssql
-    user.local.dev: docker exec -it mssql /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P P@ssw0rd -Q "SELECT * FROM sysusers"
+<!-- tabs:start -->
+#### **Github Codespaces**
+
 ```
+bash hashiqube/basetools.sh
+bash docker/docker.sh
+bash vault/vault.sh
+bash database/mssql.sh
+```
+
+#### **Vagrant**
+
+```
+vagrant up --provision-with basetools,docker,docsify,vault,mssql
+```
+
+#### **Docker Compose**
+
+```
+docker compose exec hashiqube /bin/bash
+bash hashiqube/basetools.sh
+bash docker/docker.sh
+bash docsify/docsify.sh
+bash vault/vault.sh
+bash database/mssql.sh
+```
+<!-- tabs:end -->
 
 Now that MSSQL is launched let's get started.
 
@@ -372,7 +360,7 @@ NT AUTHORITY\SYSTEM                                                             
 
 [google ads](../googleads.html ':include :type=iframe width=100% height=300px')
 
-## MSSQL Vagrant Provisioner
+## MSSQL Provisioner
 
 [filename](mssql.sh ':include :type=code')
 
@@ -382,92 +370,37 @@ https://www.postgresql.org/
 
 ![PostgreSQL Logo](images/postgresql-logo.png?raw=true "PostgreSQL Logo")
 
-`vagrant up --provision-with basetools,docker,docsify,vault,postgresql`
+## Provision
 
-```log
-Bringing machine 'hashiqube0.service.consul' up with 'virtualbox' provider...
-==> hashiqube0.service.consul: Checking if box 'ubuntu/bionic64' version '20200429.0.0' is up to date...
-==> hashiqube0.service.consul: [vagrant-hostsupdater] Checking for host entries
-==> hashiqube0.service.consul: [vagrant-hostsupdater]   found entry for: 10.9.99.10 hashiqube0.service.consul
-==> hashiqube0.service.consul: [vagrant-hostsupdater]   found entry for: 10.9.99.10 hashiqube0.service.consul
-==> hashiqube0.service.consul: Running provisioner: postgresql (shell)...
-    hashiqube0.service.consul: Running: /var/folders/7j/gsrjvmds05n53ddg28krf4_80001p9/T/vagrant-shell20200831-13614-16pi9p8.sh
-    hashiqube0.service.consul: postgres
-    hashiqube0.service.consul: postgres
-    hashiqube0.service.consul: Download complete
-    hashiqube0.service.consul: 38fa0d496534: Verifying Checksum
-    hashiqube0.service.consul: 38fa0d496534: Download complete
-    hashiqube0.service.consul: bf5952930446: Pull complete
-    hashiqube0.service.consul: 26dc6fdd7b2d: Verifying Checksum
-    hashiqube0.service.consul: 26dc6fdd7b2d: Download complete
-    hashiqube0.service.consul: 9577476abb00: Pull complete
-    hashiqube0.service.consul: 2bd105512d5c: Pull complete
-    hashiqube0.service.consul: b1cd21c26e81: Pull complete
-    hashiqube0.service.consul: 3c5032512cf3: Verifying Checksum
-    hashiqube0.service.consul: 3c5032512cf3: Download complete
-    hashiqube0.service.consul: 34a7c86cf8fc: Pull complete
-    hashiqube0.service.consul: 274e7b0c38d5: Pull complete
-    hashiqube0.service.consul: 3e831b350d37: Pull complete
-    hashiqube0.service.consul: 38fa0d496534: Pull complete
-    hashiqube0.service.consul: 26910ececf99: Verifying Checksum
-    hashiqube0.service.consul: 26910ececf99: Download complete
-    hashiqube0.service.consul: 0339413523e8: Verifying Checksum
-    hashiqube0.service.consul: 0339413523e8: Download complete
-    hashiqube0.service.consul: d61df7db53da: Verifying Checksum
-    hashiqube0.service.consul: d61df7db53da: Download complete
-    hashiqube0.service.consul: c989da35e5c0: Verifying Checksum
-    hashiqube0.service.consul: c989da35e5c0: Download complete
-    hashiqube0.service.consul: c989da35e5c0: Pull complete
-    hashiqube0.service.consul: 26dc6fdd7b2d: Pull complete
-    hashiqube0.service.consul: 3c5032512cf3: Pull complete
-    hashiqube0.service.consul: 26910ececf99: Pull complete
-    hashiqube0.service.consul: 0339413523e8: Pull complete
-    hashiqube0.service.consul: d61df7db53da: Pull complete
-    hashiqube0.service.consul: Digest: sha256:9f325740426d14a92f71013796d98a50fe385da64a7c5b6b753d0705add05a21
-    hashiqube0.service.consul: Status: Downloaded newer image for postgres:latest
-    hashiqube0.service.consul: 3213b29cefa1c04b46c220b2da42c761aeb73e05c70da3174965646c75a96cfd
-    hashiqube0.service.consul: ++++ Vault already installed and running
-    hashiqube0.service.consul: ++++ Vault http://localhost:8200/ui and enter the following codes displayed below
-    hashiqube0.service.consul: ++++ Auto unseal vault
-    hashiqube0.service.consul: ++++ Show users in database
-    hashiqube0.service.consul:                                    List of roles
-    hashiqube0.service.consul:  Role name |                         Attributes                         | Member of
-    hashiqube0.service.consul: -----------+------------------------------------------------------------+-----------
-    hashiqube0.service.consul:  root      | Superuser, Create role, Create DB, Replication, Bypass RLS | {}
-    hashiqube0.service.consul: ++++ Enable Vault Database PostgreSQL secret engine
-    hashiqube0.service.consul: ++++ Configure PostgreSQL
-    hashiqube0.service.consul: rnings were returned from Vault:
-    hashiqube0.service.consul:
-    hashiqube0.service.consul:  * Password found in connection_url, use a templated url to enable root
-    hashiqube0.service.consul:   rotation and prevent read access to p
-    hashiqube0.service.consul: a
-    hashiqube0.service.consul: s
-    hashiqube0.service.consul: s
-    hashiqube0.service.consul: w
-    hashiqube0.service.consul: ord information.
-    hashiqube0.service.consul: ++++ Create a role
-    hashiqube0.service.consul: Success! Data written to: database/roles/postgresql-role
-    hashiqube0.service.consul: ++++ Create policy
-    hashiqube0.service.consul: Success! Uploaded policy: apps
-    hashiqube0.service.consul: ++++ Create new token
-    hashiqube0.service.consul: ++++ New Token: s.oUPWzOf9xJw1fLQiHaFGOdFe
-    hashiqube0.service.consul: ++++ Create new connection with token
-    hashiqube0.service.consul: Key                Value
-    hashiqube0.service.consul: ---                -----
-    hashiqube0.service.consul: lease_id           database/creds/postgresql-role/WFLWSDwEwDSgou9qmJrBpk9m
-    hashiqube0.service.consul: lease_duration     1h
-    hashiqube0.service.consul: lease_renewable    true
-    hashiqube0.service.consul: password           A1a-WgK3eOqo10hHFXpa
-    hashiqube0.service.consul: username           v-token-postgres-3AhBH3pbmVNnkbxXV8K3-1598841098
-    hashiqube0.service.consul: ++++ Now show users in database again with new user created
-    hashiqube0.service.consul:                                                        List of roles
-    hashiqube0.service.consul:                     Role name                     |                         Attributes                         | Member of
-    hashiqube0.service.consul: --------------------------------------------------+------------------------------------------------------------+-----------
-    hashiqube0.service.consul:  root                                             | Superuser, Create role, Create DB, Replication, Bypass RLS | {}
-    hashiqube0.service.consul:  v-token-postgres-3AhBH3pbmVNnkbxXV8K3-1598841098 | Password valid until 2020-08-31 03:31:43+00                | {}
+<!-- tabs:start -->
+#### **Github Codespaces**
+
+```
+bash hashiqube/basetools.sh
+bash docker/docker.sh
+bash vault/vault.sh
+bash database/postgresql.sh
 ```
 
-## PostgreSQL Vagrant Provisioner
+#### **Vagrant**
+
+```
+vagrant up --provision-with basetools,docker,docsify,vault,postgresql
+```
+
+#### **Docker Compose**
+
+```
+docker compose exec hashiqube /bin/bash
+bash hashiqube/basetools.sh
+bash docker/docker.sh
+bash docsify/docsify.sh
+bash vault/vault.sh
+bash database/postgresql.sh
+```
+<!-- tabs:end -->
+
+## PostgreSQL Provisioner
 
 [filename](postgresql.sh ':include :type=code')
 
