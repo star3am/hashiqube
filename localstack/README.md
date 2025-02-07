@@ -10,8 +10,35 @@ LocalStack provides an easy-to-use test/mocking framework for developing Cloud a
 
 To get Localstack installed and running in Hashiqube, you can use the following command
 
-Github Codespace: `bash localstack/localstack.sh` <br />
-Vagrant: `vagrant up --provision-with basetools,localstack`
+## Provision
+
+<!-- tabs:start -->
+#### **Github Codespaces**
+
+```
+bash hashiqube/basetools.sh
+bash docker/docker.sh
+bash localstack/localstack.sh
+bash terraform/terraform.sh
+```
+
+#### **Vagrant**
+
+```
+vagrant up --provision-with basetools,localstack,terraform
+```
+
+#### **Docker Compose**
+
+```
+docker compose exec hashiqube /bin/bash
+bash hashiqube/basetools.sh
+bash docker/docker.sh
+bash docsify/docsify.sh
+bash localstack/localstack.sh
+bash terraform/terraform.sh
+```
+<!-- tabs:end -->
 
 ## Terraform plan
 

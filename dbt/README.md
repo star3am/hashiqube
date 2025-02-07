@@ -29,16 +29,42 @@ DBT_WITH=postgres
 # ^^ will install all adapters excluding mssql
 ```
 
-Next lets provision Hashiqube with basetools and dbt:
+Next lets provision Hashiqube with basetools and dbt
 
-```bash
+## Provision
+
+<!-- tabs:start -->
+#### **Github Codespaces**
+
+```
+bash hashiqube/basetools.sh
+bash docker/docker.sh
+bash database/postgresql.sh
+bash dbt/dbt.sh
+```
+
+#### **Vagrant**
+
+```
 vagrant up --provision-with basetools,docsify,docker,postgresql,dbt
 ```
 
-## Practicle example from DBT Labs 
+#### **Docker Compose**
+
+```
+docker compose exec hashiqube /bin/bash
+bash hashiqube/basetools.sh
+bash docker/docker.sh
+bash docsify/docsify.sh
+bash database/postgresql.sh
+bash dbt/dbt.sh
+```
+<!-- tabs:end -->
+
+## DBT Labs Example
 https://github.com/dbt-labs/jaffle_shop#running-this-project
 
-1. Run `vagrant up --provision-with basetools,docsify,docker,postgresql,dbt`
+1. Run the Provision step
 
 2. We have already cloned https://github.com/dbt-labs/jaffle_shop into `/vagrant/dbt/jaffle_shop`
 and we will be following the tutorial at https://github.com/dbt-labs/jaffle_shop#running-this-project
@@ -47,7 +73,7 @@ and we will be following the tutorial at https://github.com/dbt-labs/jaffle_shop
 
 4. Enter Hashiqube ssh session using `vagrant ssh` this project can be found in `/vagrant/dbt`
 
-## Next steps if you have your own project
+## Your DBT project
 
 1. Enter Hashiqube ssh session using `vagrant ssh`
 
@@ -104,7 +130,7 @@ For a practical example we are going to use https://github.com/dbt-labs/jaffle_s
 
 Jaffle shop will automatically cloned down, and instantiated. It will seed to the PosgreSQL database which we provisioned with `postgresql` in the command `vagrant up --provision-with basetools,docsify,docker,postgresql,dbt`
 
-# DBT Serv Web Interface
+# DBT Serv Web UI
 Once the provisioner is done you will be able to access the DBT Web interface at http://localhost:28080/
 
 # DBT Project
@@ -131,7 +157,7 @@ This would open space as well to implement cool stuff, such as running the model
 
 - https://www.getdbt.com/
 
-## DBT Vagrant Provisioner
+## DBT Provisioner
 
 [filename](common.sh ':include :type=code')
 

@@ -9,6 +9,40 @@ Once Hashiqube is up an internet connection is no longer needed meaning sales pi
 
 Hashiqube has been created to help Engineers, Developers and anyone who wants to practise, learn or demo HashiCorp products to get started quickly with a local lab. 
 
+## Provision
+
+<!-- tabs:start -->
+#### **Github Codespaces**
+
+```
+bash hashiqube/basetools.sh
+bash docker/docker.sh
+bash vault/vault.sh
+bash consul/consul.sh
+bash nomad/nomad.sh
+bash boundary/boundary.sh
+```
+
+#### **Vagrant**
+
+```
+vagrant up --provision
+```
+
+#### **Docker Compose**
+
+```
+docker compose exec hashiqube /bin/bash
+bash hashiqube/basetools.sh
+bash docker/docker.sh
+bash docsify/docsify.sh
+bash vault/vault.sh
+bash consul/consul.sh
+bash nomad/nomad.sh
+bash boundary/boundary.sh
+```
+<!-- tabs:end -->
+
 Please connect with me on [LinkedIn (Riaan Nolan)](https://www.linkedin.com/in/riaannolan/) or check out [my Credly profile](https://www.credly.com/users/riaan-nolan.e657145c)
 
 ![Hashiqube Logo](../images/logo-qube.png?raw=true "Hashiqube Logo")

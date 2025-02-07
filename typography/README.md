@@ -737,6 +737,24 @@ _   Underscore
 
   Answer 2
 
+## Tabs
+
+<!-- tabs:start -->
+
+#### **English**
+
+Hello!
+
+#### **French**
+
+Bonjour!
+
+#### **Italian**
+
+Ciao!
+
+<!-- tabs:end -->
+
 ## Youtube Videos
 - https://github.com/codepo8/youtube-embed
 

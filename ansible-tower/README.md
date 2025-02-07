@@ -18,148 +18,35 @@ With Red Hat® Ansible® Tower you can centralize and control your IT infrastruc
 
 ## Provision
 
-`vagrant up --provision-with basetools,docker,docsify,minikube,ansible-tower`
+<!-- tabs:start -->
 
-```log
-Bringing machine 'hashiqube0.service.consul' up with 'virtualbox' provider...
-==> hashiqube0.service.consul: Importing base box 'ubuntu/bionic64'...
-==> hashiqube0.service.consul: Matching MAC address for NAT networking...
-==> hashiqube0.service.consul: Checking if box 'ubuntu/bionic64' version '20210623.0.0' is up to date...
-==> hashiqube0.service.consul: Setting the name of the VM: hashiqube_hashiqube0serviceconsul_1630622011577_474
-==> hashiqube0.service.consul: Clearing any previously set network interfaces...
-==> hashiqube0.service.consul: Preparing network interfaces based on configuration...
-    hashiqube0.service.consul: Adapter 1: nat
-    hashiqube0.service.consul: Adapter 2: hostonly
-==> hashiqube0.service.consul: Forwarding ports...
-    hashiqube0.service.consul: 22 (guest) => 2255 (host) (adapter 1)
-    hashiqube0.service.consul: 3000 (guest) => 3000 (host) (adapter 1)
-    hashiqube0.service.consul: 9090 (guest) => 9090 (host) (adapter 1)
-    hashiqube0.service.consul: 8200 (guest) => 8200 (host) (adapter 1)
-...
-    hashiqube0.service.consul: Status: Downloaded newer image for redis:latest
-    hashiqube0.service.consul: Pulling postgres (postgres:12)...
-    hashiqube0.service.consul: 12: Pulling from library/postgres
-    hashiqube0.service.consul: Digest: sha256:1cb8f7fc2e6745ef577640de1c9fde04ff9498a7e0d067f1b8e6890ad4ba5073
-    hashiqube0.service.consul: Status: Downloaded newer image for postgres:12
-    hashiqube0.service.consul: Pulling receptor-hop (quay.io/project-receptor/receptor:latest)...
-    hashiqube0.service.consul: latest: Pulling from project-receptor/receptor
-    hashiqube0.service.consul: Digest: sha256:3b1ec7a75962bc27891af7e87f60df5393f219d82484630cb1c7cf10202af369
-    hashiqube0.service.consul: Status: Downloaded newer image for quay.io/project-receptor/receptor:latest
-    hashiqube0.service.consul: Creating tools_redis_1 ...
-    hashiqube0.service.consul: Creating tools_postgres_1 ...
-    hashiqube0.service.consul: Creating tools_postgres_1 ... done
-    hashiqube0.service.consul: Creating tools_redis_1    ... done
-    hashiqube0.service.consul: Creating tools_awx_1      ...
-    hashiqube0.service.consul: Creating tools_awx_1      ... done
-    hashiqube0.service.consul: Creating tools_receptor_hop ...
-    hashiqube0.service.consul: Creating tools_receptor_hop ... done
-    hashiqube0.service.consul: Creating tools_receptor_1   ...
-    hashiqube0.service.consul: Creating tools_receptor_2   ...
-    hashiqube0.service.consul: Creating tools_receptor_2   ... done
-    hashiqube0.service.consul: Creating tools_receptor_1   ... done
-    hashiqube0.service.consul: ++++ Running docker exec tools_awx_1 make clean-ui ui-devel
-    hashiqube0.service.consul: rm -rf node_modules
-    hashiqube0.service.consul: rm -rf awx/ui/node_modules
-    hashiqube0.service.consul: rm -rf awx/ui/build
-    hashiqube0.service.consul: rm -rf awx/ui/src/locales/_build
-    hashiqube0.service.consul: rm -rf awx/ui/.ui-built
-    hashiqube0.service.consul: NODE_OPTIONS=--max-old-space-size=4096 npm --prefix awx/ui --loglevel warn ci
-    hashiqube0.service.consul:
-    hashiqube0.service.consul: added 2316 packages, and audited 2317 packages in 2m
-    hashiqube0.service.consul: 7 packages are looking for funding
-    hashiqube0.service.consul:   run `npm fund` for details
-    hashiqube0.service.consul:
-    hashiqube0.service.consul: 9 moderate severity vulnerabilities
-    hashiqube0.service.consul:
-    hashiqube0.service.consul: To address all issues (including breaking changes), run:
-    hashiqube0.service.consul:   npm audit fix --force
-    hashiqube0.service.consul:
-    hashiqube0.service.consul: Run `npm audit` for details.
-    hashiqube0.service.consul: npm
-    hashiqube0.service.consul:  notice
-    hashiqube0.service.consul: npm
-    hashiqube0.service.consul: notice
-    hashiqube0.service.consul:  New minor version of npm available! 7.20.3 -> 7.22.0
-    hashiqube0.service.consul: npm
-    hashiqube0.service.consul:
-    hashiqube0.service.consul: notice
-    hashiqube0.service.consul:  Changelog: <https://github.com/npm/cli/releases/tag/v7.22.0>
-    hashiqube0.service.consul: npm
-    hashiqube0.service.consul:
-    hashiqube0.service.consul: notice
-    hashiqube0.service.consul:  Run `npm install -g npm@7.22.0` to update!
-    hashiqube0.service.consul: npm
-    hashiqube0.service.consul:
-    hashiqube0.service.consul: notice
-    hashiqube0.service.consul:
-    hashiqube0.service.consul: make[1]: Entering directory '/awx_devel'
-    hashiqube0.service.consul: python3.8 tools/scripts/compilemessages.py
-    hashiqube0.service.consul: processing file django.po in /awx_devel/awx/locale/en-us/LC_MESSAGES
-    hashiqube0.service.consul:
-    hashiqube0.service.consul: processing file django.po in /awx_devel/awx/locale/fr/LC_MESSAGES
-    hashiqube0.service.consul:
-    hashiqube0.service.consul: processing file django.po in /awx_devel/awx/locale/zh/LC_MESSAGES
-    hashiqube0.service.consul:
-    hashiqube0.service.consul: processing file django.po in /awx_devel/awx/locale/ja/LC_MESSAGES
-    hashiqube0.service.consul:
-    hashiqube0.service.consul: processing file django.po in /awx_devel/awx/locale/nl/LC_MESSAGES
-    hashiqube0.service.consul:
-    hashiqube0.service.consul: processing file django.po in /awx_devel/awx/locale/es/LC_MESSAGES
-    hashiqube0.service.consul: npm --prefix awx/ui --loglevel warn run compile-strings
-    hashiqube0.service.consul:
-    hashiqube0.service.consul: > compile-strings
-    hashiqube0.service.consul: > lingui compile
-    hashiqube0.service.consul: Compiling message catalogs…
-    hashiqube0.service.consul: Done!
-    hashiqube0.service.consul: npm --prefix awx/ui --loglevel warn run build
-    hashiqube0.service.consul:
-    hashiqube0.service.consul: > build
-    hashiqube0.service.consul: > INLINE_RUNTIME_CHUNK=false react-scripts build
-    hashiqube0.service.consul: Creating an optimized production build...
+#### **Github Codespaces**
 
-    hashiqube0.service.consul: Compiled successfully.
-    hashiqube0.service.consul:
-    hashiqube0.service.consul: File sizes after gzip:
-    hashiqube0.service.consul:   604.81 KB  build/static/js/2.815e5b58.chunk.js
-    hashiqube0.service.consul:   279.62 KB  build/static/js/main.020cd60d.chunk.js
-    hashiqube0.service.consul:   74.22 KB   build/static/css/2.e1a87a1d.chunk.css
-    hashiqube0.service.consul:   49.78 KB   build/static/js/9.3530b46c.chunk.js
-    hashiqube0.service.consul:   41.79 KB   build/static/js/6.c63a2fbd.chunk.js
-    hashiqube0.service.consul:   38.5 KB    build/static/js/5.3180cbb2.chunk.js
-    hashiqube0.service.consul:   38.11 KB   build/static/js/8.3dc1f177.chunk.js
-    hashiqube0.service.consul:   36.98 KB   build/static/js/4.4e3760ac.chunk.js
-    hashiqube0.service.consul:   36.62 KB   build/static/js/7.0eb36b20.chunk.js
-    hashiqube0.service.consul:   25 KB      build/static/js/3.ae40d317.chunk.js
-    hashiqube0.service.consul:   1.22 KB    build/static/js/runtime-main.49c4d4eb.js
-    hashiqube0.service.consul:   196 B      build/static/css/main.e189280d.chunk.css
-    hashiqube0.service.consul: The project was built assuming it is hosted at /.
-    hashiqube0.service.consul: You can control this with the homepage field in your package.json.
-    hashiqube0.service.consul: The build folder is ready to be deployed.
-    hashiqube0.service.consul: You may serve it with a static server:
-    hashiqube0.service.consul:   npm install -g serve
-    hashiqube0.service.consul:   serve -s build
-    hashiqube0.service.consul:
-    hashiqube0.service.consul: Find out more about deployment here:
-    hashiqube0.service.consul:
-    hashiqube0.service.consul:   https://cra.link/deployment
-    hashiqube0.service.consul: mkdir -p awx/public/static/css
-    hashiqube0.service.consul: mkdir -p awx/public/static/js
-    hashiqube0.service.consul: mkdir -p awx/public/static/media
-    hashiqube0.service.consul: cp -r awx/ui/build/static/css/* awx/public/static/css
-    hashiqube0.service.consul: cp -r awx/ui/build/static/js/* awx/public/static/js
-    hashiqube0.service.consul: cp -r awx/ui/build/static/media/* awx/public/static/media
-    hashiqube0.service.consul: touch awx/ui/.ui-built
-    hashiqube0.service.consul: make[1]: Leaving directory '/awx_devel'
-    hashiqube0.service.consul: ++++ Create superuser for AWX and setting password
-    hashiqube0.service.consul: CommandError: Error: That username is already taken.
-    hashiqube0.service.consul: Password updated
-    hashiqube0.service.consul: ++++ Loading AWX demo data
-    hashiqube0.service.consul: (changed: False)
-    hashiqube0.service.consul: ++++ Done
-    hashiqube0.service.consul: ++++ AWX https://10.9.99.10:8043 and login with Username: admin and Password: password
+```
+bash hashiqube/basetools.sh
+bash docker/docker.sh
+bash minikube/minikube.sh
+bash ansible-tower/ansible-tower.sh
 ```
 
-[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+#### **Vagrant**
+
+```
+vagrant up --provision-with basetools,docker,docsify,minikube,ansible-tower
+```
+
+#### **Docker Compose**
+
+```
+docker compose exec hashiqube /bin/bash
+bash bashiqube/basetools.sh
+bash docker/docker.sh
+bash docsify/docsify.sh
+bash minikube/minikube.sh
+bash ansible-tower/ansible-tower.sh
+```
+
+<!-- tabs:end -->
 
 ## Summary
 After provision, you can access AWX Ansible Tower on http://localhost:8043 and login with User: __admin__ and the Password displayed at the end of the Provision operation.
@@ -391,7 +278,7 @@ Back in Ansible Tower, click on __Jobs__ in the menue on the left
 You should see a successful Job
 ![Ansible Tower](images/ansible-tower-job-details-windows.png?raw=true "Ansible Tower")
 
-## AWX CLI and TOWER CLI 
+## CLI
 One thing I've always struggled with was feedback from Ansible Tower to a pipeline, for example how do we know if a run succeeded or failed.
 Then I discovered AWX CLI and TOWER CLI and it can be installed with pip
 
@@ -516,7 +403,7 @@ status
 successful
 ```
 
-## Terraform calling Ansible Tower
+## Terraform
 So using the configuration above, let's use terraform to kick of an ansible run and display the output
 
 We are going to use local-exec and remote-exec
@@ -941,11 +828,11 @@ https://github.com/ybalt/ansible-tower <br />
 https://www.ansible.com/products/tower <br />
 https://www.ansible.com/ <br />
 
-## Ansible AWX Tower Vagrant Provisioner
+## Ansible AWX Tower
 
 [filename](ansible-tower.sh ':include :type=code')
 
-## Terraform calling Ansible AWX
+## Terraform and AWX
 
 [filename](main.tf ':include :type=code hcl')
 
