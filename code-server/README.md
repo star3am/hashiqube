@@ -11,9 +11,8 @@ VSCode is a free, open source IDE. Code-server runs an instance of VS code that 
 
 <!-- tabs:start -->
 #### **Github Codespaces**
-
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/star3am/hashiqube?quickstart=1)
 ```
-bash hashiqube/basetools.sh
 bash docker/docker.sh
 bash code-server/code-server.sh
 ```

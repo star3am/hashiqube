@@ -24,6 +24,35 @@ Terraform is an open-source infrastructure as code software tool created by Hash
 
 Because of this flexibility, Terraform can be used to solve many different problems.
 
+## Provision
+
+<!-- tabs:start -->
+#### **Github Codespaces**
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/star3am/hashiqube?quickstart=1)
+```
+bash docker/docker.sh
+bash localstack/localstack.sh
+bash terraform/terraform.sh
+```
+
+#### **Vagrant**
+
+```
+vagrant up --provision-with basetools,docsify,docker,localstack,terraform
+```
+
+#### **Docker Compose**
+
+```
+docker compose exec hashiqube /bin/bash
+bash hashiqube/basetools.sh
+bash docker/docker.sh
+bash docsify/docsify.sh
+bash localstack/localstack.sh
+bash terraform/terraform.sh
+```
+<!-- tabs:end -->
+
 ### Introduction to Terraform
 
 HashiCorp Co-Founder and CTO, Armon Dadgar, explains the basics of Terraform, what it is, and how it works in this informative whiteboard video. 

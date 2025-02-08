@@ -28,9 +28,8 @@ In this whiteboard overview, HashiCorp Co-Founder and CTO, Armon Dadgar introduc
 
 <!-- tabs:start -->
 #### **Github Codespaces**
-
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/star3am/hashiqube?quickstart=1)
 ```
-bash hashiqube/basetools.sh
 bash boundary/boundary.sh
 ```
 

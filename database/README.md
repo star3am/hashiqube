@@ -14,9 +14,8 @@ Let's start with Oracle's MySQL
 
 <!-- tabs:start -->
 #### **Github Codespaces**
-
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/star3am/hashiqube?quickstart=1)
 ```
-bash hashiqube/basetools.sh
 bash docker/docker.sh
 bash vault/vault.sh
 bash database/mysql.sh
@@ -227,9 +226,8 @@ mysql: [Warning] Using a password on the command line interface can be insecure.
 
 <!-- tabs:start -->
 #### **Github Codespaces**
-
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/star3am/hashiqube?quickstart=1)
 ```
-bash hashiqube/basetools.sh
 bash docker/docker.sh
 bash vault/vault.sh
 bash database/mssql.sh
@@ -374,9 +372,8 @@ https://www.postgresql.org/
 
 <!-- tabs:start -->
 #### **Github Codespaces**
-
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/star3am/hashiqube?quickstart=1)
 ```
-bash hashiqube/basetools.sh
 bash docker/docker.sh
 bash vault/vault.sh
 bash database/postgresql.sh

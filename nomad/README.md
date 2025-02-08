@@ -24,9 +24,8 @@ Increasingly, teams want to move away from the traditional tight coupling of app
 
 <!-- tabs:start -->
 #### **Github Codespaces**
-
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/star3am/hashiqube?quickstart=1)
 ```
-bash hashiqube/basetools.sh
 bash docker/docker.sh
 bash consul/consul.sh
 bash nomad/nomad.sh
