@@ -13,9 +13,8 @@ Hashiqube has been created to help Engineers, Developers and anyone who wants to
 
 <!-- tabs:start -->
 #### **Github Codespaces**
-
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/star3am/hashiqube?quickstart=1)
 ```
-bash hashiqube/basetools.sh
 bash docker/docker.sh
 bash vault/vault.sh
 bash consul/consul.sh

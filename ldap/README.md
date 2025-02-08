@@ -9,9 +9,8 @@ LDAP stands for Lightweight Directory Access Protocol. As the name suggests, it 
 
 <!-- tabs:start -->
 #### **Github Codespaces**
-
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/star3am/hashiqube?quickstart=1)
 ```
-bash hashiqube/basetools.sh
 bash docker/docker.sh
 bash ldap/ldap.sh
 bash vault/vault.sh

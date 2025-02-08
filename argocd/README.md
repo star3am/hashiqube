@@ -26,9 +26,8 @@ Argo CD automates the deployment of the desired application states in the specif
 
 <!-- tabs:start -->
 #### **Github Codespaces**
-
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/star3am/hashiqube?quickstart=1)
 ```
-bash hashiqube/basetools.sh
 bash docker/docker.sh
 bash minikube/minikube.sh
 bash argocd/argocd.sh

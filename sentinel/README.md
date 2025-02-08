@@ -10,9 +10,8 @@ Sentinel is a language and framework for policy built to be embedded in existing
 
 <!-- tabs:start -->
 #### **Github Codespaces**
-
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/star3am/hashiqube?quickstart=1)
 ```
-bash hashiqube/basetools.sh
 bash docker/docker.sh
 bash sentinel/sentinel.sh
 ```
