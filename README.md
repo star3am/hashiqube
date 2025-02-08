@@ -23,11 +23,11 @@ Please connect with me on [LinkedIn (Riaan Nolan)](https://www.linkedin.com/in/r
 
 # Running Hashiqube
 There are a few ways of running Hashiqube depending on your needs, the easiet is by running it in a Github Codespace [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/star3am/hashiqube?quickstart=1)
-* [Hashiqube on Github Codespaces](/?id=hashiqube-on-github-codespaces) (You only need a Github account and can have Hashiqube up in 1 minute) __Preferred__
-* [Hashiqube locally using Vagrant or Docker](/?id=hashiqube-locally) Compose (You need Docker and Vagrant (Optional) or Virtualbox (Optional))
+* [Hashiqube on Github Codespaces](/?id=hashiqube-github-codespaces) (You only need a Github account and can have Hashiqube up in 1 minute) __Preferred__
+* [Hashiqube locally using Vagrant or Docker](/?id=hashiqube-local-vagrant) Compose (You need Docker and Vagrant (Optional) or Virtualbox (Optional))
 * [Hashiqube on VM in a Hyperscaler](/multi-cloud/README) (AWS, GCP or Azure)
 
-## Hashiqube on Github Codespaces
+## Hashiqube Github Codespaces
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/star3am/hashiqube?quickstart=1)
 
@@ -38,7 +38,7 @@ There are a few ways of running Hashiqube depending on your needs, the easiet is
 
 [![HashiQube on Github's Codespaces](images/hashiqube-on-github-codespace.png)](https://www.youtube.com/watch?v=8uDfDnQZZoA)
 
-## Hashiqube Locally
+## Hashiqube Local Vagrant
 Follow the instructions below to run Hashiqube locally on your laptop or PC. 
 
 ### Pre-requisites
@@ -123,41 +123,41 @@ Hashiqube can be visualized with the diagrams below.
 ![HashiQube](images/thestack.png?raw=true "HashiQube")
 
 * [Multi Cloud](multi-cloud/#terraform-hashicorp-hashiqube) - [Hashiqube on AWS, GCP and Azure (Clustered)](https://registry.terraform.io/modules/star3am/hashiqube/hashicorp/latest)
-* [Vagrant](vagrant/#vagrant) - Vagrant is an open-source software product for building and maintaining portable virtual software development environments; e.g., for VirtualBox, KVM, Hyper-V, Docker containers, VMware, and AWS. It tries to simplify the software configuration management of virtualization in order to increase development productivity `vagrant up --provision`
-* [Vault](vault/#vault) - Secure, store and tightly control access to tokens, passwords, certificates, encryption keys for protecting secrets and other sensitive data using a UI, CLI, or HTTP API `vagrant up --provision-with basetools,vault`
-* [Consul](consul/#consul) - Consul uses service identities and traditional networking practices to help organizations securely connect applications running in any environment `vagrant up --provision-with basetools,consul`
-* [Nomad](nomad/#nomad) - A simple and flexible scheduler and orchestrator to deploy and manage containers and non-containerized applications across on-prem and clouds at scale `vagrant up --provision-with basetools,docker,nomad`
-* [Traefik](nomad/#traefik-load-balancer-for-nomad) - Traefik is a modern HTTP reverse proxy and load balancer that seamlessly integrates with Nomad `vagrant up --provision-with basetools,docker,nomad` or `vagrant up --provision-with basetools,docker,minikube`
-* [Fabio](nomad/#fabio-load-balancer-for-nomad) - Fabio is an HTTP and TCP reverse proxy that configures itself with data from Consul `vagrant up --provision-with basetools,docker,nomad`
-* [Terraform](terraform/#terraform) - Use Infrastructure as Code to provision and manage any cloud, infrastructure, or service `vagrant up --provision-with basetools,docker,localstack,terraform`
+* [Vagrant](vagrant/#vagrant) - Vagrant is an open-source software product for building and maintaining portable virtual software development environments; e.g., for VirtualBox, KVM, Hyper-V, Docker containers, VMware, and AWS. It tries to simplify the software configuration management of virtualization in order to increase development productivity
+* [Vault](vault/#vault) - Secure, store and tightly control access to tokens, passwords, certificates, encryption keys for protecting secrets and other sensitive data using a UI, CLI, or HTTP API
+* [Consul](consul/#consul) - Consul uses service identities and traditional networking practices to help organizations securely connect applications running in any environment
+* [Nomad](nomad/#nomad) - A simple and flexible scheduler and orchestrator to deploy and manage containers and non-containerized applications across on-prem and clouds at scale
+* [Traefik](nomad/#traefik-load-balancer-for-nomad) - Traefik is a modern HTTP reverse proxy and load balancer that seamlessly integrates with Nomad
+* [Fabio](nomad/#fabio-load-balancer-for-nomad) - Fabio is an HTTP and TCP reverse proxy that configures itself with data from Consul
+* [Terraform](terraform/#terraform) - Use Infrastructure as Code to provision and manage any cloud, infrastructure, or service
 * [Packer](packer/#packer) - Create identical machine images for multiple platforms from a single source configuration.
 * [Sentinel](sentinel/#sentinel) - Sentinel is an embedded policy-as-code framework
-* [Waypoint](waypoint/#waypoint) - Waypoint is an open source solution that provides a modern workflow for build, deploy, and release across platforms `vagrant up --provision-with basetools,docker,waypoint` or `vagrant up --provision-with basetools,docker,waypoint-kubernetes-minikube`
-* [Boundary](boundary/#boundary) - Simple and secure remote access to any system from anywhere based on user identity `vagrant up --provision-with basetools,boundary`
-* [Docker](docker/#docker) - Securely build, share and run any application, anywhere `vagrant up --provision-with basetools,docker`
-* [Localstack](localstack/#localstack) - A fully functional local AWS cloud stack `vagrant up --provision-with basetools,docker,localstack,terraform`
+* [Waypoint](waypoint/#waypoint) - Waypoint is an open source solution that provides a modern workflow for build, deploy, and release across platforms
+* [Boundary](boundary/#boundary) - Simple and secure remote access to any system from anywhere based on user identity
+* [Docker](docker/#docker) - Securely build, share and run any application, anywhere
+* [Localstack](localstack/#localstack) - A fully functional local AWS cloud stack
 * [Ansible](ansible/#ansible) - Ansible is a suite of software tools that enables infrastructure as code. It is open-source and the suite includes software provisioning, configuration management, and application deployment functionality.
-* [LDAP](ldap/#ldap) - Lightweight Directory Access Protocol `vagrant up --provision-with basetools,vault,ldap`
-* [Jenkins](jenkins/#jenkins) - Jenkins is an open source automation server. It helps automate the parts of software development related to building, testing, and deploying, facilitating continuous integration and continuous delivery `vagrant up --provision-with basetools,docker,vault,jenkins`
-* [Oracle MySQL](database/#oracle-mysql) - MySQL is an open-source relational database management system (RDBMS) `vagrant up --provision-with basetools,docker,vault,mysql`
-* [Microsoft MSSQL](database/#microsoft-sql-mssql-express) - Microsoft SQL Server is a relational database management system developed by Microsoft `vagrant up --provision-with basetools,docker,vault,mssql`
-* [PostgreSQL](database/#postgresql) - PostgreSQL, also known as Postgres, is a free and open-source relational database management system emphasizing extensibility and SQL compliance `vagrant up --provision-with basetools,docker,vault,postgresql`
-* [Minikube](minikube/#minikube) - Minikube implements a local Kubernetes cluster on macOS, Linux, and Windows `vagrant up --provision-with basetools,docker,minikube`
+* [LDAP](ldap/#ldap) - Lightweight Directory Access Protocol
+* [Jenkins](jenkins/#jenkins) - Jenkins is an open source automation server. It helps automate the parts of software development related to building, testing, and deploying, facilitating continuous integration and continuous delivery
+* [Oracle MySQL](database/#oracle-mysql) - MySQL is an open-source relational database management system (RDBMS)
+* [Microsoft MSSQL](database/#microsoft-sql-mssql-express) - Microsoft SQL Server is a relational database management system developed by Microsoft
+* [PostgreSQL](database/#postgresql) - PostgreSQL, also known as Postgres, is a free and open-source relational database management system emphasizing extensibility and SQL compliance
+* [Minikube](minikube/#minikube) - Minikube implements a local Kubernetes cluster on macOS, Linux, and Windows
 * [Newrelic Kubernetes Monitoring](newrelic-kubernetes-monitoring/#newrelic-kubernetes-monitoring) - Monitor Kubernetes Clusters and Workloads with Newrelic
-* [Docsify](docsify/#docsify) - A magical documentation site generator `vagrant up --provision-with basetools,docsify`
+* [Docsify](docsify/#docsify) - A magical documentation site generator
 * [Mermaid](mermaid/#mermaid) - Generation of diagram and flowchart from text in a similar manner as markdown
-* [Prometheus](prometheus-grafana/#prometheus-and-grafana) - Open-source monitoring system with dimensional data model, flexible query language, efficient time series database & modern alerting `vagrant up --provision-with basetools,docker,minikube,prometheus-grafana`
-* [Grafana](prometheus-grafana/#prometheus-and-grafana) - Grafana is the open source analytics & monitoring solution for every database `vagrant up --provision-with basetools,docker,minikube,prometheus-grafana`
-* [Elasticsearch](elasticsearch-kibana-cerebro/#elasticsearch-kibana-and-cerebro) - Elasticsearch is a search engine based on the Lucene library `vagrant up --provision-with basetools,docker,elasticsearch-kibana-cerebro`
-* [Kibana](elasticsearch-kibana-cerebro/#elasticsearch-kibana-and-cerebro) - Kibana is an open source data visualization dashboard for Elasticsearch `vagrant up --provision-with basetools,docker,elasticsearch-kibana-cerebro`
-* [Cerebro](elasticsearch-kibana-cerebro/#elasticsearch-kibana-and-cerebro) - Cerebro is the evolution of the previous Elasticsearch plugin Elasticsearch kopf `vagrant up --provision-with basetools,docker,elasticsearch-kibana-cerebro`
-* [Ansible-Tower](ansible-tower/#ansible-tower) - Is a web-based solution that makes Ansible even more easy to use for IT teams of all kinds. It’s designed to be the hub for all of your automation tasks `vagrant up --provision-with basetools,docker,minikube,ansible-tower`
-* [Dbt](dbt/#dbt) - Dbt is a data transformation tool that enables data analysts and engineers to transform, test and document data in the cloud data warehouse `vagrant up --provision-with basetools,docker,postgresql,dbt`
-* [Airflow](apache-airflow/#apache-airflow) - Apache Airflow is an open-source workflow management platform for data engineering pipelines `vagrant up --provision-with basetools,docker,docsify,postgresql,minikube,dbt,apache-airflow`
-* [Visual-Studio-Code](visual-studio-code/#visual-studio-code) - Visual Studio Code is a code editor redefined and optimized for building and debugging modern web and cloud applications `vagrant up --provision-with basetools,docker,vscode-server`
-* [Portainer](portainer/#portainer) - A lightweight service delivery platform for containerized applications that can be used to manage Docker, Swarm, Kubernetes and ACI environments. It is designed to be as simple to deploy as it is to use `vagrant up --provision-with basetools,docker,docsify,portainer`
-* [Gitlab](gitlab/#gitlab) - GitLab is a complete DevOps platform, delivered as a single application `vagrant up --provision-with basetools,docker,docsify,minikube,gitlab`
-* [Argocd](argocd/#argocd) - Argo CD is a declarative, GitOps continuous delivery tool for Kubernetes. `vagrant up --provision-with basetools,docker,docsify,minikube,argocd`
+* [Prometheus](prometheus-grafana/#prometheus-and-grafana) - Open-source monitoring system with dimensional data model, flexible query language, efficient time series database & modern alerting
+* [Grafana](prometheus-grafana/#prometheus-and-grafana) - Grafana is the open source analytics & monitoring solution for every database
+* [Elasticsearch](elasticsearch-kibana-cerebro/#elasticsearch-kibana-and-cerebro) - Elasticsearch is a search engine based on the Lucene library
+* [Kibana](elasticsearch-kibana-cerebro/#elasticsearch-kibana-and-cerebro) - Kibana is an open source data visualization dashboard for Elasticsearch
+* [Cerebro](elasticsearch-kibana-cerebro/#elasticsearch-kibana-and-cerebro) - Cerebro is the evolution of the previous Elasticsearch plugin Elasticsearch kopf
+* [Ansible-Tower](ansible-tower/#ansible-tower) - Is a web-based solution that makes Ansible even more easy to use for IT teams of all kinds. It’s designed to be the hub for all of your automation tasks 
+* [Dbt](dbt/#dbt) - Dbt is a data transformation tool that enables data analysts and engineers to transform, test and document data in the cloud data warehouse
+* [Airflow](apache-airflow/#apache-airflow) - Apache Airflow is an open-source workflow management platform for data engineering pipelines 
+* [Visual-Studio-Code](visual-studio-code/#visual-studio-code) - Visual Studio Code is a code editor redefined and optimized for building and debugging modern web and cloud applications
+* [Portainer](portainer/#portainer) - A lightweight service delivery platform for containerized applications that can be used to manage Docker, Swarm, Kubernetes and ACI environments. It is designed to be as simple to deploy as it is to use
+* [Gitlab](gitlab/#gitlab) - GitLab is a complete DevOps platform, delivered as a single application
+* [Argocd](argocd/#argocd) - Argo CD is a declarative, GitOps continuous delivery tool for Kubernetes.
 
 Once the stack is up you will have a large number of services running and available on `localhost` <br />
 For Documentation please open http://localhost:3333 in your browser
@@ -183,7 +183,7 @@ Thanks to the flexibility of the Hashicorp products there is no need to wonder h
 | mac intel | ✓ | ✓ | ✘ |
 | mac apple | ✓ | ✘ | ✘ |
 
-## Supported HashiCorp product Versions
+## HashiCorp product Versions
 
 By default Hashiqube installs community editions of Hashicorp products, but you can also test and demo Enterprise versions. You can request a trial license from here https://developer.hashicorp.com/vault/tutorials/enterprise/hashicorp-enterprise-license#request-a-trial-license
 
@@ -431,7 +431,7 @@ Please connect with me on [LinkedIn](https://www.linkedin.com/in/riaannolan/) or
 
 ![My Hashicorp Badges](images/hashicorp-badges.png?raw=true "My Hashicorp Badges")
 
-## Contributors and Special mentions
+## Contributors
 A Very special mention to HashiQube's contributors, Thank You All for your help, suggestions and contributions no matter how small <3
  - [Thomas Cockin](https://www.aslantechnology.com.au/)
  - [Konstantin Vanyushov](https://www.linkedin.com/in/konstantin-vanyushov/)
