@@ -2,6 +2,8 @@
 
 ![HashiQube](images/hashiqube-banner.png?raw=true "HashiQube ")
 
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/star3am/hashiqube?quickstart=1)
+
 ## Overview
 
 Hashiqube is the Ultimate Hands on DevOps Lab in a Docker Container.
@@ -20,12 +22,14 @@ Please connect with me on [LinkedIn (Riaan Nolan)](https://www.linkedin.com/in/r
 <br />
 
 # Running Hashiqube
-There are a few ways of running Hashiqube depending on your needs
+There are a few ways of running Hashiqube depending on your needs, the easiet is by running it in a Github Codespace [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/star3am/hashiqube?quickstart=1)
 * [Hashiqube on Github Codespaces](/?id=hashiqube-on-github-codespaces) (You only need a Github account and can have Hashiqube up in 1 minute) __Preferred__
 * [Hashiqube locally using Vagrant or Docker](/?id=hashiqube-locally) Compose (You need Docker and Vagrant (Optional) or Virtualbox (Optional))
 * [Hashiqube on VM in a Hyperscaler](/multi-cloud/README) (AWS, GCP or Azure)
 
 ## Hashiqube on Github Codespaces
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/star3am/hashiqube?quickstart=1)
 
 * Head over to https://github.com/star3am/hashiqube
 * Now Fork the Hashiqube repository
