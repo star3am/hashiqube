@@ -1,94 +1,186 @@
 # Ansible
 
-![Ansible Logo](images/ansible-logo.png?raw=true "Ansible Logo")
+<div align="center">
+  <img src="images/ansible-logo.png" alt="Ansible Logo" width="300px">
+  <br><br>
+  <p><strong>Automate infrastructure management with Ansible's Configuration as Code approach</strong></p>
+</div>
 
-## About
+## 🚀 About
 
-In this HashiQube DevOps Lab you will learn about Ansible. What it is and how to use it. Further down below I provide you with an Example Ansible Role that runs on all operating systems, and has Molecule built in. 
+In this HashiQube DevOps Lab, you'll learn about Ansible—what it is and how to use it. This guide includes a hands-on Ansible Role example that runs on multiple operating systems and has Molecule integration for testing.
 
-Ansible is a Configuration in Code system. It can do a lot of things for you. Enjoy this hands on DevOps Lab! 
+Ansible is an open-source software provisioning, configuration management, and application-deployment tool. It works with:
 
-Ansible is an open-source software provisioning, configuration management, and application-deployment tool. It runs on many Unix-like systems, and can configure both Unix-like systems as well as Microsoft Windows. It includes its own declarative language to describe system configuration in YAML.
+- Unix-like systems
+- Microsoft Windows
+- Uses its own declarative language based on YAML
 
-## Molecule 
+As a Configuration as Code system, Ansible can automate a wide variety of IT tasks, helping you standardize your infrastructure management.
 
-Molecule project is designed to aid in the development and testing of Ansible roles and can speed up local development of Ansible roles and playbooks in magnetude!
+## 🧪 Molecule
 
-Molecule provides support for testing with multiple instances, operating systems and distributions, virtualization providers, test frameworks and testing scenarios.
+<div align="center">
+  <p><em>Speed up your Ansible development with comprehensive testing</em></p>
+</div>
 
-Molecule encourages an approach that results in consistently developed roles that are well-written, easily understood and maintained.
+Molecule is designed to aid in the development and testing of Ansible roles, dramatically speeding up local development of Ansible roles and playbooks. It provides:
 
-Molecule supports only the latest two major versions of Ansible (N/N-1), meaning that if the latest version is 2.9.x, we will also test our code with 2.8.x.
+- Support for testing with multiple instances, operating systems, and distributions
+- Various virtualization providers
+- Different test frameworks and testing scenarios
 
-## Ansible Tasks
+Molecule encourages an approach that results in consistently developed roles that are well-written, easily understood, and maintained.
 
-When Ansible is executed it uses site.yml as the entry point, this simply points it to the __tasks__ directory.
+> Note: Molecule supports only the latest two major versions of Ansible (N/N-1), meaning that if the latest version is 2.9.x, it will also test with 2.8.x.
 
-Because Ansible can operate on Windows, Linux (Deb and RPM based) systems, it's wise to split the tasks up to make it more readable. 
+## 📚 Ansible Tasks Structure
 
-## Main.yml
-Let's first look at the main.yml 
+When Ansible is executed, it uses `site.yml` as the entry point, which directs it to the __tasks__ directory.
 
-As you can see below we are using Ansible Facts to direct the different Operating Systems to their own Task file. 
+Since Ansible can operate on Windows, Linux (Debian and RPM-based) systems, it's wise to split the tasks into separate files to improve readability.
 
-[filename](roles/ansible-role-example-role/tasks/main.yml ':include :type=code')
+### Main Task File
 
-[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+The `main.yml` file uses Ansible Facts to direct different operating systems to their own task files:
 
-## Enterprise Linux
-Let's have a look at Enterprise Linux (RPM YUM based) el.yml
+```yaml
+---
+- name: import OS specific tasks
+  ansible.builtin.import_tasks: "{{ lookup('first_found', params) }}"
+  vars:
+    params:
+      files:
+        - "{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version }}.yml"
+        - "{{ ansible_distribution | lower }}.yml"
+        - "{{ ansible_os_family | lower }}.yml"
+        - "{{ ansible_system | lower }}.yml"
+      paths:
+        - "{{ role_path }}/tasks"
 
-[filename](roles/ansible-role-example-role/tasks/el.yml ':include :type=code')
+- name: import os family tasks
+  ansible.builtin.include_tasks: "{{ ansible_os_family | lower }}.yml"
+  when:
+    - ansible_os_family is defined
+    - ansible_os_family | lower == "redhat" or ansible_os_family | lower == "debian"
 
-[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+# additional tasks...
+```
 
-## Debian/Ubuntu Linux
-Let's have a look at Debian/Ubuntu Linux (DEB based) deb.yml
+### Operating System-Specific Tasks
 
-[filename](roles/ansible-role-example-role/tasks/deb.yml ':include :type=code')
+<details>
+<summary><strong>🔍 Enterprise Linux (RPM/YUM-based) - el.yml</strong></summary>
 
-[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+```yaml
+---
+- name: OS
+  ansible.builtin.debug:
+    msg: "{{ ansible_distribution }} {{ ansible_distribution_version }} {{ ansible_distribution_release }} on {{ ansible_system_vendor }}"
+  when: ansible_os_family | lower == "redhat"
 
-## Windows
-Let's have a look at Windows windows.yml
+# Additional tasks for Enterprise Linux...
+```
 
-[filename](roles/ansible-role-example-role/tasks/windows.yml ':include :type=code')
+</details>
 
-[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+<details>
+<summary><strong>🔍 Debian/Ubuntu Linux (DEB-based) - deb.yml</strong></summary>
 
-## Molecule example
+```yaml
+---
+- name: OS
+  ansible.builtin.debug:
+    msg: "{{ ansible_distribution }} {{ ansible_distribution_version }} {{ ansible_distribution_release }} on {{ ansible_system_vendor }}"
+  when: ansible_os_family | lower == "debian"
 
-Using Molecule, we can quickly test our Role or Playbook against many Operating Systems. 
+# Additional tasks for Debian-based systems...
+```
 
-In our Ansible Role Example Role which supports Redhat, Centos, Ubuntu, Debian and Windows we have an example Molecule YAML file 
+</details>
 
-[filename](roles/ansible-role-example-role/molecule/default/molecule.yml ':include :type=code')
+<details>
+<summary><strong>🔍 Windows - windows.yml</strong></summary>
 
-[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+```yaml
+---
+- name: OS
+  ansible.builtin.debug:
+    msg: "{{ ansible_distribution }} {{ ansible_distribution_version }} on {{ ansible_system_vendor }}"
+  when: ansible_os_family | lower == "windows"
 
-## Practicle example
-Molecule use providers such as docker or virtualbox to create the target instances to run the playbook against. 
+# Additional tasks for Windows systems...
+```
 
-The Targets are configured in molecule/molecule.yml
+</details>
 
-For this example we will use: 
+## 🧪 Molecule Testing
+
+Molecule allows you to quickly test your Ansible Role or Playbook against many operating systems. The example role supports RedHat, CentOS, Ubuntu, Debian, and Windows.
+
+### Molecule Configuration
+
+Here's a sample Molecule configuration file:
+
+```yaml
+---
+dependency:
+  name: galaxy
+driver:
+  name: vagrant
+platforms:
+  - name: ansible-role-example-role-ubuntu-2204
+    box: generic/ubuntu2204
+    instance_raw_config_args:
+      - "vm.network 'forwarded_port', guest: 22, host: 3225"
+    memory: 1024
+    cpus: 1
+    groups:
+      - linux
+  - name: ansible-role-example-role-windows-2019
+    box: jborean93/WindowsServer2019
+    memory: 4096
+    cpus: 2
+    groups:
+      - windows
+provisioner:
+  name: ansible
+  playbooks:
+    converge: ${MOLECULE_PLAYBOOK:-converge.yml}
+verifier:
+  name: ansible
+```
+
+### Running Molecule Tests
+
+From the HashiQube cloned repo:
+
+```bash
+cd ansible/roles/ansible-role-example-role && ./run.sh
+```
+
+This will test your Ansible role against:
+
 - Ubuntu 22.04
 - Windows 2019
 
-### Run Molecule
+## 🌟 Ansible Role Example
 
-From the Hashiqube Cloned repo do: 
-`cd ansible/roles/ansible-role-example-role && ./run.sh`
+The repository includes an example Ansible Role that covers:
 
-## Ansible Role Example Role
-An example Ansible Role that you can use which covers, Red Hat, Centos, Ubuntu, Debian and Windows Targets. 
+- Red Hat and CentOS Linux
+- Ubuntu and Debian Linux
+- Windows
 
-Further reading see: [__Ansible Role Example Role__](ansible/roles/ansible-role-example-role/#ansible-role-example-role) 
+For more details, see the [__Ansible Role Example Role__](ansible/roles/ansible-role-example-role/#ansible-role-example-role) section.
 
-## Ansible Galaxy Roles
-Ansible Galaxy is the Ansible's official community hub for sharing Ansible roles. It is a community and a shared resource hub where people can download roles or Playbooks
+## ⭐ Ansible Galaxy Roles
 
-To download community roles and playbooks from remote repositories you need a requirements.txt file foe example
+Ansible Galaxy is Ansible's official community hub for sharing roles. It serves as a repository where people can download pre-built roles and playbooks.
+
+### Using Galaxy Roles
+
+To download community roles from remote repositories, create a `requirements.yml` file:
 
 ```yaml
 - src: 'https://github.com/ansible-lockdown/RHEL8-CIS'
@@ -103,221 +195,220 @@ To download community roles and playbooks from remote repositories you need a re
   version: 'main'
   scm: 'git'
 
-- src: 'https://github.com/ansible-lockdown/UBUNTU20-CIS'
-  version: '1.1.0'
-  scm: 'git'
-
-- src: 'https://github.com/ansible-lockdown/UBUNTU18-CIS'
-  version: '1.3.0'
-  scm: 'git'
-
-- src: 'https://github.com/ansible-lockdown/Windows-2016-CIS'
-  version: '1.2.1'
-  scm: 'git'
-
-- src: 'https://github.com/ansible-lockdown/Windows-2019-CIS'
-  version: '1.1.1'
-  scm: 'git'
-
-- src: 'https://github.com/star3am/ansible-role-win_openssh'
-  version: 'ssh-playbook-test'
-  scm: 'git'
-
-- src: 'https://github.com/elastic/ansible-elasticsearch'
-  version: 'v7.17.0'
-  scm: 'git'
+# Additional roles...
 ```
 
-You can then download them by using this command: 
-`ansible-galaxy install -f -r ansible/galaxy/requirements.yml -p ansible/galaxy/roles/`
+Install the roles with:
 
-[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
-
-## Ansible Role Example Role 
-
-## About
-
-This is an Ansible Example Role used for training and development
-
-## Gotcha's (Sorry!!)
-- M1 and M2 Mac Architectures are NOT supported at this stage
-- Hyper-V is not supported at this stage
-- Your Vagrant version on Windows and in WSL *MUST* be the same 
-- Installing WSL could give error: `Catastrophic failure`
-``` 
-PS C:\Windows\system32> wsl --install
-Installing: Windows Subsystem for Linux
-Catastrophic failure
+```bash
+ansible-galaxy install -f -r ansible/galaxy/requirements.yml -p ansible/galaxy/roles/
 ```
-Restart laptop, run this installation command again, and make sure nothing is downloading in the background at the same time when running the command.
 
+## 🛠️ Getting Started: Setup Guide
 
-- WSL Ubuntu Install could give error: `An error occurred during installation. Distribution Name: 'Ubuntu' Error Code: 0x8000ffff`
-```
-PS C:\WINDOWS\system32> wsl --install -d ubuntu
-Installing: Ubuntu
-An error occurred during installation. Distribution Name: 'Ubuntu' Error Code: 0x8000ffff
-```
-Follow this link: https://askubuntu.com/questions/1434150/wsl-ubuntu-installation-fails-with-the-error-please-restart-wsl-with-the-follo and 
-https://learn.microsoft.com/en-us/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package
+### ⚠️ Known Issues and Limitations
 
-Note : Run ``` wsl --install -d Ubuntu ``` in **non administrative** mode in powershell
+- M1 and M2 Mac architectures are not currently supported
+- Hyper-V is not supported
+- Your Vagrant version on Windows and in WSL __MUST__ be the same
+- Special setup steps needed for WSL (see below)
 
-![wsl.png](roles/ansible-role-example-role/wsl.PNG)
+<details>
+<summary><strong>Common WSL Installation Issues</strong></summary>
 
-[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+- Error: `Catastrophic failure` when installing WSL
 
-```
-PS C:\Users\User> wsl --shutdown
-PS C:\Users\User> wsl --unregister Ubuntu
-```
-- If you have error when creating python virtual env: ![image-1.png](roles/ansible-role-example-role/image-1.png)
-Close WSL and run `Restart-Service -Name "LxssManager"` as **Administrator in Powershell**, restart WSL and `./run.sh` again
+  ```powershell
+  PS C:\Windows\system32> wsl --install
+  Installing: Windows Subsystem for Linux
+  Catastrophic failure
+  ```
 
-- If you have error when bringing up VM: `vagrant was unable to communicate with the guest machine within the configured time period`
-![image-5.png](roles/ansible-role-example-role/image-5.png)
-Set WSL Ubuntu Distro to version 1: run `wsl --set-version Ubuntu 1` in powershell, restart WSL and run `./run.sh` again
+  Solution: Restart your laptop and ensure nothing is downloading in the background when running the command.
 
-## Get Started!
+- Error: `An error occurred during installation. Distribution Name: 'Ubuntu' Error Code: 0x8000ffff`
 
-:bulb: __IMPORTANT__ Install these Tools first, before we start actually using Molecule to develop our Ansible Roles
+  ```powershell
+  PS C:\WINDOWS\system32> wsl --install -d ubuntu
+  Installing: Ubuntu
+  An error occurred during installation. Distribution Name: 'Ubuntu' Error Code: 0x8000ffff
+  ```
 
-- Git - https://git-scm.com 
-- VSCode - https://code.visualstudio.com
-- Vagrant - https://www.vagrantup.com
-- Virtualbox - https://www.virtualbox.org
-- Python and Pip - https://www.python.org
-- Windows Subsystem for Linux WSL (Windows Operating System), install as **Administrator in Powershell** - https://learn.microsoft.com/en-us/windows/wsl/install 
-- WSL Ubuntu Distro, install as **Non-Administrator in Powershell** `wsl --install -d Ubuntu`
-- Set WSL Ubuntu Distro to version 1 `wsl --set-version Ubuntu 1`
-- SSHPass - https://www.cyberciti.biz/faq/how-to-install-sshpass-on-macos-os-x/
+  Solution: Follow the guidance at [Microsoft Learn](https://learn.microsoft.com/en-us/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package)
 
-## Supported OSs
+  > Note: Run `wsl --install -d Ubuntu` in __non-administrative__ mode in PowerShell
 
-The Role supports the following Operating Systems and versions
-See: `molecule/default/molecule.yml`
+- If a virtual environment creation fails:
+  Close WSL and run `Restart-Service -Name "LxssManager"` as __Administrator in PowerShell__, restart WSL and run `./run.sh` again
+  
+- If you get `vagrant was unable to communicate with the guest machine within the configured time period` error:
+  Set WSL Ubuntu Distro to version 1 by running `wsl --set-version Ubuntu 1` in PowerShell, restart WSL and run `./run.sh` again
 
-| Name | Docker | Virtualbox | Hyper-V | Host Arch | Host OS
+</details>
+
+### 📋 Prerequisites
+
+Install these tools before using Molecule to develop Ansible roles:
+
+- [Git](https://git-scm.com)
+- [VSCode](https://code.visualstudio.com)
+- [Vagrant](https://www.vagrantup.com)
+- [VirtualBox](https://www.virtualbox.org)
+- [Python and Pip](https://www.python.org)
+- Windows Subsystem for Linux (WSL) - Windows only
+- SSHPass for password-based SSH
+
+### 🖥️ Supported Operating Systems
+
+| Name | Docker | VirtualBox | Hyper-V | Host Arch | Host OS |
 |------|--------|------------|---------|-----------|---------|
 | Windows 2016 | ✘ | ✓ | ✘ | amd64 | Windows, Mac, Linux |
 | Windows 2019 | ✘ | ✓ | ✘ | amd64 | Windows, Mac, Linux |
-| Redhat 7.9 | ✘ | ✓ | ✘ | amd64 | Windows, Mac, Linux |
-| Redhat 8.3 | ✘ | ✓ | ✘ | amd64 | Windows, Mac, Linux |
-| Centos 7.7 | ✘ | ✓ | ✘ | amd64 | Windows, Mac, Linux |
-| Centos 8.3 | ✘ | ✓ | ✘ | amd64 | Windows, Mac, Linux |
+| RedHat 7.9 | ✘ | ✓ | ✘ | amd64 | Windows, Mac, Linux |
+| RedHat 8.3 | ✘ | ✓ | ✘ | amd64 | Windows, Mac, Linux |
+| CentOS 7.7 | ✘ | ✓ | ✘ | amd64 | Windows, Mac, Linux |
+| CentOS 8.3 | ✘ | ✓ | ✘ | amd64 | Windows, Mac, Linux |
 | Ubuntu 18.04 | ✘ | ✓ | ✘ | amd64 | Windows, Mac, Linux |
 | Ubuntu 20.04 | ✘ | ✓ | ✘ | amd64 | Windows, Mac, Linux |
 | Ubuntu 22.04 | ✘ | ✓ | ✘ | amd64 | Windows, Mac, Linux |
 | Debian 9 | ✘ | ✘ | ✘ | amd64 | Windows, Mac, Linux |
 | Debian 10 | ✘ | ✘ | ✘ | amd64 | Windows, Mac, Linux |
 
-## Instructions 
+### 💻 Setup Instructions by Platform
 
-Here is how you can get up and running quickly, this section is devided into `Windows using Windows Subsystem for Linux WSL` and `Mac OSX` (Sorry Intel Mac's only at this stage) and Linux
+<details>
+<summary><strong>Linux (Ubuntu Recommended)</strong></summary>
 
-### Linux (Ubuntu recommended)
+1. Install Python:
 
-Install all the Tools you need in the [__Get Started Section__](#get-started-dependencies-the-tools-you-will-need) 
+   ```bash
+   sudo apt update && sudo apt-get install -y python3 python3-pip python3-dev python3-virtualenv python3-venv
+   sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 1 --force
+   sudo update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 1 --force
+   ```
 
-Install Python
+2. Install SSHPass:
+
+   ```bash
+   sudo apt-get install -y sshpass
+   ```
+
+3. Install Hashicorp Package Sources:
+
+   ```bash
+   wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg 
+   
+   echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+   
+   sudo apt update && sudo apt install vagrant
+   
+   echo 1 > /proc/sys/fs/binfmt_misc/WSLInterop
+   ```
+
+4. Install PowerShell in Ubuntu on WSL (optional):
+
+   ```bash
+   sudo apt-get install -y wget apt-transport-https software-properties-common
+   
+   wget -q "https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb"
+   
+   sudo dpkg -i packages-microsoft-prod.deb
+   
+   sudo apt-get update
+   
+   sudo apt-get install -y powershell
+   ```
+
+5. Run Molecule:
+
+   ```bash
+   ./run.sh
+   ```
+
+> ⚠️ Allow all 3 types of network when setting up the Firewall for VirtualBox
+</details>
+
+<details>
+<summary><strong>macOS (Intel Only)</strong></summary>
+
+1. Install SSHPass:
+
+   ```bash
+   brew tap esolitos/ipa
+   brew install esolitos/ipa/sshpass
+   brew install sshpass
+   ```
+
+2. Run Molecule:
+
+   ```bash
+   ./run.sh
+   ```
+
+</details>
+
+<details>
+<summary><strong>Windows with WSL</strong></summary>
+
+1. Install WSL as __Administrator in PowerShell__:
+
+   ```powershell
+   wsl --install
+   ```
+
+2. Install Ubuntu as __Non-Administrator in PowerShell__:
+
+   ```powershell
+   wsl --install -d Ubuntu
+   ```
+
+3. Set WSL version to 1:
+
+   ```powershell
+   wsl --set-version Ubuntu 1
+   ```
+
+4. Follow the Linux (Ubuntu) instructions within your WSL environment
+
+5. Testing the connection:
+   - After Molecule brings up the Ubuntu VM in VirtualBox, open a new WSL Ubuntu window
+   - Run: `ssh vagrant@127.0.0.1 -p 3225` or `ssh vagrant@localhost -p 3225`
+   - Login with password: `vagrant`
+
+</details>
+
+## 📷 Screenshots
+
+<div align="center">
+  <img src="roles/ansible-role-example-role/images/molecule-run-on-wsl-windows.png" alt="Ansible Molecule on Windows" width="85%">
+  <p><em>Ansible Molecule running on Windows with WSL</em></p>
+</div>
+
+<div align="center">
+  <img src="roles/ansible-role-example-role/images/molecule-run-on-mac-intel.png" alt="Ansible Molecule on Mac Intel" width="85%">
+  <p><em>Ansible Molecule running on Mac Intel with Vagrant and VirtualBox</em></p>
+</div>
+
+## ❓ Troubleshooting
+
+<details>
+<summary><strong>Common Errors</strong></summary>
+
+Error:
 
 ```bash
-sudo apt update && sudo apt-get install -y python3 python3-pip python3-dev python3-virtualenv python3-venv
-sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 1 --force
-sudo update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 1 --force
-```
-Install SSHPass program
-
-```bash
-sudo apt-get install -y sshpass
-```
-
-Install Hashicorp Package Sources
-
-```bash
-wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg 
-
-echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
-
-sudo apt update && sudo apt install vagrant
-
-echo 1 > /proc/sys/fs/binfmt_misc/WSLInterop
-```
-
-Install Powershell in Ubuntu on WSL
-
-```bash
-sudo apt-get install -y wget apt-transport-https software-properties-common
-
-wget -q "https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb"
-
-sudo dpkg -i packages-microsoft-prod.deb
-
-sudo apt-get update
-
-sudo apt-get install -y powershell
-```
-
-Now let's run Molecule by going into the source directory where you cloned this repo, usually in Ubuntu on WSL somewhere under `/mnt/c/....`
-
-and do
-
-`./run.sh`
-
-
-Allow all 3 types of network when set up Firewall for VirtualBox
-![image-2.png](roles/ansible-role-example-role/image-2.png)
-
-[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
-
-### Mac 
-
-Install all the Tools you need in the [__Get Started Section__](#get-started-dependencies-the-tools-you-will-need) 
-
-Install SSHPass
-
-```bash
-brew tap esolitos/ipa
-brew install esolitos/ipa/sshpass
-brew install sshpass
-```
-
-Now let's run Molecule by going into the source directory where you cloned this repo
-
-and do
-
-`./run.sh`
-
-After Molecule bringing up the Ubuntu VM in VirtualBox, to test connection to vagrant in VM, open a new WSL Ubuntu window, and run `ssh vagrant@127.0.0.1 -p 3225` or `ssh vagrant@localhost -p 3225`. Login with password: `vagrant`. 
-
-Succesful ouput should be as below:
-![image-4.png](roles/ansible-role-example-role/image-4.png)
-
-## Windows (Ubuntu with WSL)
-![Ansible Molecule on Windows](roles/ansible-role-example-role/images/molecule-run-on-wsl-windows.png?raw=true "Ansible Moleculeon Windows")
-
-## Ansible Molecule, Mac Intel
-## Vagrant and Virtualbox
-![Ansible Molecule on Mac Intel](roles/ansible-role-example-role/images/molecule-run-on-mac-intel.png?raw=true "Ansible Moleculeon Mac Intel")
-
-## Links
-
-- https://developer.hashicorp.com/vagrant/docs/other/wsl#path-modifications
-- https://stackoverflow.com/questions/45375933/vagrant-wsl-cant-access-virtualbox
-- https://learn.microsoft.com/en-us/windows/wsl/install
-- https://molecule.readthedocs.io/en/latest/getting-started.html
-- https://www.ansible.com/hubfs//AnsibleFest%20ATL%20Slide%20Decks/Practical%20Ansible%20Testing%20with%20Molecule.pdf
-- https://www.jeffgeerling.com/blog/2018/testing-your-ansible-roles-molecule
-- https://app.vagrantup.com/jborean93
-- https://github.com/jborean93/packer-windoze
-- https://www.ansible.com/
-- https://molecule.readthedocs.io/en/latest/
-
-## Common Errors 
-
-```log
 fatal: [ansible-role-example-role-ubuntu-2204]: FAILED! => {"msg": "to use the 'ssh' connection type with passwords or pkcs11_provider, you must install the sshpass program"}
 ```
-Did you install the SSHPass application? See [__Get Started Section__](#get-started-dependencies-the-tools-you-will-need) 
 
-[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+Solution: Install the SSHPass application as described in the setup instructions for your platform.
+</details>
+
+## 🔗 Useful Links
+
+- [Vagrant WSL Documentation](https://developer.hashicorp.com/vagrant/docs/other/wsl#path-modifications)
+- [Vagrant WSL VirtualBox Access](https://stackoverflow.com/questions/45375933/vagrant-wsl-cant-access-virtualbox)
+- [Microsoft WSL Installation Guide](https://learn.microsoft.com/en-us/windows/wsl/install)
+- [Molecule Documentation](https://molecule.readthedocs.io/en/latest/getting-started.html)
+- [Practical Ansible Testing with Molecule](https://www.ansible.com/hubfs//AnsibleFest%20ATL%20Slide%20Decks/Practical%20Ansible%20Testing%20with%20Molecule.pdf)
+- [Jeff Geerling: Testing Ansible Roles with Molecule](https://www.jeffgeerling.com/blog/2018/testing-your-ansible-roles-molecule)
+- [Ansible Official Website](https://www.ansible.com/)
