@@ -625,6 +625,7 @@ A very special mention to HashiQube's contributors. Thank you all for your help,
 - [JJ Badenhorst](https://github.com/badj)
 - [Jan Laubscher](https://howdypress.com/)
 - [Nesar Uddin Rahid](https://dribbble.com/rahiddesigner)
+- [Ruaan Deysel](https://www.linkedin.com/in/ruaandeysel/)
 
 ---
 
