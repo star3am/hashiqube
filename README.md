@@ -192,9 +192,7 @@ Hashiqube runs on your local machine or cloud instance and provides:
 
 > Hashiqube is a Training/Development Lab for practice, learning, and demos. It is not designed for production use.
 
-### Draw.io Diagram
-
-[Hashiqube Deployment](images/hashiqube.drawio)
+![Diagram](images/hashiqube.drawio.svg)
 
 ---
 
