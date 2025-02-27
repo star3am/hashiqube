@@ -1,113 +1,105 @@
 # Tools Container
 
+<div align="center">
+  <p><strong>A development environment that helps you become a better developer using Git pre-commit hooks</strong></p>
+</div>
+
 ![Pre-Commit](images/009-owl.png?raw=true "Pre-Commit")
 
-This is an example repository showing how to use Git pre-commit to help you become a better developer.
+## 🚀 Introduction
 
-The Dockerfile supports Multi-OS, and Multi-Architecture
-Windows, Linux, Mac (Intel and ARM Chipsets)
+This is an example repository showing how to use Git pre-commit to help you become a better developer. The container supports multiple operating systems and architectures (Windows, Linux, Mac - Intel and ARM chipsets).
 
-It does great little things for you such as check your YAML and JSON syntax. But it also helps you stay safe and secure by scanning your repository for AWS credentials and SSH private_key files.
+It performs useful checks such as validating YAML and JSON syntax, while also helping you stay secure by scanning your repository for AWS credentials and SSH private key files.
 
-## Install
+## 🛠️ Installation
 
-You will need the following tools to get started before you can use this repo and commence local development
+You will need the following tools to get started before you can use this repo and commence local development:
 
-- Docker Desktop
-  https://www.docker.com/products/docker-desktop/
-- IDE Visual Studio Code (with Remote development in Containers extension)
-  https://code.visualstudio.com/docs/remote/containers-tutorial
-- Git
-  https://git-scm.com/
-- Pre-Commit
-  https://pre-commit.com/#install
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+- [Visual Studio Code](https://code.visualstudio.com/docs/remote/containers-tutorial) (with Remote Development in Containers extension)
+- [Git](https://git-scm.com/)
+- [Pre-Commit](https://pre-commit.com/#install)
 
-### Build Agent
-You will need the following tools installed on the build agent to use this
+### Build Agent Requirements
+
+For CI/CD pipelines, you'll need these tools on your build agent:
 
 - Git
 - Docker Daemon
 - Docker Compose
 
-### Sample Gitlab Build Pipeline
+## 🔄 CI/CD Integration
 
-A sample Gitlab pipeline, with the only dependency on the build agent being Docker and Docker Compose. 
+### Sample GitLab Build Pipeline
 
-The commands are executed within the Docker Container, making your dependency tool chain very small.
+Here's a sample GitLab pipeline that only requires Docker and Docker Compose on the build agent. All commands execute within the Docker container, minimizing your dependency toolchain.
 
-`.gitlab-ci.yml`
+`.gitlab-ci.yml`:
 
+```yaml
 [filename](gitlab-ci.yml ':include :type=code yaml')
+```
 
-[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+## 🐳 Dockerfile
 
-## The Dockerfile
+The Dockerfile installs all necessary tools such as Terraform, kubectl, AWS CLI, Google Cloud CLI, Azure CLI, and more:
 
-And the Dockerfile which installs all the tools needed such as Terraform, kubectl, AWS cli, Gcloud cli and Azure cli and more 
-
-`Dockerfile`
-
+```dockerfile
 [filename](Dockerfile.txt ':include :type=code docker')
+```
 
-[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+## 🧪 Pre-Commit
 
-## Pre-Commit
+[Pre-commit](https://pre-commit.com/) is a framework for managing and maintaining multi-language pre-commit hooks.
 
-https://pre-commit.com/
+`.pre-commit.yaml`:
 
-A framework for managing and maintaining multi-language pre-commit hooks.
-
-`.pre-commit.yaml`
-
+```yaml
 [filename](pre-commit-config.yaml ':include :type=code yaml')
+```
 
-You can add your own pre-commit hooks, and there is support for all Operating Systems and most Languages.
+You can add your own pre-commit hooks, and there is support for all operating systems and most languages.
 
-Most of all, have fun becoming a better developer <3
+## 📊 Supported Tools
 
-## Command Line CLI Supported
-| Name | Azure | Google | AWS | Kubectl | Dbt | Terraform | Terragrunt | TFENV | Python | Pip | Packer | Cookiecutter | Pre-Commit |
-|------|-------|--------|-----|-------|-------|-----------|------------|-------|--------|-----|--------|--------------|------------|
-| Tools | ✓    | ✓      | ✓   | ✓     | ✓     |         ✓ |          ✓ |    ✓  |     ✓  |  ✓  |     ✓  | ✓            |       ✓    |
+| Tool | Included |
+|------|----------|
+| Azure CLI | ✓ |
+| Google Cloud CLI | ✓ |
+| AWS CLI | ✓ |
+| Kubectl | ✓ |
+| DBT | ✓ |
+| Terraform | ✓ |
+| Terragrunt | ✓ |
+| TFENV | ✓ |
+| Python | ✓ |
+| Pip | ✓ |
+| Packer | ✓ |
+| Cookiecutter | ✓ |
+| Pre-Commit | ✓ |
 
-## Dependencies
-- Python
-- Git https://git-scm.com/
-- IDE (I use Visual Studio Code) https://code.visualstudio.com/
-- Docker Desktop https://www.docker.com/products/docker-desktop/
-- Pre-Commit https://pre-commit.com/#install
-- Terraform https://www.terraform.io/downloads
-- Terraform Docs https://github.com/terraform-docs/terraform-docs
+## 💻 Operating System & Architecture Support
 
-## Usage
-- pre-commit install
-
-## Links
-See:
-- https://pre-commit.com/
-- https://github.com/antonbabenko/pre-commit-terraform
-
-## Features
-- Dockerfile for local development and testing
-- Pre-Commit Git hooks https://pre-commit.com/ and https://github.com/antonbabenko/pre-commit-terraform
-- Gitlab Pipeline
-- Terraform Docs
-- Example Terraform Module
-- Runs on Multi-OS (Linux, Windows and Mac) and Multi-Arch (amd64 and arm64)
-
-## Local Development
-For local development we use Docker and Docker compose. See run.sh
-
-## Operating Architecture Support
-| Name | Amd64 | Arch64 |
-|------|-------|--------|
+| OS | AMD64 | ARM64 |
+|----|-------|-------|
 | Linux | ✓ | ✓ |
-| Linux | ✓ | ✓ |
-| Mac | ✓ | ✓ |
-| Mac | ✓ | ✓ |
+| macOS | ✓ | ✓ |
 | Windows | ✘ | ✘ |
 
-### A FAIL
+## 🔍 Features
+
+- Dockerfile for local development and testing
+- Pre-Commit Git hooks ([pre-commit.com](https://pre-commit.com/) and [antonbabenko/pre-commit-terraform](https://github.com/antonbabenko/pre-commit-terraform))
+- GitLab Pipeline configuration
+- Terraform Docs integration
+- Example Terraform Module
+- Multi-OS (Linux, macOS) and Multi-Architecture (AMD64 and ARM64) support
+
+## 🚦 Pre-Commit Examples
+
+### Example: Failed Commit
+
 ```shell
 git commit -am "update default tgenv to amd64"
 
@@ -133,10 +125,16 @@ Terraform docs.......................................(no files to check)Skipped
 Lint Dockerfiles.........................................................Passed
 ```
 
-### Fix the error
-`git checkout -b feature/pre-commit`
+### Fixing the Error
 
-### A PASS
+Create a feature branch instead of committing to main:
+
+```shell
+git checkout -b feature/pre-commit
+```
+
+### Example: Successful Commit
+
 ```shell
 git commit -am "fix pre-commit dont commit to branch"
 
@@ -167,7 +165,18 @@ Terraform docs.......................................(no files to check)Skipped
 Lint Dockerfiles.........................................................Passed
 ```
 
-## Module Documentation
-- See [__docs folder__](/tools-container/docs/#providers)
+## 📝 Usage
 
-[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+To activate pre-commit hooks in your repository:
+
+```bash
+pre-commit install
+```
+
+For local development, use Docker and Docker Compose via the provided `run.sh` script.
+
+## 📚 Resources
+
+- [Pre-Commit Website](https://pre-commit.com/)
+- [Pre-Commit Terraform Hooks](https://github.com/antonbabenko/pre-commit-terraform)
+- [Module Documentation](/tools-container/docs/#providers)
