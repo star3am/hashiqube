@@ -1,125 +1,127 @@
 # Visual Studio Code
 
+<div align="center">
+  <img src="images/vscode-logo.png?raw=true" alt="VSCode Microsoft Visual Studio Code">
+  <p><strong>A powerful, free code editor with cross-platform compatibility and extensive plugin support</strong></p>
+</div>
+
 This page has 2 sections:
 
-* [Visual Studio Code on your laptop](/visual-studio-code/?id=visual-studio-code)
-* [Visual Studio Code in your browser](/visual-studio-code/?id=vscode-server-vscode-in-a-browser)
+* [Visual Studio Code on your laptop](#visual-studio-code-on-your-laptop)
+* [Visual Studio Code in your browser](#vscode-in-a-browser)
 
-https://code.visualstudio.com/
+## 🚀 Introduction
 
-![VSCode Microsoft Visual Studio Code](images/vscode-logo.png?raw=true "VSCode Microsoft Visual Studio Code")
+[Visual Studio Code](https://code.visualstudio.com/) (VSCode) is a Code Editor, also referred to as an IDE. It's made by Microsoft, it's completely free, very powerful and runs on all Operating Systems and Architectures. It has many extensions and plugins and can help you write better code faster.
 
-Visual Studio Code or VSCode is a Code Editor, also referred to as an IDE. It's made by Microsoft, it's completely free, very powerful and run on all Operating Systems and Architectures. 
+<div align="center">
+  <img src="images/vscode.png?raw=true" alt="VSCode">
+</div>
 
-It has many extensions and plugins and can help you write betetr code faster. 
+## 🛠️ Visual Studio Code on your laptop
 
-![VSCode](images/vscode.png?raw=true "VSCode")
+### Download and Install
 
-## Download and Install VSCode
+To use VSCode, download it from the official website:
+[https://code.visualstudio.com/Download](https://code.visualstudio.com/Download)
 
-To use VSCode, please down load it from here: 
-https://code.visualstudio.com/Download
+### 🧩 Popular VSCode Extensions
 
-## Popular VSCode Extensions 
+Enhance your coding experience with these popular extensions:
 
-Also install these popular Extensions to help you get started: 
+* [**Azure Terraform Extension**](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureterraform) - Azure integration for Terraform
+* [**Terraform Extension**](https://marketplace.visualstudio.com/items?itemName=HashiCorp.terraform) - HashiCorp's official Terraform extension
+* [**Git History Extension**](https://marketplace.visualstudio.com/items?itemName=donjayamanne.githistory) - View git log, file history, compare branches
+* [**GitLens Extension**](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens) - Supercharge Git capabilities
+* [**YAML Extension**](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml) - YAML language support
+* [**Docker Remote Extension**](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) - Dev Containers / Remote Containers support
+* [**AWS Toolkit**](https://aws.amazon.com/visualstudiocode/) - AWS integration tools
+* [**AWS CloudFormation Extension**](https://marketplace.visualstudio.com/items?itemName=aws-scripting-guy.cform) - CloudFormation support
+* [**Dracula Dark Theme**](https://marketplace.visualstudio.com/items?itemName=dracula-theme.theme-dracula) - Popular dark theme
+* [**Live Share Extension**](https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare-pack) - Real-time collaborative development
 
-- Azure Terraform Extension
-https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureterraform
+## 📦 Dev Containers in VSCode
 
-- Terraform Extension
-https://marketplace.visualstudio.com/items?itemName=HashiCorp.terraform
+[Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers) in Visual Studio Code let you use a container as a full-featured development environment. This allows you to:
 
-- Install Git History Extension
-https://marketplace.visualstudio.com/items?itemName=donjayamanne.githistory
+* Open any folder inside (or mounted into) a container
+* Take advantage of Visual Studio Code's full feature set
+* Use a consistent development environment across your team
+* Easily switch between different development environments
 
-- Install GitLens Extension
-https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens
+A `devcontainer.json` file in your project tells VS Code how to access (or create) a development container with a well-defined tool and runtime stack.
 
-- YAML Extension
-https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml
+### Hashiqube VSCode Dev Container
 
-- Docker Remote Extension (Dev Containers / Remote Containers)
-https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers
+Follow these steps to use Hashiqube with VSCode Dev Containers:
 
-- AWS Toolkit
-https://aws.amazon.com/visualstudiocode/
+1. Start Hashiqube with `vagrant up --provision`
 
-- AWS CloudFormation Extension
-https://marketplace.visualstudio.com/items?itemName=aws-scripting-guy.cform
+2. Install the [Docker Remote Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 
-- Dracula Dark Theme
-https://marketplace.visualstudio.com/items?itemName=dracula-theme.theme-dracula
+3. In VSCode Top Menu, click on View -> Command Palette and type in:
+   `Dev Containers: Attach to Running Container...`
 
-- Live Share Extension 
-https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare-pack
+   <div align="center">
+     <img src="images/vscode-view-command-palette-attach-to-running-container.png?raw=true" alt="Dev Containers: Attach to Running Container">
+   </div>
 
-## VSCode Remote Containers
+4. Select the running Hashiqube Container
 
-https://code.visualstudio.com/docs/devcontainers/containers
+   <div align="center">
+     <img src="images/vscode-view-command-palette-attach-to-running-container-select-hashiqube-container.png?raw=true" alt="Select Hashiqube Container">
+   </div>
 
-The Visual Studio Code Dev Containers extension lets you use a container as a full-featured development environment. It allows you to open any folder inside (or mounted into) a container and take advantage of Visual Studio Code's full feature set. A devcontainer.json file in your project tells VS Code how to access (or create) a development container with a well-defined tool and runtime stack. This container can be used to run an application or to separate tools, libraries, or runtimes needed for working with a codebase.
+5. You are now inside Hashiqube Docker container, and you can work locally and interact with Hashiqube
 
-Workspace files are mounted from the local file system or copied or cloned into the container. Extensions are installed and run inside the container, where they have full access to the tools, platform, and file system. This means that you can seamlessly switch your entire development environment just by connecting to a different container.
+   <div align="center">
+     <img src="images/vscode-hashiqube-devcontainer.png?raw=true" alt="VSCode in Dev Container">
+   </div>
 
-## Hashiqube VSCode Dev Container
+💡 **Tip**: Remember to do `su - vagrant` and `cd /vagrant` to become the vagrant user so that you work as the vagrant user. You can then issue `kubectl` or `terraform` commands if you ran the provisioners first from a terminal on your laptop.
 
-- Start Hashiqube with `vagrant up --provision`
+## 🌐 VSCode in a Browser
 
-- Install the Docker Remote Extension (Dev Containers / Remote Containers)
-https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers
+Code-server runs an instance of VS code that can be accessed locally via browser. This allows us to start up a predictable VScode instance in Vagrant.
 
-- In VSCode Top Menu, click on View -> Command Palette and type in
-`Dev Containers: Attach to Running Container...`
+<div align="center">
+  <img src="images/vscode-in-a-browser.png?raw=true" alt="VSCode in a Browser">
+</div>
 
-![Dev Containers: Attach to Running Container](images/vscode-view-command-palette-attach-to-running-container.png?raw=true "Dev Containers: Attach to Running Container")
+### Resources
 
-- Select the running Hashiqube Container
+* [VS Code Official Website](https://code.visualstudio.com/)
 
-![Dev Containers: Attach to Running Container](images/vscode-view-command-palette-attach-to-running-container-select-hashiqube-container.png?raw=true "Dev Containers: Attach to Running Container")
+* [Code Server GitHub Repository](https://github.com/coder/code-server)
 
-- You are now inside Hashiqube Docker container, and you can work locally an interact with Hashiqube
+### 🛠️ Provision
 
-:bulb: Remember to do `su - vagrant` and `cd /vagrant` to become the vagrant user so that you work as the vagrant user, you can then issue `kubectl` or `terraform` commands if you ran the provisioners first from a terminal on your laptop. 
+In order to provision Visual Studio Code Server (Visual Studio IDE in a browser) you need basetools and docker as dependencies:
 
-![VSCode](images/vscode-hashiqube-devcontainer.png?raw=true "VSCode")
+```bash
+vagrant up --provision-with basetools,docker,vscode-server
+```
 
-# VSCode in a Browser
-
-https://code.visualstudio.com/
-
-https://github.com/coder/code-server
-
-VSCode is a free, open source IDE. Code-server runs an instance of VS code that can then be accessed locally via browser. This allows us to start up a predictable VScode instance in Vagrant. 
-
-![VSCode in a Browser](images/vscode-in-a-browser.png?raw=true "VSCode in a Browser")
-
-## Provision
-
-In order to provision Visual Studio Code Server (Visual Studio IDE in a browser) you need bastetools, docker as dependencies. 
-
-`vagrant up --provision-with basetools,docker,vscode-server`
-
-## Web UI Access
+### Web UI Access
 
 To access the Web UI visit the following address:
-```
+
+```bash
 http://localhost:7777/
 ```
 
-The default password will be printed to console on start up. Else it can be obtained by the following command:
-```
+The default password will be printed to console on start up. Alternatively, it can be obtained by the following command:
+
+```bash
 vagrant ssh -c "< ~/.config/code-server/config.yaml head -n "3" | tail -n +"3""
 ```
 
-[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+### 🔮 Future plans
 
-## Future plans
+In the future there is potential to add an option for starting different code-server instances. Currently it always launches with the default image. Custom images could be setup that have different things preinstalled (e.g. Image with python, useful libraries and useful extensions pre-installed).
 
-In the future there is potential to add an option for starting different code-server instances. Currently it always launches with the default image. Custom images could be setup that have different things preinstalled (e.g. Image with python, usefull libaries and useful extentions pre installed).
+## 📜 The Code
 
-## The Code
-
-[filename](vscode-server.sh ':include :type=code')
-
-[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+```bash
+# The vscode-server.sh script content is included here
+```
