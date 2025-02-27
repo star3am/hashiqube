@@ -1,14 +1,20 @@
 # Nomad
 
+<div align="center">
+  <p><strong>A flexible workload orchestrator that enables an organization to easily deploy and manage containerized or legacy applications</strong></p>
+</div>
+
 ![Nomad Logo](images/nomad-logo.png?raw=true "Nomad Logo")
 
-In this HashiQube DevOps lab you will get hands on experience with HashiCorp Nomad.
+## 🚀 Introduction
 
-Nomad is a highly available, distributed, data-center aware cluster and application scheduler designed to support the modern datacenter with support for
+HashiCorp Nomad is a highly available, distributed, data-center aware cluster and application scheduler designed to support the modern datacenter. In this HashiQube DevOps lab, you'll get hands-on experience working with Nomad.
 
-Increasingly, teams want to move away from the traditional tight coupling of application and operating system. So they need an abstraction layer to help developers and operators work together, and save money with better hardware utilization. Introducing HashiCorp Nomad.
+Teams increasingly want to move away from the traditional tight coupling of application and operating system. They need an abstraction layer to help developers and operators work together, and save money with better hardware utilization. HashiCorp Nomad meets this need by providing a flexible workload orchestrator.
 
-## Latest News
+[![Introduction to HashiCorp Nomad](images/maxresdefault.jpeg)](https://www.youtube.com/watch?v=s_Fm9UtL4YU)
+
+## 📰 Latest News
 
 - [Nomad 1.7 beta improves Vault and Consul integrations, adds NUMA support](https://www.hashicorp.com/blog/nomad-1-7-improves-vault-and-consul-integrations-adds-numa-support)
 - [Nomad 1.6 adds node pools, UX updates, and more](https://www.hashicorp.com/blog/nomad-1-6-adds-node-pools-ux-updates-and-more)
@@ -16,30 +22,29 @@ Increasingly, teams want to move away from the traditional tight coupling of app
 - [Nomad 1.4 Adds Nomad Variables and Updates Service Discovery](https://www.hashicorp.com/blog/nomad-1-4-adds-nomad-variables-and-updates-service-discovery)
 - [Nomad 1.3 Adds Native Service Discovery and Edge Workload Support](https://www.hashicorp.com/blog/nomad-1-3-adds-native-service-discovery-and-edge-workload-support)
 
-## Introduction
+## 🛠️ Provision
 
-[![Introduction to HashiCorp Nomad](images/maxresdefault.jpeg)](https://www.youtube.com/watch?v=s_Fm9UtL4YU)
-
-## Provision
+Choose one of the following methods to set up your environment:
 
 <!-- tabs:start -->
-#### **Github Codespaces**
+
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/star3am/hashiqube?quickstart=1)
-```
+
+```bash
 bash docker/docker.sh
 bash consul/consul.sh
 bash nomad/nomad.sh
 ```
 
-#### **Vagrant**
+### **Vagrant**
 
-```
+```bash
 vagrant up --provision-with basetools,docker,docsify,consul,nomad
 ```
 
-#### **Docker Compose**
+### **Docker Compose**
 
-```
+```bash
 docker compose exec hashiqube /bin/bash
 bash hashiqube/basetools.sh
 bash docker/docker.sh
@@ -48,46 +53,60 @@ bash nomad/nomad.sh
 ```
 <!-- tabs:end -->
 
-![Nomad](images/nomad.png?raw=true "Nomad")
+After provisioning, you will have access to the Nomad UI:
 
-## Nomad Provisioner
+![Nomad UI](images/nomad.png?raw=true "Nomad UI")
 
-`nomad.sh`
+## 🧩 Nomad Provisioner
 
+The `nomad.sh` script handles the installation and configuration of Nomad:
+
+```bash
+# Nomad provisioning script content
 [filename](nomad.sh ':include :type=code')
+```
 
-## Monitoring Nomad
+## 📊 Monitoring Nomad
 
-We use Prometheus and Grafana to Monitor Nomad
+We use Prometheus and Grafana to monitor Nomad deployments.
 
-See: [__Monitoring Hashicorp Nomad__](prometheus-grafana/README?id=monitoring-hashicorp-nomad)
+> 💡 For more information, see: [**Monitoring Hashicorp Nomad**](prometheus-grafana/README?id=monitoring-hashicorp-nomad)
 
-## Traefik on Nomad
-https://traefik.io/blog/traefik-proxy-fully-integrates-with-hashicorp-nomad/ <br />
-https://doc.traefik.io/traefik/v2.8/providers/nomad/
+## 🔄 Traefik on Nomad
 
 ![Traefik Logo](images/traefik-logo.png?raw=true "Traefik Logo")
 
-We are thrilled to announce the full integration of the new Nomad built-in Service Discovery with Traefik Proxy. This is a first-of-its-kind ingress integration that simplifies ingress in HashiCorp Nomad. Utilizing Nomad directly with Traefik Proxy has never been so easy!
+Traefik Proxy now fully integrates with the new Nomad built-in Service Discovery. This first-of-its-kind ingress integration simplifies ingress in HashiCorp Nomad, making it easier than ever to utilize Nomad directly with Traefik Proxy.
 
-In early May, Hashicorp announced Nomad Version 1.3. Among other updates, it also includes a nice list of improvements on usability and developer experience. Before this release, when using service discovery with Nomad, Traefik Proxy users had to use Hashicorp Consul and Nomad side-by-side in order to benefit from Traefik Proxy’s famous automatic configuration. Now, Nomad has a simple and straightforward way to use service discovery built-in. This improves direct usability a lot! Not only in simple test environments but also on the edge.
+Before Nomad 1.3, when using service discovery with Nomad, Traefik Proxy users had to use Hashicorp Consul and Nomad side-by-side to benefit from Traefik Proxy's automatic configuration. Now, Nomad has a simple and straightforward built-in service discovery, improving usability in both test environments and edge deployments.
 
-`http://localhost:8080/` and `http://localhost:8181`
+### Access Traefik
 
-![Traefik Load Balancer](images/traefik-dashboard.png?raw=true "Traefik Load Balancer")
+- Dashboard: `http://localhost:8181`
+- Load Balancer: `http://localhost:8080/`
+
+![Traefik Dashboard](images/traefik-dashboard.png?raw=true "Traefik Dashboard")
 
 ![Traefik Load Balancer](images/traefik-proxy.png?raw=true "Traefik Load Balancer")
 
-## Traefik Nomad Job
+### Traefik Nomad Job Configuration
+
+```hcl
+# Traefik job configuration
 [filename](nomad/jobs/traefik.nomad ':include :type=code hcl')
+```
 
-`vagrant up --provision-with basetools,docker,docsify,consul,nomad`
+### Testing the Traefik Configuration
 
-The new native Service Discovery in Nomad really does work seamlessly. With this integration, delivering load balancing, dynamic routing configuration, and ingress traffic routing become easier than ever. Check out the Traefik Proxy 2.8 Release Candidate and the Nomad 1.3 release notes.
+The native Service Discovery in Nomad works seamlessly with Traefik. To test it:
 
-`curl -H "Host: whoami.nomad.localhost" http://localhost:8080 -v`
+```bash
+curl -H "Host: whoami.nomad.localhost" http://localhost:8080 -v
+```
 
-```log
+Sample output:
+
+```bash
 *   Trying 127.0.0.1:8080...
 * Connected to localhost (127.0.0.1) port 8080 (#0)
 > GET / HTTP/1.1
@@ -120,41 +139,45 @@ X-Real-Ip: 172.17.0.1
 * Connection #0 to host localhost left intact
 ```
 
-## Traefik Whoami
+### Traefik Whoami Example Job
+
+```hcl
+# Traefik whoami job configuration
 [filename](nomad/jobs/traefik-whoami.nomad ':include :type=code hcl')
+```
 
-## Fabio on Nomad
-https://github.com/fabiolb/fabio <br />
-https://fabiolb.net
-
-Fabio is an HTTP and TCP reverse proxy that configures itself with data from Consul.
-
-Traditional load balancers and reverse proxies need to be configured with a config file. The configuration contains the hostnames and paths the proxy is forwarding to upstream services. This process can be automated with tools like consul-template that generate config files and trigger a reload.
-
-Fabio works differently since it updates its routing table directly from the data stored in Consul as soon as there is a change and without restart or reloading.
-
-When you register a service in Consul all you need to add is a tag that announces the paths the upstream service accepts, e.g. urlprefix-/user or urlprefix-/order and fabio will do the rest.
-
-`http://localhost:9999/` and `http://localhost:9998`
+## 🌐 Fabio on Nomad
 
 ![Fabio Load Balancer](images/fabio.png?raw=true "Fabio Load Balancer")
 
-`vagrant up --provision-with basetools,docker,docsify,consul,nomad`
+[Fabio](https://fabiolb.net) is an HTTP and TCP reverse proxy that configures itself with data from Consul.
 
-Fabio runs as a Nomad job, see `nomad/nomad/jobs/fabio.nomad`
+Unlike traditional load balancers and reverse proxies that require manual configuration files, Fabio updates its routing table directly from the data stored in Consul as soon as there is a change, without requiring restart or reloading.
 
-Some routes are added via Consul, see `consul/consul.sh`
+When you register a service in Consul, simply add a tag that announces the paths the upstream service accepts (e.g., `urlprefix-/user` or `urlprefix-/order`), and Fabio will do the rest.
 
-## Links 
+### Access Fabio
 
-- https://www.nomadproject.io/
+- Load Balancer: `http://localhost:9999/`
+- UI: `http://localhost:9998`
 
-[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+### Fabio Nomad Job Configuration
 
-## Fabio Nomad Job
+```hcl
+# Fabio job configuration
 [filename](nomad/jobs/fabio.nomad ':include :type=code hcl')
+```
 
-## Fabio Properties
+### Fabio Properties Configuration
+
+```properties
+# Fabio properties configuration
 [filename](nomad/jobs/fabio.properties ':include :type=code config')
+```
 
-[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+## 📚 Resources
+
+- [Nomad Official Website](https://www.nomadproject.io/)
+- [Traefik Proxy and Nomad Integration](https://traefik.io/blog/traefik-proxy-fully-integrates-with-hashicorp-nomad/)
+- [Traefik Nomad Provider Documentation](https://doc.traefik.io/traefik/v2.8/providers/nomad/)
+- [Fabio GitHub Repository](https://github.com/fabiolb/fabio)
