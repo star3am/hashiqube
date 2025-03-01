@@ -1,34 +1,39 @@
 # Newrelic Kubernetes Monitoring
 
+<div align="center">
+  <p><strong>Monitor your Kubernetes clusters with Newrelic in a HashiQube DevOps lab environment</strong></p>
+</div>
+
 ![Newrelic Logo](images/newrelic-logo.png?raw=true "Newrelic Logo")
 
-In this HashiQube DevOps lab you will get hands on experience with Newrelic Monitoring using Helm on Minikube
+## 🚀 Introduction
 
-https://docs.newrelic.com/docs/kubernetes-pixie/kubernetes-integration/installation/kubernetes-integration-install-configure
-https://kubernetes.io/docs/tasks/tools/install-minikube/
-https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
+This lab provides hands-on experience with Newrelic Monitoring using Helm on Minikube. You'll learn how to set up comprehensive monitoring for your Kubernetes environment using Newrelic's powerful observability platform.
 
 ![Newrelic Kubernetes Monitoring](images/newrelic-kubernetes-monitoring.png?raw=true "Newrelic Kubernetes Monitoring")
 
-## Provision
+## 🛠️ Provision
+
+Choose one of the following methods to set up your environment:
 
 <!-- tabs:start -->
-#### **Github Codespaces**
+
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/star3am/hashiqube?quickstart=1)
-```
+
+```bash
 bash docker/docker.sh
 bash minikube/minikube.sh
 ```
 
-#### **Vagrant**
+### **Vagrant**
 
-```
+```bash
 vagrant up --provision-with basetools,docker,docsify,minikube
 ```
 
-#### **Docker Compose**
+### **Docker Compose**
 
-```
+```bash
 docker compose exec hashiqube /bin/bash
 bash hashiqube/basetools.sh
 bash docker/docker.sh
@@ -37,66 +42,79 @@ bash minikube/minikube.sh
 ```
 <!-- tabs:end -->
 
-You should now be able to open Minikube dashboard: http://localhost:10888
+After provisioning, you should be able to access the Minikube dashboard at: <http://localhost:10888>
 
 ![Minikube Dashboard](images/minikube.png?raw=true "Minikube Dashboard")
 
-For more extensive details on how to run Minikube on Hashiqube please visit: [__Minikube__](minikube/#minikube)
+> 💡 For more detailed information on running Minikube on HashiQube, visit: [**Minikube**](minikube/#minikube)
 
-## Newrelic
+## 📊 Newrelic Setup
 
-Now we deploy the Newrelic integration ontop of Kubernetes (Minikube) using Helm
+### Getting Started with Newrelic
 
-But first, head over to http://www.newrelic.com and open a Free Demo account, we will need this for our demo. 
-
-Once you have your Newrelic account open and logged in, we can proceed. 
+1. Head over to <http://www.newrelic.com> and create a free demo account
+2. Log in to your Newrelic account
 
 ![Newrelic Logged in](images/01-newrelic-logged-in.png?raw=true "Newrelic Logged in")
 
-Now you can select your account and Kubernetes namespace for the integration
+3. Select your account and Kubernetes namespace for the integration
 
 ![Newrelic Account and Namespace](images/02-newrelic-select-account-and-namespace.png?raw=true "Newrelic Account and Namespace")
 
-Now we can select the the Newrelic features for the integration
+4. Choose the Newrelic features for your integration
 
 ![Newrelic Integration Features](images/03-newrelic-features.png?raw=true "Newrelic Integration Features")
 
-## Install
+## 🧩 Installation
 
-Please visit https://one.newrelic.com/launcher/k8s-cluster-explorer-nerdlet.cluster-explorer-launcher and follow the steps
-
-At the end will be a Helm command like this that we run in the container. 
+Please visit <https://one.newrelic.com/launcher/k8s-cluster-explorer-nerdlet.cluster-explorer-launcher> and follow the steps there. At the end, you'll receive a Helm command similar to the one below.
 
 ![Newrelic Integration Install with Helm](images/04-newrelic-install-with-helm.png?raw=true "Newrelic Integration Install with Helm")
 
-- vagrant ssh 
-- now run this command:
-```shell
-helm repo add newrelic https://helm-charts.newrelic.com && helm repo update && \
-kubectl create namespace newrelic; 
+### Installation Steps
 
-helm upgrade --install newrelic-bundle newrelicnri-bundle \
---set global.licenseKey=YOUR_NEWRELIC_LICENSE_KEY \
---set global.cluster=minikube \
---namespace=newrelic \
---set newrelic-infrastructure.privileged=true \
---set global.lowDataMode=true \
---set ksm.enabled=true \
---set kubeEvents.enabled=true \
---set prometheus.enabled=true \
---set logging.enabled=true \
---set newrelic-pixie.enabled=true \
---set newrelic-pixie.apiKey=YOUR_PIXIE_API_KEY \
---set pixie-chart.enabled=true \
---set pixie-chart.deployKey=YOUR_PIXIE_DEPLOY_KEY \
---set pixie-chart.clusterName=minikube
+1. SSH into your HashiQube environment:
+
+   ```bash
+   vagrant ssh
+   ```
+
+2. Run the Helm command provided by Newrelic:
+
+   ```bash
+   helm repo add newrelic https://helm-charts.newrelic.com && helm repo update && \
+   kubectl create namespace newrelic; 
+   
+   helm upgrade --install newrelic-bundle newrelic/nri-bundle \
+   --set global.licenseKey=YOUR_NEWRELIC_LICENSE_KEY \
+   --set global.cluster=minikube \
+   --namespace=newrelic \
+   --set newrelic-infrastructure.privileged=true \
+   --set global.lowDataMode=true \
+   --set ksm.enabled=true \
+   --set kubeEvents.enabled=true \
+   --set prometheus.enabled=true \
+   --set logging.enabled=true \
+   --set newrelic-pixie.enabled=true \
+   --set newrelic-pixie.apiKey=YOUR_PIXIE_API_KEY \
+   --set pixie-chart.enabled=true \
+   --set pixie-chart.deployKey=YOUR_PIXIE_DEPLOY_KEY \
+   --set pixie-chart.clusterName=minikube
+   ```
+
+> ⚠️ Remember to replace `YOUR_NEWRELIC_LICENSE_KEY`, `YOUR_PIXIE_API_KEY`, and `YOUR_PIXIE_DEPLOY_KEY` with your actual keys.
+
+## 🔍 Verification
+
+To verify that all Newrelic components are running properly:
+
+```bash
+kubectl get po,svc -n newrelic
 ```
 
-## Info
+Example output:
 
-*vagrant@hashiqube0:~$* `kubectl get po,svc -n newrelic`
-
-```shell
+```bash
 NAME                                                          READY   STATUS                       RESTARTS      AGE
 pod/newrelic-bundle-kube-state-metrics-654df84864-9hvk8       1/1     Running                      0             19m
 pod/newrelic-bundle-newrelic-logging-xfs98                    1/1     Running                      0             19m
@@ -113,27 +131,41 @@ service/newrelic-bundle-kube-state-metrics       ClusterIP   10.107.30.223   <no
 service/newrelic-bundle-nri-metadata-injection   ClusterIP   10.96.68.196    <none>        443/TCP    19m
 ```
 
-Within a few minutes you will be able to see the Kubernetes Integrqation 
+## 📈 Viewing Monitoring Data
 
-![Newrelic Kuberneter Integration Clusters](images/05-newrelic-kuibernetes-clusters.png?raw=true "Newrelic Kuberneter Integration Clusters")
+Within a few minutes, you'll be able to see your Kubernetes clusters in the Newrelic interface:
 
-And we will be able to see the Data streaming through
+![Newrelic Kubernetes Integration Clusters](images/05-newrelic-kuibernetes-clusters.png?raw=true "Newrelic Kubernetes Integration Clusters")
 
-![Newrelic Kuberneter Integration Clusters](images/06-newrelic-summary-01.png?raw=true "Newrelic Kuberneter Integration Clusters")
+You can then explore the data streaming from your cluster:
 
-![Newrelic Kuberneter Integration Clusters](images/06-newrelic-summary-02.png?raw=true "Newrelic Kuberneter Integration Clusters")
+![Newrelic Kubernetes Summary 1](images/06-newrelic-summary-01.png?raw=true "Newrelic Kubernetes Summary 1")
 
-## TODO
+![Newrelic Kubernetes Summary 2](images/06-newrelic-summary-02.png?raw=true "Newrelic Kubernetes Summary 2")
 
-### Pixie
-I was unable to get Pixie running, due to `bash: line 225: /home/vagrant/bin/px: cannot execute binary file: Exec format error`
+## ⚙️ Known Issues
 
-I am currently on a Mac M1 Chipset and this needs deeper debugging to figure out how to run Pixie on ARM64 Chipsets.
+### Pixie on ARM64 Architecture
 
-*vagrant@hashiqube0:~$* `bash -c "$(curl -fsSL https://work.withpixie.ai/install.sh)"`
+There's a known issue when trying to run Pixie on ARM64 chipsets (like Apple M1). You may encounter the following error:
 
-```shell
+```bash
+bash: line 225: /home/vagrant/bin/px: cannot execute binary file: Exec format error
+```
 
+This is due to compatibility issues with the ARM64 architecture. The Pixie binary is likely compiled for x86_64 architecture and won't run directly on ARM-based systems.
+
+![Newrelic Pixie Integration](images/07-newrelic-pixie.png?raw=true "Newrelic Pixie Integration")
+
+#### Attempted Installation
+
+```bash
+bash -c "$(curl -fsSL https://work.withpixie.ai/install.sh)"
+```
+
+#### Error Output
+
+```bash
   ___  _       _
  | _ \(_)__ __(_) ___
  |  _/| |\ \ /| |/ -_)
@@ -144,22 +176,7 @@ Pixie gives engineers access to no-instrumentation, streaming &
 unsampled auto-telemetry to debug performance issues in real-time,
 More information at: https://www.pixielabs.ai.
 
-This command will install the Pixie CLI (px) in a location selected
-by you, and performs authentication with Pixie's cloud hosted control
-plane. After installation of the CLI you can easily manage Pixie
-installations on your K8s clusters and execute scripts to collect
-telemetry from your clusters using Pixie.
-
-Docs:
-  https://work.withpixie.ai/docs
-
-
-==> Terms and Conditions https://www.pixielabs.ai/terms
-I have read and accepted the Terms & Conditions [y/n]: y
-
-
-==> Installing PX CLI:
-Install Path [/home/vagrant/bin]: 
+# ... truncated output ...
 
 ==> Authenticating with Pixie Cloud:
 bash: line 225: /home/vagrant/bin/px: cannot execute binary file: Exec format error
@@ -168,15 +185,12 @@ FAILED to authenticate with Pixie cloud.
   You can try this step yourself by running px auth login.
   For help, please contact support@pixielabs.ai or join our community slack/github"
 
-
-==> Next steps:
-- PX CLI has been installed to: /home/vagrant/bin. Make sure this directory is in your PATH.
-- Run px deploy to deploy Pixie on K8s.
-- Run px help to get started, or visit our UI: https://work.withpixie.ai
-- Further documentation:
-    https://work.withpixie.ai/docs
+# ... truncated output ...
 ```
 
-![Newrelic Kuberneter Integration Clusters](images/07-newrelic-pixie.png?raw=true "Newrelic Kuberneter Integration Clusters")
+## 📚 Resources
 
-[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+- [Newrelic Kubernetes Integration Documentation](https://docs.newrelic.com/docs/kubernetes-pixie/kubernetes-integration/installation/kubernetes-integration-install-configure)
+- [Minikube Documentation](https://kubernetes.io/docs/tasks/tools/install-minikube/)
+- [Kubernetes Dashboard Documentation](https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/)
+- [Pixie Documentation](https://work.withpixie.ai/docs)

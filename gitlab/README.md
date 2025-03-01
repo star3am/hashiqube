@@ -1,44 +1,45 @@
-# Gitlab
-https://docs.gitlab.com/omnibus/docker/ <br />
-https://gitlab.com/ <br />
+# GitLab
 
-![Gitlab Logo](images/gitlab-logo.png?raw=true "Gitlab Logo")
+<div align="center">
+  <img src="images/gitlab-logo.png" alt="GitLab Logo" width="300px">
+  <br><br>
+  <p><strong>A complete DevOps platform in a single application</strong></p>
+</div>
 
-GitLab is a complete DevOps platform
-With GitLab, you get a complete CI/CD toolchain in a single application. One interface. One conversation. One permission model. Thousands of features. You'll be amazed at everything GitLab can do today. And we're just getting started.
+## 🚀 About
 
-You can get Gitlab up and running by running the following command in the hashiqube source repository
+GitLab provides a complete CI/CD toolchain in a single application. One interface. One conversation. One permission model. Thousands of features. GitLab simplifies DevOps by providing everything you need to build, test, deploy, and monitor your applications in one place.
 
-:clock3: Duration 15 - 30 minutes <br>
-:bangbang: Your Docker daemon should at least have 12G Ram (Gitlab takes 6G alone, Minikube 2G and 2G for the Operating System in Hashiqube) <br>
-:bulb: We will bring up the Docker daemon and Minikube and then deploy Gitlab ontop of Minikube using Helm
+## ⏱️ Setup Information
 
-During the install process you can open the Kubernetes Dashboard once Minikube has been installed - Initally you will see some red as Gitlab pods and services start up, later this will all turn to green.
+- **Duration**: 15-30 minutes
+- **Requirements**: Your Docker daemon should have at least 12GB RAM
+  - GitLab: 6GB
+  - Minikube: 2GB
+  - Operating System: 2GB
+- **Process**: We'll bring up the Docker daemon and Minikube, then deploy GitLab on top of Minikube using Helm
 
-http://localhost:10888/
-
-![Minikube Dashboard](images/gitlab-install-minikube-dashboard.png?raw=true "Minikube Dashboard")
-
-## Provision
+## 📋 Provision
 
 <!-- tabs:start -->
-#### **Github Codespaces**
+
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/star3am/hashiqube?quickstart=1)
-```
+
+```bash
 bash docker/docker.sh
 bash minikube/minikube.sh
 bash gitlab/gitlab.sh
 ```
 
-#### **Vagrant**
+### **Vagrant**
 
-```
+```bash
 vagrant up --provision-with basetools,docker,docsify,minikube,gitlab
 ```
 
-#### **Docker Compose**
+### **Docker Compose**
 
-```
+```bash
 docker compose exec hashiqube /bin/bash
 bash hashiqube/basetools.sh
 bash docker/docker.sh
@@ -46,272 +47,416 @@ bash docsify/docsify.sh
 bash minikube/minikube.sh
 bash gitlab/gitlab.sh
 ```
+
 <!-- tabs:end -->
 
-[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+## 🖥️ Installation Process
 
-The above Gitlab provision will look like this
+During the installation, you can monitor progress via the Kubernetes Dashboard once Minikube is installed. Initially, you'll see some red indicators as GitLab pods and services start up, which will gradually turn green as the deployment completes.
 
-![Gitlab provision](images/gitlab-provision.png?raw=true "Gitlab provision")
+- **Kubernetes Dashboard**: [http://localhost:10888/](http://localhost:10888/)
 
-You can now login to Gitlab at http://localhost:5580 and login with Username `root` and the password printed out example: `jMh629reoQ7FqtillBmLQZPY69JUStSFATXD11T5wMk39NtNezqIKohcIIwoxwvl`
+<div align="center">
+  <img src="images/gitlab-install-minikube-dashboard.png" alt="Minikube Dashboard during GitLab installation" width="85%">
+  <p><em>Minikube Dashboard showing GitLab deployment progress</em></p>
+</div>
 
-You can follow along with the rest of the documentation here: <br>
-Locally: http://localhost:3333/gitlab/README?id=you-are-here <br>
-Hashiqube.com: https://hashiqube.com/gitlab/README?id=you-are-here
+The GitLab provisioning process will look like this:
 
-## You are here
+<div align="center">
+  <img src="images/gitlab-provision.png" alt="GitLab provision" width="85%">
+  <p><em>Terminal output during GitLab provisioning</em></p>
+</div>
 
-You have just ran the Gitlab provisioner and Gitlab should now be installed.  
+## 🔑 Accessing GitLab
 
-Please login with username __root__ and the password that was printed out
-![Gitlab](images/gitlab-login-root-password.png?raw=true "Gitlab")
+Once installation is complete, you can access GitLab at:
 
-Now you should be logged into Gitlab, and you will see a page looking like this
-![Gitlab](images/gitlab-first-login.png?raw=true "Gitlab")
+- **URL**: [http://localhost:5580](http://localhost:5580)
+- **Username**: `root`
+- **Password**: The password is printed in the terminal output
+  - Example: `jMh629reoQ7FqtillBmLQZPY69JUStSFATXD11T5wMk39NtNezqIKohcIIwoxwvl`
 
-Now let's create our first project in Gitlab <br>
-Click on Create a Project -> Create a Blank project and enter the project name as `test`
+<div align="center">
+  <img src="images/gitlab-login-root-password.png" alt="GitLab login page" width="85%">
+  <p><em>GitLab login page</em></p>
+</div>
 
-Select the namespace as `root` <br>
-Make it a Public repository
+After logging in, you'll see the GitLab dashboard:
 
-And click `Create Project`
+<div align="center">
+  <img src="images/gitlab-first-login.png" alt="GitLab first login" width="85%">
+  <p><em>GitLab dashboard after first login</em></p>
+</div>
 
-![Gitlab Create Project](images/gitlab-create-project.png?raw=true "Gitlab Create Project")
+## 🛠️ Hands-On Tutorial
 
-Our Test Repository has been created
+### Creating Your First Project
 
-![Gitlab Create Project](images/gitlab-created-test-project.png?raw=true "Gitlab Create Project")
+1. Click on **Create a Project** → **Create a Blank project**
+2. Enter the project name as `test`
+3. Select the namespace as `root`
+4. Make it a Public repository
+5. Click **Create Project**
 
-Now we need to add our SSH key to our User Profile in Gitlab, we can then clone this repository locally, using our SSH keys as authentication. 
+<div align="center">
+  <img src="images/gitlab-create-project.png" alt="GitLab Create Project" width="85%">
+  <p><em>Creating a new project in GitLab</em></p>
+</div>
 
-To do that, please navigate to Top Left, Click on your Profile Icon image and click on `Preferences`
+Once created, you'll see your new repository:
 
-![Gitlab Preferences](images/gitlab-navigate-to-preferences.png?raw=true "Gitlab Gitlab Preferences")
+<div align="center">
+  <img src="images/gitlab-created-test-project.png" alt="GitLab Created Test Project" width="85%">
+  <p><em>Newly created test project</em></p>
+</div>
 
-Now please navigate to `SSH Keys`
-![Gitlab Preferences SSH Keys](images/gitlab-navigate-to-preferences-ssh-keys.png?raw=true "Gitlab Gitlab Preferences SSH Keys")
+### Adding SSH Keys
 
-On your laptop in a Terminal Window, please do: 
-`cat ~/.ssh/id_rsa.pub` It should look something like this 
+To clone the repository using SSH, you need to add your SSH key to GitLab:
 
+1. Click on your profile icon in the top left corner
+2. Select **Preferences**
+
+<div align="center">
+  <img src="images/gitlab-navigate-to-preferences.png" alt="GitLab Navigate to Preferences" width="85%">
+  <p><em>Navigating to user preferences</em></p>
+</div>
+
+3. Navigate to **SSH Keys** in the sidebar
+
+<div align="center">
+  <img src="images/gitlab-navigate-to-preferences-ssh-keys.png" alt="GitLab Navigate to Preferences SSH Keys" width="85%">
+  <p><em>SSH Keys section in user preferences</em></p>
+</div>
+
+4. On your local machine, retrieve your public SSH key:
+
+   ```bash
+   cat ~/.ssh/id_rsa.pub
+   ```
+
+5. Copy the key and paste it into the GitLab SSH key field
+6. **Important**: Remove the expiry date
+7. Click **Add Key**
+
+<div align="center">
+  <img src="images/gitlab-enter-ssh-keys.png" alt="GitLab Enter SSH Keys" width="85%">
+  <p><em>Adding an SSH key to your GitLab account</em></p>
+</div>
+
+After adding the key:
+
+<div align="center">
+  <img src="images/gitlab-added-ssh-keys.png" alt="GitLab Added SSH Keys" width="85%">
+  <p><em>SSH key successfully added</em></p>
+</div>
+
+### Cloning Your Repository
+
+1. Navigate back to your test project
+2. Click the **Clone** button
+3. Copy the **Clone with SSH** URL
+   > ⚠️ **Note**: The HTTP link doesn't work correctly due to a bug with the port configuration. Use SSH instead.
+
+<div align="center">
+  <img src="images/gitlab-copy-ssh-clone-url-test-project.png" alt="GitLab Copy SSH Clone URL" width="85%">
+  <p><em>Copying the SSH clone URL</em></p>
+</div>
+
+4. Clone the repository:
+
+   ```bash
+   git clone ssh://git@localhost:32022/root/test.git
+   ```
+
+<div align="center">
+  <img src="images/gitlab-ssh-clone-test-project.png" alt="GitLab SSH Clone Test Repository" width="85%">
+  <p><em>Successfully cloning the repository</em></p>
+</div>
+
+### Creating a GitLab CI Pipeline
+
+1. In your local repository, create a `.gitlab-ci.yml` file:
+
+   ```bash
+   cd test
+   nano .gitlab-ci.yml
+   ```
+
+2. Add the following pipeline configuration:
+
+   ```yaml
+   variables:
+     REPOSITORY_URL: xxxxxxxxxxxxx.dkr.ecr.eu-west-1.amazonaws.com/container
+
+   stages:
+     - test
+     - build
+     - dev
+     - stg
+     - prd
+
+   test:
+     stage: test
+     script:
+       - echo 'Here you can run tests'
+
+   build:
+     stage: build
+     script:
+       - echo 'After Test stage was successful, here you can run build your container'
+
+   dev:
+     stage: dev
+     script:
+       - echo 'After Build stage was successful, here you can run your Development environment deployment'
+
+   stg:
+     stage: stg
+     script:
+       - echo 'After Dev stage was successful, here you can run your Staging environment deployment'
+
+   prd:
+     stage: prd
+     script:
+       - echo 'After Stg stage was successful, here you can run your Production environment deployment'
+   ```
+
+3. Commit and push the changes:
+
+   ```bash
+   git add .gitlab-ci.yml
+   git commit -am "adding .gitlab-ci.yml pipeline file"
+   git push
+   ```
+
+<div align="center">
+  <img src="images/gitlab-add-pipeline-file-to-test-repository.png" alt="GitLab Add Pipeline File" width="85%">
+  <p><em>Adding a CI pipeline file to the repository</em></p>
+</div>
+
+After pushing, you'll see the file in your repository:
+
+<div align="center">
+  <img src="images/gitlab-added-pipeline-file.png" alt="GitLab Added Pipeline File" width="85%">
+  <p><em>Pipeline file added to the repository</em></p>
+</div>
+
+### Setting Up a GitLab Runner
+
+1. In your project, navigate to **Settings** → **CI/CD**
+
+<div align="center">
+  <img src="images/gitlab-navigate-to-settings-cicd.png" alt="GitLab Navigate to Settings CICD" width="85%">
+  <p><em>Navigating to CI/CD settings</em></p>
+</div>
+
+2. Expand the **Runners** section
+
+<div align="center">
+  <img src="images/gitlab-navigate-to-settings-cicd-expand-runners.png" alt="GitLab Expand Runners" width="85%">
+  <p><em>Expanding the Runners section</em></p>
+</div>
+
+3. Click **New Project Runner**
+4. In the configuration form, check **Run Untagged Jobs**
+5. Click **Create Runner**
+
+<div align="center">
+  <img src="images/gitlab-add-test-project-runners.png" alt="GitLab New Project Runner" width="85%">
+  <p><em>Creating a new project runner</em></p>
+</div>
+
+> ⚠️ **Note**: Due to a known bug, you might be redirected to a blank page. If this happens, manually add `:5580` to the URL:
+>
+> **Instead of**: <http://localhost/root/test/-/runners/1/register?platform=linux>  
+> **Use**: <http://localhost:5580/root/test/-/runners/1/register?platform=linux>
+
+<div align="center">
+  <img src="images/gitlab-add-test-project-runners-correct-page.png" alt="GitLab Create Project Runner Correct Page" width="85%">
+  <p><em>Runner registration page</em></p>
+</div>
+
+### Registering the Runner
+
+1. Copy the registration command, but remember to add the port `:5580`:
+
+   **Incorrect**:
+
+   ```
+   gitlab-runner register --url http://localhost --token glrt-NRYUnqLZ2yzyutC1MYVV
+   ```
+
+   **Correct**:
+
+   ```
+   gitlab-runner register --url http://localhost:5580 --token glrt-NRYUnqLZ2yzyutC1MYVV
+   ```
+
+2. SSH into your HashiQube instance:
+
+   ```bash
+   vagrant ssh
+   ```
+
+<div align="center">
+  <img src="images/gitlab-vagrant-ssh-register-runner.png" alt="Vagrant SSH" width="85%">
+  <p><em>SSHing into HashiQube to register the runner</em></p>
+</div>
+
+3. Register the runner with the corrected command
+4. Start the runner:
+
+   ```bash
+   gitlab-runner run
+   ```
+
+<div align="center">
+  <img src="images/gitlab-vagrant-ssh-register-runner-gitlab-runner-run.png" alt="Vagrant SSH GitLab Runner Run" width="85%">
+  <p><em>Starting the GitLab runner</em></p>
+</div>
+
+5. Return to GitLab to see the confirmation:
+
+<div align="center">
+  <img src="images/gitlab-vagrant-ssh-register-runner-gitlab-runner-run-success.png" alt="GitLab Runner Run Success" width="85%">
+  <p><em>Runner successfully registered</em></p>
+</div>
+
+6. Click **Go to the Runners page** to see your registered runner:
+
+<div align="center">
+  <img src="images/gitlab-runners-page-registered.png" alt="GitLab Runners Page" width="85%">
+  <p><em>Runners page showing the registered runner</em></p>
+</div>
+
+### Running Your Pipeline
+
+1. Navigate to **Build** → **Pipelines** in the left sidebar
+
+<div align="center">
+  <img src="images/gitlab-test-project-run-pipeline.png" alt="GitLab Test Project Run Pipeline" width="85%">
+  <p><em>Pipelines section</em></p>
+</div>
+
+2. You'll see your pipeline is running:
+
+<div align="center">
+  <img src="images/gitlab-test-project-run-pipeline-in-progress.png" alt="GitLab Pipeline In Progress" width="85%">
+  <p><em>Pipeline running in progress</em></p>
+</div>
+
+3. To see job details, navigate to **Jobs** in the left sidebar and click on a job:
+
+<div align="center">
+  <img src="images/gitlab-test-project-pipeline-job.png" alt="GitLab Pipeline Job Details" width="85%">
+  <p><em>Job details showing execution results</em></p>
+</div>
+
+## 📚 Additional Resources
+
+- [GitLab Documentation](https://docs.gitlab.com/)
+- [GitLab Runner Documentation](https://docs.gitlab.com/runner/)
+- [GitLab with Docker](https://docs.gitlab.com/omnibus/docker/)
+- [GitLab CI/CD Pipeline Configuration](https://docs.gitlab.com/ee/ci/yaml/)
+
+## 🔧 GitLab Provisioner Script
+
+The GitLab environment is set up using this script:
+
+```bash
+#!/bin/bash
+
+# Print the commands that are run
+set -x
+
+# Stop execution if something fails
+set -e
+
+# This script provisions Gitlab on Minikube
+
+# Check if kubectl exists
+if ! [ -x "$(command -v kubectl)" ]; then
+  echo 'kubectl is not installed, please install minikube first" >&2'
+  exit 1
+fi
+
+if ! [ -x "$(command -v helm)" ]; then
+  echo 'helm is not installed, installing it ...' >&2
+  curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+  chmod 700 get_helm.sh
+  ./get_helm.sh
+  rm -f get_helm.sh
+fi
+
+# Check if Minikube environment exists
+if ! [ -x "$(minikube status | grep Running)" ]; then
+  echo 'Minikube is not running, starting it up ...' >&2
+  # Start Minikube
+  minikube start
+fi
+
+# Get the IP of the Minikube instance to allow access to Gitlab ports
+MINIKUBEIP=$(minikube ip)
+echo "Minikube is running at $MINIKUBEIP"
+
+# Clean up
+function clean_up {
+  NAMESPACE=gitlab
+  kubectl delete namespace $NAMESPACE
+  helm uninstall gitlab
+  echo "Successfully cleaned up $NAMESPACE namespace and gitlab helm release"
+}
+
+if [ "$1" == "clean" ] || [ "$1" == "delete" ] || [ "$1" == "destroy" ] || [ "$1" == "cleanup" ]; then
+  clean_up
+  exit 0
+fi
+
+# Get IP for Hashiqube
+HOSTIP=$(hostname -I | awk '{print $2}')
+if [[ -z "$HOSTIP" ]]; then
+  HOSTIP=$(hostname -I | awk '{print $1}')
+fi
+
+# Add the GitLab Helm repository
+helm repo add gitlab https://charts.gitlab.io/
+helm repo update
+
+# Install GitLab using Helm
+helm upgrade --install gitlab gitlab/gitlab \
+  --timeout 600s \
+  --set global.hosts.domain=local \
+  --set global.hosts.externalIP=$HOSTIP \
+  --set global.edition=ce \
+  --set certmanager-issuer.email=youremail@example.org \
+  --set nginx-ingress.enabled=false \
+  --set global.ingress.enabled=false \
+  --set global.ingress.configureCertmanager=false \
+  --set gitlab-runner.install=true
+
+# Wait for deployment to complete
+echo "Waiting for GitLab deployment to complete..."
+sleep 10
+
+# Get the root password
+ROOT_PASSWORD=$(kubectl get secret gitlab-gitlab-initial-root-password -ojsonpath='{.data.password}' | base64 --decode ; echo)
+
+# Get the service ports
+GITLAB_SSH_PORT=$(kubectl get service gitlab-gitlab-shell -ojsonpath='{.spec.ports[0].nodePort}')
+GITLAB_HTTP_PORT=$(kubectl get service gitlab-webservice-default -ojsonpath='{.spec.ports[0].nodePort}')
+
+# Forward ports for easy access
+echo "Forward ports for easy access"
+echo "kubectl port-forward svc/gitlab-webservice-default 5580:8080 &"
+echo "kubectl port-forward svc/gitlab-gitlab-shell 32022:22 &"
+kubectl port-forward svc/gitlab-webservice-default 5580:8080 > /dev/null 2>&1 &
+kubectl port-forward svc/gitlab-gitlab-shell 32022:22 > /dev/null 2>&1 &
+
+echo "GitLab is now running!"
+echo "Access the web UI at http://localhost:5580"
+echo "Login with username: root and password: $ROOT_PASSWORD"
+echo "You can use SSH with port $GITLAB_SSH_PORT"
+echo "You can use HTTP with port $GITLAB_HTTP_PORT"
 ```
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDIgkrDFTASaZYyJfGd0swmUZaol3JSZmO6D74230CtZjz/YrHq4QL34r5z4oPz9gO8f0l6kN8Hz6BEhAIzArg8kDI9lrsPXypCqlahE49cuzNH3C5GEC9MHo46U6+ZG2IOwCXjiP5ohnXyG8ho8N1BVpDa0xyVevy4COg4malaLVcRwP73YwgxiitNLWcq8k8nB riaan@Riaans-MacBook-Pro.local
-```
-
-Copy that key, we will enter it now, navigate back to Gitlab
-
-![Gitlab Enter SSH Keys](images/gitlab-enter-ssh-keys.png?raw=true "Gitlab Gitlab Enter SSH Keys")
-
-:bangbang: Be sure to remove the expiry date and click `Add Key`
-
-![Gitlab Added SSH Keys](images/gitlab-added-ssh-keys.png?raw=true "Gitlab Gitlab Added SSH Keys")
-
-## Clone Test Repo
-
-Now we have a method to authenticate to Gitlab, now we can clone our Test repository we created earlier! 
-
-Navigate back to the home page of Gitlab, and click on your test repository. 
-
-![Gitlab Test Repository](images/gitlab-navigate-to-test-project.png?raw=true "Gitlab Test Repository")
-
-Now, to the right you will see a Clone Button, please click on that, and Copy the `Clone with SSH` link. 
-
-:bangbang: The HTTP Link does not work currently, there is a BUG and i was unable to add the port `5580` in there. So please don't use that, it won;t work.
-
-![Gitlab Clone with SSH Test Repository](images/gitlab-copy-ssh-clone-url-test-project.png?raw=true "Gitlab Clone with SSH Test Repository")
-
-[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
-
-I will clone this to my `~/workspace/personal/test` directory, and I will use this command `git clone ssh://git@localhost:32022/root/test.git` 
-
-The output is below
-
-![Gitlab SSH Clone Test Repository](images/gitlab-ssh-clone-test-project.png?raw=true "Gitlab SSH Clone Test Repository")
-
-## Gitlab Pipeline
-
-Now that we have cloned the Test repository locally, we can add files to it. For our first file we are going to add a `.gitlab-ci.yml` Gitlab Pipeline file. 
-
-So create a new file in the test reposiroty directory, called `.gitlab-ci.yml` with the following content
-
-```yaml
-variables:
-  REPOSITORY_URL: xxxxxxxxxxxxx.dkr.ecr.eu-west-1.amazonaws.com/container
-
-stages:
-  - test
-  - build
-  - dev
-  - stg
-  - prd
-
-test:
-  stage: test
-  script:
-    - echo 'Here you can run tests'
-
-build:
-  stage: build
-  script:
-    - echo 'After Test stage was successful, here you can run build your container'
-
-dev:
-  stage: dev
-  script:
-    - echo 'After Build stage was successful, here you can run your Development environment deployment'
-
-stg:
-  stage: stg
-  script:
-    - echo 'After Dev stage was successful, here you can run your Staging environment deployment'
-
-prd:
-  stage: prd
-  script:
-    - echo 'After Stg stage was successful, here you can run your Production environment deployment'
-```
-
-Here is a screenshot of what I did, and the commands will be below that you can copy and past. 
-
-![Gitlab add pipeline file to Test Repository](images/gitlab-add-pipeline-file-to-test-repository.png?raw=true "Gitlab add pipeline file to Test Repository")
-
-[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
-
-`cd test`
-
-`nano .gitlab-ci.yml`
-
-`git status`
-```
-On branch main
-Your branch is up to date with 'origin/main'.
-
-Untracked files:
-  (use "git add <file>..." to include in what will be committed)
-	.gitlab-ci.yml
-
-nothing added to commit but untracked files present (use "git add" to track)
-```
-
-`git add .gitlab-ci.yml`
-
-`git commit -am "adding .gitlab-ci.yml pipeline file"`
-```
-[main 0fe4e09] adding .gitlab-ci.yml pipeline file
- 1 file changed, 35 insertions(+)
- create mode 100644 .gitlab-ci.yml
-```
-
-`git push`
-```
-Enumerating objects: 4, done.
-Counting objects: 100% (4/4), done.
-Delta compression using up to 10 threads
-Compressing objects: 100% (3/3), done.
-Writing objects: 100% (3/3), 573 bytes | 573.00 KiB/s, done.
-Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
-To ssh://localhost:32022/root/test.git
-   29c151b..0fe4e09  main -> main
-```
-
-Now when you navigate back to the Gitlab Test Reposiroty and you refresh the page, you will see that our file have been added. 
-
-![Gitlab Test Repository](images/gitlab-added-pipeline-file.png?raw=true "Gitlab Test Repository")
-
-In the next section we will add a Runner to run our pipeline, enjoy! 
-
-## Runners
-https://docs.gitlab.com/runner/register/index.html#docker
-
-Let's add a Gitlab runner for our `test` project, please navigate to Settings -> CI/CD 
-
-![Gitlab Navigate to Settings CICD](images/gitlab-navigate-to-settings-cicd.png?raw=true "Gitlab Navigate to Settings CICD")
-
-Now please expand Runners 
-
-![Gitlab Expand Runners](images/gitlab-navigate-to-settings-cicd-expand-runners.png?raw=true "Gitlab Expand Runners")
-
-and click on `New Project Runner`
-
-:bangbang: You can leave everything default, but please Click `Run Untagged Jobs`
-
-![Gitlab New Project Runner](images/gitlab-add-test-project-runners.png?raw=true "Gitlab New Project Runner")
-
-And click on Create Runner. 
-
-Remember that BUG I mentioned above? 
-:bug: https://gitlab.com/gitlab-org/charts/gitlab/-/issues/4205
-
-![Gitlab New Project Runner Bug](images/gitlab-add-test-project-runners-bug.png?raw=true "Gitlab New Project Runner Bug")
-
-Well you will now get a blank page, because it redirects us to the URL: http://localhost/root/test/-/runners/1/register?platform=linux
-
-BUT IT SHOULD ACTUALLY BE: 
-
-http://localhost:5580/root/test/-/runners/1/register?platform=linux
-
-So please add the `:5580` after localhost in the URL adrress bar and press enter
-
-![Gitlab Create Project Runner Correct Page](images/gitlab-add-test-project-runners-correct-page.png?raw=true "Gitlab Create Project Runner Correct Page")
-
-## Register Runner
-
-You see the text in Register Runner, Step 1? Copy that, mine looks like below, BUT LOK CLOSELY, You see the BUG again? It's missing the port!! `:5580` 
-
-WRONG!!
-```
-gitlab-runner register  --url http://localhost  --token glrt-NRYUnqLZ2yzyutC1MYVV
-```
-
-So remember to add the port there so that it looks like 
-
-CORRECT!!
-```
-gitlab-runner register  --url http://localhost:5580  --token glrt-NRYUnqLZ2yzyutC1MYVV
-```
-
-Now let's head over to our Hashiqube instance, in our hashiqube directory, we can do
-
-`vagrant ssh`
-
-![Vagrant SSH](images/gitlab-vagrant-ssh-register-runner.png?raw=true "Vagrant SSH")
-
-And we'll register our runner in the Hashiqube instance, be sure to remember to add the port in there 
-
-Now you can do step 3 where we run the runner
-
-`gitlab-runner run`
-
-![Vagrant SSH Gitlab Runner Run](images/gitlab-vagrant-ssh-register-runner-gitlab-runner-run.png?raw=true "Vagrant SSH Gitlab Runner Run")
-
-When you now go back to your Gitlab page you will see :tada: You've created a new runner!
-
-![Vagrant SSH Gitlab Runner Run Success](images/gitlab-vagrant-ssh-register-runner-gitlab-runner-run-success.png?raw=true "Vagrant SSH Gitlab Runner Run Success")
-
-You can now click on Go to the Runners page and you will see it is registered and ready to accept jobs
-
-![Vagrant SSH Gitlab Runners Page](images/gitlab-runners-page-registered.png?raw=true "Vagrant SSH Gitlab Runners Page")
-
-## Run Pipeline
-
-Ok, so we have a Test Project, We have a registered Runner and we have a Pipeline, so let's run our pipeline. Please navigate on your left to `Build - Pipelines`
-
-![Build Pipelines Run](images/gitlab-test-project-run-pipeline.png?raw=true "Build Pipelines Run")
-
-and you will see in the next screen your pipeline is running
-
-![Build Pipelines in progress](images/gitlab-test-project-run-pipeline-in-progress.png?raw=true "Build Pipelines in progress")
-
-To see what the Pipeline Jobs did, please navigate to `Jobs` on the left and then click on one of those jobs
-
-![Build Pipelines Job Details](images/gitlab-test-project-pipeline-job.png?raw=true "Build Pipelines Job Details")
-
-And that's it for now folks, thank you for taking the time to go through this tutorial with me and thank you for using Hashiqube, I hope you had fun! 
-
-## Gitlab Provisioner
-
-[filename](gitlab.sh ':include :type=code')
-
-[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

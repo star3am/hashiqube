@@ -1,35 +1,38 @@
-# Localstack
+# LocalStack
 
-![Localstack Logo](images/localstack-logo.png?raw=true "Localstack Logo")
+<div align="center">
+  <img src="images/localstack-logo.png" alt="LocalStack Logo" width="300px">
+  <br><br>
+  <p><strong>A local AWS cloud stack for development and testing</strong></p>
+</div>
 
-In this HashiQube DevOps lab you will get hands on experience with Localstack and Terraform.
+## 🚀 About
 
-LocalStack provides an easy-to-use test/mocking framework for developing Cloud applications. It spins up a testing environment on your local machine that provides the same functionality and APIs as the real AWS cloud environment.
+In this HashiQube DevOps lab, you'll get hands-on experience with LocalStack and Terraform.
 
-## Localstack
+LocalStack provides an easy-to-use test/mocking framework for developing cloud applications. It spins up a testing environment on your local machine that provides the same functionality and APIs as the real AWS cloud environment, allowing you to develop and test your cloud applications without incurring AWS costs.
 
-To get Localstack installed and running in Hashiqube, you can use the following command
-
-## Provision
+## 📋 Provision
 
 <!-- tabs:start -->
-#### **Github Codespaces**
+
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/star3am/hashiqube?quickstart=1)
-```
+
+```bash
 bash docker/docker.sh
 bash localstack/localstack.sh
 bash terraform/terraform.sh
 ```
 
-#### **Vagrant**
+### **Vagrant**
 
-```
+```bash
 vagrant up --provision-with basetools,localstack,terraform
 ```
 
-#### **Docker Compose**
+### **Docker Compose**
 
-```
+```bash
 docker compose exec hashiqube /bin/bash
 bash hashiqube/basetools.sh
 bash docker/docker.sh
@@ -37,659 +40,375 @@ bash docsify/docsify.sh
 bash localstack/localstack.sh
 bash terraform/terraform.sh
 ```
+
 <!-- tabs:end -->
 
-## Terraform plan
+## 🛠️ Using Terraform with LocalStack
 
-To do a terraform plan, you can simply do the following:
+### Terraform Plan
 
-Change Directory into /vagrant/localstack
-`cd /vagrant/localstack`
+To perform a Terraform plan:
 
-And then to a `terraform init` and `terraform plan`
+1. Change directory to the LocalStack directory:
 
-## Terraform apply
+   ```bash
+   cd /vagrant/localstack
+   ```
 
-To do a terraform apply, you can simply do the following:
+2. Initialize Terraform and run the plan:
 
-Change Directory into /vagrant/localstack
-`cd /vagrant/localstack`
+   ```bash
+   terraform init
+   terraform plan
+   ```
 
-And then to a `terraform init` and `terraform plan` and lastly `terraform apply`
+### Terraform Apply
 
-## Terraform and Vault
+To apply your Terraform configuration:
 
-Terraform has many providers, and you can use Terraform to create many resources of many providers, such as Github, AWS, Azure, Cloudfalre and many others. Of course you can also manage HashiCorp Vault with Terraform. 
+1. Change directory to the LocalStack directory:
 
-To do that, you can follow these simple staps.
+   ```bash
+   cd /vagrant/localstack
+   ```
 
-1. Get Terraform and Localstack running <br />
-Github Codespace: `bash localstack/localstack.sh` <br />
-Vagrant: `vagrant up --provision-with basetools,localstack`
+2. Initialize Terraform, run a plan, and apply the changes:
 
-2. Bring Vault up <br />
-Github Codespace: `bash vault/vault.sh` <br />
-Vagrant: `vagrant up --provision-with basetools,vault`
+   ```bash
+   terraform init
+   terraform plan
+   terraform apply
+   ```
 
-3. Run Terraform plan with the vault module enabled <br />
-Github Codespace: `VAULT_TOKEN="YOUR_VAULT_TOKEN" TF_VAR_vault_enabled=true terraform plan` <br />
-Vagrant: To be determined
+## 🔄 Terraform and Vault Integration
 
-```
-  # module.hashicorp-vault[0].vault_kv_secret_v2.example will be created
-  + resource "vault_kv_secret_v2" "example" {
-      + cas                 = 1
-      + data                = (sensitive value)
-      + data_json           = (sensitive value)
-      + delete_all_versions = true
-      + disable_read        = false
-      + id                  = (known after apply)
-      + metadata            = (known after apply)
-      + mount               = "kvv2"
-      + name                = "secret"
-      + path                = (known after apply)
+Terraform has many providers, and you can use it to create resources across various platforms like GitHub, AWS, Azure, Cloudflare, and many others. You can also manage HashiCorp Vault with Terraform.
 
-      + custom_metadata {
-          + data         = {
-              + "bar" = "12345"
-              + "foo" = "vault@example.com"
-            }
-          + max_versions = 5
-        }
-    }
+### Setting Up Terraform with Vault
 
-  # module.hashicorp-vault[0].vault_mount.kvv2 will be created
-  + resource "vault_mount" "kvv2" {
-      + accessor                     = (known after apply)
-      + audit_non_hmac_request_keys  = (known after apply)
-      + audit_non_hmac_response_keys = (known after apply)
-      + default_lease_ttl_seconds    = (known after apply)
-      + description                  = "KV Version 2 secret engine mount"
-      + external_entropy_access      = false
-      + id                           = (known after apply)
-      + max_lease_ttl_seconds        = (known after apply)
-      + options                      = {
-          + "version" = "2"
-        }
-      + path                         = "kvv2"
-      + seal_wrap                    = (known after apply)
-      + type                         = "kv"
-    }
-```
+1. Get Terraform and LocalStack running:
+   - GitHub Codespace: `bash localstack/localstack.sh`
+   - Vagrant: `vagrant up --provision-with basetools,localstack`
 
-4. Run Terraform apply with the vault module enabled <br />
-Github Codespace: `VAULT_TOKEN="YOUR_VAULT_TOKEN" TF_VAR_vault_enabled=true terraform apply` <br />
-Vagrant: To be determined
+2. Bring Vault up:
+   - GitHub Codespace: `bash vault/vault.sh`
+   - Vagrant: `vagrant up --provision-with basetools,vault`
 
-```
-module.hashicorp-vault[0].vault_mount.kvv2: Creation complete after 1s [id=kvv2]
-module.hashicorp-vault[0].vault_kv_secret_v2.example: Creating...
-module.hashicorp-vault[0].vault_kv_secret_v2.example: Creation complete after 0s [id=kvv2/data/secret]
-```
+3. Run Terraform plan with the Vault module enabled:
 
-5. Aaccess Vault to see the Secret engine enabled <br />
+   ```bash
+   VAULT_TOKEN="YOUR_VAULT_TOKEN" TF_VAR_vault_enabled=true terraform plan
+   ```
 
-![Vault Secrets Egine KV2](images/localstack-terraform-vault-secret-engine-kv2.png?raw=true "Vault Secrets Egine KV2")
+   Example output:
 
-![Vault Secrets Egine KV2 Secrets](images/localstack-terraform-vault-secret-engine-kv2-secrets.png?raw=true "Vault Secrets Egine KV2 Secrets")
+   ```bash
+   # module.hashicorp-vault[0].vault_kv_secret_v2.example will be created
+   + resource "vault_kv_secret_v2" "example" {
+       + cas                 = 1
+       + data                = (sensitive value)
+       + data_json           = (sensitive value)
+       + delete_all_versions = true
+       + disable_read        = false
+       + id                  = (known after apply)
+       + metadata            = (known after apply)
+       + mount               = "kvv2"
+       + name                = "secret"
+       + path                = (known after apply)
 
-For further details, look at the code in `/vagrant/localstack`
+       + custom_metadata {
+           + data         = {
+               + "bar" = "12345"
+               + "foo" = "vault@example.com"
+             }
+           + max_versions = 5
+         }
+     }
 
-[filename](modules.tf ':include :type=code hcl')
+   # module.hashicorp-vault[0].vault_mount.kvv2 will be created
+   + resource "vault_mount" "kvv2" {
+       + accessor                     = (known after apply)
+       + audit_non_hmac_request_keys  = (known after apply)
+       + audit_non_hmac_response_keys = (known after apply)
+       + default_lease_ttl_seconds    = (known after apply)
+       + description                  = "KV Version 2 secret engine mount"
+       + external_entropy_access      = false
+       + id                           = (known after apply)
+       + max_lease_ttl_seconds        = (known after apply)
+       + options                      = {
+           + "version" = "2"
+         }
+       + path                         = "kvv2"
+       + seal_wrap                    = (known after apply)
+       + type                         = "kv"
+     }
+   ```
 
-## Localstack Web Interface
+4. Run Terraform apply with the Vault module enabled:
 
-After you ran this provisioner above you will see that it also ran some Terraform for you, we will shortly access Hashiqube and run Terraform again, but before we do, let's create a login at https://www.localstack.cloud/
+   ```bash
+   VAULT_TOKEN="YOUR_VAULT_TOKEN" TF_VAR_vault_enabled=true terraform apply
+   ```
 
-So head over to https://www.localstack.cloud/ and Register yourself a user or click here https://app.localstack.cloud/sign-up
+   Example output:
 
-I Registered with SSO using my github Credentials. 
+   ```bash
+   module.hashicorp-vault[0].vault_mount.kvv2: Creation complete after 1s [id=kvv2]
+   module.hashicorp-vault[0].vault_kv_secret_v2.example: Creating...
+   module.hashicorp-vault[0].vault_kv_secret_v2.example: Creation complete after 0s [id=kvv2/data/secret]
+   ```
 
-Once you have logged in you will see the Localstack Dashboard like below.
+5. Access Vault to see the secret engine enabled:
 
-![Localstack Dashboard](images/localstack-dashboard.png?raw=true "Localstack Dashboard")
+<div align="center">
+  <img src="images/localstack-terraform-vault-secret-engine-kv2.png" alt="Vault Secrets Engine KV2" width="85%">
+  <p><em>KV2 secret engine enabled in Vault</em></p>
+</div>
 
-## Localstack Instances 
+<div align="center">
+  <img src="images/localstack-terraform-vault-secret-engine-kv2-secrets.png" alt="Vault Secrets Engine KV2 Secrets" width="85%">
+  <p><em>Secrets stored in the KV2 secret engine</em></p>
+</div>
 
-If you scroll down a bit, you will see in the left hand menu, your running instances. 
+For further details, look at the code in `/vagrant/localstack`:
 
-![Localstack Instances](images/localstack-instances.png?raw=true "Localstack Instances")
-
-If you click on S3 you will see that we have just created a bucket with our Terraform Code. 
-
-![Localstack S3](images/localstack-instances-click-on-s3.png?raw=true "Localstack S3")
-
-![Localstack S3](images/localstack-instances-my-bucket.png?raw=true "Localstack S3")
-
-## Run Terraform
-
-Go ahead and Install Terraform on your Laptop
-
-https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli 
-
-Let's make sure Terraform is installed by typing in our terminal `terraform -version` You should see output similar to mine below.
-
-`terraform -version`
-```
-Terraform v1.5.7
-on darwin_arm64
-+ provider registry.terraform.io/hashicorp/aws v5.55.0
-+ provider registry.terraform.io/hashicorp/null v3.2.2
-+ provider registry.terraform.io/hashicorp/random v3.6.2
-
-Your version of Terraform is out of date! The latest version
-is 1.8.5. You can update by downloading from https://www.terraform.io/downloads.html
+```hcl
+# modules.tf
+module "hashicorp-vault" {
+  source = "../modules/vault-kv-secret"
+  count  = var.vault_enabled ? 1 : 0
+}
 ```
 
-Now let's make sure we are in the localstack directory, by doing `cd localstack`
+## 🌐 LocalStack Web Interface
 
-After I did that, I can check with the command `pwd`
+After running the provisioner, you can create an account at [LocalStack Cloud](https://www.localstack.cloud/) to view your resources.
 
-`pwd`
-```
-/Users/riaan/workspace/personal/hashiqube/localstack
-```
+### Creating a LocalStack Account
 
-### terraform init
+1. Go to [https://www.localstack.cloud/](https://www.localstack.cloud/) and register, or sign up directly at [https://app.localstack.cloud/sign-up](https://app.localstack.cloud/sign-up)
+2. You can register using SSO with GitHub credentials
 
-Now we can run `terraform init` 
+Once logged in, you'll see the LocalStack Dashboard:
 
-```log
-Initializing the backend...
-Initializing provider plugins...
-- Checking for available provider plugins...
-- Downloading plugin for provider "aws" (hashicorp/aws) 2.33.0...
-The following providers do not have any version constraints in configuration,
-so the latest version was installed.
-To prevent automatic upgrades to new major versions that may contain breaking
-changes, it is recommended to add version = "..." constraints to the
-corresponding provider blocks in configuration, with the constraint strings
-suggested below.
-* provider.aws: version = "~> 2.33"
-Terraform has been successfully initialized!
-You may now begin working with Terraform. Try running "terraform plan" to see
-any changes that are required for your infrastructure. All Terraform commands
-should now work.
-If you ever set or change modules or backend configuration for Terraform,
-rerun this command to reinitialize your working directory. If you forget, other
-commands will detect it and remind you to do so if necessary.
-```
+<div align="center">
+  <img src="images/localstack-dashboard.png" alt="LocalStack Dashboard" width="85%">
+  <p><em>LocalStack Cloud dashboard</em></p>
+</div>
 
-### terraform plan
+### Viewing LocalStack Instances
 
-Now we can run `terraform plan` 
+Scroll down in the left-hand menu to see your running instances:
 
-```log
-Refreshing Terraform state in-memory prior to plan...
-The refreshed state will be used to calculate this plan, but will not be
-persisted to local or remote state storage.
-------------------------------------------------------------------------
-An execution plan has been generated and is shown below.
-Resource actions are indicated with the following symbols:
- + create
-Terraform will perform the following actions:
- # aws_s3_bucket.localstack-s3-bucket will be created
- + resource "aws_s3_bucket" "localstack-s3-bucket" {
-     + acceleration_status         = (known after apply)
-     + acl                         = "public-read"
-     + arn                         = (known after apply)
-     + bucket                      = "localstack-s3-bucket"
-     + bucket_domain_name          = (known after apply)
-     + bucket_regional_domain_name = (known after apply)
-     + force_destroy               = false
-     + hosted_zone_id              = (known after apply)
-     + id                          = (known after apply)
-     + region                      = (known after apply)
-     + request_payer               = (known after apply)
-     + website_domain              = (known after apply)
-     + website_endpoint            = (known after apply)
-     + versioning {
-         + enabled    = (known after apply)
-         + mfa_delete = (known after apply)
-       }
-   }
-Plan: 1 to add, 0 to change, 0 to destroy.
-------------------------------------------------------------------------
-Note: You didn't specify an "-out" parameter to save this plan, so Terraform
-can't guarantee that exactly these actions will be performed if
-"terraform apply" is subsequently run.
-```
+<div align="center">
+  <img src="images/localstack-instances.png" alt="LocalStack Instances" width="85%">
+  <p><em>LocalStack running instances</em></p>
+</div>
 
-### terraform apply
+If you click on S3, you'll see the bucket created by Terraform:
 
-Now we can run `terraform apply` 
+<div align="center">
+  <img src="images/localstack-instances-click-on-s3.png" alt="LocalStack S3" width="85%">
+  <p><em>S3 service in LocalStack</em></p>
+</div>
 
-```log
-An execution plan has been generated and is shown below.
-Resource actions are indicated with the following symbols:
- + create
-Terraform will perform the following actions:
- # aws_s3_bucket.localstack-s3-bucket will be created
- + resource "aws_s3_bucket" "localstack-s3-bucket" {
-     + acceleration_status         = (known after apply)
-     + acl                         = "public-read"
-     + arn                         = (known after apply)
-     + bucket                      = "localstack-s3-bucket"
-     + bucket_domain_name          = (known after apply)
-     + bucket_regional_domain_name = (known after apply)
-     + force_destroy               = false
-     + hosted_zone_id              = (known after apply)
-     + id                          = (known after apply)
-     + region                      = (known after apply)
-     + request_payer               = (known after apply)
-     + website_domain              = (known after apply)
-     + website_endpoint            = (known after apply)
-     + versioning {
-         + enabled    = (known after apply)
-         + mfa_delete = (known after apply)
-       }
-   }
-Plan: 1 to add, 0 to change, 0 to destroy.
-Do you want to perform these actions?
- Terraform will perform the actions described above.
- Only 'yes' will be accepted to approve.
- Enter a value: yes
-aws_s3_bucket.localstack-s3-bucket: Creating...
-aws_s3_bucket.localstack-s3-bucket: Creation complete after 0s [id=localstack-s3-bucket]
-Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
-```
+<div align="center">
+  <img src="images/localstack-instances-my-bucket.png" alt="LocalStack S3 Bucket" width="85%">
+  <p><em>S3 bucket details</em></p>
+</div>
 
-Now check the assets with aws local inside vagrant
+## 💻 Running Terraform Locally
 
-`vagrant ssh -c "awslocal s3 ls"`
-```
-2024-06-25 17:42:18 my-bucket
-```
+You can also run Terraform commands on your local machine:
 
-## Further learning 
+1. Install Terraform on your laptop:
+   - Follow the instructions at [https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
 
-Thanks to the folks at Localstack for publishing some more examples for us to use and learn Terraform. You can go to this repository on Github, https://github.com/localstack-samples/localstack-terraform-samples/tree/master 
+2. Verify Terraform is installed:
 
-We can then clone it down locally into our `localstack` folder
+   ```bash
+   terraform -version
+   ```
 
-`git clone git@github.com:localstack-samples/localstack-terraform-samples.git`
+   Example output:
 
-Now let's go into this directory, 
+   ```bash
+   Terraform v1.5.7
+   on darwin_arm64
+   + provider registry.terraform.io/hashicorp/aws v5.55.0
+   + provider registry.terraform.io/hashicorp/null v3.2.2
+   + provider registry.terraform.io/hashicorp/random v3.6.2
 
-`cd localstack-terraform-samples`
+   Your version of Terraform is out of date! The latest version
+   is 1.8.5. You can update by downloading from https://www.terraform.io/downloads.html
+   ```
 
-There are many examples you can browse, but for now, let's just cd into `demo-deploy`
+3. Navigate to the LocalStack directory:
 
-`cd demo-deploy`
+   ```bash
+   cd localstack
+   pwd
+   ```
 
-Let's copy our provider.tf to this directory with 
+   Output:
 
-`cp ../../provider.tf .`
+   ```bash
+   /Users/riaan/workspace/personal/hashiqube/localstack
+   ```
 
-Now as always let's do Terraform Init
+4. Initialize Terraform:
 
-`terraform init`
-```
-Initializing the backend...
-Initializing modules...
-- apigateway in modules/apigateway
-- cognito_authorizer in modules/cognito
-- dynamo in modules/dynamodb
-- lambda_authorizer in modules/lambda
-- s3 in modules/s3
-- sqs in modules/sqs
+   ```bash
+   terraform init
+   ```
 
-Initializing provider plugins...
-- Finding latest version of hashicorp/aws...
-- Installing hashicorp/aws v5.55.0...
-- Installed hashicorp/aws v5.55.0 (signed by HashiCorp)
+   Output:
 
-Terraform has created a lock file .terraform.lock.hcl to record the provider
-selections it made above. Include this file in your version control repository
-so that Terraform can guarantee to make the same selections by default when
-you run "terraform init" in the future.
+```bash
+   Initializing the backend...
+   Initializing provider plugins...
+   - Checking for available provider plugins...
+   - Downloading plugin for provider "aws" (hashicorp/aws) 2.33.0...
+   The following providers do not have any version constraints in configuration,
+   so the latest version was installed.
+   To prevent automatic upgrades to new major versions that may contain breaking
+   changes, it is recommended to add version = "..." constraints to the
+   corresponding provider blocks in configuration, with the constraint strings
+   suggested below.
+   * provider.aws: version = "~> 2.33"
+   Terraform has been successfully initialized!
+   You may now begin working with Terraform. Try running "terraform plan" to see
+   any changes that are required for your infrastructure. All Terraform commands
+   should now work.
+   If you ever set or change modules or backend configuration for Terraform,
+   rerun this command to reinitialize your working directory. If you forget, other
+   commands will detect it and remind you to do so if necessary.
+   ```
 
-Terraform has been successfully initialized!
+5. Run Terraform plan:
 
-You may now begin working with Terraform. Try running "terraform plan" to see
-any changes that are required for your infrastructure. All Terraform commands
-should now work.
+   ```bash
+   terraform plan
+   ```
 
-If you ever set or change modules or backend configuration for Terraform,
-rerun this command to reinitialize your working directory. If you forget, other
-commands will detect it and remind you to do so if necessary.
-```
+6. Apply the Terraform configuration:
 
-Now we can do Terraform Plan
+   ```bash
+   terraform apply
+   ```
 
-`terraform plan`
-```
-Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following
-symbols:
-  + create
+7. Verify resources in LocalStack:
 
-Terraform will perform the following actions:
+   ```bash
+   vagrant ssh -c "awslocal s3 ls"
+   ```
 
-  # module.apigateway[0].aws_api_gateway_integration.apigw-integration-api will be created
-  + resource "aws_api_gateway_integration" "apigw-integration-api" {
-      + cache_namespace         = (known after apply)
-      + connection_type         = "INTERNET"
-      + http_method             = "ANY"
-      + id                      = (known after apply)
-      + integration_http_method = "ANY"
-      + passthrough_behavior    = "WHEN_NO_MATCH"
-      + request_parameters      = {
-          + "integration.request.path.proxy" = "method.request.path.proxy"
-        }
-      + resource_id             = (known after apply)
-      + rest_api_id             = (known after apply)
-      + timeout_milliseconds    = 29000
-      + type                    = "HTTP_PROXY"
-      + uri                     = "https://httpbin.org/anything/{proxy}"
-    }
+   Output:
 
-  # module.apigateway[0].aws_api_gateway_integration.apigw-integration-api-proxy will be created
-  + resource "aws_api_gateway_integration" "apigw-integration-api-proxy" {
-      + cache_namespace         = (known after apply)
-      + connection_type         = "INTERNET"
-      + http_method             = "ANY"
-      + id                      = (known after apply)
-      + integration_http_method = "ANY"
-      + passthrough_behavior    = "WHEN_NO_MATCH"
-      + request_parameters      = {
-          + "integration.request.path.proxy" = "method.request.path.proxy"
-        }
-      + resource_id             = (known after apply)
-      + rest_api_id             = (known after apply)
-      + timeout_milliseconds    = 29000
-      + type                    = "HTTP_PROXY"
-      + uri                     = "https://httpbin.org/anything/{proxy}"
-    }
+   ```bash
+   2024-06-25 17:42:18 my-bucket
+   ```
 
-  # module.apigateway[0].aws_api_gateway_integration.apigw-integration-proxy will be created
-  + resource "aws_api_gateway_integration" "apigw-integration-proxy" {
-      + cache_namespace         = (known after apply)
-      + connection_type         = "INTERNET"
-      + http_method             = "ANY"
-      + id                      = (known after apply)
-      + integration_http_method = "ANY"
-      + passthrough_behavior    = "WHEN_NO_MATCH"
-      + request_parameters      = {
-          + "integration.request.path.proxy" = "method.request.path.proxy"
-        }
-      + resource_id             = (known after apply)
-      + rest_api_id             = (known after apply)
-      + timeout_milliseconds    = 29000
-      + type                    = "HTTP_PROXY"
-      + uri                     = "https://httpbin.org/anything/{proxy}"
-    }
+## 📚 Further Learning
 
-  # module.apigateway[0].aws_api_gateway_method.apigw-method_api will be created
-  + resource "aws_api_gateway_method" "apigw-method_api" {
-      + api_key_required   = false
-      + authorization      = "NONE"
-      + http_method        = "ANY"
-      + id                 = (known after apply)
-      + request_parameters = {
-          + "method.request.path.proxy" = true
-        }
-      + resource_id        = (known after apply)
-      + rest_api_id        = (known after apply)
-    }
+Thanks to the folks at LocalStack for publishing examples for learning Terraform. You can explore more examples from their GitHub repository:
 
-  # module.apigateway[0].aws_api_gateway_method.apigw-method_api_proxy will be created
-  + resource "aws_api_gateway_method" "apigw-method_api_proxy" {
-      + api_key_required   = false
-      + authorization      = "NONE"
-      + http_method        = "ANY"
-      + id                 = (known after apply)
-      + request_parameters = {
-          + "method.request.path.proxy" = true
-        }
-      + resource_id        = (known after apply)
-      + rest_api_id        = (known after apply)
-    }
+1. Clone the samples repository:
 
-  # module.apigateway[0].aws_api_gateway_method.apigw-method_proxy will be created
-  + resource "aws_api_gateway_method" "apigw-method_proxy" {
-      + api_key_required   = false
-      + authorization      = "NONE"
-      + http_method        = "ANY"
-      + id                 = (known after apply)
-      + request_parameters = {
-          + "method.request.path.proxy" = true
-        }
-      + resource_id        = (known after apply)
-      + rest_api_id        = (known after apply)
-    }
+   ```bash
+   git clone git@github.com:localstack-samples/localstack-terraform-samples.git
+   cd localstack-terraform-samples
+   ```
 
-  # module.apigateway[0].aws_api_gateway_resource.apigw-resource_api_proxy will be created
-  + resource "aws_api_gateway_resource" "apigw-resource_api_proxy" {
-      + id          = (known after apply)
-      + parent_id   = (known after apply)
-      + path        = (known after apply)
-      + path_part   = "{proxy+}"
-      + rest_api_id = (known after apply)
-    }
+2. Try the `demo-deploy` example:
 
-  # module.apigateway[0].aws_api_gateway_resource.apigw-resource_proxy will be created
-  + resource "aws_api_gateway_resource" "apigw-resource_proxy" {
-      + id          = (known after apply)
-      + parent_id   = (known after apply)
-      + path        = (known after apply)
-      + path_part   = "{proxy+}"
-      + rest_api_id = (known after apply)
-    }
+   ```bash
+   cd demo-deploy
+   cp ../../provider.tf .
+   ```
 
-  # module.apigateway[0].aws_api_gateway_resource.apigw_resource_api will be created
-  + resource "aws_api_gateway_resource" "apigw_resource_api" {
-      + id          = (known after apply)
-      + parent_id   = (known after apply)
-      + path        = (known after apply)
-      + path_part   = "api"
-      + rest_api_id = (known after apply)
-    }
+3. Initialize and apply the configuration:
 
-  # module.apigateway[0].aws_api_gateway_rest_api.apigw will be created
-  + resource "aws_api_gateway_rest_api" "apigw" {
-      + api_key_source               = (known after apply)
-      + arn                          = (known after apply)
-      + binary_media_types           = (known after apply)
-      + created_date                 = (known after apply)
-      + description                  = (known after apply)
-      + disable_execute_api_endpoint = (known after apply)
-      + execution_arn                = (known after apply)
-      + id                           = (known after apply)
-      + minimum_compression_size     = (known after apply)
-      + name                         = "apigwv1-demo"
-      + policy                       = (known after apply)
-      + root_resource_id             = (known after apply)
-      + tags_all                     = {
-          + "Environment" = "Local"
-          + "Service"     = "LocalStack"
-        }
-    }
+   ```bash
+   terraform init
+   terraform plan
+   terraform apply
+   ```
 
-Plan: 10 to add, 0 to change, 0 to destroy.
+## 🌐 Provision HashiQube on AWS, GCP, or Azure
+
+HashiQube is a DevOps lab that runs all the HashiCorp products and popular Open Source Integrations. It can also help you learn Terraform!
+
+Head over to the [HashiQube Cloud Tutorial](/localstack/hashiqube/README) to learn more.
+
+## 🔧 LocalStack Terraform Examples
+
+Here are some example Terraform configuration files for LocalStack:
+
+### variables.tf
+
+```hcl
+variable "vault_enabled" {
+  description = "Enable the vault module"
+  type        = bool
+  default     = false
+}
 ```
 
-And finally, we can do Terraform Apply
+### main.tf
 
-`terraform apply`
-```
-Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following
-symbols:
-  + create
+```hcl
+provider "aws" {
+  region                      = "us-east-1"
+  access_key                  = "mock_access_key"
+  secret_key                  = "mock_secret_key"
+  skip_credentials_validation = true
+  skip_metadata_api_check     = true
+  skip_requesting_account_id  = true
 
-Terraform will perform the following actions:
+  endpoints {
+    apigateway     = "http://localhost:4566"
+    cloudformation = "http://localhost:4566"
+    cloudwatch     = "http://localhost:4566"
+    dynamodb       = "http://localhost:4566"
+    es             = "http://localhost:4566"
+    firehose       = "http://localhost:4566"
+    iam            = "http://localhost:4566"
+    kinesis        = "http://localhost:4566"
+    lambda         = "http://localhost:4566"
+    route53        = "http://localhost:4566"
+    redshift       = "http://localhost:4566"
+    s3             = "http://localhost:4566"
+    secretsmanager = "http://localhost:4566"
+    ses            = "http://localhost:4566"
+    sns            = "http://localhost:4566"
+    sqs            = "http://localhost:4566"
+    ssm            = "http://localhost:4566"
+    stepfunctions  = "http://localhost:4566"
+    sts            = "http://localhost:4566"
+  }
+}
 
-  # module.apigateway[0].aws_api_gateway_integration.apigw-integration-api will be created
-  + resource "aws_api_gateway_integration" "apigw-integration-api" {
-      + cache_namespace         = (known after apply)
-      + connection_type         = "INTERNET"
-      + http_method             = "ANY"
-      + id                      = (known after apply)
-      + integration_http_method = "ANY"
-      + passthrough_behavior    = "WHEN_NO_MATCH"
-      + request_parameters      = {
-          + "integration.request.path.proxy" = "method.request.path.proxy"
-        }
-      + resource_id             = (known after apply)
-      + rest_api_id             = (known after apply)
-      + timeout_milliseconds    = 29000
-      + type                    = "HTTP_PROXY"
-      + uri                     = "https://httpbin.org/anything/{proxy}"
-    }
-
-  # module.apigateway[0].aws_api_gateway_integration.apigw-integration-api-proxy will be created
-  + resource "aws_api_gateway_integration" "apigw-integration-api-proxy" {
-      + cache_namespace         = (known after apply)
-      + connection_type         = "INTERNET"
-      + http_method             = "ANY"
-      + id                      = (known after apply)
-      + integration_http_method = "ANY"
-      + passthrough_behavior    = "WHEN_NO_MATCH"
-      + request_parameters      = {
-          + "integration.request.path.proxy" = "method.request.path.proxy"
-        }
-      + resource_id             = (known after apply)
-      + rest_api_id             = (known after apply)
-      + timeout_milliseconds    = 29000
-      + type                    = "HTTP_PROXY"
-      + uri                     = "https://httpbin.org/anything/{proxy}"
-    }
-
-  # module.apigateway[0].aws_api_gateway_integration.apigw-integration-proxy will be created
-  + resource "aws_api_gateway_integration" "apigw-integration-proxy" {
-      + cache_namespace         = (known after apply)
-      + connection_type         = "INTERNET"
-      + http_method             = "ANY"
-      + id                      = (known after apply)
-      + integration_http_method = "ANY"
-      + passthrough_behavior    = "WHEN_NO_MATCH"
-      + request_parameters      = {
-          + "integration.request.path.proxy" = "method.request.path.proxy"
-        }
-      + resource_id             = (known after apply)
-      + rest_api_id             = (known after apply)
-      + timeout_milliseconds    = 29000
-      + type                    = "HTTP_PROXY"
-      + uri                     = "https://httpbin.org/anything/{proxy}"
-    }
-
-  # module.apigateway[0].aws_api_gateway_method.apigw-method_api will be created
-  + resource "aws_api_gateway_method" "apigw-method_api" {
-      + api_key_required   = false
-      + authorization      = "NONE"
-      + http_method        = "ANY"
-      + id                 = (known after apply)
-      + request_parameters = {
-          + "method.request.path.proxy" = true
-        }
-      + resource_id        = (known after apply)
-      + rest_api_id        = (known after apply)
-    }
-
-  # module.apigateway[0].aws_api_gateway_method.apigw-method_api_proxy will be created
-  + resource "aws_api_gateway_method" "apigw-method_api_proxy" {
-      + api_key_required   = false
-      + authorization      = "NONE"
-      + http_method        = "ANY"
-      + id                 = (known after apply)
-      + request_parameters = {
-          + "method.request.path.proxy" = true
-        }
-      + resource_id        = (known after apply)
-      + rest_api_id        = (known after apply)
-    }
-
-  # module.apigateway[0].aws_api_gateway_method.apigw-method_proxy will be created
-  + resource "aws_api_gateway_method" "apigw-method_proxy" {
-      + api_key_required   = false
-      + authorization      = "NONE"
-      + http_method        = "ANY"
-      + id                 = (known after apply)
-      + request_parameters = {
-          + "method.request.path.proxy" = true
-        }
-      + resource_id        = (known after apply)
-      + rest_api_id        = (known after apply)
-    }
-
-  # module.apigateway[0].aws_api_gateway_resource.apigw-resource_api_proxy will be created
-  + resource "aws_api_gateway_resource" "apigw-resource_api_proxy" {
-      + id          = (known after apply)
-      + parent_id   = (known after apply)
-      + path        = (known after apply)
-      + path_part   = "{proxy+}"
-      + rest_api_id = (known after apply)
-    }
-
-  # module.apigateway[0].aws_api_gateway_resource.apigw-resource_proxy will be created
-  + resource "aws_api_gateway_resource" "apigw-resource_proxy" {
-      + id          = (known after apply)
-      + parent_id   = (known after apply)
-      + path        = (known after apply)
-      + path_part   = "{proxy+}"
-      + rest_api_id = (known after apply)
-    }
-
-  # module.apigateway[0].aws_api_gateway_resource.apigw_resource_api will be created
-  + resource "aws_api_gateway_resource" "apigw_resource_api" {
-      + id          = (known after apply)
-      + parent_id   = (known after apply)
-      + path        = (known after apply)
-      + path_part   = "api"
-      + rest_api_id = (known after apply)
-    }
-
-  # module.apigateway[0].aws_api_gateway_rest_api.apigw will be created
-  + resource "aws_api_gateway_rest_api" "apigw" {
-      + api_key_source               = (known after apply)
-      + arn                          = (known after apply)
-      + binary_media_types           = (known after apply)
-      + created_date                 = (known after apply)
-      + description                  = (known after apply)
-      + disable_execute_api_endpoint = (known after apply)
-      + execution_arn                = (known after apply)
-      + id                           = (known after apply)
-      + minimum_compression_size     = (known after apply)
-      + name                         = "apigwv1-demo"
-      + policy                       = (known after apply)
-      + root_resource_id             = (known after apply)
-      + tags_all                     = {
-          + "Environment" = "Local"
-          + "Service"     = "LocalStack"
-        }
-    }
-
-Plan: 10 to add, 0 to change, 0 to destroy.
+resource "aws_s3_bucket" "localstack-s3-bucket" {
+  bucket = "localstack-s3-bucket"
+  acl    = "public-read"
+}
 ```
 
-## Provision HashiQube on AWS, GCP or Azure
+### outputs.tf
 
-HashiQube is a DevOps lab that runs all the HashiCorp products and some popular Open Source Integrations. 
+```hcl
+output "s3_bucket_name" {
+  value = aws_s3_bucket.localstack-s3-bucket.bucket
+}
+```
 
-HashiQube can also help us lear Terraform! 
+## 🔗 Additional Resources
 
-So let's head over to HashiQube and follow the rest of the tutorial. 
-
-- [HashiQube Cloud Tutorial](/localstack/hashiqube/README)
-
-[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
-
-## Links
-
-- https://localstack.cloud/
-- https://github.com/localstack-samples/localstack-terraform-samples
-- https://github.com/localstack/localstack-pro-samples/blob/master/terraform-resources/test.tf
-- https://www.terraform.io/docs/providers/aws/guides/custom-service-endpoints.html
-- https://www.terraform.io
-- https://localstack.cloud
-- https://github.com/localstack/localstack
-= https://github.com/localstack/awscli-local
-
-## Localstack Terraform Examples
-
-[filename](variables.tf ':include :type=code hcl')
-
-[filename](main.tf ':include :type=code hcl')
-
-[filename](outputs.tf ':include :type=code hcl')
-
-[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+- [LocalStack Official Website](https://localstack.cloud/)
+- [LocalStack Terraform Samples](https://github.com/localstack-samples/localstack-terraform-samples)
+- [LocalStack Pro Samples](https://github.com/localstack/localstack-pro-samples/blob/master/terraform-resources/test.tf)
+- [Terraform AWS Provider - Custom Service Endpoints](https://www.terraform.io/docs/providers/aws/guides/custom-service-endpoints.html)
+- [Terraform Documentation](https://www.terraform.io)
+- [LocalStack GitHub Repository](https://github.com/localstack/localstack)
+- [AWS CLI Local](https://github.com/localstack/awscli-local)

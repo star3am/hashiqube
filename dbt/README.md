@@ -1,56 +1,60 @@
-# DBT
+# dbt - Data Build Tool
 
-![DBT Logo](images/dbt-logo.png?raw=true "DBT Logo")
+<div align="center">
+  <img src="images/dbt-logo.png" alt="DBT Logo" width="300px">
+  <br><br>
+  <p><strong>Transform, test, and document data in your warehouse</strong></p>
+</div>
 
-In this HashiQube DevOps lab you will get hands on experience with DBT - The Data Build Tool.
+## 🚀 About
 
-dbt is a data transformation tool that enables data analysts and engineers to transform, test and document data in the cloud data warehouse.
+In this HashiQube DevOps lab, you'll get hands-on experience with dbt (Data Build Tool) - a transformation tool that enables data analysts and engineers to transform, test, and document data in cloud data warehouses.
 
-![alt](https://www.getdbt.com/ui/img/png/analytics-engineering-dbt.png)
+<div align="center">
+  <img src="https://www.getdbt.com/ui/img/png/analytics-engineering-dbt.png" alt="Analytics Engineering with dbt" width="85%">
+  <p><em>The modern analytics engineering workflow powered by dbt</em></p>
+</div>
 
-## Getting Started
+## 📋 Getting Started
 
-Review the dbt and adapter versions located in [common.sh](./common.sh)
+Before provisioning, review the dbt and adapter versions located in [common.sh](./common.sh).
 
-To control which adapter and version you would like to install with dbt, change the variable `DBT_WITH` to an accepted value
+You can control which adapter and version you want to install with dbt by changing the `DBT_WITH` variable to one of these values:
 
 ```bash
 DBT_WITH=postgres
 
-# AVAILABLE OPTIONS ARE:
-# postgres
-# redshift
-# bigquery
-# snowflake
-# mssql
-# ^^ with mssql being SQL Server and Synapase
-# spark
-# all
-# ^^ will install all adapters excluding mssql
+# AVAILABLE OPTIONS:
+# postgres    - PostgreSQL adapter
+# redshift    - Amazon Redshift adapter
+# bigquery    - Google BigQuery adapter
+# snowflake   - Snowflake adapter
+# mssql       - SQL Server and Synapse adapter
+# spark       - Apache Spark adapter
+# all         - Install all adapters (excluding mssql)
 ```
 
-Next lets provision Hashiqube with basetools and dbt
-
-## Provision
+## 📥 Provision
 
 <!-- tabs:start -->
-#### **Github Codespaces**
+
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/star3am/hashiqube?quickstart=1)
-```
+
+```bash
 bash docker/docker.sh
 bash database/postgresql.sh
 bash dbt/dbt.sh
 ```
 
-#### **Vagrant**
+### **Vagrant**
 
-```
+```bash
 vagrant up --provision-with basetools,docsify,docker,postgresql,dbt
 ```
 
-#### **Docker Compose**
+### **Docker Compose**
 
-```
+```bash
 docker compose exec hashiqube /bin/bash
 bash hashiqube/basetools.sh
 bash docker/docker.sh
@@ -60,46 +64,87 @@ bash dbt/dbt.sh
 ```
 <!-- tabs:end -->
 
-## DBT Labs Example
-https://github.com/dbt-labs/jaffle_shop#running-this-project
+## 🧪 dbt Labs Example Project
 
-1. Run the Provision step
+The provisioner automatically sets up the [Jaffle Shop](https://github.com/dbt-labs/jaffle_shop) example project from dbt Labs.
 
-2. We have already cloned https://github.com/dbt-labs/jaffle_shop into `/vagrant/dbt/jaffle_shop`
-and we will be following the tutorial at https://github.com/dbt-labs/jaffle_shop#running-this-project
+### Running the Example
 
-3. See the output and now try to follow the tutorial at https://github.com/dbt-labs/jaffle_shop
+1. Run the Provision step above.
 
-4. Enter Hashiqube ssh session using `vagrant ssh` this project can be found in `/vagrant/dbt`
+2. The example project from <https://github.com/dbt-labs/jaffle_shop> is already cloned into `/vagrant/dbt/jaffle_shop`.
 
-## Your DBT project
+3. Enter the HashiQube environment:
 
-1. Enter Hashiqube ssh session using `vagrant ssh`
+   ```bash
+   vagrant ssh
+   ```
 
-2. If you have an existing dbt project under your home directory, you can navigate to your dbt project via the `/osdata` volume which is mapped to your home directory.
+4. Navigate to the example project:
 
-3. Update your `profile.yml` with the correct credentials of your target database. Use `dbt debug` to test connection.
+   ```bash
+   cd /vagrant/dbt/jaffle_shop
+   ```
 
-4. `dbt run` and be awesome.
+5. Explore the project structure and follow the tutorial at <https://github.com/dbt-labs/jaffle_shop#running-this-project>.
 
-<br>
+## 💻 Using Your Own dbt Project
 
-# Supported databases
+1. Enter HashiQube SSH session:
 
-## MSSQL and Synapse
+   ```bash
+   vagrant ssh
+   ```
 
-These adapters require a previous version of dbt (not latest).
+2. If you have an existing dbt project under your home directory, you can access it via the `/osdata` volume, which is mapped to your home directory.
 
-`dbt --version` will output:
+3. Update your `profiles.yml` with the correct credentials for your target database.
+
+4. Test your connection:
+
+   ```bash
+   dbt debug
+   ```
+
+5. Run your dbt project:
+
+   ```bash
+   dbt run
+   ```
+
+## 🖥️ Web UI Access
+
+Once provisioning is complete, you can access the dbt web interface:
+
+- **URL**: <http://localhost:28080/>
+
+<div align="center">
+  <img src="images/dbt_project.png" alt="DBT Project View" width="85%">
+  <p><em>dbt project view showing models and structure</em></p>
+</div>
+
+<div align="center">
+  <img src="images/dbt_database.png" alt="DBT Database View" width="85%">
+  <p><em>dbt database view showing tables and schemas</em></p>
+</div>
+
+<div align="center">
+  <img src="images/dbt_lineage_graph.png" alt="DBT Lineage Graph" width="85%">
+  <p><em>dbt lineage graph showing data transformation dependencies</em></p>
+</div>
+
+## 🔌 Supported Database Adapters
+
+dbt supports multiple database adapters, allowing you to connect to various data warehouses.
+
+### MSSQL and Synapse
+
+These adapters require a specific version of dbt:
 
 ```log
 Core:
   - installed: 1.1.0
   - latest:    1.2.1 - Update available!
-
-  Your version of dbt-core is out of date!
-  You can find instructions for upgrading here:
-  https://docs.getdbt.com/docs/installation
 
 Plugins:
   - postgres:  1.1.0 - Update available!
@@ -107,7 +152,9 @@ Plugins:
   - sqlserver: 1.1.0 - Up to date!
 ```
 
-Example 2 with other adapters:
+### Other Adapters
+
+When using other adapters, you'll see something like:
 
 ```log
 Core:
@@ -122,44 +169,64 @@ Plugins:
   - bigquery:  1.2.0 - Up to date!
 ```
 
-[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+## 💡 Performance Tips
 
-# DBT Jaffle-Shop
-For a practical example we are going to use https://github.com/dbt-labs/jaffle_shop 
+As your dbt project grows, `dbt run` and `dbt test` commands can become time-consuming. Here are some optimization strategies:
 
-Jaffle shop will automatically cloned down, and instantiated. It will seed to the PosgreSQL database which we provisioned with `postgresql` in the command `vagrant up --provision-with basetools,docsify,docker,postgresql,dbt`
+### Using Deferred Execution
 
-# DBT Serv Web UI
-Once the provisioner is done you will be able to access the DBT Web interface at http://localhost:28080/
+Store artifacts to reuse in future runs:
 
-# DBT Project
-![DBT](images/dbt_project.png?raw=true "DBT")
+```bash
+# Run only new or modified models
+dbt run --select [...] --defer --state path/to/artifacts
 
-# DBT Database
-![DBT](images/dbt_database.png?raw=true "DBT")
+# Test only new or modified models
+dbt test --select [...] --defer --state path/to/artifacts
+```
 
-# DBT Lineage Graph
-![DBT](images/dbt_lineage_graph.png?raw=true "DBT")
+This approach:
 
-# Tips
-When the dbt project grows, DBT RUN and DBT TEST become expensive. An alternative to reduce the cost of running the project is to have the content of the folder .dbt/targeton persistent storage to reuse later
+- Executes only what's new or changed in your code
+- Reuses previously compiled artifacts
+- Significantly reduces execution time for large projects
+- Is perfect for CI/CD pipelines and pull request validation
 
-Use DBT RUN and DBT TEST with deferring parameters: $ dbt run --select [...] --defer --state path/to/artifacts and
+## 🔧 Provisioner Scripts
 
-`dbt test --select [...] --defer --state path/to/artifacts`
+The dbt environment is set up using these scripts:
 
-In this way, if we have already run the model, the next RUN and TEST will execute exclusively what is new on the code and reuse what has been run previously.
+### common.sh
 
-This would open space as well to implement cool stuff, such as running the model over a pull request. 
+```bash
+#!/bin/bash
+# Set versions
+DBT_VERSION="1.2.1"
+DBT_SQL_SERVER_VERSION="1.1.0"
+DBT_SQL_SYNAPSE_VERSION="1.1.0"
+DBT_WITH=postgres
 
-## Links 
+# Available adapter options:
+# postgres
+# redshift
+# bigquery
+# snowflake
+# mssql
+# spark
+# all
+```
 
-- https://www.getdbt.com/
+### dbt-global.sh
 
-## DBT Provisioner
+```bash
+#!/bin/bash
+# This script provisions the global dbt environment...
+```
 
-[filename](common.sh ':include :type=code')
+## 🔗 Additional Resources
 
-[filename](dbt-global.sh ':include :type=code')
-
-[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
+- [dbt Official Website](https://www.getdbt.com/)
+- [dbt Documentation](https://docs.getdbt.com/)
+- [dbt Slack Community](https://www.getdbt.com/community/join-the-community/)
+- [dbt GitHub Repository](https://github.com/dbt-labs/dbt-core)
+- [Analytics Engineering Guide](https://www.getdbt.com/analytics-engineering/)
