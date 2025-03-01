@@ -26,7 +26,8 @@ This lab will guide you through integrating three popular database systems with 
 ### Provision MySQL
 
 <!-- tabs:start -->
-#### **GitHub Codespaces**
+
+### **Github Codespace**
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/star3am/hashiqube?quickstart=1)
 
@@ -36,13 +37,13 @@ bash vault/vault.sh
 bash database/mysql.sh
 ```
 
-#### **Vagrant**
+### **Vagrant**
 
 ```bash
 vagrant up --provision-with basetools,docker,docsify,vault,mysql
 ```
 
-#### **Docker Compose**
+### **Docker Compose**
 
 ```bash
 docker compose exec hashiqube /bin/bash

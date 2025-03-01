@@ -30,6 +30,8 @@ In this HashiQube DevOps lab, you will get hands-on experience with HashiCorp Va
 
 <!-- tabs:start -->
 
+### **Github Codespace**
+
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/star3am/hashiqube?quickstart=1)
 
 ```bash

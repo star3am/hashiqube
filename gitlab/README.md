@@ -23,6 +23,8 @@ GitLab provides a complete CI/CD toolchain in a single application. One interfac
 
 <!-- tabs:start -->
 
+### **Github Codespace**
+
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/star3am/hashiqube?quickstart=1)
 
 ```bash

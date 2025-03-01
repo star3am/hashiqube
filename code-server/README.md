@@ -19,6 +19,8 @@ By running VS Code Server in your HashiQube environment, you can enjoy a consist
 
 <!-- tabs:start -->
 
+### **Github Codespace**
+
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/star3am/hashiqube?quickstart=1)
 
 ```bash

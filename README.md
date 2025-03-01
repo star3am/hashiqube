@@ -21,6 +21,44 @@ Please connect with me on [LinkedIn (Riaan Nolan)](https://www.linkedin.com/in/r
 
 ---
 
+## Quik Start
+
+<!-- tabs:start -->
+
+### **Github Codespace**
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/star3am/hashiqube?quickstart=1)
+
+```bash
+bash docker/docker.sh
+bash consul/consul.sh
+bash nomad/nomad.sh
+bash vault/vault.sh
+bash boundary/boundary.sh
+```
+
+### **Vagrant**
+
+```bash
+vagrant up --provision-with basetools,docker,docsify,consul,nomad,vault,boundary
+```
+
+### **Docker Compose**
+
+```bash
+docker compose exec hashiqube /bin/bash
+bash hashiqube/basetools.sh
+bash docker/docker.sh
+bash consul/consul.sh
+bash nomad/nomad.sh
+bash vault/vault.sh
+bash boundary/boundary.sh
+```
+
+<!-- tabs:end -->
+
+---
+
 ## Table of Contents
 
 - [HashiQube - A DevOps Development Lab Using All the HashiCorp Products](#hashiqube---a-devops-development-lab-using-all-the-hashicorp-products)

@@ -48,6 +48,8 @@ Waypoint is a firstclass citizen of Hashicorp and runs flawlessly on both Nomad 
 
 <!-- tabs:start -->
 
+### **Github Codespace**
+
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/star3am/hashiqube?quickstart=1)
 
 ```bash

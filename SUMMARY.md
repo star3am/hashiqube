@@ -1,5 +1,6 @@
 * [Home](README.md)
 
+  * [Security](HASHIQUBE_ISSUES.md)
   * [Ansible](ansible/README.md)
   * [Ansible-tower](ansible-tower/README.md)
   * [Apache-airflow](apache-airflow/README.md)
