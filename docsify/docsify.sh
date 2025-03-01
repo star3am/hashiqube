@@ -26,8 +26,8 @@ cd /vagrant
 #   * [Prometheus-grafana](prometheus-grafana/README.md)
 #   * [Sonarqube](sonarqube/README.md)
 sudo find . -maxdepth 2 -name '*.md' | grep -v SUMMARY | grep -v "\./README" | cut -d "/" -f2 | sort | awk 'BEGIN { print "* [Home](README.md)\n" } { FS=" "} { print "  * ["toupper(substr($0,0,1))tolower(substr($0,2))"]("$1"/README.md)" }' > SUMMARY.md
-sudo pkill node
-sleep 3
+# sudo pkill node
+# sleep 3
 sudo sh -c "echo \"16384\" > /proc/sys/fs/inotify/max_user_watches"
 sudo touch /var/log/docsify.log
 sudo chmod 777 /var/log/docsify.log
