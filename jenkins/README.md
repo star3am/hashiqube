@@ -20,6 +20,8 @@ This lab demonstrates a practical example of a Jenkins pipeline that:
 
 <!-- tabs:start -->
 
+### **Github Codespace**
+
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/star3am/hashiqube?quickstart=1)
 
 ```bash
@@ -290,7 +292,7 @@ When you run the pipeline, your secret will be fetched from HCP Vault Secrets (a
   <p><em>Generating a Terraform Cloud API token</em></p>
 </div>
 
-### Adding Terraform Cloud Token to Jenkins
+### Adding Terraform Cloud Token
 
 Add your Terraform Cloud token as a "Secret Text" credential in Jenkins:
 

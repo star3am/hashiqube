@@ -27,6 +27,8 @@ AWX is the upstream open-source project for Red Hat Ansible Automation Platform,
 
 <!-- tabs:start -->
 
+### **Github Codespace**
+
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/star3am/hashiqube?quickstart=1)
 
 ```bash
@@ -164,7 +166,7 @@ sudo --preserve-env=PATH -u vagrant /home/vagrant/.local/bin/awx job_templates c
   --wait $AWX_COMMON
 ```
 
-## ▶️ Triggering Jobs Programmatically
+## ▶️ Triggering Jobs
 
 ### Using the Callback URL
 

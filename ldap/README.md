@@ -16,6 +16,8 @@ In this HashiQube DevOps lab, you'll set up an LDAP server and integrate it with
 
 <!-- tabs:start -->
 
+### **Github Codespace**
+
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/star3am/hashiqube?quickstart=1)
 
 ```bash

@@ -24,6 +24,8 @@ HashiQube is your complete DevOps playground, designed to help engineers, develo
 
 <!-- tabs:start -->
 
+### **Github Codespace**
+
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/star3am/hashiqube?quickstart=1)
 
 ```bash
