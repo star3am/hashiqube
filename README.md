@@ -674,3 +674,6 @@ Videos were made with [asciinema](https://asciinema.org/)
 ```bash
 asciinema rec -i 1
 asciicast2gif -S 1 -s 2 tmp
+```
+
+[google ads](googleads.html ':include :type=iframe width=100% height=300px')
