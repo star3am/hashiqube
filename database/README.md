@@ -265,35 +265,7 @@ mysql: [Warning] Using a password on the command line interface can be insecure.
 
 The script below automates the setup of MySQL in your HashiQube environment:
 
-```bash
-#!/bin/bash
-
-# Print the commands that are run
-set -x
-
-# Stop execution if something fails
-set -e
-
-# This script provisions MySQL
-
-if [[ $(docker ps | grep mysql) ]]; then
-  echo "MySQL already running..."
-  if [[ $(docker ps | grep -v mysql) ]]; then
-    echo "MySQL not running, starting it up..."
-    docker start mysql
-  fi
-else
-  # You can also set up docker-compose without passwords as well if thats a step too far
-  echo "Starting MySQL..."
-  docker run --name mysql \
-    -p 3306:3306 \
-    -e MYSQL_ROOT_PASSWORD=password \
-    -e MYSQL_DATABASE=db \
-    -d mysql:5.7 \
-    --character-set-server=utf8mb4 \
-    --collation-server=utf8mb4_unicode_ci
-fi
-```
+[filename](mysql.sh ':include :type=code')
 
 </details>
 
@@ -425,33 +397,7 @@ bash database/mssql.sh
 
 The script below automates the setup of Microsoft SQL Server in your HashiQube environment:
 
-```bash
-#!/bin/bash
-
-# Print the commands that are run
-set -x
-
-# Stop execution if something fails
-set -e
-
-# This script provisions Microsoft SQL Server
-cd /home/vagrant
-
-if [[ $(docker ps | grep mssql) ]]; then
-  echo "Microsoft SQL Server already running..."
-  if [[ $(docker ps | grep -v mssql) ]]; then
-    echo "Microsoft SQL Server not running, starting it up..."
-    docker start mssql
-  fi
-else
-  echo "Starting Microsoft SQL Server..."
-  docker run --name mssql \
-    -e "ACCEPT_EULA=Y" \
-    -e "SA_PASSWORD=P@ssw0rd" \
-    -p 1433:1433 \
-    -d mcr.microsoft.com/mssql/server:2019-latest
-fi
-```
+[filename](mssql.sh ':include :type=code')
 
 </details>
 
@@ -497,31 +443,7 @@ bash database/postgresql.sh
 
 The script below automates the setup of PostgreSQL in your HashiQube environment:
 
-```bash
-#!/bin/bash
-
-# Print the commands that are run
-set -x
-
-# Stop execution if something fails
-set -e
-
-# This script provisions PostgreSQL
-cd /home/vagrant
-
-# Check if we already have postgres
-if [[ $(docker ps | grep postgres) ]]; then
-  echo "PostgreSQL already running..."
-else
-  echo "Starting PostgreSQL..."
-  docker run --name postgres \
-    -e POSTGRES_PASSWORD=hashiqube \
-    -e POSTGRES_USER=hashiqube \
-    -e POSTGRES_DB=hashiqube \
-    -p 5432:5432 \
-    -d postgres:latest
-fi
-```
+[filename](postgresql.sh ':include :type=code')
 
 </details>
 
@@ -554,11 +476,5 @@ fi
 - [HashiCorp Vault Database Secrets Engine](https://www.vaultproject.io/docs/secrets/databases)
 - [Dynamic Secrets: Database Credentials Rotation](https://learn.hashicorp.com/tutorials/vault/database-credentials-rotation)
 - [Database Root Credential Rotation](https://learn.hashicorp.com/tutorials/vault/database-root-rotation)
-
-[filename](mssql.sh ':include :type=code')
-
-[filename](mysql.sh ':include :type=code')
-
-[filename](postgresql.sh ':include :type=code')
 
 [google ads](../googleads.html ':include :type=iframe width=100% height=300px')

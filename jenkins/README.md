@@ -517,68 +517,7 @@ The pipeline demonstrates several key integrations:
 
 The Jenkins environment is set up using this script:
 
-```bash
-#!/bin/bash
-
-# Print the commands that are run
-set -x
-
-# Stop execution if something fails
-set -e
-
-# This script provisions Jenkins
-
-# Check if Hashicorp Vault is running
-echo -e '\e[38;5;198m'"++++ "
-echo -e '\e[38;5;198m'"++++ Check if Hashicorp Vault is running"
-echo -e '\e[38;5;198m'"++++ "
-if pgrep -x "vault" >/dev/null
-then
-echo "Vault is running"
-else
-echo -e '\e[38;5;198m'"++++ Ensure Vault is running.."
-sudo bash /vagrant/vault/vault.sh
-fi
-
-# Check if jenkins exists
-echo -e '\e[38;5;198m'"++++ "
-echo -e '\e[38;5;198m'"++++ Check if jenkins is already provisioned"
-echo -e '\e[38;5;198m'"++++ "
-if [[ $(docker ps -a | grep jenkins) ]]; then
-  echo "Jenkins already provisioned, skipping.."
-else
-  echo -e '\e[38;5;198m'"++++ "
-  echo -e '\e[38;5;198m'"++++ Jenkins is being provisioned.."
-  echo -e '\e[38;5;198m'"++++ "
-  cd /vagrant/jenkins
-  # Start Jenkins container, with port
-  JENKINS_PORT=8088
-  echo -e '\e[38;5;198m'"++++ "
-  echo -e '\e[38;5;198m'"++++ Starting jenkins on port $JENKINS_PORT"
-  echo -e '\e[38;5;198m'"++++ "
-  docker run --name jenkins -p $JENKINS_PORT:8080 -d jenkins/jenkins:lts
-  
-  # Wait for Jenkins to start
-  echo -e '\e[38;5;198m'"++++ "
-  echo -e '\e[38;5;198m'"++++ Wait for Jenkins to start"
-  echo -e '\e[38;5;198m'"++++ "
-  sleep 15
-  
-  # Get the initial admin password
-  echo -e '\e[38;5;198m'"++++ "
-  echo -e '\e[38;5;198m'"++++ Get the initial admin password"
-  echo -e '\e[38;5;198m'"++++ "
-  JENKINS_ADMIN_PASSWORD=$(docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword)
-  
-  echo -e '\e[38;5;198m'"++++ "
-  echo -e '\e[38;5;198m'"++++ Jenkins is running at http://localhost:$JENKINS_PORT/"
-  echo -e '\e[38;5;198m'"++++ Login with $JENKINS_ADMIN_PASSWORD"
-  echo -e '\e[38;5;198m'"++++ "
-  echo -e '\e[38;5;198m'"++++ "
-  echo -e '\e[38;5;198m'"++++ Install the Jenkins HashiCorp Vault Plugin"
-  echo -e '\e[38;5;198m'"++++ "
-fi
-```
+[filename](jenkins.sh ':include :type=code')
 
 ## 🔗 Additional Resources
 
@@ -588,7 +527,5 @@ fi
 - [HashiCorp Vault Documentation](https://www.vaultproject.io/docs)
 - [HCP Vault Secrets Documentation](https://developer.hashicorp.com/hcp/docs/vault-secrets)
 - [Terraform Cloud Documentation](https://developer.hashicorp.com/terraform/cloud-docs)
-
-[filename](jenkins.sh ':include :type=code')
 
 [google ads](../googleads.html ':include :type=iframe width=100% height=300px')

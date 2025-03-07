@@ -200,30 +200,11 @@ The dbt environment is set up using these scripts:
 
 ### common.sh
 
-```bash
-#!/bin/bash
-# Set versions
-DBT_VERSION="1.2.1"
-DBT_SQL_SERVER_VERSION="1.1.0"
-DBT_SQL_SYNAPSE_VERSION="1.1.0"
-DBT_WITH=postgres
-
-# Available adapter options:
-# postgres
-# redshift
-# bigquery
-# snowflake
-# mssql
-# spark
-# all
-```
+[filename](common.sh ':include :type=code')
 
 ### dbt-global.sh
 
-```bash
-#!/bin/bash
-# This script provisions the global dbt environment...
-```
+[filename](dbt-global.sh ':include :type=code')
 
 ## 🔗 Additional Resources
 
@@ -232,9 +213,5 @@ DBT_WITH=postgres
 - [dbt Slack Community](https://www.getdbt.com/community/join-the-community/)
 - [dbt GitHub Repository](https://github.com/dbt-labs/dbt-core)
 - [Analytics Engineering Guide](https://www.getdbt.com/analytics-engineering/)
-
-[filename](dbt-global.sh ':include :type=code')
-
-[filename](common.sh ':include :type=code')
 
 [google ads](../googleads.html ':include :type=iframe width=100% height=300px')

@@ -64,42 +64,7 @@ bash argocd/argocd.sh
 
 The following script automates the Argo CD deployment on Minikube:
 
-```bash
-#!/bin/bash
-
-# Print the commands that are run
-set -x
-
-# Stop execution if something fails
-set -e
-
-# Add Helm Repos
-echo "+++ Adding helm repos +++"
-helm repo add argo https://argoproj.github.io/argo-helm && helm repo update
-
-# Install ArgoCD
-echo "+++ Install argocd +++"
-minikube kubectl -- create namespace argocd
-helm install argocd argo/argo-cd \
-   --set server.service.type=NodePort \
-   --set server.service.nodePortHttp=30080 \
-   --set server.extraArgs[0]="--insecure" \
-   --namespace argocd
-
-# Download ArgoCD CLI
-echo "+++ Download ArgoCD CLI +++"
-sudo curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
-sudo chmod +x /usr/local/bin/argocd
-
-# Get initial admin password
-echo "+++ Get initial admin password +++"
-sleep 15
-echo "ArgoCD admin password: "
-minikube kubectl -- get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.password}" | base64 -d
-
-echo "+++ ArgoCD URL: http://localhost:30080 +++"
-echo "+++ Username: admin, Password: Use the password from above +++"
-```
+[filename](argocd.sh ':include :type=code')
 
 ## 🔗 Additional Resources
 
@@ -131,7 +96,5 @@ minikube kubectl -- get secret argocd-initial-admin-secret -n argocd -o jsonpath
 - **Webhook integrations** (GitHub, BitBucket, GitLab)
 - **PreSync, Sync, PostSync hooks** for complex application rollouts
 - **Prometheus metrics** for monitoring
-
-[filename](argocd.sh ':include :type=code')
 
 [google ads](../googleads.html ':include :type=iframe width=100% height=300px')

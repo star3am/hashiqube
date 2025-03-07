@@ -94,56 +94,7 @@ apt-utils ntp update-motd toilet figlet nano iputils-ping dnsutils iptables teln
 
 The script below automates the setup of basic tools in your HashiQube environment:
 
-```bash
-#!/bin/bash
-
-# Print the commands that are run
-set -x
-
-# Stop execution if something fails
-set -e
-
-# This script provisions base tools we will need
-
-# Update apt
-if [ -x "$(command -v apt)" ]; then
-  # We want to be able to install add-apt-repository
-  apt-get update && apt-get install -y sudo software-properties-common ntp update-motd toilet figlet nano
-  # Add Latest Python PPA
-  sudo apt-add-repository -y ppa:deadsnakes/ppa
-  # add this for apt install debian-goodies
-  sudo apt-add-repository -y ppa:apt-fast/stable
-  sudo apt-get update
-  # Install some apt packages needed
-  sudo apt-get install -y \
-    swapspace rkhunter jq curl unzip software-properties-common bzip2 git make python3.9 python3-pip python3-dev python3-venv python3-virtualenv golang-go apt-utils ntp update-motd toilet figlet nano iputils-ping dnsutils iptables telnet
-fi
-
-sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 1
-sudo update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 1
-
-# Set Message Of The Day (MOTD)
-motd()
-{
-  # Set Message of the day
-  sudo rm -f /etc/update-motd.d/10-help-text
-  sudo rm -f /etc/update-motd.d/51-cloudguest
-  sudo rm -f /etc/update-motd.d/50-landscape-sysinfo
-  sudo rm -f /etc/update-motd.d/90-updates-available
-  sudo rm -f /etc/update-motd.d/91-release-upgrade
-  sudo rm -f /etc/update-motd.d/94-*
-  sudo rm -f /etc/update-motd.d/97-*
-  sudo rm -f /etc/update-motd.d/00-header
-  sudo sh -c 'echo "#!/bin/sh" > /etc/update-motd.d/00-header'
-  sudo sh -c 'figlet -f slant "Hashiqube">> /etc/update-motd.d/00-header'
-  sudo sh -c 'echo "\nHashiqube - Vagrant lab environment for learning Hashicorp products and playing with integrations\n" >> /etc/update-motd.d/00-header'
-  sudo sh -c 'toilet -f term --filter metal "Hashiqube is for learning Hashicorp products and playing with integrations" >> /etc/update-motd.d/00-header'
-  sudo sh -c 'echo "find out more at https://hashiqube.com\n" >> /etc/update-motd.d/00-header'
-  sudo sh -c 'echo "Please report any issues to https://github.com/star3am/hashiqube\n" >> /etc/update-motd.d/00-header'
-  sudo chmod +x /etc/update-motd.d/00-header
-}
-motd
-```
+[filename](basetool.sh ':include :type=code')
 
 ## 🌐 HashiQube.com Deployment
 
@@ -226,7 +177,5 @@ Please connect with the creator:
 
 - [LinkedIn (Riaan Nolan)](https://www.linkedin.com/in/riaannolan/)
 - [Credly Profile](https://www.credly.com/users/riaan-nolan.e657145c)
-
-[filename](basetools.sh ':include :type=code')
 
 [google ads](../googleads.html ':include :type=iframe width=100% height=300px')

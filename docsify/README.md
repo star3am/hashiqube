@@ -108,24 +108,7 @@ Want to create your own documentation with Docsify? Here's a simple guide:
 
 The script below automates the setup of Docsify in your HashiQube environment:
 
-```bash
-#!/bin/bash
-
-# Print the commands that are run
-set -x
-
-# Stop execution if something fails
-set -e
-
-# This script provisions Docsify
-if ! [ -x "$(command -v docsify)" ]; then
-  echo 'Docsify is not installed, installing it ...' >&2
-  curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-  sudo apt-get install -y nodejs && npm i docsify-cli -g && mkdir -p /vagrant/docs && cp -r /vagrant/* /vagrant/docs/ && cd /vagrant && docsify serve docs -p 3333 > /vagrant/docsify.log 2>&1 & echo 'Docsify installed'
-else
-  echo "Docsify is already installed."
-fi
-```
+[filename](docsify.sh ':include :type=code')
 
 ## 🔗 Additional Resources
 
@@ -134,7 +117,5 @@ fi
 - [Docsify Awesome List](https://github.com/docsifyjs/awesome-docsify)
 - [Markdown Guide](https://www.markdownguide.org/)
 - [GitHub Pages Documentation](https://docs.github.com/en/pages)
-
-[filename](docsify.sh ':include :type=code')
 
 [google ads](../googleads.html ':include :type=iframe width=100% height=300px')
