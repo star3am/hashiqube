@@ -134,3 +134,7 @@ fi
 - [Docsify Awesome List](https://github.com/docsifyjs/awesome-docsify)
 - [Markdown Guide](https://www.markdownguide.org/)
 - [GitHub Pages Documentation](https://docs.github.com/en/pages)
+
+[filename](docsify.sh ':include :type=code')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

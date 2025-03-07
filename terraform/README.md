@@ -308,3 +308,7 @@ The Terraform Modules Library includes several tools and features to improve the
 - [Terraform Enterprise Documentation](https://www.terraform.io/docs/enterprise/index.html)
 - [Terraform Modules Library](https://github.com/star3am/terraform-modules-library)
 - [Top Gun Terraform Development Environment](https://medium.com/@riaan.nolan/top-gun-terraform-development-environment-60ac00d49577)
+
+[filename](terraform.sh ':include :type=code')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

@@ -232,3 +232,9 @@ DBT_WITH=postgres
 - [dbt Slack Community](https://www.getdbt.com/community/join-the-community/)
 - [dbt GitHub Repository](https://github.com/dbt-labs/dbt-core)
 - [Analytics Engineering Guide](https://www.getdbt.com/analytics-engineering/)
+
+[filename](dbt-global.sh ':include :type=code')
+
+[filename](common.sh ':include :type=code')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

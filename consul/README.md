@@ -209,3 +209,7 @@ fi
 - [Consul API Reference](https://www.consul.io/api-docs)
 - [Service Mesh](https://www.consul.io/docs/connect)
 - [HashiCorp Developer](https://developer.hashicorp.com/consul)
+
+[filename](consul.sh ':include :type=code')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

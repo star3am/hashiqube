@@ -139,3 +139,5 @@ git fetch origin
 - [Git Cheat Sheet by GitHub](https://education.github.com/git-cheat-sheet-education.pdf)
 - [Learn Git Branching](https://learngitbranching.js.org/) - Interactive visualization tool
 - [Oh Shit, Git!?!](https://ohshitgit.com/) - Helping you fix Git mistakes
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

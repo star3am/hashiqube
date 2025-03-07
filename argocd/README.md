@@ -131,3 +131,7 @@ minikube kubectl -- get secret argocd-initial-admin-secret -n argocd -o jsonpath
 - **Webhook integrations** (GitHub, BitBucket, GitLab)
 - **PreSync, Sync, PostSync hooks** for complex application rollouts
 - **Prometheus metrics** for monitoring
+
+[filename](argocd.sh ':include :type=code')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

@@ -76,3 +76,7 @@ The `portainer.sh` script handles the installation and configuration of Portaine
 - [Portainer Documentation](https://docs.portainer.io/)
 - [Portainer Community](https://community.portainer.io/)
 - [Portainer GitHub Repository](https://github.com/portainer/portainer)
+
+[filename](portainer.sh ':include :type=code')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

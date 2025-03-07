@@ -414,3 +414,9 @@ output "s3_bucket_name" {
 - [Terraform Documentation](https://www.terraform.io)
 - [LocalStack GitHub Repository](https://github.com/localstack/localstack)
 - [AWS CLI Local](https://github.com/localstack/awscli-local)
+
+[filename](localstack.sh ':include :type=code')
+
+[filename](provider.tf ':include :type=code')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

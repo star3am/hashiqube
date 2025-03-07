@@ -180,3 +180,7 @@ For local development, use Docker and Docker Compose via the provided `run.sh` s
 - [Pre-Commit Website](https://pre-commit.com/)
 - [Pre-Commit Terraform Hooks](https://github.com/antonbabenko/pre-commit-terraform)
 - [Module Documentation](/tools-container/docs/#providers)
+
+[filename](tools-container.sh ':include :type=code')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

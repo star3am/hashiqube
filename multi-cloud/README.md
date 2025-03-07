@@ -359,3 +359,5 @@ I have worked for Multi-National companies in Portugal, Germany, China, South Af
 You are welcome to connect with me on [LinkedIn](https://www.linkedin.com/in/riaannolan/) and check out my [Credly profile](https://www.credly.com/users/riaan-nolan.e657145c).
 
 ![My HashiCorp Badges](images/hashicorp-badges.png?raw=true "My HashiCorp Badges")
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

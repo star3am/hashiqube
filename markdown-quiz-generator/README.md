@@ -115,3 +115,5 @@ Contributions are welcome! If you have ideas to improve the Markdown Quiz Genera
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](https://github.com/osandadeshan/markdown-quiz-generator/blob/master/LICENSE) file for details.
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

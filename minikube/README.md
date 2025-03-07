@@ -190,3 +190,7 @@ Alternatively, SSH into the VM with `vagrant ssh` and then use `sudo kubectl get
 3. **Experiment with Services**: Try different service types (ClusterIP, NodePort, LoadBalancer) to understand networking
 4. **Learn kubectl**: Become familiar with common kubectl commands for managing your cluster
 5. **Use Namespaces**: Organize your resources into namespaces for better management
+
+[filename](minikube.sh ':include :type=code')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

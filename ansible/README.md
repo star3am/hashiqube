@@ -412,3 +412,5 @@ Solution: Install the SSHPass application as described in the setup instructions
 - [Practical Ansible Testing with Molecule](https://www.ansible.com/hubfs//AnsibleFest%20ATL%20Slide%20Decks/Practical%20Ansible%20Testing%20with%20Molecule.pdf)
 - [Jeff Geerling: Testing Ansible Roles with Molecule](https://www.jeffgeerling.com/blog/2018/testing-your-ansible-roles-molecule)
 - [Ansible Official Website](https://www.ansible.com/)
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

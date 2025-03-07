@@ -130,3 +130,7 @@ After provisioning, you can access the web interfaces at:
 - [Cerebro GitHub Repository](https://github.com/lmenezes/cerebro)
 - [Elastic Community](https://discuss.elastic.co/)
 - [Elasticsearch: The Definitive Guide](https://www.elastic.co/guide/en/elasticsearch/guide/current/index.html)
+
+[filename](elasticsearch-kibana-cerebro.sh ':include :type=code')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

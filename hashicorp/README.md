@@ -133,3 +133,5 @@ The session demonstrates how to build Hyperscale applications from the ground up
 ### Related Resources
 
 - [GitHub Repository: hashiapp](https://github.com/kelseyhightower/hashiapp) - Example 12-Factor application using the HashiStack
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

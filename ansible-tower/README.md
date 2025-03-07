@@ -281,4 +281,6 @@ resource "null_resource" "awx_cli" {
 
 [filename](ansible-tower.sh ':include :type=code')
 
+[filename](main.tf ':include :type=code')
+
 [google ads](../googleads.html ':include :type=iframe width=100% height=300px')

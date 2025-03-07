@@ -359,3 +359,7 @@ echo "Login with admin / password"
 - [Boundary GitHub Repository](https://github.com/hashicorp/boundary)
 - [Boundary Tutorials](https://learn.hashicorp.com/boundary)
 - [Boundary CLI Reference](https://www.boundaryproject.io/docs/api-clients/cli)
+
+[filename](boundary.sh ':include :type=code')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

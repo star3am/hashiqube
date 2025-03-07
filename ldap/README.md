@@ -489,3 +489,7 @@ echo "Password: GoodNewsEveryone"
 - **Single Sign-On (SSO)**: Enabling users to access multiple applications with one set of credentials
 - **Authorization**: Determining what resources a user can access
 - **Directory Services**: Storing and organizing information about resources on a network
+
+[filename](ldap.sh ':include :type=code')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

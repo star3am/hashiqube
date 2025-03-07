@@ -218,3 +218,7 @@ The `waypoint.sh` script handles the setup and configuration of Waypoint:
 ```bash
 # Script content available in the original file: waypoint.sh
 ```
+
+[filename](waypoint.sh ':include :type=code')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

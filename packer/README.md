@@ -87,3 +87,7 @@ Packer integrates with several other HashiCorp and third-party tools:
 - [Packer Documentation](https://www.packer.io/docs)
 - [HCP Packer](https://cloud.hashicorp.com/products/packer)
 - [Learn Packer](https://learn.hashicorp.com/packer)
+
+[filename](packer.sh ':include :type=code')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

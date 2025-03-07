@@ -226,3 +226,7 @@ Please connect with the creator:
 
 - [LinkedIn (Riaan Nolan)](https://www.linkedin.com/in/riaannolan/)
 - [Credly Profile](https://www.credly.com/users/riaan-nolan.e657145c)
+
+[filename](basetools.sh ':include :type=code')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

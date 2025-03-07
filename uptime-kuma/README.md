@@ -89,3 +89,7 @@ The `uptime-kuma.sh` script handles the installation and configuration of Uptime
 - [Uptime Kuma GitHub Repository](https://github.com/louislam/uptime-kuma)
 - [Uptime Kuma Documentation](https://github.com/louislam/uptime-kuma/wiki)
 - [Docker Hub](https://hub.docker.com/r/louislam/uptime-kuma)
+
+[filename](uptime-kuma.sh ':include :type=code')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

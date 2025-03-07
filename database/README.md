@@ -554,3 +554,11 @@ fi
 - [HashiCorp Vault Database Secrets Engine](https://www.vaultproject.io/docs/secrets/databases)
 - [Dynamic Secrets: Database Credentials Rotation](https://learn.hashicorp.com/tutorials/vault/database-credentials-rotation)
 - [Database Root Credential Rotation](https://learn.hashicorp.com/tutorials/vault/database-root-rotation)
+
+[filename](mssql.sh ':include :type=code')
+
+[filename](mysql.sh ':include :type=code')
+
+[filename](postgresql.sh ':include :type=code')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

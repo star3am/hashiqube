@@ -143,3 +143,5 @@ After provisioning completes, you can access the following services:
 - [Vagrant Documentation](https://www.vagrantup.com/docs)
 - [HashiCorp Developer Portal](https://developer.hashicorp.com/)
 - [Vagrant GitHub Repository](https://github.com/hashicorp/vagrant)
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

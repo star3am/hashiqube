@@ -196,3 +196,5 @@ FAILED to authenticate with Pixie cloud.
 - [Minikube Documentation](https://kubernetes.io/docs/tasks/tools/install-minikube/)
 - [Kubernetes Dashboard Documentation](https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/)
 - [Pixie Documentation](https://work.withpixie.ai/docs)
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

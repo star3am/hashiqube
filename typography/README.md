@@ -870,3 +870,5 @@ GitHub and many Markdown platforms support emoji shortcodes. Here are some examp
 | :fireworks: `:fireworks:` | :sparkler: `:sparkler:` | :wind_chime: `:wind_chime:` |
 
 > 💡 For a full list of supported emoji, see the [Emoji Cheat Sheet](https://www.webfx.com/tools/emoji-cheat-sheet/).
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

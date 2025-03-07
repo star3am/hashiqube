@@ -176,3 +176,7 @@ Check the complete Vault provisioner script:
 ```bash
 # Script content available in the original file: vault.sh
 ```
+
+[filename](vault.sh ':include :type=code')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

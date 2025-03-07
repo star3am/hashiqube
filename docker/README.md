@@ -281,3 +281,7 @@ fi
 - [Docker Hub](https://hub.docker.com/) - Repository for Docker images
 - [Docker Best Practices](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
 - [Docker Cheat Sheet](https://www.docker.com/sites/default/files/d8/2019-09/docker-cheat-sheet.pdf)
+
+[filename](docker.sh ':include :type=code')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

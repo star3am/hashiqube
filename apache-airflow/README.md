@@ -172,3 +172,7 @@ default_args = {
 - [Adding Connections and Variables](https://airflow.apache.org/docs/helm-chart/stable/adding-connections-and-variables.html)
 - [Airflow 1.10.2 Documentation (PDF)](https://airflow.readthedocs.io/_/downloads/en/1.10.2/pdf/)
 - [Helm Chart Parameters Reference](https://airflow.apache.org/docs/helm-chart/stable/parameters-ref.html)
+
+[filename](apache-airflow.sh ':include :type=code')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

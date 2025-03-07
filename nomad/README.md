@@ -183,3 +183,7 @@ When you register a service in Consul, simply add a tag that announces the paths
 - [Traefik Proxy and Nomad Integration](https://traefik.io/blog/traefik-proxy-fully-integrates-with-hashicorp-nomad/)
 - [Traefik Nomad Provider Documentation](https://doc.traefik.io/traefik/v2.8/providers/nomad/)
 - [Fabio GitHub Repository](https://github.com/fabiolb/fabio)
+
+[filename](nomad.sh ':include :type=code')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

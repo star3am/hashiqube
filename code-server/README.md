@@ -92,3 +92,5 @@ These specialized instances will allow you to quickly spin up purpose-built deve
 - [VS Code Documentation](https://code.visualstudio.com/docs)
 - [code-server GitHub Repository](https://github.com/coder/code-server)
 - [VS Code Extensions Marketplace](https://marketplace.visualstudio.com/vscode)
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

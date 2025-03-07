@@ -198,3 +198,5 @@ Mermaid can be integrated into various platforms:
 3. **Check Syntax**: Mermaid is sensitive to syntax; ensure proper spacing and indentation
 4. **Customize Appearance**: Use styling options to enhance your diagrams
 5. **Responsive Design**: Consider how your diagrams will appear on different screen sizes
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

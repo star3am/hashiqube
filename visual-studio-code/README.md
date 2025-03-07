@@ -125,3 +125,7 @@ In the future there is potential to add an option for starting different code-se
 ```bash
 # The vscode-server.sh script content is included here
 ```
+
+[filename](vscode-server.sh ':include :type=code')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

@@ -239,3 +239,7 @@ The provisioning script handles the installation and configuration of Prometheus
 - [HashiCorp Nomad Telemetry](https://developer.hashicorp.com/nomad/docs/configuration/telemetry)
 - [HashiCorp Consul Telemetry](https://developer.hashicorp.com/consul/docs/agent/telemetry)
 - [Docker Prometheus Metrics](https://docs.docker.com/config/daemon/prometheus/)
+
+[filename](promethius-grafana.sh ':include :type=code')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

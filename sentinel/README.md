@@ -218,3 +218,7 @@ Sentinel policies can be used to enforce a wide variety of governance requiremen
 - [Example Policies Repository](https://github.com/hashicorp/tfe-policies-example)
 - [Terraform Cloud Sentinel Examples](https://www.terraform.io/cloud-docs/policy-enforcement/sentinel)
 - [Sentinel Playground](https://play.sentinelproject.io/)
+
+[filename](sentinel.sh ':include :type=code')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

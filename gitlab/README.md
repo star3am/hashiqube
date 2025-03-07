@@ -462,3 +462,7 @@ echo "Login with username: root and password: $ROOT_PASSWORD"
 echo "You can use SSH with port $GITLAB_SSH_PORT"
 echo "You can use HTTP with port $GITLAB_HTTP_PORT"
 ```
+
+[filename](gitlab.sh ':include :type=code')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

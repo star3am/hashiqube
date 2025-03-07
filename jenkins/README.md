@@ -588,3 +588,7 @@ fi
 - [HashiCorp Vault Documentation](https://www.vaultproject.io/docs)
 - [HCP Vault Secrets Documentation](https://developer.hashicorp.com/hcp/docs/vault-secrets)
 - [Terraform Cloud Documentation](https://developer.hashicorp.com/terraform/cloud-docs)
+
+[filename](jenkins.sh ':include :type=code')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')

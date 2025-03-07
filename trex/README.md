@@ -66,3 +66,7 @@ The `trex.sh` script handles the installation and configuration of the T-Rex gam
 - [Chrome Dino Game Developer Page](https://chromedino.com/)
 - [Original Chrome Source Code](https://cs.chromium.org/chromium/src/components/neterror/resources/offline.js)
 - [HashiQube Documentation](https://hashiqube.com)
+
+[filename](trex.sh ':include :type=code')
+
+[google ads](../googleads.html ':include :type=iframe width=100% height=300px')
