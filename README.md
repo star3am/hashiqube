@@ -657,7 +657,6 @@ A very special mention to HashiQube's contributors. Thank you all for your help,
 - [Lane Birmingham](https://www.linkedin.com/in/lane-birmingham-93261b151/)
 - [Devang Dhameliya](https://www.linkedin.com/in/devangdhameliya/)
 - [Rajesh Cholleti](https://www.linkedin.com/in/rajesh-cholleti-2b25a1116/)
-- [Nel-Marie Nolan](https://www.linkedin.com/in/nelmarie/)
 - [Adriana Villela](https://www.linkedin.com/in/adrianavillela/)
 - [Charle Van Der Walt](https://linkedin.com/in/charle-van-der-walt-b9ba2628/)
 - [JJ Badenhorst](https://github.com/badj)
