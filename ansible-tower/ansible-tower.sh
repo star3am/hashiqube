@@ -310,36 +310,36 @@ echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Configure SSH to allow login with password"
 echo -e '\e[38;5;198m'"++++ "
 sudo sed -i "s/PasswordAuthentication no/PasswordAuthentication yes/g" /etc/ssh/sshd_config
-sudo systemctl reload ssh
+sudo systemctl restart ssh
 
 # https://docs.ansible.com/ansible-tower/latest/html/towercli/reference.html#awx-hosts-create
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Add VM host to Ansible Tower inventory"
 echo -e '\e[38;5;198m'"++++ "
-sudo --preserve-env=PATH -u vagrant /home/vagrant/.local/bin/awx hosts create --id 10.9.99.10 --description $(hostname) --inventory 1 --enabled true --name 10.9.99.10 $AWX_COMMON
+sudo --preserve-env=PATH -u vagrant /home/vagrant/.local/bin/awx hosts create --id 172.18.0.1 --description $(hostname) --inventory 1 --enabled true --name 172.18.0.1 $AWX_COMMON
 
 # https://docs.ansible.com/ansible-tower/latest/html/towercli/reference.html#awx-job-templates-launch
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Run Ansible Tower job_template"
 echo -e '\e[38;5;198m'"++++ sudo --preserve-env=PATH -u vagrant /home/vagrant/.local/bin/awx job_templates launch ansible-role-example-role \
-  --limit 10.9.99.10 \
+  --limit 172.18.0.1 \
   --monitor \
   --filter status $AWX_COMMON \
   --job_tags \"day0,day1,always\" \
-  --extra_vars \"{\"vm_name\":\"$(hostname)\", \"vm_ip\":\"10.9.99.10\"}\""
+  --extra_vars \"{\"vm_name\":\"$(hostname)\", \"vm_ip\":\"172.18.0.1\"}\""
 echo -e '\e[38;5;198m'"++++ "
 sudo --preserve-env=PATH -u vagrant /home/vagrant/.local/bin/awx job_templates launch ansible-role-example-role \
-  --limit 10.9.99.10 \
+  --limit 172.18.0.1 \
   --monitor \
   --filter status $AWX_COMMON \
   --job_tags "day0,day1,always" \
-  --extra_vars "{\"vm_name\":\"$(hostname)\", \"vm_ip\":\"10.9.99.10\"}"
+  --extra_vars "{\"vm_name\":\"$(hostname)\", \"vm_ip\":\"172.18.0.1\"}"
 
 # https://docs.ansible.com/ansible-tower/latest/html/towercli/reference.html#awx-hosts-delete
 # echo -e '\e[38;5;198m'"++++ "
 # echo -e '\e[38;5;198m'"++++ Remove VM host from Ansible Tower inventory"
 # echo -e '\e[38;5;198m'"++++ "
-# sudo --preserve-env=PATH -u vagrant /home/vagrant/.local/bin/awx hosts delete --id "$(sudo --preserve-env=PATH -u vagrant /home/vagrant/.local/bin/awx hosts list $AWX_COMMON | grep "10.9.99.10" | cut -d ' ' -f1)" $AWX_COMMON
+# sudo --preserve-env=PATH -u vagrant /home/vagrant/.local/bin/awx hosts delete --id "$(sudo --preserve-env=PATH -u vagrant /home/vagrant/.local/bin/awx hosts list $AWX_COMMON | grep "172.18.0.1" | cut -d ' ' -f1)" $AWX_COMMON
 
 # echo -e '\e[38;5;198m'"++++ "
 # echo -e '\e[38;5;198m'"++++ DEBUG with kubectl logs -f deployments/awx-operator-controller-manager -c awx-manager -n awx"
