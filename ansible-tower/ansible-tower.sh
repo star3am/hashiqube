@@ -28,16 +28,6 @@ sudo --preserve-env=PATH -u vagrant git clone https://github.com/ansible/awx.git
 
 cd /opt/awx
 
-if [[ $CODESPACES == true ]]; then
-  echo -e '\e[38;5;198m'"++++ "
-  echo -e '\e[38;5;198m'"++++ Adding Github Codespace Name in CSRF_TRUSTED_ORIGINS in /opt/awx/awx/settings/local_overrides.py"
-  echo -e '\e[38;5;198m'"++++ "
-  cat <<EOF | sudo tee awx/settings/local_overrides.py
-CSRF_TRUSTED_ORIGINS = ['https://$CODESPACE_NAME-8043.app.github.dev']
-EOF
-  cat awx/settings/local_overrides.py
-fi
-
 # https://github.com/ansible/awx/blob/17.0.1/INSTALL.md#prerequisites
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Install Ansible and AWX dependencies with pip"
@@ -133,6 +123,11 @@ cat <<EOF | sudo --preserve-env=PATH -u vagrant tee -a ./awx-demo.yaml
   - setting: CSRF_TRUSTED_ORIGINS
     value:
       - https://$CODESPACE_NAME-8043.app.github.dev
+      - $CODESPACE_NAME-8043.app.github.dev
+  - setting: SECURE_PROXY_SSL_HEADER
+    value:
+      - HTTP_X_FORWARDED_PROTO
+      - https
 EOF
 fi
 
