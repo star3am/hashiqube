@@ -325,14 +325,13 @@ echo -e '\e[38;5;198m'"++++ sudo --preserve-env=PATH -u vagrant /home/vagrant/.l
   --limit 172.18.0.1 \
   --monitor \
   --filter status $AWX_COMMON \
-  --job_tags \"day0,day1,always\" \
   --extra_vars \"{\"vm_name\":\"$(hostname)\", \"vm_ip\":\"172.18.0.1\"}\""
 echo -e '\e[38;5;198m'"++++ "
+# Specify job tags to target specific role task e.g --job_tags "day0,day1,always"
 sudo --preserve-env=PATH -u vagrant /home/vagrant/.local/bin/awx job_templates launch ansible-role-example-role \
   --limit 172.18.0.1 \
   --monitor \
   --filter status $AWX_COMMON \
-  --job_tags "day0,day1,always" \
   --extra_vars "{\"vm_name\":\"$(hostname)\", \"vm_ip\":\"172.18.0.1\"}"
 
 # https://docs.ansible.com/ansible-tower/latest/html/towercli/reference.html#awx-hosts-delete
