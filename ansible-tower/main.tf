@@ -36,7 +36,7 @@ resource "null_resource" "awx_cli" {
     inline = [
       "${var.tower_cli_remote} --conf.host ${var.tower_host} -f human job_templates launch ansible-role-example-role --monitor --filter status --conf.insecure --conf.token ${data.external.tower_token.result.token}",
     ]
-
+    on_failure = continue
     connection {
       type        = "ssh"
       user        = "vagrant"
@@ -46,6 +46,7 @@ resource "null_resource" "awx_cli" {
   }
   
   provisioner "local-exec" {
-    command = "${var.tower_cli_local} --conf.host ${var.tower_host} -f human job_templates launch ansible-role-example-role --monitor --filter status --conf.insecure --conf.token ${data.external.tower_token.result.token}"
+    command    = "${var.tower_cli_local} --conf.host ${var.tower_host} -f human job_templates launch ansible-role-example-role --monitor --filter status --conf.insecure --conf.token ${data.external.tower_token.result.token}"
+    on_failure = continue
   }
 }
