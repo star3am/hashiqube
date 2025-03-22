@@ -7,7 +7,8 @@ services:
     tty: true
     cgroup: host
     tmpfs:
-    - /var/lib/docker:mode=0777,dev,size=15g,suid,exec
+    - /var/lib/docker:mode=0777,dev,size=15g,suid,exec # docker
+    - /var/lib/rancher:mode=0777,dev,size=15g,suid,exec # k3s
     - /run
     ports:
       - "3000:3000" # grafana
