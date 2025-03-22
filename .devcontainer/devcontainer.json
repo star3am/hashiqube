@@ -2,6 +2,8 @@
   "dockerComposeFile": "../docker-compose.yml",
   "service": "hashiqube",
   "workspaceFolder": "/vagrant",
+  "forwardPorts": ["localhost:8001"],
+  "portsAttributes": {"8001": {"protocol": "https"}},
   "postStartCommand": {
     "set-git-config-safe-directory": "git config --global --add safe.directory ${containerWorkspaceFolder}",
     "set-git-config-line-endings": "git config --global core.autocrlf input",
