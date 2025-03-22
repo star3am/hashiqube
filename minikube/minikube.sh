@@ -31,6 +31,11 @@ function minikube-install() {
   fi
 
   echo -e '\e[38;5;198m'"++++ "
+  echo -e '\e[38;5;198m'"++++ Delete K3s if exists"
+  echo -e '\e[38;5;198m'"++++ "
+  sudo bash /usr/local/bin/k3s-uninstall.sh || true
+
+  echo -e '\e[38;5;198m'"++++ "
   echo -e '\e[38;5;198m'"++++ Installing Minikube"
   echo -e '\e[38;5;198m'"++++ "
   if [ -f /usr/local/bin/minikube ]; then

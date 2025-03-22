@@ -7,7 +7,8 @@ services:
     tty: true
     cgroup: host
     tmpfs:
-    - /var/lib/docker:mode=0777,dev,size=15g,suid,exec
+    - /var/lib/docker:mode=0777,dev,size=15g,suid,exec # docker
+    - /var/lib/rancher:mode=0777,dev,size=15g,suid,exec # k3s
     - /run
     ports:
       - "3000:3000" # grafana
@@ -70,6 +71,9 @@ services:
       - "3001:3001" # uptime-kuma
       - "6001:6001" # trex
       - "18043:18043" # argocd
+      - "6443:6443" # k3s kubernetes cluster api
+      - "8001:8001" # kubernetes dashboard
+      - "8002:8002" # helm dashboard
     # Build the container from the Dockerfile for development purposes
     # build:
     #   context: .
