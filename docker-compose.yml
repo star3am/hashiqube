@@ -25,7 +25,7 @@ services:
       - "19701:19701" # waypoint-api-kubernetes-minikube
       - "9702:9702" # waypoint-nomad
       - "9701:9701" # waypoint-api-nomad
-      - "19200:19200" # boundary
+      - "9200:9200" # boundary
       - "8500:8500" # consul
       - "8501:8501" # consul
       - "8502:8502" # consul
@@ -33,7 +33,7 @@ services:
       - "8301:8301" # consul
       - "8302:8302" # consul
       - "8600:8600" # consul dns
-      - "9200:9200" # elasticsearch
+      - "19200:19200" # elasticsearch
       - "5601:5601" # kibana
       - "5602:5602" # cerebro
       - "8888:8888" # ansible/roles/www

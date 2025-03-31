@@ -54,7 +54,7 @@ output "aws_hashiqube-waypoint" {
 }
 
 output "aws_hashiqube-boundary" {
-  value = var.deploy_to_aws ? try("http://${module.aws-hashiqube[0].hashiqube_ip}:19200 username: admin password: password", null) : null
+  value = var.deploy_to_aws ? try("http://${module.aws-hashiqube[0].hashiqube_ip}:9200 username: admin password: password", null) : null
 }
 
 output "aws_hashiqube-traefik-ui" {
@@ -99,7 +99,7 @@ output "azure_hashiqube-waypoint" {
 }
 
 output "azure_hashiqube-boundary" {
-  value = var.deploy_to_azure ? try("http://${module.azure-hashiqube[0].hashiqube_ip}:19200 username: admin password: password", null) : null
+  value = var.deploy_to_azure ? try("http://${module.azure-hashiqube[0].hashiqube_ip}:9200 username: admin password: password", null) : null
 }
 
 output "azure_hashiqube-traefik-ui" {
@@ -144,7 +144,7 @@ output "gcp_hashiqube-waypoint" {
 }
 
 output "gcp_hashiqube-boundary" {
-  value = var.deploy_to_gcp ? try("http://${module.gcp-hashiqube[0].hashiqube_ip}:19200 username: admin password: password", null) : null
+  value = var.deploy_to_gcp ? try("http://${module.gcp-hashiqube[0].hashiqube_ip}:9200 username: admin password: password", null) : null
 }
 
 output "gcp_hashiqube-traefik-ui" {

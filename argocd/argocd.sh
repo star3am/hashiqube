@@ -87,4 +87,4 @@ echo -e '\e[38;5;198m'"++++ Login with admin:$ARGOCD_PASSWORD"
 echo -e '\e[38;5;198m'"++++ Argocd Documentation http://localhost:3333/#/argocd/README?id=argocd"
 
 # TODO: read token and test login
-# boundary authenticate password -login-name=admin -password password -auth-method-id=ampw_1234567890 -addr=http://127.0.0.1:19200
+# boundary authenticate password -login-name=admin -password password -auth-method-id=ampw_1234567890 -addr=http://127.0.0.1:9200
