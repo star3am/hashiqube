@@ -97,7 +97,7 @@ Thank you for using this module, you are most welcome to fork this repository to
 ** DO NOT USE THIS IN PRODUCTION **
 
 EOT
-aws_hashiqube-boundary = "http://13.55.129.xxx:19200 username: admin password: password"
+aws_hashiqube-boundary = "http://13.55.129.xxx:9200 username: admin password: password"
 aws_hashiqube-consul = "http://13.55.129.xxx:8500"
 aws_hashiqube-fabio-lb = "http://13.55.129.xxx:9999"
 aws_hashiqube-fabio-ui = "http://13.55.129.xxx:9998"
@@ -198,7 +198,7 @@ aws_hashiqube-waypoint = "https://13.55.129.xxx:9702"
 **Access Boundary**:
 
 ```bash
-aws_hashiqube-boundary = "http://13.55.129.152:19200 username: admin password: password"
+aws_hashiqube-boundary = "http://13.55.129.152:9200 username: admin password: password"
 ```
 
 ![HashiCorp Boundary on HashiQube](images/hashiqube-boundary.png?raw=true "HashiCorp Boundary on HashiQube")

@@ -100,7 +100,7 @@ After=network-online.target
 EnvironmentFile=/etc/boundary/boundary.env
 ExecReload=/bin/kill -HUP $MAINPID
 # https://developer.hashicorp.com/boundary/docs/commands/dev
-ExecStart=/usr/local/bin/boundary dev -api-listen-address 0.0.0.0:19200 -ops-listen-address 0.0.0.0 -controller-public-cluster-address 0.0.0.0 -proxy-listen-address 0.0.0.0:9202 -cluster-listen-address 0.0.0.0:9201 -worker-public-address 0.0.0.0 -log-level debug
+ExecStart=/usr/local/bin/boundary dev -api-listen-address 0.0.0.0:9200 -ops-listen-address 0.0.0.0 -controller-public-cluster-address 0.0.0.0 -proxy-listen-address 0.0.0.0:9202 -cluster-listen-address 0.0.0.0:9201 -worker-public-address 0.0.0.0 -log-level debug
 KillMode=process
 KillSignal=SIGINT
 LimitNOFILE=65536
@@ -152,7 +152,7 @@ controller {
 
 listener "tcp" {
   purpose = "api"
-  address = "0.0.0.0:19200"
+  address = "0.0.0.0:9200"
 }
 EOF
 # https://developer.hashicorp.com/boundary/docs/enterprise/licensing
@@ -186,13 +186,13 @@ echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Set Boundary Environment Variables"
 echo -e '\e[38;5;198m'"++++ "
 export BOUNDARY_PASSWORD=password
-export BOUNDARY_ADDR=http://localhost:19200
+export BOUNDARY_ADDR=http://localhost:9200
 
 # https://developer.hashicorp.com/boundary/tutorials/community-administration/community-manage-targets
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Athenticating Boundary client"
 echo -e '\e[38;5;198m'"++++ "
-boundary authenticate password -addr=http://127.0.0.1:19200 -login-name=admin -password=env://BOUNDARY_PASSWORD -keyring-type=none > /etc/boundary/auth.info
+boundary authenticate password -addr=http://127.0.0.1:9200 -login-name=admin -password=env://BOUNDARY_PASSWORD -keyring-type=none > /etc/boundary/auth.info
 
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Set Boundary Token ENV variable"
@@ -214,11 +214,11 @@ for i in $(env | grep BOUNDARY); do echo "export $i"; done
 # echo -e '\e[38;5;198m'"++++ "
 # boundary connect ssh -target-id ttcp_g4twnnFCNk -token env://BOUNDARY_TOKEN -username vagrant
 # boundary connect postgres -target-id=ttcp_Rr9ldMaR3x -dbname=boundary
-# boundary connect ssh -target-id ttcp_ldXJYelrjQ -token env://BOUNDARY_TOKEN -username vagrant -addr=https://glorious-halibut-xq6pr6pvphv94j-19200.app.github.dev/
+# boundary connect ssh -target-id ttcp_ldXJYelrjQ -token env://BOUNDARY_TOKEN -username vagrant -addr=https://glorious-halibut-xq6pr6pvphv94j-9200.app.github.dev/
 
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Access Boundary"
 echo -e '\e[38;5;198m'"++++ "
-echo -e '\e[38;5;198m'"++++ Boundary Server started at http://localhost:19200"
+echo -e '\e[38;5;198m'"++++ Boundary Server started at http://localhost:9200"
 echo -e '\e[38;5;198m'"++++ Login with admin:password"
 echo -e '\e[38;5;198m'"++++ Boundary Documentation http://localhost:3333/#/hashicorp/README?id=boundary"

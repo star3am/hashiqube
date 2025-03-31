@@ -624,7 +624,7 @@ After running `vagrant up --provision`, you'll have access to:
 | Consul | <http://localhost:8500> | `vagrant up --provision-with basetools,consul` |
 | Waypoint on Nomad | <https://localhost:9702> | `vagrant up --provision-with basetools,docker,waypoint` |
 | Waypoint on Minikube | <https://localhost:19702> | `vagrant up --provision-with basetools,docker,waypoint-kubernetes-minikube` |
-| Boundary | <http://localhost:19200> | `vagrant up --provision-with basetools,boundary` |
+| Boundary | <http://localhost:9200> | `vagrant up --provision-with basetools,boundary` |
 | Docsify | <http://localhost:3333> | `vagrant up --provision-with basetools,docsify` |
 
 ![Hashiqube Integrations](images/logo-qube.png?raw=true "Hashiqube Integrations")

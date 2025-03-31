@@ -85,7 +85,7 @@ Vagrant::configure("2") do |config|
         config.vm.network "forwarded_port", guest: 19701, host: 19701 # waypoint-api-kubernetes-minikube
         config.vm.network "forwarded_port", guest: 9702, host: 9702 # waypoint-nomad
         config.vm.network "forwarded_port", guest: 9701, host: 9701 # waypoint-api-nomad
-        config.vm.network "forwarded_port", guest: 19200, host: 19200 # boundary
+        config.vm.network "forwarded_port", guest: 9200, host: 9200 # boundary
         config.vm.network "forwarded_port", guest: 8500, host: 8500 # consul
         config.vm.network "forwarded_port", guest: 8501, host: 8501 # consul
         config.vm.network "forwarded_port", guest: 8502, host: 8502 # consul
@@ -93,7 +93,7 @@ Vagrant::configure("2") do |config|
         config.vm.network "forwarded_port", guest: 8301, host: 8301 # consul
         config.vm.network "forwarded_port", guest: 8302, host: 8302 # consul
         config.vm.network "forwarded_port", guest: 8600, host: 8600, protocol: 'udp' # consul dns
-        config.vm.network "forwarded_port", guest: 9200, host: 9200 # elasticsearch
+        config.vm.network "forwarded_port", guest: 19200, host: 19200 # elasticsearch
         config.vm.network "forwarded_port", guest: 5601, host: 5601 # kibana
         config.vm.network "forwarded_port", guest: 5602, host: 5602 # cerebro
         config.vm.network "forwarded_port", guest: 8888, host: 8888 # ansible/roles/www

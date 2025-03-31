@@ -160,7 +160,7 @@ provider "nomad" {
 
 # https://registry.terraform.io/providers/hashicorp/boundary/latest/docs
 provider "boundary" {
-  addr                            = "http://127.0.0.1:19200"
+  addr                            = "http://127.0.0.1:9200"
   password_auth_method_login_name = "admin"
   password_auth_method_password   = "password"
 }
