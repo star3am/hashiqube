@@ -56,32 +56,32 @@ docker rm apache2
 yes | sudo docker system prune -a
 yes | sudo docker system prune --volumes
 
-echo -e '\e[38;5;198m'"++++ "
-echo -e '\e[38;5;198m'"Creating Private Docker Registry"
-echo -e '\e[38;5;198m'"++++ "
-# https://docs.docker.com/registry/deploying/#customize-the-published-port
-docker run -d --restart=always \
-  --name registry \
-  -v "$(pwd)"/auth:/auth \
-  -e "REGISTRY_AUTH=htpasswd" \
-  -e "REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm" \
-  -e REGISTRY_AUTH_HTPASSWD_PATH=/auth/htpasswd \
-  -e REGISTRY_HTTP_ADDR=0.0.0.0:5002 \
-  --memory 256M -p 5002:5002 registry:2
+# echo -e '\e[38;5;198m'"++++ "
+# echo -e '\e[38;5;198m'"Creating Private Docker Registry"
+# echo -e '\e[38;5;198m'"++++ "
+# # https://docs.docker.com/registry/deploying/#customize-the-published-port
+# docker run -d --restart=always \
+#   --name registry \
+#   -v "$(pwd)"/auth:/auth \
+#   -e "REGISTRY_AUTH=htpasswd" \
+#   -e "REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm" \
+#   -e REGISTRY_AUTH_HTPASSWD_PATH=/auth/htpasswd \
+#   -e REGISTRY_HTTP_ADDR=0.0.0.0:5002 \
+#   --memory 256M -p 5002:5002 registry:2
 
-cat <<EOF | sudo tee /etc/docker/auth.json
-{
-  "username": "admin",
-  "password": "password",
-  "email": "admin@localhost"
-}
-EOF
+# cat <<EOF | sudo tee /etc/docker/auth.json
+# {
+#   "username": "admin",
+#   "password": "password",
+#   "email": "admin@localhost"
+# }
+# EOF
 
-echo -e '\e[38;5;198m'"++++ "
-echo -e '\e[38;5;198m'"++++ Docker Login to Registry"
-echo -e '\e[38;5;198m'"++++ "
-sleep 10;
-sudo --preserve-env=PATH -u vagrant docker login -u="admin" -p="password" http://10.9.99.10:5002
+# echo -e '\e[38;5;198m'"++++ "
+# echo -e '\e[38;5;198m'"++++ Docker Login to Registry"
+# echo -e '\e[38;5;198m'"++++ "
+# sleep 10;
+# sudo --preserve-env=PATH -u vagrant docker login -u="admin" -p="password" http://10.9.99.10:5002
 
 # echo -e '\e[38;5;198m'"++++ "
 # echo -e '\e[38;5;198m'"++++ Docker build -t apache2 ."

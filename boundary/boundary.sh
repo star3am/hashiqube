@@ -100,7 +100,7 @@ After=network-online.target
 EnvironmentFile=/etc/boundary/boundary.env
 ExecReload=/bin/kill -HUP $MAINPID
 # https://developer.hashicorp.com/boundary/docs/commands/dev
-ExecStart=/usr/local/bin/boundary dev -api-listen-address 0.0.0.0:9200 -ops-listen-address 0.0.0.0 -controller-public-cluster-address 0.0.0.0 -proxy-listen-address 0.0.0.0:9202 -cluster-listen-address 0.0.0.0:9201 -worker-public-address 0.0.0.0 -log-level debug
+ExecStart=/usr/local/bin/boundary dev -host-address 0.0.0.0 -api-listen-address 0.0.0.0:9200 -ops-listen-address 0.0.0.0 -controller-public-cluster-address 0.0.0.0 -proxy-listen-address 0.0.0.0:9202 -cluster-listen-address 0.0.0.0:9201 -worker-public-address 0.0.0.0 -log-level debug
 KillMode=process
 KillSignal=SIGINT
 LimitNOFILE=65536
@@ -208,6 +208,11 @@ echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Print Boundary ENV variables"
 echo -e '\e[38;5;198m'"++++ "
 for i in $(env | grep BOUNDARY); do echo "export $i"; done
+
+echo -e '\e[38;5;198m'"++++ "
+echo -e '\e[38;5;198m'"++++ Print Boundary LISTEN ports"
+echo -e '\e[38;5;198m'"++++ "
+netstat -nlp | grep boundary
 
 # echo -e '\e[38;5;198m'"++++ "
 # echo -e '\e[38;5;198m'"++++ DEBUG: Test Boundary target"
