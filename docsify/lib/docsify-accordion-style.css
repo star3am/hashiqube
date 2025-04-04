@@ -1,0 +1,95 @@
+ul.accordion-wrapper {
+  display: block;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  /* counter-reset: question; */
+}
+
+ul.accordion-wrapper > li {
+  display: block;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  /* counter-increment: question; */
+  cursor: pointer;
+}
+
+ul.accordion-wrapper > li:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+ul.accordion-wrapper > li > p:first-of-type {
+  position: relative;
+  margin: 0;
+  padding: 10px 20px;
+  font-weight: bold;
+}
+
+ul.accordion-wrapper > li.active > p:first-of-type {
+  padding: 10px 20px 20px 20px;
+}
+
+ul.accordion-wrapper > li.active > p:first-of-type::after {
+  content: "";
+  position: absolute;
+  top: calc(100% - 10px);
+  left: 40px;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  border: 10px solid white;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-left-color: transparent;
+}
+
+ul.accordion-wrapper > li > .accordion-content-container {
+  display: block;
+  margin: 0 20px 20px 20px;
+  padding: 0 15px 20px;
+  background: white;
+  cursor: default;
+  overflow: hidden;
+}
+
+ul.accordion-wrapper > li:not(:first-of-type) {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.accordion {
+  background: whitesmoke;
+}
+
+.accordion.active {
+  background: rgba(0, 0, 0, 0.1);
+  border-left: 3px solid #014f17;
+}
+
+.accordion .accordion-content-container {
+  display: none !important;
+}
+
+.accordion.active .accordion-content-container {
+  display: block !important;
+}
+
+
+.arrow {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 4px;
+  float:right;
+  margin-top: 1.25%;
+}
+
+.right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
