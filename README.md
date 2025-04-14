@@ -46,13 +46,11 @@ vagrant up --provision-with basetools,docker,docsify,consul,nomad,vault,boundary
 ### **Docker Compose**
 
 ```bash
-docker compose exec hashiqube /bin/bash
-bash hashiqube/basetools.sh
-bash docker/docker.sh
-bash consul/consul.sh
-bash nomad/nomad.sh
-bash vault/vault.sh
-bash boundary/boundary.sh
+# Start the container
+docker compose up -d
+
+# Run the one-command setup script
+docker compose exec hashiqube /vagrant/setup.sh
 ```
 
 <!-- tabs:end -->
@@ -71,6 +69,9 @@ bash boundary/boundary.sh
       - [Installation Instructions](#installation-instructions)
     - [Docker Compose](#docker-compose)
   - [Documentation and Status](#documentation-and-status)
+    - [Compatibility Matrix](#compatibility-matrix)
+    - [Component Dependencies](#component-dependencies)
+    - [Utility Tools](#utility-tools)
   - [HashiQube Overview](#hashiqube-overview)
   - [HashiQube Diagrams](#hashiqube-diagrams)
     - [Draw.io Diagram](#drawio-diagram)
@@ -145,7 +146,7 @@ Follow the instructions below to run Hashiqube locally on your laptop or PC.
 
 #### Installation Instructions
 
-> :clock3: Duration: 15-30 minutes  
+> :clock3: Duration: 15-30 minutes
 > :bulb: Docker is the default and preferred way to run Hashiqube
 
 1. **Install Docker**: Download from the [Docker desktop installer](https://www.docker.com/products/docker-desktop)
@@ -175,17 +176,8 @@ Docker compose is also supported! To bring up Hashiqube with Docker Compose:
 4. **Initialize services**:
 
    ```bash
-   # Access the container shell
-   docker compose exec hashiqube /bin/bash
-   
-   # Install dependencies
-   bash hashiqube/basetools.sh
-   
-   # Install Docker daemon
-   bash docker/docker.sh
-   
-   # Start HashiCorp Vault
-   bash vault/vault.sh
+   # Run the one-command setup script
+   docker compose exec hashiqube /vagrant/setup.sh
    ```
 
 To check status:
@@ -209,6 +201,24 @@ After completing the installation steps:
 
 - :book: **Documentation**: <http://localhost:3333>
 - :vertical_traffic_light: **Status of Integrations**: <http://localhost:3001>
+
+### Compatibility Matrix
+
+- :clipboard: **Compatibility Matrix**: See [COMPATIBILITY.md](COMPATIBILITY.md) for detailed information about platform and component compatibility
+- :computer: **Platform-Specific Guide**: See [PLATFORM_GUIDE.md](PLATFORM_GUIDE.md) for detailed instructions for different platforms
+
+### Component Dependencies
+
+- :link: **Component Dependencies**: See [DEPENDENCIES.md](DEPENDENCIES.md) for information about dependencies between components
+
+### Utility Tools
+
+Additional tools available:
+
+- :stethoscope: **Health Check**: Run `/vagrant/hashiqube/health_check.sh` to verify service status
+- :floppy_disk: **Backup Tool**: Run `/vagrant/hashiqube/backup.sh` to backup critical data
+- :broom: **Cleanup Tool**: Run `/vagrant/hashiqube/cleanup.sh` to clean up resources
+- :gear: **Configuration**: Run `/vagrant/hashiqube/config.sh` to view and manage configuration
 
 ---
 
@@ -305,7 +315,7 @@ Hashiqube runs on your local machine or cloud instance and provides:
 - [Mermaid](/mermaid/#mermaid) - Diagram generation from text
 - [Newrelic Kubernetes Monitoring](/newrelic-kubernetes-monitoring/#newrelic-kubernetes-monitoring) - Monitor Kubernetes
 
-Once the stack is up, you will have many services running and available on `localhost`.  
+Once the stack is up, you will have many services running and available on `localhost`.
 For documentation, open <http://localhost:3333> in your browser.
 
 ![Hashiqube Integrations](images/logo-qube.png?raw=true "Hashiqube Integrations")

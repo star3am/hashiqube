@@ -49,10 +49,21 @@ cd /vagrant/docker
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"Docker System prune"
 echo -e '\e[38;5;198m'"++++ "
-docker stop registry
-docker rm registry
-docker stop apache2
-docker rm apache2
+
+# Check if containers exist before stopping and removing them
+if docker ps -a --format '{{.Names}}' | grep -q "^registry$"; then
+  echo "Stopping and removing registry container"
+  docker stop registry
+  docker rm registry
+fi
+
+if docker ps -a --format '{{.Names}}' | grep -q "^apache2$"; then
+  echo "Stopping and removing apache2 container"
+  docker stop apache2
+  docker rm apache2
+fi
+
+echo "Pruning Docker system"
 yes | sudo docker system prune -a
 yes | sudo docker system prune --volumes
 
@@ -69,11 +80,12 @@ yes | sudo docker system prune --volumes
 #   -e REGISTRY_HTTP_ADDR=0.0.0.0:5002 \
 #   --memory 256M -p 5002:5002 registry:2
 
+# Create Docker registry credentials from environment variables
 # cat <<EOF | sudo tee /etc/docker/auth.json
 # {
-#   "username": "admin",
-#   "password": "password",
-#   "email": "admin@localhost"
+#   "username": "${DOCKER_REGISTRY_USER:-admin}",
+#   "password": "${DOCKER_REGISTRY_PASSWORD:-$(openssl rand -base64 12)}",
+#   "email": "${DOCKER_REGISTRY_EMAIL:-admin@localhost}"
 # }
 # EOF
 
@@ -81,7 +93,9 @@ yes | sudo docker system prune --volumes
 # echo -e '\e[38;5;198m'"++++ Docker Login to Registry"
 # echo -e '\e[38;5;198m'"++++ "
 # sleep 10;
-# sudo --preserve-env=PATH -u vagrant docker login -u="admin" -p="password" http://10.9.99.10:5002
+# DOCKER_REGISTRY_USER=${DOCKER_REGISTRY_USER:-admin}
+# DOCKER_REGISTRY_PASSWORD=${DOCKER_REGISTRY_PASSWORD:-$(openssl rand -base64 12)}
+# sudo --preserve-env=PATH -u vagrant docker login -u="$DOCKER_REGISTRY_USER" -p="$DOCKER_REGISTRY_PASSWORD" http://10.9.99.10:5002
 
 # echo -e '\e[38;5;198m'"++++ "
 # echo -e '\e[38;5;198m'"++++ Docker build -t apache2 ."

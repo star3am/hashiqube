@@ -8,10 +8,167 @@ ENV['VAGRANT_DEFAULT_PROVIDER'] = "docker"
 user = ENV["USER"].downcase
 fqdn = ENV["fqdn"] || "service.consul"
 
+# Helper method for dynamic port allocation with fallback
+def get_available_port(preferred_port, min_port = 10000, max_port = 65535)
+  # Check if the preferred port is available
+  require 'socket'
+  begin
+    server = TCPServer.new('127.0.0.1', preferred_port)
+    server.close
+    return preferred_port
+  rescue Errno::EADDRINUSE
+    puts "Port #{preferred_port} is already in use. Looking for an available port..."
+  end
+
+  # Find an available port in the specified range
+  available_port = nil
+  (min_port..max_port).each do |port|
+    begin
+      server = TCPServer.new('127.0.0.1', port)
+      server.close
+      available_port = port
+      break
+    rescue Errno::EADDRINUSE
+      next
+    end
+  end
+
+  if available_port
+    puts "Using alternative port #{available_port} instead of #{preferred_port}"
+    return available_port
+  else
+    puts "No available ports found in range #{min_port}-#{max_port}. Using preferred port #{preferred_port} anyway."
+    return preferred_port
+  end
+end
+
+# Helper method for adaptive resource allocation
+def get_system_resources
+  # Default values if detection fails
+  resources = {
+    memory: 4096,  # 4GB default
+    cpus: 2        # 2 CPUs default
+  }
+
+  begin
+    # Try to detect total system memory
+    if RUBY_PLATFORM =~ /darwin/
+      # macOS
+      mem_info = `sysctl -n hw.memsize`.to_i
+      resources[:memory] = (mem_info / 1024 / 1024 / 2).to_i  # 50% of total memory
+    elsif RUBY_PLATFORM =~ /linux/
+      # Linux
+      mem_info = `grep MemTotal /proc/meminfo`.match(/\d+/)[0].to_i
+      resources[:memory] = (mem_info / 1024 / 2).to_i  # 50% of total memory
+    elsif RUBY_PLATFORM =~ /mswin|mingw|cygwin/
+      # Windows
+      mem_info = `wmic computersystem get totalphysicalmemory`.split("\n")[1].to_i
+      resources[:memory] = (mem_info / 1024 / 1024 / 2).to_i  # 50% of total memory
+    end
+
+    # Try to detect CPU cores
+    if RUBY_PLATFORM =~ /darwin/
+      # macOS
+      cpu_cores = `sysctl -n hw.ncpu`.to_i
+    elsif RUBY_PLATFORM =~ /linux/
+      # Linux
+      cpu_cores = `nproc`.to_i
+    elsif RUBY_PLATFORM =~ /mswin|mingw|cygwin/
+      # Windows
+      cpu_cores = `wmic cpu get NumberOfCores`.split("\n")[1].to_i
+    end
+
+    # Set CPU cores (use 75% of available cores, minimum 2)
+    resources[:cpus] = [[(cpu_cores * 0.75).to_i, 1].max, cpu_cores].min if cpu_cores > 0
+
+    # Cap memory at reasonable values
+    resources[:memory] = [resources[:memory], 16384].min  # Max 16GB
+    resources[:memory] = [resources[:memory], 2048].max   # Min 2GB
+
+    # Cap CPUs at reasonable values
+    resources[:cpus] = [resources[:cpus], 8].min  # Max 8 CPUs
+    resources[:cpus] = [resources[:cpus], 1].max  # Min 1 CPU
+
+    puts "Detected system resources: #{resources[:memory]}MB RAM, #{resources[:cpus]} CPUs"
+    puts "Allocating: #{resources[:memory]}MB RAM, #{resources[:cpus]} CPUs to VM"
+  rescue => e
+    puts "Error detecting system resources: #{e.message}. Using defaults."
+  end
+
+  resources
+end
+
+# Define service ports with preferred values
+service_ports = {
+  'grafana' => 3000,
+  'prometheus' => 9090,
+  'prometheus-alertmanager' => 9093,
+  'vault' => 8200,
+  'vault-cluster' => 8201,
+  'nomad' => 4646,
+  'nomad-server' => 4647,
+  'nomad-serf' => 4648,
+  'nomad-traefik' => 38080,
+  'nomad-traefik-admin' => 38081,
+  'waypoint-kubernetes-minikube' => 19702,
+  'waypoint-api-kubernetes-minikube' => 19701,
+  'waypoint-nomad' => 9702,
+  'waypoint-api-nomad' => 9701,
+  'boundary' => 9200,
+  'consul' => 8500,
+  'consul-https' => 8501,
+  'consul-grpc' => 8502,
+  'consul-server' => 8300,
+  'consul-lan' => 8301,
+  'consul-wan' => 8302,
+  'consul-dns' => 8600,
+  'elasticsearch' => 19200,
+  'kibana' => 5601,
+  'cerebro' => 5602,
+  'ansible-www' => 8888,
+  'docker-apache2' => 8889,
+  'docker-registry-minikube' => 5001,
+  'docker-registry-daemon' => 5002,
+  'ldap' => 33389,
+  'localstack' => 4566,
+  'jenkins' => 8088,
+  'consul-counter-dashboard' => 9002,
+  'consul-counter-api' => 9001,
+  'consul-counter-dashboard-test' => 9022,
+  'consul-counter-api-test' => 9011,
+  'mysql' => 3306,
+  'postgres' => 5432,
+  'mssql' => 1433,
+  'fabio-dashboard' => 9998,
+  'fabiolb' => 9999,
+  'portainer' => 9333,
+  'minikube-dashboard' => 10888,
+  'helm-dashboard' => 11888,
+  'minikube-traefik' => 18080,
+  'minikube-traefik-admin' => 18181,
+  'tech-challange-minikube' => 31506,
+  'hello-minikube' => 18888,
+  'apache-airflow' => 18889,
+  'docsify' => 3333,
+  'ansible-tower' => 8043,
+  'gitlab' => 5580,
+  'gitlab-workhorse' => 8181,
+  'gitlab-shell' => 32022,
+  'vscode-server' => 7777,
+  'dbt-docs' => 28080,
+  'markdown-quiz-generator' => 8000,
+  'uptime-kuma' => 3001,
+  'trex' => 6001,
+  'argocd' => 18043
+}
+
+# Get adaptive resource allocation based on host system
+system_resources = get_system_resources()
+
 # https://www.virtualbox.org/manual/ch08.html
 vbox_config = [
-  { '--memory' => '10240' },
-  { '--cpus' => '4' },
+  { '--memory' => system_resources[:memory].to_s },
+  { '--cpus' => system_resources[:cpus].to_s },
   { '--cpuexecutioncap' => '100' },
   { '--biosapic' => 'x2apic' },
   { '--ioapic' => 'on' },
@@ -71,66 +228,31 @@ Vagrant::configure("2") do |config|
       config.vm.network "forwarded_port", guest: 22, host: machine[:ssh_port], id: 'ssh', auto_correct: true
 
       if machines.size == 1 # only expose these ports if 1 machine, else conflicts
-        config.vm.network "forwarded_port", guest: 3000, host: 3000 # grafana
-        config.vm.network "forwarded_port", guest: 9090, host: 9090 # prometheus
-        config.vm.network "forwarded_port", guest: 9093, host: 9093 # prometheus-alertmanager
-        config.vm.network "forwarded_port", guest: 8200, host: 8200 # vault
-        config.vm.network "forwarded_port", guest: 8201, host: 8201 # vault
-        config.vm.network "forwarded_port", guest: 4646, host: 4646 # nomad
-        config.vm.network "forwarded_port", guest: 4647, host: 4647 # nomad
-        config.vm.network "forwarded_port", guest: 4648, host: 4648 # nomad
-        config.vm.network "forwarded_port", guest: 38080, host: 38080 # nomad-traefik
-        config.vm.network "forwarded_port", guest: 38081, host: 38081 # nomad-traefik-admin
-        config.vm.network "forwarded_port", guest: 19702, host: 19702 # waypoint-kubernetes-minikube
-        config.vm.network "forwarded_port", guest: 19701, host: 19701 # waypoint-api-kubernetes-minikube
-        config.vm.network "forwarded_port", guest: 9702, host: 9702 # waypoint-nomad
-        config.vm.network "forwarded_port", guest: 9701, host: 9701 # waypoint-api-nomad
-        config.vm.network "forwarded_port", guest: 9200, host: 9200 # boundary
-        config.vm.network "forwarded_port", guest: 8500, host: 8500 # consul
-        config.vm.network "forwarded_port", guest: 8501, host: 8501 # consul
-        config.vm.network "forwarded_port", guest: 8502, host: 8502 # consul
-        config.vm.network "forwarded_port", guest: 8300, host: 8300 # consul
-        config.vm.network "forwarded_port", guest: 8301, host: 8301 # consul
-        config.vm.network "forwarded_port", guest: 8302, host: 8302 # consul
-        config.vm.network "forwarded_port", guest: 8600, host: 8600, protocol: 'udp' # consul dns
-        config.vm.network "forwarded_port", guest: 19200, host: 19200 # elasticsearch
-        config.vm.network "forwarded_port", guest: 5601, host: 5601 # kibana
-        config.vm.network "forwarded_port", guest: 5602, host: 5602 # cerebro
-        config.vm.network "forwarded_port", guest: 8888, host: 8888 # ansible/roles/www
-        config.vm.network "forwarded_port", guest: 8889, host: 8889 # docker/apache2
-        config.vm.network "forwarded_port", guest: 5001, host: 5001 # docker registry on minikube
-        config.vm.network "forwarded_port", guest: 5002, host: 5002 # docker registry on docker daemon
-        config.vm.network "forwarded_port", guest: 389, host: 33389 # ldap
-        config.vm.network "forwarded_port", guest: 4566, host: 4566 # localstack
-        config.vm.network "forwarded_port", guest: 8088, host: 8088 # jenkins
-        config.vm.network "forwarded_port", guest: 9002, host: 9002 # consul counter-dashboard
-        config.vm.network "forwarded_port", guest: 9001, host: 9001 # consul counter-api
-        config.vm.network "forwarded_port", guest: 9022, host: 9022 # consul counter-dashboard-test
-        config.vm.network "forwarded_port", guest: 9011, host: 9011 # consul counter-api-test
-        config.vm.network "forwarded_port", guest: 3306, host: 3306 # mysql
-        config.vm.network "forwarded_port", guest: 5432, host: 5432 # postgres
-        config.vm.network "forwarded_port", guest: 1433, host: 1433 # mssql
-        config.vm.network "forwarded_port", guest: 9998, host: 9998 # fabio-dashboard
-        config.vm.network "forwarded_port", guest: 9999, host: 9999 # fabiolb
-        config.vm.network "forwarded_port", guest: 9333, host: 9333 # portainer
-        config.vm.network "forwarded_port", guest: 10888, host: 10888 # minikube dashboard
-        config.vm.network "forwarded_port", guest: 11888, host: 11888 # helm dashboard
-        config.vm.network "forwarded_port", guest: 18080, host: 18080 # minikube-traefik
-        config.vm.network "forwarded_port", guest: 18181, host: 18181 # minikube-traefik-admin
-        config.vm.network "forwarded_port", guest: 31506, host: 31506 # tech-challange-minikube
-        config.vm.network "forwarded_port", guest: 18888, host: 18888 # hello minikube application
-        config.vm.network "forwarded_port", guest: 18889, host: 18889 # apache airflow
-        config.vm.network "forwarded_port", guest: 3333, host: 3333 # docsify
-        config.vm.network "forwarded_port", guest: 8043, host: 8043 # ansible-tower
-        config.vm.network "forwarded_port", guest: 5580, host: 5580 # gitlab
-        config.vm.network "forwarded_port", guest: 8181, host: 8181 # gitlab-workhorse gitlab-api
-        config.vm.network "forwarded_port", guest: 32022, host: 32022 # gitlab-shell
-        config.vm.network "forwarded_port", guest: 7777, host: 7777 # vscode-server
-        config.vm.network "forwarded_port", guest: 28080, host: 28080 # dbt docs serve
-        config.vm.network "forwarded_port", guest: 8000, host: 8000 # markdown-quiz-generator
-        config.vm.network "forwarded_port", guest: 3001, host: 3001 # uptime-kuma
-        config.vm.network "forwarded_port", guest: 6001, host: 6001 # trex
-        config.vm.network "forwarded_port", guest: 18043, host: 18043 # argocd
+        # Use dynamic port allocation with fallback for all services
+        puts "Setting up port forwarding with dynamic allocation and fallback..."
+
+        # Special case for consul-dns with UDP protocol
+        consul_dns_port = get_available_port(service_ports['consul-dns'])
+        config.vm.network "forwarded_port", guest: service_ports['consul-dns'], host: consul_dns_port, protocol: 'udp', id: 'consul-dns'
+
+        # Handle all other services
+        service_ports.each do |service_name, guest_port|
+          # Skip consul-dns as it's handled separately
+          next if service_name == 'consul-dns'
+
+          # Get an available port with fallback
+          host_port = get_available_port(guest_port)
+
+          # Configure port forwarding with auto_correct in case the port becomes unavailable
+          config.vm.network "forwarded_port", guest: guest_port, host: host_port, id: service_name, auto_correct: true
+
+          # Store the actual port used for later reference
+          ENV["HASHIQUBE_#{service_name.upcase.gsub('-', '_')}_PORT"] = host_port.to_s
+        end
+
+        # Add LDAP which has a different guest/host port mapping
+        ldap_port = get_available_port(service_ports['ldap'])
+        config.vm.network "forwarded_port", guest: 389, host: ldap_port, id: 'ldap', auto_correct: true
       end
 
       config.vm.hostname = "#{machine[:name]}"
@@ -144,11 +266,11 @@ Vagrant::configure("2") do |config|
           end
         end
       end
-      
+
       config.vm.provider "hyperv" do |hv|
-        hv.cpus = "4"
-        hv.memory = "10240"
-        hv.maxmemory = "12240"
+        hv.cpus = system_resources[:cpus].to_s
+        hv.memory = system_resources[:memory].to_s
+        hv.maxmemory = (system_resources[:memory] * 1.2).to_i.to_s  # 20% more than base memory
         hv.enable_enhanced_session_mode = true
       end
 
@@ -340,11 +462,11 @@ Vagrant::configure("2") do |config|
       # vagrant up --provision-with ansible-tower to only run this on vagrant up
       config.vm.provision "ansible-tower", run: "never", type: "shell", preserve_order: false, privileged: false, path: "ansible-tower/ansible-tower.sh"
 
-      # dbt 
+      # dbt
       # vagrant up --provision-with dbt to only run this on vagrant up
       config.vm.provision "dbt", run: "never", type: "shell", preserve_order: false, privileged: false, path: "dbt/dbt-global.sh"
 
-      # markdown-quiz-generator 
+      # markdown-quiz-generator
       # vagrant up --provision-with markdown-quiz-generator to only run this on vagrant up
       config.vm.provision "markdown-quiz-generator", run: "never", type: "shell", preserve_order: false, privileged: false, path: "markdown-quiz-generator/markdown-quiz-generator.sh"
 
@@ -373,15 +495,23 @@ Vagrant::configure("2") do |config|
       config.vm.provision "argocd", run: "never", type: "shell", preserve_order: false, privileged: true, path: "argocd/argocd.sh"
 
       # vagrant up --provision-with welcome to only run this on vagrant up
-      config.vm.provision "welcome", preserve_order: true, type: "shell", privileged: true, inline: <<-SHELL
+      config.vm.provision "welcome", preserve_order: true, type: "shell", privileged: true, run: "always", inline: <<-SHELL
         echo -e '\e[38;5;198m'"HashiQube has now been provisioned, and your services should be running."
         echo -e '\e[38;5;198m'"Below are some links for you to get started."
-        echo -e '\e[38;5;198m'"Local documentation http://localhost:3333 Open this first."
-        echo -e '\e[38;5;198m'"Hashiqube status http://localhost:3001 and login with Username: admin and Password: P@ssw0rd"
+
+        # Get the actual ports from environment variables
+        DOCSIFY_PORT=${HASHIQUBE_DOCSIFY_PORT:-3333}
+        UPTIME_KUMA_PORT=${HASHIQUBE_UPTIME_KUMA_PORT:-3001}
+        VAULT_PORT=${HASHIQUBE_VAULT_PORT:-8200}
+        CONSUL_PORT=${HASHIQUBE_CONSUL_PORT:-8500}
+        NOMAD_PORT=${HASHIQUBE_NOMAD_PORT:-4646}
+
+        echo -e '\e[38;5;198m'"Local documentation http://localhost:${DOCSIFY_PORT} Open this first."
+        echo -e '\e[38;5;198m'"Hashiqube status http://localhost:${UPTIME_KUMA_PORT} - Please set up your credentials at first login"
         echo -e '\e[38;5;198m'"Online documentation https://hashiqube.com"
-        echo -e '\e[38;5;198m'"Vault http://localhost:8200 with $(cat /etc/vault/init.file | grep Root)"
-        echo -e '\e[38;5;198m'"Consul http://localhost:8500"
-        echo -e '\e[38;5;198m'"Nomad http://localhost:4646"
+        echo -e '\e[38;5;198m'"Vault http://localhost:${VAULT_PORT} - Use the temporary token from the environment variable VAULT_TOKEN"
+        echo -e '\e[38;5;198m'"Consul http://localhost:${CONSUL_PORT}"
+        echo -e '\e[38;5;198m'"Nomad http://localhost:${NOMAD_PORT}"
         echo -e '\e[33;1;93m'"Like HashiQube? Say thanks with a Star on GitHub: https://github.com/star3am/hashiqube"
       SHELL
 

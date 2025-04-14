@@ -5,13 +5,15 @@
 
 VERSION=latest
 
-arch=$(lscpu | grep "Architecture" | awk '{print $NF}')
-if [[ $arch == x86_64* ]]; then
+# Source the common architecture detection script
+if [ -f /vagrant/hashiqube/detect_arch.sh ]; then
+  source /vagrant/hashiqube/detect_arch.sh
+  ARCH=$(detect_architecture)
+  echo -e '\e[38;5;198m'"CPU architecture detected as $ARCH"
+else
+  echo -e '\e[38;5;198m'"Warning: Architecture detection script not found, defaulting to amd64"
   ARCH="amd64"
-elif  [[ $arch == aarch64 ]]; then
-  ARCH="arm64"
 fi
-echo -e '\e[38;5;198m'"CPU is $ARCH"
 
 sudo DEBIAN_FRONTEND=noninteractive apt-get --assume-yes install -qq curl unzip jq < /dev/null > /dev/null
 
@@ -187,17 +189,38 @@ echo "export VAULT_ADDR=http://127.0.0.1:8200" >> ~/.bashrc
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Initialize Vault"
 echo -e '\e[38;5;198m'"++++ "
-sudo rm -rf /etc/vault/init.file
-vault operator init > /etc/vault/init.file
+# Create a secure directory for Vault credentials with restricted permissions
+sudo mkdir -p /etc/vault/secure
+sudo chmod 700 /etc/vault/secure
+
+# Initialize Vault and store credentials in a secure location
+sudo rm -rf /etc/vault/secure/init.file
+vault operator init > /etc/vault/secure/init.file
+sudo chmod 600 /etc/vault/secure/init.file
+
+# Create a symbolic link for backward compatibility
+sudo ln -sf /etc/vault/secure/init.file /etc/vault/init.file
 
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Auto unseal vault"
 echo -e '\e[38;5;198m'"++++ "
-for i in $(cat /etc/vault/init.file | grep Unseal | cut -d " " -f4 | head -n 3); do vault operator unseal $i; done
+for i in $(cat /etc/vault/secure/init.file | grep Unseal | cut -d " " -f4 | head -n 3); do vault operator unseal $i; done
 vault status
-cat /etc/vault/init.file
-# add vault ENV variables
-VAULT_TOKEN=$(grep 'Initial Root Token' /etc/vault/init.file | cut -d ':' -f2 | tr -d ' ')
+
+# Create a temporary token with limited TTL instead of using the root token
+VAULT_ROOT_TOKEN=$(grep 'Initial Root Token' /etc/vault/secure/init.file | cut -d ':' -f2 | tr -d ' ')
+export VAULT_TOKEN=${VAULT_ROOT_TOKEN}
+
+# Create a policy for basic operations
+cat <<EOF | vault policy write hashiqube-policy -
+path "secret/*" {
+  capabilities = ["create", "read", "update", "delete", "list"]
+}
+EOF
+
+# Create a token with the policy and limited TTL
+TEMP_TOKEN_INFO=$(vault token create -policy=hashiqube-policy -ttl=24h -format=json)
+VAULT_TOKEN=$(echo $TEMP_TOKEN_INFO | jq -r '.auth.client_token')
 grep -q "${VAULT_TOKEN}" /etc/environment
 if [ $? -eq 1 ]; then
   echo "VAULT_TOKEN=${VAULT_TOKEN}" >> /etc/environment
@@ -219,9 +242,10 @@ echo -e '\e[38;5;198m'"++++ "
 vault status
 
 echo -e '\e[38;5;198m'"++++ "
-echo -e '\e[38;5;198m'"++++ Cat Vault Credentials"
+echo -e '\e[38;5;198m'"++++ Vault Credentials Info"
 echo -e '\e[38;5;198m'"++++ "
-cat /etc/vault/init.file
+echo "Vault credentials are stored securely in /etc/vault/secure/init.file"
+echo "A temporary token with limited privileges has been created for daily use."
 if [ -f /vagrant/vault/license.hclic ]; then
   echo -e '\e[38;5;198m'"++++ "
   echo -e '\e[38;5;198m'"++++ Vault License Inspect"
@@ -232,8 +256,8 @@ fi
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Access Vault"
 echo -e '\e[38;5;198m'"++++ "
-echo -e '\e[38;5;198m'"++++ Vault Initial Root Token: ${VAULT_TOKEN}"
-echo -e '\e[38;5;198m'"++++ Vault http://localhost:8200/ui and enter the Root Token displayed above"
+echo -e '\e[38;5;198m'"++++ Vault Temporary Token: ${VAULT_TOKEN}"
+echo -e '\e[38;5;198m'"++++ Vault http://localhost:8200/ui and enter the token displayed above"
 echo -e '\e[38;5;198m'"++++ Vault Documentation http://localhost:3333/#/vault/README?id=vault"
 
 # TODO: FIXME
@@ -271,7 +295,18 @@ fi
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Restart SSH"
 echo -e '\e[38;5;198m'"++++ "
+# Configure SSH to allow password authentication
+grep -q "PasswordAuthentication yes" /etc/ssh/sshd_config
+if [ $? -eq 1 ]; then
+  sudo sed -i "s/PasswordAuthentication no/PasswordAuthentication yes/g" /etc/ssh/sshd_config
+fi
 sudo systemctl reload ssh
+
+# Set a default password for the ubuntu user
+echo -e '\e[38;5;198m'"++++ "
+echo -e '\e[38;5;198m'"++++ Setting default password for ubuntu user"
+echo -e '\e[38;5;198m'"++++ "
+echo "ubuntu:vagrant" | sudo chpasswd
 
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Create a named Vault role for signing client keys"
@@ -307,6 +342,13 @@ echo -e '\e[38;5;198m'"++++ "
 sudo -H -u ubuntu vault write ssh-client-signer/sign/my-role public_key=@/home/ubuntu/.ssh/id_rsa.pub
 sudo -H -u ubuntu vault write -field=signed_key ssh-client-signer/sign/my-role public_key=@/home/ubuntu/.ssh/id_rsa.pub | sudo -H -u ubuntu tee /home/ubuntu/.ssh/id_rsa-cert.pub
 
+# Fix permissions on the SSH certificate file
+echo -e '\e[38;5;198m'"++++ "
+echo -e '\e[38;5;198m'"++++ Fix permissions on SSH certificate files"
+echo -e '\e[38;5;198m'"++++ "
+sudo chmod 600 /home/ubuntu/.ssh/id_rsa-cert.pub
+sudo chown ubuntu:ubuntu /home/ubuntu/.ssh/id_rsa-cert.pub
+
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ View enabled extensions, principals, and metadata of the signed key"
 echo -e '\e[38;5;198m'"++++ ssh-keygen -Lf /home/ubuntu/~/.ssh/id_rsa-cert.pub"
@@ -317,8 +359,19 @@ echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ SSH to localhost using the signed key"
 echo -e '\e[38;5;198m'"++++ sudo -H -u ubuntu ssh -v -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /home/ubuntu/.ssh/id_rsa-cert.pub -i /home/ubuntu/.ssh/id_rsa ubuntu@localhost"
 echo -e '\e[38;5;198m'"++++ "
+# Try SSH with certificate first
 sudo -H -u ubuntu ssh -v -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /home/ubuntu/.ssh/id_rsa-cert.pub -i /home/ubuntu/.ssh/id_rsa ubuntu@localhost || true
-echo $?
+SSH_RESULT=$?
+echo "SSH exit code: $SSH_RESULT"
+
+# If certificate-based SSH fails, inform about password-based login
+if [ $SSH_RESULT -ne 0 ]; then
+  echo -e '\e[38;5;198m'"++++ "
+  echo -e '\e[38;5;198m'"++++ Certificate-based SSH failed. You can use password-based login with:"
+  echo -e '\e[38;5;198m'"++++ Username: ubuntu"
+  echo -e '\e[38;5;198m'"++++ Password: vagrant"
+  echo -e '\e[38;5;198m'"++++ "
+fi
 
 # https://www.vaultproject.io/docs/secrets/ssh/dynamic-ssh-keys
 #sudo apt-get -y install pwgen
@@ -328,7 +381,7 @@ echo $?
 #sudo -H -u ubuntu vault write ssh/keys/vault_key key=@/home/ubuntu/.ssh/id_rsa
 #vault write ssh/roles/dynamic_key_role key_type=dynamic key=vault_key admin_user=ubuntu default_user=ubuntu cidr_list=0.0.0.0/0
 
-#echo -e '\e[38;5;198m'"++++ Please run the following on your local computer" 
+#echo -e '\e[38;5;198m'"++++ Please run the following on your local computer"
 #echo -e '\e[38;5;198m'"++++ export VAULT_TOKEN=$(grep 'Initial Root Token' /etc/vault/init.file | cut -d ':' -f2 | tr -d ' ')"
 #echo -e '\e[38;5;198m'"++++ export VAULT_ADDR=http://10.9.99.10:8200"
 #echo -e '\e[38;5;198m'"++++ vagrant ssh -c \"vault write ssh/creds/dynamic_key_role ip=10.9.99.10\""

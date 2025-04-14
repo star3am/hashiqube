@@ -6,10 +6,11 @@ services:
     privileged: true
     tty: true
     cgroup: host
-    tmpfs:
-    - /var/lib/docker:mode=0777,dev,size=15g,suid,exec # docker
-    - /var/lib/rancher:mode=0777,dev,size=15g,suid,exec # k3s
-    - /run
+    # Using named volumes instead of tmpfs for persistence
+    # tmpfs:
+    # - /var/lib/docker:mode=0777,dev,size=15g,suid,exec # docker
+    # - /var/lib/rancher:mode=0777,dev,size=15g,suid,exec # k3s
+    # - /run
     ports:
       - "3000:3000" # grafana
       - "9090:9090" # prometheus
@@ -83,6 +84,11 @@ services:
       # Mounts the project folder into the container
       - ".:/vagrant"
       - "/sys/fs/cgroup:/sys/fs/cgroup:rw"
+      # Persistent volumes instead of tmpfs
+      - "docker_data:/var/lib/docker:rw"
+      - "rancher_data:/var/lib/rancher:rw"
+      - "run_data:/run:rw"
+      - "run_lock_data:/run/lock:rw"
       # Mount your ~/.ssh folder into the container
       # for Authenticating to Github
       # - "~/.ssh:/home/ubuntu/.ssh"
@@ -106,3 +112,14 @@ services:
       - TF_LOG
       - TGENV_AUTO_INSTALL=true
       - GPG_TTY=/dev/pts/1
+
+# Define named volumes for persistence
+volumes:
+  docker_data:
+    driver: local
+  rancher_data:
+    driver: local
+  run_data:
+    driver: local
+  run_lock_data:
+    driver: local

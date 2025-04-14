@@ -1,6 +1,11 @@
 * [Home](README.md)
 
-  * [Security](HASHIQUBE_ISSUES.md)
+  * [Changelog.md](CHANGELOG.md/README.md)
+  * [Compatibility.md](COMPATIBILITY.md/README.md)
+  * [Default_credentials.md](DEFAULT_CREDENTIALS.md/README.md)
+  * [Dependencies.md](DEPENDENCIES.md/README.md)
+  * [Hashiqube_issues.md](HASHIQUBE_ISSUES.md/README.md)
+  * [Platform_guide.md](PLATFORM_GUIDE.md/README.md)
   * [Ansible](ansible/README.md)
   * [Ansible-tower](ansible-tower/README.md)
   * [Apache-airflow](apache-airflow/README.md)

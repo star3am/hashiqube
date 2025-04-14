@@ -1,0 +1,12 @@
+[Unit]
+Description=HashiQube Startup Service
+After=network.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/vagrant
+ExecStart=/bin/bash /vagrant/start-services.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

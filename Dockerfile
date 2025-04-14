@@ -34,7 +34,7 @@ RUN find /lib/systemd/system/sysinit.target.wants -mindepth 1 -not -name "system
     rm -f /lib/systemd/system/anaconda.target.wants/*;
 
 # Enable ssh for vagrant
-RUN systemctl enable ssh.service; 
+RUN systemctl enable ssh.service;
 EXPOSE 22
 
 # Create the vagrant user
@@ -43,12 +43,18 @@ RUN useradd -m -G sudo -s /bin/bash vagrant && \
     echo 'vagrant ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/vagrant && \
     chmod 440 /etc/sudoers.d/vagrant
 
-# Establish ssh keys for vagrant
-RUN mkdir -p /home/vagrant/.ssh; \
-    chmod 700 /home/vagrant/.ssh
-RUN wget -q -O /home/vagrant/.ssh/authorized_keys https://raw.githubusercontent.com/hashicorp/vagrant/master/keys/vagrant.pub
-RUN chmod 600 /home/vagrant/.ssh/authorized_keys; \
+# Generate unique SSH keys for vagrant user
+RUN mkdir -p /home/vagrant/.ssh && \
+    chmod 700 /home/vagrant/.ssh && \
+    ssh-keygen -t rsa -b 4096 -f /home/vagrant/.ssh/id_rsa -N "" && \
+    cp /home/vagrant/.ssh/id_rsa.pub /home/vagrant/.ssh/authorized_keys && \
+    chmod 600 /home/vagrant/.ssh/authorized_keys && \
     chown -R vagrant:vagrant /home/vagrant/.ssh
+
+# Store the private key in a location that can be accessed during provisioning
+RUN mkdir -p /vagrant/ssh_keys && \
+    cp /home/vagrant/.ssh/id_rsa /vagrant/ssh_keys/vagrant_id_rsa && \
+    chmod 600 /vagrant/ssh_keys/vagrant_id_rsa
 
 # Run the init daemon
 VOLUME [ "/sys/fs/cgroup" ]
