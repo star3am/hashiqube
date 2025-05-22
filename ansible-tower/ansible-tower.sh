@@ -52,7 +52,7 @@ echo -e '\e[38;5;198m'"++++ Pull quay.io/ansible/awx-ee:latest to avoid Back-off
 echo -e '\e[38;5;198m'"++++ "
 sudo --preserve-env=PATH -u vagrant minikube ssh docker pull quay.io/ansible/awx-ee:latest
 
-# 
+#
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Create kustomization.yaml"
 echo -e '\e[38;5;198m'"++++ "

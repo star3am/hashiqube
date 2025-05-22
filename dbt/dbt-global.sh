@@ -5,8 +5,8 @@ set -e
 source /vagrant/dbt/common.sh
 
 ############################
-# installs the odbc drivers required and 
-# sets the pip versions for MSSQL 
+# installs the odbc drivers required and
+# sets the pip versions for MSSQL
 install-dbt-mssql () {
 
   echo "Installing dbt core.  Version: ${dbt_sqlserver}"
@@ -104,7 +104,7 @@ case $DBT_WITH in
   postgres)
   install-dbt
   ;;
-  
+
   redshift)
   install-dbt-redshift
   ;;

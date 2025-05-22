@@ -12,7 +12,7 @@ function k3s-install() {
   echo -e '\e[38;5;198m'"++++ "
   echo -e '\e[38;5;198m'"++++ CPU is $ARCH"
   echo -e '\e[38;5;198m'"++++ "
-  
+
   echo -e '\e[38;5;198m'"++++ "
   echo -e '\e[38;5;198m'"++++ Ensure Docker Daemon is running (Dependency)"
   echo -e '\e[38;5;198m'"++++ "
@@ -56,7 +56,7 @@ function k3s-install() {
   echo -e '\e[38;5;198m'"++++ "
   echo -e '\e[38;5;198m'"++++ Configure K3s Cluster access to user ubuntu"
   echo -e '\e[38;5;198m'"++++ "
-  sudo chmod -R 644 /etc/rancher/k3s 
+  sudo chmod -R 644 /etc/rancher/k3s
   # Set kube config for root
   sudo mkdir -p /root/.kube
   sudo cp /etc/rancher/k3s/k3s.yaml /root/.kube/config

@@ -34,7 +34,7 @@ RUN find /lib/systemd/system/sysinit.target.wants -mindepth 1 -not -name "system
     rm -f /lib/systemd/system/anaconda.target.wants/*;
 
 # Enable ssh for vagrant
-RUN systemctl enable ssh.service; 
+RUN systemctl enable ssh.service;
 EXPOSE 22
 
 # Create the vagrant user
@@ -49,6 +49,8 @@ RUN mkdir -p /home/vagrant/.ssh; \
 RUN wget -q -O /home/vagrant/.ssh/authorized_keys https://raw.githubusercontent.com/hashicorp/vagrant/master/keys/vagrant.pub
 RUN chmod 600 /home/vagrant/.ssh/authorized_keys; \
     chown -R vagrant:vagrant /home/vagrant/.ssh
+
+RUN python3 -m pip install --no-cache-dir --quiet --upgrade pre-commit==3.6.0 --break-system-packages
 
 # Run the init daemon
 VOLUME [ "/sys/fs/cgroup" ]

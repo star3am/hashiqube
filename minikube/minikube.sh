@@ -18,7 +18,7 @@ function minikube-install() {
   echo -e '\e[38;5;198m'"++++ "
   echo -e '\e[38;5;198m'"++++ CPU is $ARCH"
   echo -e '\e[38;5;198m'"++++ "
-  
+
   echo -e '\e[38;5;198m'"++++ "
   echo -e '\e[38;5;198m'"++++ Ensure Docker Daemon is running (Dependency)"
   echo -e '\e[38;5;198m'"++++ "
@@ -100,12 +100,12 @@ function minikube-install() {
   echo -e '\e[38;5;198m'"++++ Installing k8s CLI"
   echo -e '\e[38;5;198m'"++++ "
   sudo curl -sS https://webinstall.dev/k9s | bash
-  
+
   echo -e '\e[38;5;198m'"++++ "
   echo -e '\e[38;5;198m'"++++ Initially, some services such as the storage-provisioner, may not yet be in a Running state. This is a normal condition during cluster bring-up, and will resolve itself momentarily. For additional insight into your cluster state, minikube bundles the Kubernetes Dashboard, allowing you to get easily acclimated to your new environment:\nSleep 30s.."
   echo -e '\e[38;5;198m'"++++ "
   sleep 30;
-  
+
   echo -e '\e[38;5;198m'"++++ "
   echo -e '\e[38;5;198m'"++++ Get minikube IP"
   echo -e '\e[38;5;198m'"++++ "
@@ -225,7 +225,7 @@ function minikube-install() {
   # echo -e '\e[38;5;198m'"++++ "
   # sleep 15;
   # sudo --preserve-env=PATH -u vagrant kubectl get services hello-minikube
-  
+
   # echo -e '\e[38;5;198m'"++++ "
   # echo -e '\e[38;5;198m'"++++ The easiest way to access this service is to let kubectl to forward the port:"
   # echo -e '\e[38;5;198m'"++++ kubectl port-forward service/hello-minikube 18888:3000"

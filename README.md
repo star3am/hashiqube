@@ -177,13 +177,13 @@ Docker compose is also supported! To bring up Hashiqube with Docker Compose:
    ```bash
    # Access the container shell
    docker compose exec hashiqube /bin/bash
-   
+
    # Install dependencies
    bash hashiqube/basetools.sh
-   
+
    # Install Docker daemon
    bash docker/docker.sh
-   
+
    # Start HashiCorp Vault
    bash vault/vault.sh
    ```

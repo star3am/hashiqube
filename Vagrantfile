@@ -144,7 +144,7 @@ Vagrant::configure("2") do |config|
           end
         end
       end
-      
+
       config.vm.provider "hyperv" do |hv|
         hv.cpus = "4"
         hv.memory = "10240"
@@ -340,11 +340,11 @@ Vagrant::configure("2") do |config|
       # vagrant up --provision-with ansible-tower to only run this on vagrant up
       config.vm.provision "ansible-tower", run: "never", type: "shell", preserve_order: false, privileged: false, path: "ansible-tower/ansible-tower.sh"
 
-      # dbt 
+      # dbt
       # vagrant up --provision-with dbt to only run this on vagrant up
       config.vm.provision "dbt", run: "never", type: "shell", preserve_order: false, privileged: false, path: "dbt/dbt-global.sh"
 
-      # markdown-quiz-generator 
+      # markdown-quiz-generator
       # vagrant up --provision-with markdown-quiz-generator to only run this on vagrant up
       config.vm.provision "markdown-quiz-generator", run: "never", type: "shell", preserve_order: false, privileged: false, path: "markdown-quiz-generator/markdown-quiz-generator.sh"
 

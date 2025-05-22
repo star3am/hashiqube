@@ -150,4 +150,3 @@ build {
     only            = ["azure-arm.ubuntu-2204"]
   }
 }
-

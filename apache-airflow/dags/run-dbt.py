@@ -4,7 +4,7 @@ from airflow.providers.ssh.operators.ssh import SSHOperator
 
 @dag(
     dag_id="run-dbt",
-    schedule_interval=None,     
+    schedule_interval=None,
     start_date=datetime(2022, 1, 1),
     catchup=False,
     )

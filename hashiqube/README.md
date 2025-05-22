@@ -85,8 +85,8 @@ Find more information about HashiQube on these channels:
 The Basetools provider installs essential tools that HashiQube provisioners need. This is one of the first provisioners that must be run. It installs:
 
 ```bash
-swapspace rkhunter jq curl unzip software-properties-common bzip2 git make 
-python3.9 python3-pip python3-dev python3-venv python3-virtualenv golang-go 
+swapspace rkhunter jq curl unzip software-properties-common bzip2 git make
+python3.9 python3-pip python3-dev python3-venv python3-virtualenv golang-go
 apt-utils ntp update-motd toilet figlet nano iputils-ping dnsutils iptables telnet
 ```
 

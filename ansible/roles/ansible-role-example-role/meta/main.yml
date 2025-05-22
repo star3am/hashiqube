@@ -30,7 +30,7 @@ galaxy_info:
     - 2019
     - 2016
     - 2012
-  
+
   galaxy_tags: [soe, factory, hashicorp, packer]
 
 dependencies: []

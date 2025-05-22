@@ -115,13 +115,13 @@ Sample output:
 > Host: whoami.nomad.localhost
 > User-Agent: curl/7.79.1
 > Accept: */*
-> 
+>
 * Mark bundle as not supporting multiuse
 < HTTP/1.1 200 OK
 < Content-Length: 365
 < Content-Type: text/plain; charset=utf-8
 < Date: Thu, 16 Jun 2022 02:08:56 GMT
-< 
+<
 Hostname: 86bb7e3d366a
 IP: 127.0.0.1
 IP: 172.18.0.5

@@ -44,7 +44,7 @@ resource "null_resource" "awx_cli" {
       host        = "localhost"
     }
   }
-  
+
   provisioner "local-exec" {
     command    = "${var.tower_cli_local} --conf.host ${var.tower_host} -f human job_templates launch ansible-role-example-role --monitor --filter status --conf.insecure --conf.token ${data.external.tower_token.result.token}"
     on_failure = continue

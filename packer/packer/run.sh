@@ -7,7 +7,7 @@ if ! [ -x "$(command -v packer)" ]; then
   echo 'Error: packer is not installed.' >&2
   exit 1
 else
-  echo "Packer version installed: "$(packer -v) 
+  echo "Packer version installed: "$(packer -v)
 fi
 
 echo -e "++++ "

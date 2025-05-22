@@ -21,7 +21,7 @@ The process is straightforward:
     <p><strong>From Markdown File:</strong></p>
     <img src="images/sample-quiz-md-file.PNG" alt="Sample Markdown Quiz File" width="85%">
   </div>
-  
+
   <div>
     <p><strong>To Interactive Quiz:</strong></p>
     <img src="images/sample-quiz-animation.gif" alt="Sample Quiz Animation" width="85%">
