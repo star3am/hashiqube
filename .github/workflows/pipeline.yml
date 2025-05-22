@@ -13,7 +13,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checking out the repo
       - uses: actions/checkout@v3
 
       # https://github.com/docker/setup-qemu-action
@@ -54,11 +53,7 @@ jobs:
       options: --user 1001
 
     steps:
-      # Checking out the repo
       - uses: actions/checkout@v3
-
-      - name: Install Pre Commit
-        run: python3 -m pip install --no-cache-dir --quiet --upgrade --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org git+https://github.com/pre-commit/pre-commit.git@v2.20.0
 
       - name: cd GITHUB_WORKSPACE
         run: cd $GITHUB_WORKSPACE
