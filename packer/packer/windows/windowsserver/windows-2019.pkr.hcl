@@ -191,7 +191,7 @@ build {
     only          = ["amazon-ebs.windows-2019", "googlecompute.windows-2019", "azure-arm.windows-2019"]
   }
   */
-  
+
   provisioner "ansible" {
     command   = "./scripts/ansible.sh"
     user      = "${build.User}"

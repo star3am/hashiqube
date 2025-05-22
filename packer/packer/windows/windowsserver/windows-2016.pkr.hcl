@@ -186,10 +186,10 @@ build {
   # Install EC2Launch
   provisioner "powershell" {
     inline = [
-      "Write-Host \"Download EC2Launch to temp folder $env:Temp\"", 
+      "Write-Host \"Download EC2Launch to temp folder $env:Temp\"",
       "Invoke-WebRequest -Uri https://s3.amazonaws.com/ec2-downloads-windows/EC2Launch/latest/EC2-Windows-Launch.zip -OutFile $env:Temp/EC2-Windows-Launch.zip",
       "Invoke-WebRequest -Uri https://s3.amazonaws.com/ec2-downloads-windows/EC2Launch/latest/install.ps1 -OutFile $env:Temp/EC2Launch-Install.ps1",
-      "Write-Host Install EC2Launch", 
+      "Write-Host Install EC2Launch",
       "Invoke-Expression -Command $env:Temp/EC2Launch-Install.ps1"
     ]
     only = ["amazon-ebs.windows-2016"]

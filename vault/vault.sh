@@ -328,7 +328,7 @@ echo $?
 #sudo -H -u ubuntu vault write ssh/keys/vault_key key=@/home/ubuntu/.ssh/id_rsa
 #vault write ssh/roles/dynamic_key_role key_type=dynamic key=vault_key admin_user=ubuntu default_user=ubuntu cidr_list=0.0.0.0/0
 
-#echo -e '\e[38;5;198m'"++++ Please run the following on your local computer" 
+#echo -e '\e[38;5;198m'"++++ Please run the following on your local computer"
 #echo -e '\e[38;5;198m'"++++ export VAULT_TOKEN=$(grep 'Initial Root Token' /etc/vault/init.file | cut -d ':' -f2 | tr -d ' ')"
 #echo -e '\e[38;5;198m'"++++ export VAULT_ADDR=http://10.9.99.10:8200"
 #echo -e '\e[38;5;198m'"++++ vagrant ssh -c \"vault write ssh/creds/dynamic_key_role ip=10.9.99.10\""

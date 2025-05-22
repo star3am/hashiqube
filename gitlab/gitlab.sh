@@ -89,7 +89,7 @@ sudo --preserve-env=PATH -u vagrant helm install --version $GITLAB_HELM_CHART_VE
   --set redis.resources.requests.memory=128Mi \
   -f https://gitlab.com/gitlab-org/charts/gitlab/raw/master/examples/values-minikube-minimum.yaml gitlab/gitlab
 
-# INFO: Other flags I have tried during this process 
+# INFO: Other flags I have tried during this process
 # --set global.hosts.domain=localhost \
 # --set global.hosts.gitlab.name=localhost \
 # --set global.hosts.gitlab.hostnameOverride=localhost \

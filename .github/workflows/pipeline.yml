@@ -42,3 +42,26 @@ jobs:
           push: true
           tags: |
             ghcr.io/${{ github.repository_owner }}/hashiqube:latest
+  
+  run-run-dot-sh:
+    runs-on: ubuntu-latest
+    needs: build-and-publish-latest
+    if: |
+      always() &&
+      (needs.build-and-publish-latest.result == 'success' || needs.build-and-publish-latest.result == 'skipped')
+    container:
+      image: ghcr.io/${{ github.repository_owner }}/hashiqube:latest
+      options: --user 1001
+
+    steps:
+      # Checking out the repo
+      - uses: actions/checkout@v3
+
+      - name: Install Pre Commit
+        run: python3 -m pip install --no-cache-dir --quiet --upgrade --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org git+https://github.com/pre-commit/pre-commit.git@v2.20.0
+
+      - name: cd GITHUB_WORKSPACE
+        run: cd $GITHUB_WORKSPACE
+
+      - name: Run Pre-Commit rules
+        run: pre-commit run -a

@@ -12,8 +12,8 @@ DBT_WITH=postgres
 # mssql
 # ^^ with mssql being SQL Server and Synapase
 # spark
-# all 
-# ^^ will install all adapters excluding mssql 
+# all
+# ^^ will install all adapters excluding mssql
 ########################################
 
 dbt_postgres_ref=dbt-core@v1.2.5 # postgres adapter is part of core now

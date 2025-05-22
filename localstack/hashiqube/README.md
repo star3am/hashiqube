@@ -32,20 +32,19 @@ You should already have Terraform installed, if you don't see this link: https:/
 
 ## Run Terraform
 
-Now you can run: 
+Now you can run:
 
 - `terraform init`
 - `terraform plan`
 - `terraform apply`
 
-You will see HashiQube launching and it will stream the User Data debug output, 
+You will see HashiQube launching and it will stream the User Data debug output,
 
-## IMPORTANT 
+## IMPORTANT
 
 Don't forget to clean up and run `terraform destroy` after you are done to avoid Cloud costs!
 
-For further reading see: 
+For further reading see:
 
 - https://hashiqube.com
 - https://registry.terraform.io/modules/star3am/hashiqube/hashicorp/latest
-

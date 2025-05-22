@@ -114,9 +114,9 @@ mysql: [Warning] Using a password on the command line interface can be insecure.
 
    ```bash
    vagrant ssh -c "mysql -h 127.0.0.1 -u root -ppassword -e \"CREATE USER 'vault'@'%' IDENTIFIED BY 'password';\""
-   
+
    vagrant ssh -c "mysql -h 127.0.0.1 -u root -ppassword -e \"GRANT ALL PRIVILEGES ON *.* TO 'vault'@'%' WITH GRANT OPTION;\""
-   
+
    vagrant ssh -c "mysql -h 127.0.0.1 -u root -ppassword -e \"GRANT CREATE USER ON *.* to 'vault'@'%';\""
    ```
 

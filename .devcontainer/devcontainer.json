@@ -19,13 +19,50 @@
       "settings": {
         "editor.fontSize": 16,
         "terminal.integrated.fontSize": 16,
-        "terminal.integrated.scrollback": 1000
+        "terminal.integrated.scrollback": 1000,
+        "[markdown]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode",
+          "editor.tabSize": 2
+        },
+        "editor.formatOnSave": true,
+        "evenBetterToml.formatter.allowedBlankLines": 2,
+        "files.exclude": {
+          "*.egg-info": true,
+          ".pytest_cache": true,
+          ".tox": true,
+          "__pycache__": true,
+          "build": true
+        },
+        "git.ignoreLimitWarning": true,
+        "sortLines.filterBlankLines": true,
+        "yaml.completion": true,
+        "yaml.customTags": [
+          "!encrypted/pkcs1-oaep scalar",
+          "!vault scalar"
+        ],
+        "yaml.format.enable": false,
+        "yaml.validate": true,
+        "evenBetterToml.formatter.alignComments": false,
+        "[yaml]": {
+          "editor.defaultFormatter": "redhat.vscode-yaml"
+        },
+        "[terraform]": {
+          "editor.formatOnSave": true,
+          "editor.defaultFormatter": "hashicorp.terraform",
+          "editor.tabSize": 2,
+          "experimentalFeatures.validateOnSave": true
+        },
+        "[terraform-vars]": {
+          "editor.tabSize": 2
+        }
       },
       "extensions": [
         "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
         "hashicorp.terraform",
         "nhoizey.gremlins",
-        "hashicorp.hcl"
+        "hashicorp.hcl",
+        "redhat.vscode-yaml"
       ]
     }
   }

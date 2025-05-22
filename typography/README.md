@@ -118,7 +118,7 @@ _The quick brown fox jumps over the lazy dog._
 > The quick brown fox jumps over the lazy dog.
 
 > The quick brown fox jumps over the lazy dog.
-> 
+>
 > The quick brown fox jumps over the lazy dog.
 
 > The quick brown fox jumps over the lazy dog.
@@ -177,7 +177,7 @@ _The quick brown fox jumps over the lazy dog._
 #### Superscript and Subscript
 
 ```markdown
-2 <sup>53-1</sup> and -2 <sup>53-1</sup> 
+2 <sup>53-1</sup> and -2 <sup>53-1</sup>
 
 Subscript <sub>The quick brown fox jumps over the lazy dog.</sub>
 Superscript <sup>The quick brown fox jumps over the lazy dog.</sup>
@@ -324,10 +324,10 @@ Alternative syntax (no pipe at beginning/end):
 ```markdown
 Default    | Left align | Center align | Right align
 ---------- | :--------- | :----------: | ----------:
-9999999999 | 9999999999 | 9999999999   | 9999999999 
+9999999999 | 9999999999 | 9999999999   | 9999999999
 999999999  | 999999999  | 999999999    | 999999999  
-99999999   | 99999999   | 99999999     | 99999999   
-9999999    | 9999999    | 9999999      | 9999999 
+99999999   | 99999999   | 99999999     | 99999999  
+9999999    | 9999999    | 9999999      | 9999999
 ```
 
 Default    | Left align | Center align | Right align

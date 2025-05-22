@@ -31,7 +31,7 @@ Although it is based on markdown for its style format, at the moment the followi
 ```text
 2. The domain of MaxSoft is test automation framework development.
     - (x) True
-    - ( ) False 
+    - ( ) False
 ```
 Note that the correct answer is specified with an **x** ( x or X, upper or lower case) and must be in parentheses to specify that it is only one to be selected, for example, for false or true questions.
 
@@ -55,14 +55,14 @@ Note that for questions types 1 and 2, you must leave a space for the wrong answ
 It is a question where you must write the correct answer, this is specified in the following line of the question preceded by **R: =** (R or, upper or lower case) then the correct answer (it is validated regardless of whether it is uppercase or lowercase)
 
 ### Designing the quiz
-There are several tools out there on the internet that allow you to preview Markdown files. 
+There are several tools out there on the internet that allow you to preview Markdown files.
 Some online examples:
 
 1. https://dillinger.io/
 2. https://markdownlivepreview.com/
 
 ### Generating quizzes
-The application will generate all the **.md** (Markdown) files that are inside the folder 
+The application will generate all the **.md** (Markdown) files that are inside the folder
 `./markdown-quiz-files/**`. Note that this folder already has a default quiz (sample-quiz.md).
 
 You can add as many as Markdown files you want, and each of them will be generated separate quizzes.
@@ -72,7 +72,7 @@ To generate quizzes, there are two batch files,
 This is a batch file that simply executes `python quiz-generator.py` and will generate the quizzes including the required libraries (Bootstrap, jQuery) to execute it independently in the browser (usually to verify that everything is fine).
 
 2. `quiz-generator-local-server.bat` \
-This is a batch file that executes, 
+This is a batch file that executes,
 ```
 python quiz-generator.py
 cd generated-quizzes

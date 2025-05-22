@@ -7,9 +7,9 @@ This is an Ansible Example Role used for training and development
 ## Gotcha's (Sorry!!)
 - M1 and M2 Mac Architectures are NOT supported at this stage
 - Hyper-V is not supported at this stage
-- Your Vagrant version on Windows and in WSL *MUST* be the same 
+- Your Vagrant version on Windows and in WSL *MUST* be the same
 - Installing WSL could give error: `Catastrophic failure`
-``` 
+```
 PS C:\Windows\system32> wsl --install
 Installing: Windows Subsystem for Linux
 Catastrophic failure
@@ -23,7 +23,7 @@ PS C:\WINDOWS\system32> wsl --install -d ubuntu
 Installing: Ubuntu
 An error occurred during installation. Distribution Name: 'Ubuntu' Error Code: 0x8000ffff
 ```
-Follow this link: https://askubuntu.com/questions/1434150/wsl-ubuntu-installation-fails-with-the-error-please-restart-wsl-with-the-follo and 
+Follow this link: https://askubuntu.com/questions/1434150/wsl-ubuntu-installation-fails-with-the-error-please-restart-wsl-with-the-follo and
 https://learn.microsoft.com/en-us/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package
 
 Note : Run ``` wsl --install -d Ubuntu ``` in **non administrative** mode in powershell
@@ -44,12 +44,12 @@ Set WSL Ubuntu Distro to version 1: run `wsl --set-version Ubuntu 1` in powershe
 ## Get Started! Dependencies (The Tools you will need)
 :bulb: __IMPORTANT__ Install these Tools first, before we start actually using Molecule to develop our Ansible Roles
 
-- Git - https://git-scm.com 
+- Git - https://git-scm.com
 - VSCode - https://code.visualstudio.com
 - Vagrant - https://www.vagrantup.com
 - Virtualbox - https://www.virtualbox.org
 - Python and Pip - https://www.python.org
-- Windows Subsystem for Linux WSL (Windows Operating System), install as **Administrator in Powershell** - https://learn.microsoft.com/en-us/windows/wsl/install 
+- Windows Subsystem for Linux WSL (Windows Operating System), install as **Administrator in Powershell** - https://learn.microsoft.com/en-us/windows/wsl/install
 - WSL Ubuntu Distro, install as **Non-Administrator in Powershell** `wsl --install -d Ubuntu`
 - Set WSL Ubuntu Distro to version 1 `wsl --set-version Ubuntu 1`
 - SSHPass - https://www.cyberciti.biz/faq/how-to-install-sshpass-on-macos-os-x/
@@ -72,11 +72,11 @@ See: `molecule/default/molecule.yml`
 | Debian 9 | ✘ | ✘ | ✘ | amd64 | Windows, Mac, Linux |
 | Debian 10 | ✘ | ✘ | ✘ | amd64 | Windows, Mac, Linux |
 
-## Instructions 
+## Instructions
 Here is how you can get up and running quickly, this section is devided into `Windows using Windows Subsystem for Linux WSL` and `Mac OSX` (Sorry Intel Mac's only at this stage) and Linux
 
 ### Windows (Ubuntu with WSL) and Linux (Ubuntu recommended)
-Install all the Tools you need in the [__Get Started Section__](#get-started-dependencies-the-tools-you-will-need) 
+Install all the Tools you need in the [__Get Started Section__](#get-started-dependencies-the-tools-you-will-need)
 
 Install Python
 
@@ -94,7 +94,7 @@ sudo apt-get install -y sshpass
 Install Hashicorp Package Sources
 
 ```
-wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg 
+wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
 
 echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
 
@@ -127,8 +127,8 @@ and do
 Allow all 3 types of network when set up Firewall for VirtualBox
 ![image-2.png](./image-2.png)
 
-### Mac 
-Install all the Tools you need in the [__Get Started Section__](#get-started-dependencies-the-tools-you-will-need) 
+### Mac
+Install all the Tools you need in the [__Get Started Section__](#get-started-dependencies-the-tools-you-will-need)
 
 Install SSHPass
 
@@ -144,7 +144,7 @@ and do
 
 `./run.sh`
 
-After Molecule bringing up the Ubuntu VM in VirtualBox, to test connection to vagrant in VM, open a new WSL Ubuntu window, and run `ssh vagrant@127.0.0.1 -p 3225` or `ssh vagrant@localhost -p 3225`. Login with password: `vagrant`. 
+After Molecule bringing up the Ubuntu VM in VirtualBox, to test connection to vagrant in VM, open a new WSL Ubuntu window, and run `ssh vagrant@127.0.0.1 -p 3225` or `ssh vagrant@localhost -p 3225`. Login with password: `vagrant`.
 
 Succesful ouput should be as below:
 ![image-4.png](./image-4.png)
@@ -167,9 +167,9 @@ Succesful ouput should be as below:
 - https://app.vagrantup.com/jborean93
 - https://github.com/jborean93/packer-windoze
 
-## Common Errors 
+## Common Errors
 
 ```
 fatal: [ansible-role-example-role-ubuntu-2204]: FAILED! => {"msg": "to use the 'ssh' connection type with passwords or pkcs11_provider, you must install the sshpass program"}
 ```
-Did you install the SSHPass application? See [__Get Started Section__](#get-started-dependencies-the-tools-you-will-need) 
+Did you install the SSHPass application? See [__Get Started Section__](#get-started-dependencies-the-tools-you-will-need)

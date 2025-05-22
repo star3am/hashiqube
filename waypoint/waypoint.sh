@@ -111,7 +111,7 @@ function waypoint-install() {
 }
 
 function waypoint-kubernetes-minikube() {
-  
+
   if pgrep -x "minikube" >/dev/null
   then
     echo "Minikube is running"
@@ -174,7 +174,7 @@ function waypoint-kubernetes-minikube() {
     echo -e '\e[38;5;198m'"++++ kubectl port-forward -n default service/waypoint-server 19702:9702 --address=\"0.0.0.0\", (${attempts}/${max_attempts}) sleep 10s"
     sudo --preserve-env=PATH -u vagrant kubectl port-forward -n default service/waypoint-server 19702:9702 --address="0.0.0.0" > /dev/null 2>&1 &
   done
-  
+
   echo -e '\e[38;5;198m'"++++ Waypoint Login from on Platform Kubernetes (Minikube)"
   sudo --preserve-env=PATH -u vagrant waypoint login -from-kubernetes -server-tls-skip-verify https://10.9.99.10:19701
   echo -e '\e[38;5;198m'"++++ Waypoint Context Rename"
@@ -231,7 +231,7 @@ function waypoint-nomad() {
   sudo rm -rf /opt/nomad/data/volume/waypoint/*
   echo -e '\e[38;5;198m'"++++ Waypoint Install on Platform Hashicorp Nomad"
   export NOMAD_ADDR='http://localhost:4646'
-  # INFO: 
+  # INFO:
   # To further customize the server installation, you may pass advanced flag options
   # specified in the documentation for the 'server run' command. To set these values,
   # include a '--' after the full argument list for 'install', followed by these

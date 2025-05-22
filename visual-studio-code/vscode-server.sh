@@ -1,5 +1,5 @@
 
-# Run cleanup 
+# Run cleanup
 echo -e '\e[38;5;198m'"++++ Running cleanup"
 sudo docker stop code-server
 sudo docker rm code-server

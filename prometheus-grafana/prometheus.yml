@@ -42,7 +42,7 @@
       - job_name: 'kubernetes-apiservers'
         kubernetes_sd_configs:
           - role: endpoints
-        # scheme: https 
+        # scheme: https
         # tls_config:
         #   ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
         # bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
@@ -53,7 +53,7 @@
 
       - job_name: 'kubernetes-nodes'
         static_configs:
-          - targets: ['10.9.99.10:9323']      
+          - targets: ['10.9.99.10:9323']
         # scheme: https
         # tls_config:
         #   ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
@@ -107,7 +107,7 @@
 
       - job_name: 'kubernetes-cadvisor'
         static_configs:
-          - targets: ['10.9.99.10:9323']      
+          - targets: ['10.9.99.10:9323']
         # scheme: https
         # tls_config:
         #   ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
@@ -123,10 +123,10 @@
           regex: (.+)
           target_label: __metrics_path__
           replacement: /api/v1/nodes/${1}/proxy/metrics/cadvisor
-      
+
       - job_name: 'kubernetes-service-endpoints'
         static_configs:
-          - targets: ['10.9.99.10:9323']      
+          - targets: ['10.9.99.10:9323']
         kubernetes_sd_configs:
         - role: endpoints
         relabel_configs:

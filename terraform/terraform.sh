@@ -9,7 +9,7 @@ function terraform-install() {
       ARCH="arm64"
   fi
   echo -e '\e[38;5;198m'"CPU is $ARCH"
-  
+
   sudo DEBIAN_FRONTEND=noninteractive apt-get --assume-yes install -qq curl unzip jq < /dev/null > /dev/null
   if [ -f /usr/local/bin/terraform ]; then
     echo -e '\e[38;5;198m'"++++ `/usr/local/bin/terraform version` already installed at /usr/local/bin/terraform"

@@ -201,4 +201,4 @@ resource "tfe_sentinel_policy" "require-modules-from-pmr" {
   organization = "${var.tfe_organization}"
   policy       = "${data.template_file.require-modules-from-pmr.rendered}"
   enforce_mode = "hard-mandatory"
-} 
+}

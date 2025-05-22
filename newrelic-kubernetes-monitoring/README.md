@@ -85,8 +85,8 @@ Please visit <https://one.newrelic.com/launcher/k8s-cluster-explorer-nerdlet.clu
 
    ```bash
    helm repo add newrelic https://helm-charts.newrelic.com && helm repo update && \
-   kubectl create namespace newrelic; 
-   
+   kubectl create namespace newrelic;
+
    helm upgrade --install newrelic-bundle newrelic/nri-bundle \
    --set global.licenseKey=YOUR_NEWRELIC_LICENSE_KEY \
    --set global.cluster=minikube \
@@ -183,7 +183,7 @@ More information at: https://www.pixielabs.ai.
 ==> Authenticating with Pixie Cloud:
 bash: line 225: /home/vagrant/bin/px: cannot execute binary file: Exec format error
 
-FAILED to authenticate with Pixie cloud. 
+FAILED to authenticate with Pixie cloud.
   You can try this step yourself by running px auth login.
   For help, please contact support@pixielabs.ai or join our community slack/github"
 

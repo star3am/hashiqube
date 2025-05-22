@@ -240,7 +240,7 @@ ansible-galaxy install -f -r ansible/galaxy/requirements.yml -p ansible/galaxy/r
 
 - If a virtual environment creation fails:
   Close WSL and run `Restart-Service -Name "LxssManager"` as __Administrator in PowerShell__, restart WSL and run `./run.sh` again
-  
+
 - If you get `vagrant was unable to communicate with the guest machine within the configured time period` error:
   Set WSL Ubuntu Distro to version 1 by running `wsl --set-version Ubuntu 1` in PowerShell, restart WSL and run `./run.sh` again
 
@@ -296,12 +296,12 @@ Install these tools before using Molecule to develop Ansible roles:
 3. Install Hashicorp Package Sources:
 
    ```bash
-   wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg 
-   
+   wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
+
    echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
-   
+
    sudo apt update && sudo apt install vagrant
-   
+
    echo 1 > /proc/sys/fs/binfmt_misc/WSLInterop
    ```
 
@@ -309,13 +309,13 @@ Install these tools before using Molecule to develop Ansible roles:
 
    ```bash
    sudo apt-get install -y wget apt-transport-https software-properties-common
-   
+
    wget -q "https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb"
-   
+
    sudo dpkg -i packages-microsoft-prod.deb
-   
+
    sudo apt-get update
-   
+
    sudo apt-get install -y powershell
    ```
 
