@@ -50,7 +50,7 @@ RUN wget -q -O /home/vagrant/.ssh/authorized_keys https://raw.githubusercontent.
 RUN chmod 600 /home/vagrant/.ssh/authorized_keys; \
     chown -R vagrant:vagrant /home/vagrant/.ssh
 
-RUN python3 -m pip install --no-cache-dir --quiet --upgrade pre-commit==3.6.0
+RUN python3 -m pip install --no-cache-dir --quiet --upgrade pre-commit==3.6.0 --break-system-packages
 
 # Run the init daemon
 VOLUME [ "/sys/fs/cgroup" ]
