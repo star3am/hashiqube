@@ -42,7 +42,7 @@ jobs:
           tags: |
             ghcr.io/${{ github.repository_owner }}/hashiqube:latest
 
-  run-run-dot-sh:
+  run-pre-commit:
     runs-on: ubuntu-latest
     needs: build-and-publish-latest
     if: |
