@@ -48,7 +48,7 @@ body:
   - type: dropdown
     id: host_os
     attributes:
-      label: � Host Operating System
+      label: 💻 Host Operating System
       description: "Your host operating system"
       options:
         - "Windows 11"
@@ -87,7 +87,7 @@ body:
   - type: dropdown
     id: deployment_method
     attributes:
-      label: � Deployment Method
+      label: 🚀 Deployment Method
       description: "How are you trying to run HashiQube?"
       options:
         - "GitHub Codespaces"
@@ -290,8 +290,8 @@ body:
 
         - **📖 Documentation**: [HashiQube Docs](https://hashiqube.com)
         - **🎥 Introduction**: [Getting Started Video](https://hashiqube.com/#introduction-video)
-        - **� Quick Start**: [GitHub Codespaces](https://codespaces.new/star3am/hashiqube?quickstart=1)
-        - **� Learning**: [HashiCorp Developer](https://developer.hashicorp.com/)
+        - **🚀 Quick Start**: [GitHub Codespaces](https://codespaces.new/star3am/hashiqube?quickstart=1)
+        - **📚 Learning**: [HashiCorp Developer](https://developer.hashicorp.com/)
         - **💬 Community**: [HashiCorp Discuss](https://discuss.hashicorp.com/)
 
         ## ⏱️ What Happens Next?
