@@ -1,0 +1,310 @@
+name: 🔗 Component Integration Issue
+description: Report issues with HashiCorp component integration or inter-component communication
+title: "[Integration] "
+labels: ["bug", "integration"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        # 🔗 Component Integration Issue
+
+        Thank you for reporting an integration issue! This template is for problems with **HashiCorp component integration, inter-component communication, or workflow issues** between different tools in HashiQube.
+
+        ## 📋 When to use this template:
+        - ✅ Components work individually but not together
+        - ✅ Service discovery or networking issues between components
+        - ✅ Authentication/authorization problems between tools
+        - ✅ Data flow or communication issues
+        - ✅ Configuration conflicts between components
+        - ✅ Workflow or orchestration problems
+
+        ## ❌ When NOT to use this template:
+        - 🚫 **Single component issues**: One tool not working → Use "Bug Report" template
+        - 🚫 **Platform issues**: Environment problems → Use "Platform Compatibility" template
+        - 🚫 **Setup help**: Need configuration assistance → Use "Support & Setup Help" template
+
+  - type: dropdown
+    id: integration_type
+    attributes:
+      label: 🔗 Integration Type
+      description: "What type of integration issue are you experiencing?"
+      options:
+        - "Vault + Consul integration"
+        - "Vault + Nomad integration"
+        - "Consul + Nomad integration"
+        - "Vault + Boundary integration"
+        - "Consul service discovery issues"
+        - "Nomad job scheduling with Consul"
+        - "Multi-component authentication"
+        - "Service mesh connectivity"
+        - "Cross-component configuration"
+        - "Workflow orchestration"
+        - "Other integration issue"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: affected_components
+    attributes:
+      label: 🧩 Affected Components
+      description: "Which HashiCorp components are involved in this integration issue?"
+      options:
+        - label: "Vault (Secrets Management)"
+        - label: "Consul (Service Networking)"
+        - label: "Nomad (Workload Orchestration)"
+        - label: "Boundary (Secure Access)"
+        - label: "Terraform (Infrastructure as Code)"
+        - label: "Waypoint (Application Delivery)"
+        - label: "Packer (Machine Images)"
+        - label: "Other DevOps tools (Docker, Kubernetes, etc.)"
+
+  - type: dropdown
+    id: deployment_environment
+    attributes:
+      label: 🚀 Deployment Environment
+      description: "How are you running HashiQube?"
+      options:
+        - "GitHub Codespaces"
+        - "Local Vagrant (VirtualBox)"
+        - "Local Vagrant (Docker)"
+        - "Local Docker Compose"
+        - "AWS (Multi-cloud)"
+        - "GCP (Multi-cloud)"
+        - "Azure (Multi-cloud)"
+        - "Other"
+    validations:
+      required: true
+
+  - type: textarea
+    id: integration_issue
+    attributes:
+      label: 🚨 Integration Issue Description
+      description: "Describe the specific integration problem you're experiencing"
+      placeholder: |
+        **What integration should work:**
+        Nomad should be able to retrieve secrets from Vault for job deployments
+
+        **What's actually happening:**
+        Nomad jobs fail with authentication errors when trying to access Vault
+
+        **Expected workflow:**
+        1. Nomad job requests secret from Vault
+        2. Vault authenticates Nomad using Consul service identity
+        3. Vault returns secret to Nomad
+        4. Nomad uses secret in job deployment
+
+        **Actual behavior:**
+        - Nomad job fails at step 2 with "permission denied"
+        - Vault logs show authentication failure
+        - Consul shows services are registered correctly
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction_steps
+    attributes:
+      label: 🔄 Steps to Reproduce
+      description: "Step-by-step instructions to reproduce the integration issue"
+      placeholder: |
+        1. Start HashiQube with: vagrant up --provision-with basetools,vault,consul,nomad
+        2. Verify all services are running: vault status, consul members, nomad status
+        3. Configure Vault-Consul integration: vault auth enable consul
+        4. Deploy test Nomad job that requires Vault secret: nomad job run test-job.hcl
+        5. Observe job failure in Nomad UI or logs
+        6. Check Vault audit logs for authentication attempts
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: configuration_details
+    attributes:
+      label: ⚙️ Configuration Details
+      description: "Relevant configuration for the affected components"
+      placeholder: |
+        **Vault configuration:**
+        ```hcl
+        # vault.hcl relevant sections
+        storage "consul" {
+          address = "127.0.0.1:8500"
+          path    = "vault/"
+        }
+        ```
+
+        **Consul configuration:**
+        ```hcl
+        # consul.hcl relevant sections
+        connect {
+          enabled = true
+        }
+        ```
+
+        **Nomad configuration:**
+        ```hcl
+        # nomad.hcl relevant sections
+        vault {
+          enabled = true
+          address = "http://127.0.0.1:8200"
+        }
+        ```
+      render: markdown
+    validations:
+      required: false
+
+  - type: textarea
+    id: error_logs
+    attributes:
+      label: 📋 Error Logs and Output
+      description: "Include relevant logs from all affected components"
+      placeholder: |
+        **Vault logs:**
+        ```
+        [ERROR] auth.consul: failed to verify consul token: error="Unexpected response code: 403"
+        ```
+
+        **Consul logs:**
+        ```
+        [WARN] agent: Check is now critical: check=vault:vault-sealed
+        ```
+
+        **Nomad logs:**
+        ```
+        [ERROR] client.vault: failed to derive vault token: error="permission denied"
+        ```
+
+        **Job output:**
+        ```
+        ==> Evaluation "abc123" finished with status "failed"
+        ```
+      render: shell
+    validations:
+      required: false
+
+  - type: textarea
+    id: network_connectivity
+    attributes:
+      label: 🌐 Network Connectivity Tests
+      description: "Results of connectivity tests between components"
+      placeholder: |
+        **Service accessibility tests:**
+        ```bash
+        # From Nomad to Vault
+        curl -s http://127.0.0.1:8200/v1/sys/health
+        # Response: {"initialized":true,"sealed":false}
+
+        # From Vault to Consul
+        curl -s http://127.0.0.1:8500/v1/status/leader
+        # Response: "127.0.0.1:8300"
+
+        # Service discovery
+        dig @127.0.0.1 -p 8600 vault.service.consul
+        # Response: vault.service.consul. 0 IN A 127.0.0.1
+        ```
+
+        **Port accessibility:**
+        - Vault (8200): ✅ Accessible
+        - Consul (8500): ✅ Accessible  
+        - Nomad (4646): ✅ Accessible
+      render: markdown
+    validations:
+      required: false
+
+  - type: input
+    id: hashiqube_version
+    attributes:
+      label: 📦 HashiQube Version/Commit
+      description: "HashiQube version or git commit hash"
+      placeholder: "Latest from main branch or specific commit hash"
+    validations:
+      required: true
+
+  - type: input
+    id: host_os
+    attributes:
+      label: 💻 Host Operating System
+      description: "Your host operating system and version"
+      placeholder: "macOS 14.1, Ubuntu 22.04, Windows 11, etc."
+    validations:
+      required: true
+
+  - type: textarea
+    id: workarounds_attempted
+    attributes:
+      label: 🔧 Workarounds Attempted
+      description: "What have you tried to resolve the integration issue?"
+      placeholder: |
+        **Configuration changes tried:**
+        - Modified Vault auth method configuration
+        - Adjusted Consul ACL policies
+        - Changed Nomad Vault integration settings
+
+        **Troubleshooting steps:**
+        - Restarted services in different orders
+        - Checked service registration in Consul
+        - Verified network connectivity between components
+        - Reviewed authentication tokens and policies
+
+        **Temporary workarounds:**
+        - Using static secrets instead of dynamic
+        - Bypassing Vault integration temporarily
+        - Manual token generation for testing
+      render: markdown
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: 📝 Additional Context
+      description: "Any other relevant information about the integration issue"
+      placeholder: |
+        - Specific use case or workflow requirements
+        - Integration patterns you're trying to implement
+        - Previous working configurations
+        - Related documentation or tutorials followed
+        - Screenshots of error messages or configurations
+        - Timing or sequence dependencies observed
+      render: markdown
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: troubleshooting_completed
+    attributes:
+      label: ✅ Troubleshooting Completed
+      description: "Please confirm you have done the following:"
+      options:
+        - label: "I have verified each component works individually"
+          required: true
+        - label: "I have checked network connectivity between components"
+          required: true
+        - label: "I have reviewed relevant configuration files"
+          required: true
+        - label: "I have searched existing [issues](https://github.com/star3am/hashiqube/issues) for similar integration problems"
+          required: true
+        - label: "I have included relevant logs from all affected components"
+          required: false
+
+  - type: markdown
+    attributes:
+      value: |
+        ## 📚 Helpful Resources
+
+        - **📖 Documentation**: [HashiQube Docs](https://hashiqube.com)
+        - **🔗 Integration Guides**: [HashiCorp Integration Patterns](https://developer.hashicorp.com/)
+        - **🎥 Tutorials**: [HashiCorp Learn](https://learn.hashicorp.com/)
+        - **💬 Community**: [HashiCorp Discuss](https://discuss.hashicorp.com/)
+
+        ## ⏱️ What Happens Next?
+
+        1. **Analysis**: We'll analyze the integration issue and component interactions
+        2. **Investigation**: We'll investigate configuration and connectivity requirements
+        3. **Testing**: We'll reproduce the issue in a similar environment
+        4. **Resolution**: We'll provide a fix or configuration guidance
+        5. **Documentation**: We'll update integration guides to prevent similar issues
+
+        **Note**: Integration issues often require understanding the specific workflow and component dependencies. We may ask for additional configuration details or logs.
+
+        Thank you for helping improve HashiCorp component integration in HashiQube! 🙏

@@ -1,0 +1,263 @@
+name: 🎓 Learning Experience Feedback
+description: Share feedback about your HashiQube learning experience and suggest educational improvements
+title: "[Learning] "
+labels: ["enhancement", "documentation", "education"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        # 🎓 Learning Experience Feedback
+
+        Thank you for sharing your learning experience! This template helps us improve HashiQube's educational value and make it better for DevOps learning.
+
+        ## 📋 When to use this template:
+        - ✅ You want to share feedback about your learning experience
+        - ✅ You have suggestions for improving educational content
+        - ✅ You found gaps in documentation or tutorials
+        - ✅ You want to suggest new learning paths or examples
+        - ✅ You have ideas for better onboarding or guidance
+        - ✅ You want to share successful learning outcomes
+
+        ## ❌ When NOT to use this template:
+        - 🚫 **Bug reports**: Technical issues → Use "Bug Report" template
+        - 🚫 **Feature requests**: New functionality → Use "Feature Request" template
+        - 🚫 **Setup help**: Need assistance → Use "Support & Setup Help" template
+
+  - type: dropdown
+    id: experience_type
+    attributes:
+      label: 🎯 Experience Type
+      description: "What type of learning experience are you sharing feedback about?"
+      options:
+        - "First-time setup and onboarding"
+        - "HashiCorp tool learning (Vault, Consul, Nomad, etc.)"
+        - "DevOps workflow understanding"
+        - "Multi-cloud deployment learning"
+        - "Integration and orchestration concepts"
+        - "Certification preparation"
+        - "Teaching or training others"
+        - "Demo or presentation preparation"
+        - "General DevOps education"
+        - "Other"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: learning_level
+    attributes:
+      label: 📚 Your Learning Level
+      description: "What's your experience level with HashiCorp tools and DevOps?"
+      options:
+        - "Complete beginner (new to DevOps and HashiCorp tools)"
+        - "Beginner (some DevOps experience, new to HashiCorp)"
+        - "Intermediate (familiar with some HashiCorp tools)"
+        - "Advanced (experienced with HashiCorp tools)"
+        - "Expert (teaching or training others)"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: deployment_method
+    attributes:
+      label: 🚀 Deployment Method Used
+      description: "How did you run HashiQube for your learning?"
+      options:
+        - "GitHub Codespaces"
+        - "Local Vagrant (VirtualBox)"
+        - "Local Vagrant (Docker)"
+        - "Local Docker Compose"
+        - "AWS (Multi-cloud)"
+        - "GCP (Multi-cloud)"
+        - "Azure (Multi-cloud)"
+        - "Multiple methods"
+        - "Other"
+    validations:
+      required: true
+
+  - type: textarea
+    id: learning_goals
+    attributes:
+      label: 🎯 Learning Goals
+      description: "What were you trying to learn or accomplish?"
+      placeholder: |
+        **Primary learning objectives:**
+        - Understanding HashiCorp Vault for secrets management
+        - Learning service mesh concepts with Consul
+        - Exploring container orchestration with Nomad
+        - Preparing for HashiCorp Vault certification
+        - Building a demo environment for team training
+
+        **Specific use cases:**
+        - Setting up a development environment
+        - Understanding DevOps best practices
+        - Learning infrastructure as code
+        - Exploring cloud-native architectures
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: experience_feedback
+    attributes:
+      label: 📝 Learning Experience Feedback
+      description: "Share your overall learning experience with HashiQube"
+      placeholder: |
+        **What worked well:**
+        - GitHub Codespaces made it easy to get started quickly
+        - Clear documentation for Vault setup
+        - Good integration between components
+
+        **What was challenging:**
+        - Understanding the relationships between different HashiCorp tools
+        - Complex networking concepts
+        - Too many options without clear guidance on where to start
+
+        **What was missing:**
+        - Step-by-step tutorials for common scenarios
+        - More real-world examples
+        - Troubleshooting guides for common issues
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: documentation_feedback
+    attributes:
+      label: 📖 Documentation & Tutorial Feedback
+      description: "Feedback about documentation, tutorials, and learning materials"
+      placeholder: |
+        **Documentation strengths:**
+        - Comprehensive component coverage
+        - Good getting started guide
+        - Clear installation instructions
+
+        **Documentation gaps:**
+        - Missing beginner-friendly explanations
+        - Need more practical examples
+        - Lack of troubleshooting sections
+
+        **Tutorial suggestions:**
+        - End-to-end workflow examples
+        - Integration scenarios between tools
+        - Real-world use case demonstrations
+      render: markdown
+    validations:
+      required: false
+
+  - type: textarea
+    id: improvement_suggestions
+    attributes:
+      label: 💡 Improvement Suggestions
+      description: "Specific suggestions for improving the learning experience"
+      placeholder: |
+        **Educational improvements:**
+        - Add guided learning paths for different skill levels
+        - Include interactive tutorials or walkthroughs
+        - Provide more context about when to use each tool
+
+        **Content suggestions:**
+        - Video tutorials for complex concepts
+        - Hands-on exercises with solutions
+        - Common pitfalls and how to avoid them
+
+        **User experience improvements:**
+        - Better onboarding flow
+        - Progress tracking for learning objectives
+        - Quick reference guides or cheat sheets
+      render: markdown
+    validations:
+      required: false
+
+  - type: textarea
+    id: success_stories
+    attributes:
+      label: 🏆 Success Stories
+      description: "Share what you successfully learned or accomplished"
+      placeholder: |
+        **Learning achievements:**
+        - Successfully set up a complete HashiCorp stack
+        - Understood the concept of service mesh
+        - Passed HashiCorp Vault certification
+        - Built a demo environment for my team
+
+        **Practical applications:**
+        - Implemented secrets management in my project
+        - Set up service discovery for microservices
+        - Created infrastructure as code templates
+        - Improved our deployment pipeline
+      render: markdown
+    validations:
+      required: false
+
+  - type: dropdown
+    id: recommendation_likelihood
+    attributes:
+      label: 📊 Recommendation Likelihood
+      description: "How likely are you to recommend HashiQube for learning HashiCorp tools?"
+      options:
+        - "10 - Extremely likely"
+        - "9 - Very likely"
+        - "8 - Likely"
+        - "7 - Somewhat likely"
+        - "6 - Neutral"
+        - "5 - Somewhat unlikely"
+        - "4 - Unlikely"
+        - "3 - Very unlikely"
+        - "2 - Extremely unlikely"
+        - "1 - Would not recommend"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: learning_outcomes
+    attributes:
+      label: ✅ Learning Outcomes Achieved
+      description: "What did you successfully learn or accomplish?"
+      options:
+        - label: "Understanding of HashiCorp tool ecosystem"
+        - label: "Hands-on experience with Vault (secrets management)"
+        - label: "Hands-on experience with Consul (service networking)"
+        - label: "Hands-on experience with Nomad (workload orchestration)"
+        - label: "Understanding of service mesh concepts"
+        - label: "Infrastructure as code principles"
+        - label: "DevOps workflow understanding"
+        - label: "Multi-cloud deployment concepts"
+        - label: "Container orchestration knowledge"
+        - label: "Security best practices"
+
+  - type: textarea
+    id: additional_feedback
+    attributes:
+      label: 📝 Additional Feedback
+      description: "Any other feedback, suggestions, or comments"
+      placeholder: |
+        - Specific features that would enhance learning
+        - Comparison with other learning platforms
+        - Ideas for community engagement
+        - Suggestions for advanced learning paths
+        - Feedback on specific components or tools
+      render: markdown
+    validations:
+      required: false
+
+  - type: markdown
+    attributes:
+      value: |
+        ## 📚 Continue Your Learning Journey
+
+        - **📖 Documentation**: [HashiQube Docs](https://hashiqube.com)
+        - **🎥 Videos**: [Getting Started Video](https://hashiqube.com/#introduction-video)
+        - **📚 Official Learning**: [HashiCorp Developer](https://developer.hashicorp.com/)
+        - **🎓 Certifications**: [HashiCorp Certification Program](https://www.hashicorp.com/certification)
+        - **💬 Community**: [HashiCorp Discuss](https://discuss.hashicorp.com/)
+
+        ## ⏱️ What Happens Next?
+
+        1. **Review**: We'll review your feedback and learning experience
+        2. **Analysis**: We'll analyze common patterns and improvement opportunities
+        3. **Planning**: We'll incorporate your suggestions into our roadmap
+        4. **Implementation**: We'll work on improving the learning experience
+        5. **Follow-up**: We may reach out for additional feedback or testing
+
+        **Your feedback helps make HashiQube better for everyone!** Thank you for taking the time to share your learning experience. 🙏

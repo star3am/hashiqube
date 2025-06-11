@@ -1,0 +1,17 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📚 HashiQube Documentation
+    url: https://hashiqube.com
+    about: Read the comprehensive documentation for HashiQube DevOps Lab
+  - name: 💬 HashiCorp Community Forum
+    url: https://discuss.hashicorp.com/
+    about: Ask questions and get help from the HashiCorp community
+  - name: 🎥 HashiQube Introduction Video
+    url: https://hashiqube.com/#introduction-video
+    about: Watch the introduction video to get started with HashiQube
+  - name: 📋 HashiCorp Learning Resources
+    url: https://developer.hashicorp.com/
+    about: Official HashiCorp learning resources and tutorials
+  - name: 🚀 GitHub Codespaces Quick Start
+    url: https://codespaces.new/star3am/hashiqube?quickstart=1
+    about: Launch HashiQube instantly in GitHub Codespaces

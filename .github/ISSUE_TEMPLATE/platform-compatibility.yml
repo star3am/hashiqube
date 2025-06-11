@@ -1,0 +1,307 @@
+name: 🖥️ Platform Compatibility Issue
+description: Report platform or architecture compatibility problems with HashiQube
+title: "[Compatibility] "
+labels: ["bug", "compatibility"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        # 🖥️ Platform Compatibility Issue
+
+        Thank you for reporting a platform compatibility issue! This template is for cases where **HashiQube has problems running on specific platforms, architectures, or deployment environments**.
+
+        ## 📋 When to use this template:
+        - ✅ HashiQube doesn't work properly on your operating system
+        - ✅ You're experiencing architecture-specific issues (ARM64, x86_64, etc.)
+        - ✅ Deployment environment compatibility problems (Windows, WSL2, macOS, etc.)
+        - ✅ Container or virtualization platform issues
+        - ✅ Cloud platform deployment problems
+        - ✅ You want to help improve platform support
+
+        ## ❌ When NOT to use this template:
+        - 🚫 **Component Issues**: Specific HashiCorp tools not working → Use "Bug Report" template
+        - 🚫 **Feature Requests**: Want new platform support → Use "Feature Request" template
+        - 🚫 **Setup Help**: Need help with basic configuration → Use "Support & Setup Help" template
+
+  - type: dropdown
+    id: platform_category
+    attributes:
+      label: 🏷️ Platform Category
+      description: "What type of platform compatibility issue are you experiencing?"
+      options:
+        - "Operating System (Windows, macOS, Linux distribution)"
+        - "Architecture (ARM64, x86_64, Apple Silicon)"
+        - "Deployment Environment (Vagrant, Docker, Codespaces)"
+        - "Virtualization Platform (VirtualBox, Hyper-V, VMware)"
+        - "Container Runtime (Docker, Podman, containerd)"
+        - "Cloud Platform (AWS, GCP, Azure)"
+        - "WSL2 (Windows Subsystem for Linux)"
+        - "Package Manager (Homebrew, apt, yum, etc.)"
+        - "Shell Environment (bash, zsh, PowerShell)"
+        - "Network Configuration (firewalls, proxies, VPNs)"
+        - "Other Platform Issue"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: host_os
+    attributes:
+      label: � Host Operating System
+      description: "Your host operating system"
+      options:
+        - "Windows 11"
+        - "Windows 10"
+        - "macOS (Intel)"
+        - "macOS (Apple Silicon)"
+        - "Ubuntu 22.04 LTS"
+        - "Ubuntu 20.04 LTS"
+        - "Ubuntu (other version)"
+        - "Debian"
+        - "CentOS/RHEL"
+        - "Fedora"
+        - "Arch Linux"
+        - "WSL2 (Ubuntu)"
+        - "WSL2 (Debian)"
+        - "WSL2 (other)"
+        - "Other Linux distribution"
+        - "Other"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: architecture
+    attributes:
+      label: 🏗️ System Architecture
+      description: "Your system architecture"
+      options:
+        - "x86_64 (Intel/AMD 64-bit)"
+        - "arm64 (Apple Silicon/ARM 64-bit)"
+        - "arm32 (ARM 32-bit)"
+        - "i386 (32-bit)"
+        - "Other"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: deployment_method
+    attributes:
+      label: � Deployment Method
+      description: "How are you trying to run HashiQube?"
+      options:
+        - "GitHub Codespaces"
+        - "Local Vagrant (VirtualBox)"
+        - "Local Vagrant (Docker)"
+        - "Local Docker Compose"
+        - "AWS (Multi-cloud)"
+        - "GCP (Multi-cloud)"
+        - "Azure (Multi-cloud)"
+        - "Other cloud platform"
+        - "Custom setup"
+    validations:
+      required: true
+
+  - type: input
+    id: hashiqube_version
+    attributes:
+      label: 📦 HashiQube Version/Commit
+      description: "HashiQube version or git commit hash"
+      placeholder: "Latest from main branch or specific commit hash"
+    validations:
+      required: true
+
+  - type: textarea
+    id: compatibility_issue
+    attributes:
+      label: 🚨 Compatibility Issue Description
+      description: "Describe the specific compatibility problem you're experiencing"
+      placeholder: |
+        **What's not working:**
+        HashiQube fails to start properly on macOS with Apple Silicon (M1/M2)
+
+        **Expected behavior:**
+        HashiQube should start successfully and all components should be accessible
+
+        **Actual behavior:**
+        - Vagrant fails to start Docker containers
+        - Architecture detection scripts fail
+        - Some HashiCorp tools don't install correctly
+
+        **Error messages:**
+        Include any specific error messages you're seeing
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction_steps
+    attributes:
+      label: 🔄 Steps to Reproduce
+      description: "Step-by-step instructions to reproduce the compatibility issue"
+      placeholder: |
+        1. Clone HashiQube repository on macOS (Apple Silicon)
+        2. Run: vagrant up --provision-with basetools,vault
+        3. Observe error during Docker container startup
+        4. Check logs for architecture-related errors
+        5. Attempt to access Vault UI - fails to load
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: system_diagnostics
+    attributes:
+      label: 🔍 System Diagnostics
+      description: |
+        Please run these commands on your system and paste the output. This helps us understand your platform configuration:
+
+        **Required commands:**
+        ```bash
+        # System information
+        uname -a
+        lscpu (Linux) / sysctl -n machdep.cpu.brand_string (macOS)
+
+        # Docker information (if applicable)
+        docker version
+        docker info
+
+        # Vagrant information (if applicable)
+        vagrant version
+        vagrant global-status
+        ```
+
+        **Optional but helpful:**
+        ```bash
+        # Package manager info
+        brew --version (macOS)
+        apt --version (Ubuntu/Debian)
+
+        # Virtualization support
+        VBoxManage --version (if using VirtualBox)
+        ```
+      placeholder: |
+        **uname -a output:**
+        ```
+        Darwin MacBook-Pro.local 23.1.0 Darwin Kernel Version 23.1.0: arm64
+        ```
+
+        **CPU information:**
+        ```
+        Apple M2 Pro
+        ```
+
+        **Docker version:**
+        ```
+        Docker version 24.0.7, build afdd53b
+        ```
+
+        **Vagrant version:**
+        ```
+        Vagrant 2.4.0
+        ```
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: error_logs
+    attributes:
+      label: 📋 Error Logs and Output
+      description: |
+        Include relevant error logs and output from HashiQube setup attempts:
+
+        - Vagrant output and error messages
+        - Docker logs and error messages
+        - Script execution output
+        - System error logs
+      placeholder: |
+        **Vagrant output:**
+        ```
+        ==> hashiqube0: Creating the container...
+        ==> hashiqube0: Error response from daemon: no matching manifest for linux/arm64/v8
+        ```
+
+        **Docker logs:**
+        ```
+        docker: Error response from daemon: image with reference hashiqube was found but does not match the specified platform
+        ```
+
+        **Script errors:**
+        ```
+        ++++ CPU is arm64
+        ++++ Architecture not supported for this component
+        ```
+      render: shell
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: 📝 Additional Context
+      description: "Any other relevant information about your platform setup"
+      placeholder: |
+        - Network configuration (corporate firewalls, VPNs, proxies)
+        - Security software that might interfere
+        - Previous working configurations or recent changes
+        - Screenshots of error messages
+        - Workarounds you've tried
+        - Similar issues you've encountered with other tools
+        - Specific use cases or requirements
+      render: markdown
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: testing_willingness
+    attributes:
+      label: 🤝 Testing & Contribution Willingness
+      description: "How can you help us improve platform compatibility?"
+      options:
+        - label: "I'm willing to run additional diagnostic commands if needed"
+        - label: "I'm available to test development versions or fixes"
+        - label: "I can provide detailed platform/system information"
+        - label: "I have programming experience and could help with code development"
+        - label: "I can help document the solution for other users with similar platforms"
+        - label: "I'm willing to help with ongoing testing and validation"
+
+  - type: checkboxes
+    id: troubleshooting_completed
+    attributes:
+      label: ✅ Troubleshooting Completed
+      description: "Please confirm you have done the following:"
+      options:
+        - label: "I have searched existing [open](https://github.com/star3am/hashiqube/issues) and [closed](https://github.com/star3am/hashiqube/issues?q=is%3Aissue+is%3Aclosed) issues to ensure this isn't a duplicate"
+          required: true
+        - label: "I have verified my system meets the minimum requirements"
+          required: true
+        - label: "I have tried the recommended deployment method for my platform"
+          required: true
+        - label: "I have checked the HashiQube documentation for platform-specific guidance"
+          required: false
+        - label: "I have included relevant error logs and diagnostic information"
+          required: false
+
+  - type: markdown
+    attributes:
+      value: |
+        ## 📚 Helpful Resources
+
+        - **📖 Documentation**: [HashiQube Docs](https://hashiqube.com)
+        - **🎥 Introduction**: [Getting Started Video](https://hashiqube.com/#introduction-video)
+        - **� Quick Start**: [GitHub Codespaces](https://codespaces.new/star3am/hashiqube?quickstart=1)
+        - **� Learning**: [HashiCorp Developer](https://developer.hashicorp.com/)
+        - **💬 Community**: [HashiCorp Discuss](https://discuss.hashicorp.com/)
+
+        ## ⏱️ What Happens Next?
+
+        1. **Analysis**: We'll analyze your platform information and compatibility issues
+        2. **Research**: We'll research your specific platform configuration and requirements
+        3. **Development**: If feasible, we'll work on adding support for your platform
+        4. **Testing**: You'll be asked to test development versions with enhanced compatibility
+        5. **Documentation**: We'll document the new platform support for other users
+
+        **Note**: Adding support for new platforms requires understanding the specific platform requirements and may take time. Some platforms may have fundamental limitations that prevent full HashiQube functionality.
+
+        Thank you for helping improve platform compatibility in HashiQube! 🙏
