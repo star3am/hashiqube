@@ -1,0 +1,230 @@
+name: 🐛 Bug Report
+description: Report a bug or issue with HashiQube DevOps Lab
+title: "[BUG] "
+labels: ["bug"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        # 🐛 Bug Report
+
+        Thank you for reporting a bug! This template is for issues with **HashiQube DevOps Lab** that are not working correctly.
+
+        ## 📋 When to use this template:
+        - ✅ HashiQube components were working before but now have issues
+        - ✅ Installation or provisioning scripts are failing
+        - ✅ HashiCorp tools (Vault, Consul, Nomad, etc.) are not starting correctly
+        - ✅ You're getting error messages during component setup
+        - ✅ Services are not accessible or behaving unexpectedly
+
+        ## ❌ When NOT to use this template:
+        - 🚫 **Feature Requests**: Want new HashiCorp tools or features → Use "Feature Request" template
+        - 🚫 **Setup Help**: Need help with initial configuration → Use "Support & Setup Help" template
+        - 🚫 **Learning Questions**: Questions about HashiCorp tools usage → Check [documentation](https://hashiqube.com) first
+
+  - type: dropdown
+    id: deployment_environment
+    attributes:
+      label: 🚀 Deployment Environment
+      description: "How are you running HashiQube?"
+      options:
+        - "GitHub Codespaces"
+        - "Local Vagrant (VirtualBox)"
+        - "Local Vagrant (Docker)"
+        - "Local Docker Compose"
+        - "AWS (Multi-cloud)"
+        - "GCP (Multi-cloud)"
+        - "Azure (Multi-cloud)"
+        - "Other"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: affected_component
+    attributes:
+      label: 🧩 Affected HashiCorp Component
+      description: "Which HashiCorp tool is experiencing issues?"
+      options:
+        - "Vault (Secrets Management)"
+        - "Consul (Service Networking)"
+        - "Nomad (Workload Orchestration)"
+        - "Boundary (Secure Access)"
+        - "Terraform (Infrastructure as Code)"
+        - "Waypoint (Application Delivery)"
+        - "Packer (Machine Images)"
+        - "Vagrant (Development Environments)"
+        - "Multiple components"
+        - "Base system/Docker"
+        - "Other DevOps tools (Minikube, etc.)"
+        - "Documentation/Docsify"
+        - "Not component-specific"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: bug_category
+    attributes:
+      label: 🏷️ Bug Category
+      description: "What type of issue are you experiencing?"
+      options:
+        - "Component installation/setup failure"
+        - "Service startup or configuration issues"
+        - "Web UI not accessible or broken"
+        - "API/CLI commands not working"
+        - "Port conflicts or networking issues"
+        - "Authentication/security problems"
+        - "Resource allocation or performance issues"
+        - "Data persistence or backup problems"
+        - "Platform compatibility issues"
+        - "Script execution failures"
+        - "Documentation errors or missing info"
+        - "Other"
+    validations:
+      required: true
+
+  - type: textarea
+    id: bug_description
+    attributes:
+      label: 📝 Bug Description
+      description: "Clear description of what's wrong and what you expected to happen"
+      placeholder: |
+        **What's happening:**
+        Vault service fails to start after running vault/vault.sh script. The web UI at localhost:8200 is not accessible.
+
+        **What should happen:**
+        Vault should start successfully and be accessible at http://localhost:8200 with the root token available.
+
+        **When did this start:**
+        After updating to latest HashiQube version or after system restart.
+
+        **Additional context:**
+        Include any error messages, affected services, or specific scenarios.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction_steps
+    attributes:
+      label: 🔄 Steps to Reproduce
+      description: "Step-by-step instructions to reproduce the issue"
+      placeholder: |
+        1. Start HashiQube using: vagrant up --provision-with basetools,vault
+        2. Run the vault setup script: bash vault/vault.sh
+        3. Try to access Vault UI at http://localhost:8200
+        4. Check service status: vault status
+        5. Review logs for error messages
+      render: markdown
+    validations:
+      required: true
+
+  - type: input
+    id: hashiqube_version
+    attributes:
+      label: 📦 HashiQube Version/Commit
+      description: "HashiQube version or git commit hash"
+      placeholder: "Latest from main branch or specific commit hash"
+    validations:
+      required: true
+
+  - type: input
+    id: host_os
+    attributes:
+      label: 💻 Host Operating System
+      description: "Your host operating system and version"
+      placeholder: "macOS 14.1, Ubuntu 22.04, Windows 11, etc."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: architecture
+    attributes:
+      label: 🏗️ System Architecture
+      description: "Your system architecture"
+      options:
+        - "x86_64 (Intel/AMD 64-bit)"
+        - "arm64 (Apple Silicon/ARM 64-bit)"
+        - "arm32 (ARM 32-bit)"
+        - "Other"
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: 📋 Relevant Logs
+      description: |
+        Logs related to the issue. Include output from:
+        - Component installation scripts (vault/vault.sh, consul/consul.sh, etc.)
+        - Service logs (journalctl, docker logs, etc.)
+        - HashiQube provisioning output
+        - Error messages from terminal/console
+
+      placeholder: |
+        ```
+        # Output from vault/vault.sh
+        ++++ Vault Install
+        ++++ Vault already installed at /usr/local/bin/vault
+        ERROR: Failed to start vault service
+
+        # Service status
+        $ vault status
+        Error checking seal status: Get "https://127.0.0.1:8200/v1/sys/seal-status": dial tcp 127.0.0.1:8200: connect: connection refused
+
+        # Docker logs (if applicable)
+        $ docker logs hashiqube_vault
+        ```
+      render: shell
+    validations:
+      required: false
+
+  - type: textarea
+    id: system_info
+    attributes:
+      label: 🖥️ System Information
+      description: "Information about your system resources and configuration"
+      placeholder: |
+        - Available RAM: 16GB
+        - Available CPU cores: 8
+        - Available disk space: 100GB
+        - Docker version: 24.0.7
+        - Vagrant version: 2.4.0 (if applicable)
+        - VirtualBox version: 7.0.12 (if applicable)
+        - Any resource constraints or limitations
+      render: markdown
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: 📝 Additional Context
+      description: "Any other relevant information"
+      placeholder: |
+        - Recent changes to your system or HashiQube setup
+        - Workarounds you've tried
+        - Screenshots of error messages or web UIs
+        - Specific components or services affected
+        - Network configuration details
+        - Previous successful runs or configurations
+      render: markdown
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: ✅ Checklist
+      description: "Please confirm you have done the following:"
+      options:
+        - label: "I have searched existing [open](https://github.com/star3am/hashiqube/issues) and [closed](https://github.com/star3am/hashiqube/issues?q=is%3Aissue+is%3Aclosed) issues to ensure this isn't a duplicate"
+          required: true
+        - label: "I have reproduced the issue on the latest version to confirm it still exists"
+          required: true
+        - label: "I have tried restarting the affected services or HashiQube environment"
+          required: false
+        - label: "I have checked the HashiQube documentation at https://hashiqube.com"
+          required: false
+        - label: "I have included relevant logs and error messages"
+          required: false

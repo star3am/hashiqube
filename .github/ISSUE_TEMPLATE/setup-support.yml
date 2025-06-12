@@ -1,0 +1,263 @@
+name: 🆘 Support & Setup Help
+description: Get help with HashiQube setup, configuration, or learning guidance
+title: "[Support] "
+labels: ["question", "help wanted"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        # 🆘 Support & Setup Help
+
+        Need help with HashiQube? This template is for **setup assistance, configuration questions, learning guidance, and general troubleshooting**.
+
+        ## 📋 When to use this template:
+        - ✅ You need help setting up HashiQube for the first time
+        - ✅ You're having trouble with deployment environments (Codespaces, Vagrant, Docker)
+        - ✅ You need clarification on HashiCorp tool configurations
+        - ✅ You want to understand how to use specific components
+        - ✅ You need learning guidance or educational support
+        - ✅ You've followed documentation but still need help
+
+        ## ❌ When NOT to use this template:
+        - 🚫 **Bug reports**: Something was working but now it's broken → Use "Bug Report" template
+        - 🚫 **Feature requests**: Want new functionality → Use "Feature Request" template
+
+        ## 📚 Before You Continue
+
+        Please check these resources first:
+        - 📖 [HashiQube Documentation](https://hashiqube.com) - Comprehensive setup and usage guide
+        - 🎥 [Introduction Video](https://hashiqube.com/#introduction-video) - Getting started with HashiQube
+        - 🚀 [GitHub Codespaces](https://codespaces.new/star3am/hashiqube?quickstart=1) - Try HashiQube instantly
+        - 📚 [HashiCorp Learning](https://developer.hashicorp.com/) - Official HashiCorp tutorials and guides
+
+  - type: dropdown
+    id: support_category
+    attributes:
+      label: 🏷️ Support Category
+      description: "What type of help do you need?"
+      options:
+        - "Initial HashiQube setup and deployment"
+        - "Deployment environment issues (Codespaces, Vagrant, Docker)"
+        - "HashiCorp component configuration (Vault, Consul, Nomad, etc.)"
+        - "Platform compatibility problems (Windows, macOS, Linux)"
+        - "Learning guidance and educational support"
+        - "Understanding HashiCorp tool integrations"
+        - "Performance or resource allocation issues"
+        - "Multi-cloud deployment questions"
+        - "Documentation clarification"
+        - "General usage and workflow questions"
+        - "Other"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: deployment_environment
+    attributes:
+      label: 🚀 Deployment Environment
+      description: "How are you trying to run HashiQube?"
+      options:
+        - "GitHub Codespaces"
+        - "Local Vagrant (VirtualBox)"
+        - "Local Vagrant (Docker)"
+        - "Local Docker Compose"
+        - "AWS (Multi-cloud)"
+        - "GCP (Multi-cloud)"
+        - "Azure (Multi-cloud)"
+        - "Not sure / Need guidance"
+        - "Other"
+    validations:
+      required: true
+
+  - type: input
+    id: host_os
+    attributes:
+      label: 💻 Host Operating System
+      description: "Your host operating system and version"
+      placeholder: "macOS 14.1, Ubuntu 22.04, Windows 11, etc."
+    validations:
+      required: true
+
+  - type: input
+    id: hashiqube_version
+    attributes:
+      label: 📦 HashiQube Version/Commit
+      description: "HashiQube version or git commit hash you're using"
+      placeholder: "Latest from main branch or specific commit hash"
+    validations:
+      required: false
+
+  - type: textarea
+    id: problem_description
+    attributes:
+      label: 📝 Problem Description
+      description: "Describe the issue you're experiencing or what you need help with"
+      placeholder: |
+        **What are you trying to do:**
+        I'm trying to set up HashiQube in GitHub Codespaces but Vault won't start properly.
+
+        **What's happening:**
+        When I run `bash vault/vault.sh`, the script completes but I can't access the Vault UI at the expected port.
+
+        **What you've tried:**
+        - Checked port forwarding in Codespaces
+        - Verified Docker is running
+        - Restarted the Codespace
+        - Checked vault status command
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: system_info
+    attributes:
+      label: 🖥️ System Information
+      description: "Information about your system resources and configuration"
+      placeholder: |
+        - Available RAM: 16GB
+        - Available CPU cores: 8
+        - Available disk space: 100GB
+        - Docker version: 24.0.7 (if applicable)
+        - Vagrant version: 2.4.0 (if applicable)
+        - VirtualBox version: 7.0.12 (if applicable)
+        - Any resource constraints or limitations
+      render: markdown
+    validations:
+      required: false
+
+  - type: textarea
+    id: error_messages
+    attributes:
+      label: ⚠️ Error Messages
+      description: "Any error messages from scripts, logs, or during setup"
+      placeholder: |
+        **Setup errors:**
+        "Failed to start vault service"
+
+        **Script output:**
+        ```
+        ++++ Vault Install
+        ++++ Vault already installed at /usr/local/bin/vault
+        ERROR: Failed to initialize vault
+        ```
+
+        **Service status:**
+        ```
+        $ vault status
+        Error checking seal status: connection refused
+        ```
+      render: markdown
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: troubleshooting_steps
+    attributes:
+      label: 🔧 Troubleshooting Steps Completed
+      description: "Please confirm what you've already tried"
+      options:
+        - label: "I have read the [HashiQube documentation](https://hashiqube.com)"
+          required: true
+        - label: "I have watched the [introduction video](https://hashiqube.com/#introduction-video)"
+          required: false
+        - label: "I have tried the GitHub Codespaces quick start"
+          required: false
+        - label: "I have verified my system meets the minimum requirements"
+          required: false
+        - label: "I have tried restarting the affected services or environment"
+          required: false
+
+  - type: textarea
+    id: configuration_details
+    attributes:
+      label: ⚙️ Configuration Details
+      description: "Details about your current configuration attempt"
+      placeholder: |
+        **HashiQube configuration:**
+        - Deployment method: GitHub Codespaces, Vagrant, Docker Compose
+        - Components you're trying to use: Vault, Consul, Nomad, etc.
+        - Provisioning command used: vagrant up --provision-with basetools,vault
+        - Any custom configurations or modifications
+
+        **Environment settings:**
+        - Resource allocation: RAM, CPU, disk space
+        - Network configuration: ports, firewalls, proxies
+        - Any custom environment variables or settings
+      render: markdown
+    validations:
+      required: false
+
+  - type: textarea
+    id: learning_goals
+    attributes:
+      label: 🎯 Learning Goals
+      description: "What are you trying to learn or accomplish with HashiQube?"
+      placeholder: |
+        **Learning objectives:**
+        - Understanding HashiCorp Vault for secrets management
+        - Learning about service mesh with Consul
+        - Exploring container orchestration with Nomad
+        - Preparing for HashiCorp certifications
+        - Building a demo environment for presentations
+
+        **Specific use cases:**
+        - Development environment setup
+        - Training and education
+        - Proof of concept demonstrations
+        - Understanding DevOps workflows
+      render: markdown
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional_info
+    attributes:
+      label: 📝 Additional Information
+      description: "Any other relevant information about your setup or needs"
+      placeholder: |
+        - Previous experience with HashiCorp tools
+        - Specific workflows or scenarios you're trying to implement
+        - Time constraints or deadlines
+        - Screenshots of error messages or configurations
+        - Any workarounds you've tried
+        - Related documentation or tutorials you've followed
+      render: markdown
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: help_preference
+    attributes:
+      label: 🤝 How Can We Help?
+      description: "What type of assistance would be most helpful?"
+      options:
+        - label: "I need step-by-step setup guidance"
+        - label: "I need help troubleshooting a specific error"
+        - label: "I need clarification on how HashiCorp tools work"
+        - label: "I need learning guidance and educational support"
+        - label: "I'm willing to provide additional debugging information"
+        - label: "I'm available for real-time troubleshooting if needed"
+
+  - type: markdown
+    attributes:
+      value: |
+        ## 📚 Helpful Resources
+
+        - **📖 Documentation**: [HashiQube Docs](https://hashiqube.com)
+        - **🎥 Introduction**: [Getting Started Video](https://hashiqube.com/#introduction-video)
+        - **🚀 Quick Start**: [GitHub Codespaces](https://codespaces.new/star3am/hashiqube?quickstart=1)
+        - **📚 Learning**: [HashiCorp Developer](https://developer.hashicorp.com/)
+        - **💬 Community**: [HashiCorp Discuss](https://discuss.hashicorp.com/)
+
+        ## ⏱️ What Happens Next?
+
+        1. **Review**: We'll review your setup and learning goals
+        2. **Guidance**: We'll provide specific troubleshooting steps or configuration help
+        3. **Education**: We'll offer learning resources and educational guidance
+        4. **Follow-up**: We may ask for additional information or suggest alternative approaches
+        5. **Resolution**: We'll work with you to achieve your learning objectives
+        6. **Documentation**: If needed, we'll update docs to help others with similar questions
+
+        **Note**: For complex learning scenarios, we may suggest additional HashiCorp resources or community forums.
+
+        Thank you for using HashiQube for your DevOps learning journey! 🙏

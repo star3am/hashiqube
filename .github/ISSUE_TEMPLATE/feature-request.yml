@@ -1,0 +1,191 @@
+name: ✨ Feature Request
+description: Suggest a new feature or enhancement for HashiQube DevOps Lab
+title: "[Enhancement] "
+labels: ["enhancement"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        # ✨ Feature Request
+
+        Thank you for suggesting a new feature! This template is for requesting **new features or enhancements** for HashiQube DevOps Lab.
+
+        ## 📋 When to use this template:
+        - ✅ You want to add new HashiCorp tools or integrations
+        - ✅ You have ideas for better learning experiences or tutorials
+        - ✅ You want to suggest platform compatibility improvements
+        - ✅ You want to suggest new deployment environments or options
+        - ✅ You have ideas for new DevOps tools or monitoring capabilities
+        - ✅ You want to suggest documentation or educational improvements
+
+        ## ❌ When NOT to use this template:
+        - 🚫 **Bug Reports**: Existing features are broken → Use "Bug Report" template
+        - 🚫 **Setup Help**: Need help with configuration → Use "Support & Setup Help" template
+        - 🚫 **Learning Questions**: Questions about HashiCorp tools → Check [documentation](https://hashiqube.com) first
+
+  - type: dropdown
+    id: feature_category
+    attributes:
+      label: 🏷️ Feature Category
+      description: "What type of feature are you requesting?"
+      options:
+        - "New HashiCorp tool integration"
+        - "Enhanced existing HashiCorp tool functionality"
+        - "New deployment environment support"
+        - "Platform compatibility improvements"
+        - "Learning experience enhancements"
+        - "Documentation and tutorial improvements"
+        - "Monitoring and observability features"
+        - "DevOps tool integrations"
+        - "Performance and resource optimization"
+        - "Security and authentication improvements"
+        - "Backup and recovery features"
+        - "Multi-cloud deployment enhancements"
+        - "Developer workflow improvements"
+        - "Configuration and customization options"
+        - "Other"
+    validations:
+      required: true
+
+  - type: textarea
+    id: feature_description
+    attributes:
+      label: 📝 Feature Description
+      description: "Clear description of the feature you'd like to see"
+      placeholder: |
+        **What feature would you like:**
+        Add support for HashiCorp HCP (HashiCorp Cloud Platform) integration to demonstrate cloud-native HashiCorp services alongside the self-hosted versions.
+
+        **Why would this be useful:**
+        It would help users understand the differences between self-hosted and cloud-managed HashiCorp services, providing a complete learning experience.
+    validations:
+      required: true
+
+  - type: textarea
+    id: use_case
+    attributes:
+      label: 🎯 Use Case / Problem Solved
+      description: "What problem does this feature solve? How would you use it?"
+      placeholder: |
+        **Problem:**
+        Currently HashiQube only demonstrates self-hosted HashiCorp tools, but many organizations use cloud-managed services.
+
+        **Use Case:**
+        I want to learn about both deployment models and understand when to choose self-hosted vs. cloud-managed HashiCorp services.
+
+        **Benefit:**
+        This would provide a comprehensive learning experience covering all HashiCorp deployment options and help users make informed decisions.
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed_solution
+    attributes:
+      label: 💡 Proposed Solution
+      description: "How do you think this feature should work?"
+      placeholder: |
+        **Implementation idea:**
+        - Add new component directory: `hcp/` with setup scripts
+        - Create configuration templates for HCP services
+        - Add documentation comparing self-hosted vs. cloud options
+
+        **Integration approach:**
+        - Provide HCP API examples alongside local CLI examples
+        - Show how to connect local tools to HCP services
+        - Include cost and feature comparison guides
+      render: markdown
+    validations:
+      required: false
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: 🔄 Alternatives Considered
+      description: "Have you considered any alternative solutions or workarounds?"
+      placeholder: |
+        **Current workarounds:**
+        - Setting up separate HCP accounts manually
+        - Using external documentation and tutorials
+        - Creating custom scripts for HCP integration
+
+        **Why they're not ideal:**
+        - Not integrated with HashiQube learning environment
+        - Requires separate setup and configuration
+        - Doesn't provide side-by-side comparison experience
+      render: markdown
+    validations:
+      required: false
+
+  - type: textarea
+    id: hashiqube_context
+    attributes:
+      label: 🖥️ HashiQube Context
+      description: "Relevant information about your HashiQube usage and environment"
+      placeholder: |
+        - Current deployment method: GitHub Codespaces, Vagrant, Docker Compose, etc.
+        - HashiCorp tools you're currently using: Vault, Consul, Nomad, etc.
+        - Learning goals or use cases: Training, demos, development, etc.
+        - Current system specifications and constraints
+        - Specific scenarios or workflows this feature would support
+      render: markdown
+    validations:
+      required: false
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: 📊 Priority Level
+      description: "How important is this feature to you?"
+      options:
+        - "Low - Nice to have for enhanced learning"
+        - "Medium - Would improve learning experience significantly"
+        - "High - Important for comprehensive DevOps education"
+        - "Critical - Blocking important learning or demo scenarios"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: 🤝 Contribution
+      description: "Would you be willing to help implement this feature?"
+      options:
+        - label: "I'm willing to test development versions"
+        - label: "I can help with documentation and tutorials"
+        - label: "I have programming/scripting skills and could contribute code"
+        - label: "I can provide detailed requirements and feedback"
+        - label: "I can help with testing across different platforms"
+
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: 📝 Additional Context
+      description: "Any other relevant information, mockups, or examples"
+      placeholder: |
+        - Screenshots or mockups of desired functionality
+        - Examples from other DevOps tools or platforms
+        - Technical considerations or constraints
+        - Related feature requests or dependencies
+        - Educational value and learning outcomes
+        - Integration with existing HashiQube components
+      render: markdown
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: ✅ Checklist
+      description: "Please confirm you have done the following:"
+      options:
+        - label: "I have searched existing [open](https://github.com/star3am/hashiqube/issues) and [closed](https://github.com/star3am/hashiqube/issues?q=is%3Aissue+is%3Aclosed) issues to ensure this isn't a duplicate"
+          required: true
+        - label: "I have clearly described the problem this feature would solve"
+          required: true
+        - label: "I understand that feature requests might take time or not be implemented if they are not within project scope"
+          required: true
+        - label: "I have considered how this feature aligns with HashiQube's educational and DevOps learning goals"
+          required: true
