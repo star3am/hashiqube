@@ -205,7 +205,7 @@ body:
 
         **Port accessibility:**
         - Vault (8200): ✅ Accessible
-        - Consul (8500): ✅ Accessible  
+        - Consul (8500): ✅ Accessible
         - Nomad (4646): ✅ Accessible
       render: markdown
     validations:
