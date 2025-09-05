@@ -317,7 +317,7 @@ echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ SSH to localhost using the signed key"
 echo -e '\e[38;5;198m'"++++ sudo -H -u ubuntu ssh -v -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /home/ubuntu/.ssh/id_rsa-cert.pub -i /home/ubuntu/.ssh/id_rsa ubuntu@localhost"
 echo -e '\e[38;5;198m'"++++ "
-sudo -H -u ubuntu ssh -v -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /home/ubuntu/.ssh/id_rsa-cert.pub -i /home/ubuntu/.ssh/id_rsa ubuntu@localhost || true
+echo exit | sudo -H -u ubuntu ssh -v -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /home/ubuntu/.ssh/id_rsa-cert.pub -i /home/ubuntu/.ssh/id_rsa ubuntu@localhost || true
 echo $?
 
 # https://www.vaultproject.io/docs/secrets/ssh/dynamic-ssh-keys
