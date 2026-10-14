@@ -2,8 +2,21 @@
   "dockerComposeFile": "../docker-compose.yml",
   "service": "hashiqube",
   "workspaceFolder": "/vagrant",
-  "forwardPorts": ["localhost:8001"],
-  "portsAttributes": {"8001": {"protocol": "https"}},
+  "forwardPorts": [
+    "localhost:8001"
+  ],
+  "portsAttributes": {
+    "8001": {
+      "protocol": "https"
+    }
+  },
+  "remoteEnv": {
+    "BASH_ENV": "/etc/profile.d/vexport.sh",
+    "VAULT_ADDR": "http://127.0.0.1:8200"
+  },
+  "postCreateCommand": {
+    "install-mcp-servers-and-vexport": "bash /vagrant/.devcontainer/install-tools.sh"
+  },
   "postStartCommand": {
     "set-git-config-safe-directory": "git config --global --add safe.directory ${containerWorkspaceFolder}",
     "set-git-config-line-endings": "git config --global core.autocrlf input",
@@ -54,7 +67,38 @@
         },
         "[terraform-vars]": {
           "editor.tabSize": 2
-        }
+        },
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "workbench.colorCustomizations": {
+          "activityBar.activeBackground": "#520d8f",
+          "activityBar.activeBorder": "#d27814",
+          "activityBar.background": "#520d8f",
+          "activityBar.foreground": "#e7e7e7",
+          "activityBar.inactiveForeground": "#e7e7e799",
+          "activityBarBadge.background": "#d27814",
+          "activityBarBadge.foreground": "#15202b",
+          "activityBarTop.activeBackground": "#520d8f",
+          "activityBarTop.activeBorder": "#d27814",
+          "activityBarTop.background": "#520d8f",
+          "activityBarTop.foreground": "#e7e7e7",
+          "activityBarTop.inactiveForeground": "#e7e7e799",
+          "commandCenter.border": "#e7e7e799",
+          "commandCenter.foreground": "#e7e7e7",
+          "sash.hoverBorder": "#520d8f",
+          "statusBar.background": "#370960",
+          "statusBar.debuggingBackground": "#370960",
+          "statusBar.debuggingForeground": "#e7e7e7",
+          "statusBar.foreground": "#e7e7e7",
+          "statusBar.inactiveBackground": "#370960",
+          "statusBarItem.hoverBackground": "#520d8f",
+          "statusBarItem.remoteBackground": "#d27814",
+          "statusBarItem.remoteForeground": "#15202b",
+          "titleBar.activeBackground": "#370960",
+          "titleBar.activeForeground": "#e7e7e7",
+          "titleBar.inactiveBackground": "#37096099",
+          "titleBar.inactiveForeground": "#e7e7e799"
+        },
+        "peacock.color": "#370960"
       },
       "extensions": [
         "dbaeumer.vscode-eslint",
@@ -62,8 +106,32 @@
         "hashicorp.terraform",
         "nhoizey.gremlins",
         "hashicorp.hcl",
-        "redhat.vscode-yaml"
-      ]
+        "redhat.vscode-yaml",
+        "hashicorp.sentinel",
+        "hashicorp.vault-radar",
+        "owenfarrell.vscode-vault",
+        "anthropic.claude-code",
+        "openai.chatgpt",
+        "johnpapa.vscode-peacock"
+      ],
+      "mcp": {
+        "servers": {
+          "vault-mcp-server": {
+            "type": "stdio",
+            "command": "bash",
+            "args": [
+              "/vagrant/.devcontainer/vault-mcp-server.sh"
+            ]
+          },
+          "terraform-mcp-server": {
+            "type": "stdio",
+            "command": "terraform-mcp-server",
+            "args": [
+              "stdio"
+            ]
+          }
+        }
+      }
     }
   }
 }
