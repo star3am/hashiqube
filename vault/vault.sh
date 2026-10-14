@@ -213,6 +213,12 @@ fi
 
 export VAULT_TOKEN=${VAULT_TOKEN}
 
+# Share the new token with every open terminal, Claude Code and the Vault MCP server (DevContainer)
+if [ -f /etc/profile.d/vexport.sh ]; then
+  . /etc/profile.d/vexport.sh
+  vexport VAULT_ADDR=${VAULT_ADDR} VAULT_TOKEN=${VAULT_TOKEN}
+fi
+
 echo -e '\e[38;5;198m'"++++ "
 echo -e '\e[38;5;198m'"++++ Vault status"
 echo -e '\e[38;5;198m'"++++ "

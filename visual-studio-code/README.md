@@ -80,6 +80,33 @@ Follow these steps to use Hashiqube with VSCode Dev Containers:
 
 💡 **Tip**: Remember to do `su - vagrant` and `cd /vagrant` to become the vagrant user so that you work as the vagrant user. You can then issue `kubectl` or `terraform` commands if you ran the provisioners first from a terminal on your laptop.
 
+### 🤖 AI Assistants, MCP Servers and Shared Terminal Variables
+
+When you open Hashiqube with **Dev Containers: Reopen in Container** (or in GitHub Codespaces), [.devcontainer/devcontainer.json](../.devcontainer/devcontainer.json) also sets up:
+
+| What | Details |
+| --- | --- |
+| **Extensions** | Terraform, HCL, Sentinel, Vault Radar, Vault browser, Claude Code (`anthropic.claude-code`), Codex (`openai.chatgpt`), Peacock |
+| **Vault MCP Server** | Lets Claude Code and Copilot agent mode work with Vault through plain-language prompts. Start Vault first with `bash vault/vault.sh` |
+| **Terraform MCP Server** | Looks up Terraform providers, modules and docs from the Terraform Registry |
+| **Peacock** | HashiCorp purple `#370960`, so you always know you're in Hashiqube |
+
+The MCP servers are installed by [.devcontainer/install-tools.sh](../.devcontainer/install-tools.sh) and configured for both VS Code (`customizations.vscode.mcp`) and Claude Code ([.mcp.json](../.mcp.json)). Run `/mcp` inside Claude Code to check that they're connected.
+
+**Share variables with every terminal and with Claude Code** using `vexport`. A plain `export` only lives in the terminal you typed it in, so Claude Code can't see it.
+
+```bash
+vexport AWS_ACCESS_KEY_ID=AKIA... AWS_SECRET_ACCESS_KEY=... AWS_REGION=ap-southeast-2
+vexport KUBECONFIG=~/.kube/config
+venv                                  # list shared variable names
+vunset AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY
+```
+
+Variables are stored in `~/.hashiqube.env` (mode `600`). Open terminals pick them up at their next prompt, and every command Claude Code runs picks them up immediately. `bash vault/vault.sh` shares `VAULT_ADDR` and the new `VAULT_TOKEN` this way automatically.
+
+> [!WARNING]
+> Anything you `vexport` can be read by AI assistants in the container. Only share credentials you're happy for them to use.
+
 ## 🌐 VSCode in a Browser
 
 Code-server runs an instance of VS code that can be accessed locally via browser. This allows us to start up a predictable VScode instance in Vagrant.

@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "vault": {
+      "type": "stdio",
+      "command": "bash",
+      "args": ["/vagrant/.devcontainer/vault-mcp-server.sh"]
+    },
+    "terraform": {
+      "type": "stdio",
+      "command": "terraform-mcp-server",
+      "args": ["stdio"]
+    }
+  }
+}

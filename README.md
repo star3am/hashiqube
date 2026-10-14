@@ -66,6 +66,7 @@ bash boundary/boundary.sh
   - [Table of Contents](#table-of-contents)
   - [Running Hashiqube](#running-hashiqube)
     - [Hashiqube Github Codespaces](#hashiqube-github-codespaces)
+      - [AI Assistants and Shared Terminal Variables](#ai-assistants-and-shared-terminal-variables)
     - [Hashiqube Local Vagrant](#hashiqube-local-vagrant)
       - [Pre-requisites](#pre-requisites)
       - [Installation Instructions](#installation-instructions)
@@ -127,6 +128,20 @@ There are several ways to run Hashiqube depending on your needs. The easiest is 
 4. Watch the video below for follow-along instructions
 
 [![HashiQube on Github's Codespaces](images/hashiqube-on-github-codespace.png)](https://www.youtube.com/watch?v=8uDfDnQZZoA)
+
+#### AI Assistants and Shared Terminal Variables
+
+The Codespace / Dev Container comes with Claude Code, Codex, the Vault MCP Server and the Terraform MCP Server set up. Use `vexport` instead of `export` to share a variable with every terminal and with Claude Code:
+
+```bash
+vexport AWS_ACCESS_KEY_ID=AKIA... AWS_SECRET_ACCESS_KEY=... KUBECONFIG=~/.kube/config
+vunset AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY
+```
+
+> [!WARNING]
+> Anything you `vexport` can be read by AI assistants in the container. Only share credentials you're happy for them to use.
+
+See [AI Assistants, MCP Servers and Shared Terminal Variables](visual-studio-code/README.md#-ai-assistants-mcp-servers-and-shared-terminal-variables) for details.
 
 ### Hashiqube Local Vagrant
 
