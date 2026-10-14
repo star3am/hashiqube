@@ -24,3 +24,4 @@ packer/packer/windows/ansible/connection_plugins/__pycache__**
 **__pycache__
 **.out
 **kubectl
+.vscode/
