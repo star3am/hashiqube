@@ -103,8 +103,7 @@
           "titleBar.border": "#ea216b",
           "titleBar.inactiveBackground": "#37096099",
           "titleBar.inactiveForeground": "#ffffff99"
-        },
-        "peacock.color": "#370960"
+        }
       },
       "extensions": [
         "dbaeumer.vscode-eslint",
